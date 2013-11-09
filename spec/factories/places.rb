@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :place do
     name "Sala de Aula A"
-    description "Sala de aula A do terceiro piso do prédio."
+    description "Sala de aula A do terceiro piso."
     code "SA01"
     capacity 10
     sector 
