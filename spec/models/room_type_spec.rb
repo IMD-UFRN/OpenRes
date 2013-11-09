@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe RoomType do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {should have_many (:places)} 
+
+  it {should validate_presence_of (:name)} 
+  it {should validate_presence_of (:description)} 
+
+  it { should have_a_valid_factory }
 end

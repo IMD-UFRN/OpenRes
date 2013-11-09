@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {should belong_to (:sector)} 
+  it {should have_many (:reservations)} 
+
+  it {should validate_presence_of (:name)}
+  it {should validate_presence_of (:cpf)}
+
 end
