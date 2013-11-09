@@ -6,5 +6,6 @@ FactoryGirl.define do
     cpf "092.092.092-77"
     name "Joaquim Exemplo"
     sector
+    password "rootadmin"
   end
 end

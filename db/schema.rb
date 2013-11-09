@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20131109025548) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "name"
     t.string   "cpf"
     t.integer  "sector_id"
     t.datetime "created_at"
