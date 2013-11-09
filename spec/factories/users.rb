@@ -2,5 +2,9 @@
 
 FactoryGirl.define do
   factory :user do
+    email "user@example.com"
+    cpf "092.092.092-77"
+    name "Joaquim Exemplo"
+    sector
   end
 end

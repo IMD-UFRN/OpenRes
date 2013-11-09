@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :sector do
-    name "MyString"
-    description "MyText"
+    name "Departamento de Engenharia de Software"
+    description "Departamento do curso de Bacharelado em Engenharia de Software."
   end
 end

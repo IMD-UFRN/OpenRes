@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :place do
-    name "MyString"
-    description "MyText"
-    code "MyString"
-    capacity 1
-    sector nil
-    room_type nil
+    name "Sala de Aula A"
+    description "Sala de aula A do terceiro piso do prédio."
+    code "SA01"
+    capacity 10
+    sector 
+    room_type 
   end
 end

@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :object_resource do
-    name "MyString"
-    description "MyText"
-    sector nil
-    place nil
-    serial_number "MyString"
+    name "Projetor X"
+    description "Projetor Samsung modelo X e cor branca."
+    sector 
+    place 
+    serial_number "1234123456"
   end
 end
