@@ -40,8 +40,12 @@ Tais permissões implicam no acesso limitado a determinadas sessões do sistema.
 
 ###Reservas
 Uma reserva pode possuir os seguintes estados:
+
 -Pendente: quando solicitada sem nenhuma outra reserva também pendente para o horário/recursos solicitados.
+
 -Pendente, com chances de não ser atendida: quando solicitada mesmo havendo outra reserva pendente para o horário/recursos solicitados.
+
 -Rejeitada: quando verificada como inválida por algum usuário aprovador de reservas ou com permissões superiores.
+
 -Aprovada: quando validada por algum usuário aprovador de reservas ou com permissões superiores.
 
