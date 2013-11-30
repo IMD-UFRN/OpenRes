@@ -33,14 +33,14 @@ gem 'simple_form'
 
 gem 'puma'
 
-gem 'activeadmin', github: 'gregbell/active_admin'
-
-gem 'meta_search'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'bootstrap-sass', '~> 2.3.2'
+gem 'bootswatch-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
