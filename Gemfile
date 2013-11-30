@@ -38,6 +38,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'bootstrap-sass', '~> 2.3.2'
+gem 'bootswatch-rails'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'shoulda-matchers'
