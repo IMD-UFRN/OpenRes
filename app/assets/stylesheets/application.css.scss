@@ -16,3 +16,7 @@ body { padding-top: 60px; }
 
 // And finally bootswatch style itself
 @import "bootswatch/cosmo/bootswatch";
+
+@import "normalize";
+
+@import "base";
