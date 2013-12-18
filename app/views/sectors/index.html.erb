@@ -1,0 +1,26 @@
+<h1>Listando Setores</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sectors.each do |sector| %>
+      <tr>
+        <td><%= sector.name %></td>
+        <td><%= sector.description %></td>
+        <td><%= link_to 'Detalhes', sector %></td>
+        <td><%= link_to 'Excluir', sector, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar este Setor?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo Setor', new_sector_path,class:"btn btn-success" %>

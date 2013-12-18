@@ -56,4 +56,6 @@ OpenRes::Application.routes.draw do
   #   end
 
   resources :room_types
+  resources :places
+  resources :sectors
 end

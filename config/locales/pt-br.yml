@@ -215,23 +215,25 @@ pt-BR:
       reservation: Reserva 
     attributes:
       room_type:
-        name: nome
-        description: description
+        name: Nome
+        description: Descrição
       object_resource: 
-        name: nome
-        description: descrição 
-        sector: setor
-        serial_number: tombamento
+        name: Nome
+        description: Descrição 
+        sector: Setor
+        serial_number: Tombamento
       place: 
-        name: nome
-        description: descrição
-        room_type: tipo de sala 
-        sector: setor 
+        code: Código
+        name: Nome
+        description: Descrição
+        room_type: Tipo de sala 
+        sector: Setor 
+        capacity: Capacidade
       sector: 
-        name: nome
-        description: descrição
+        name: Nome
+        description: Descrição
       reservation:  
-        user: solicitante
-        begin_time: início
-        end_time: fim
-        status: status
+        user: Solicitante
+        begin_time: Início
+        end_time: Fim
+        status: Status

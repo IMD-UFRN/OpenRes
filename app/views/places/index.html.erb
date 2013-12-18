@@ -1,0 +1,33 @@
+<h1>Listando Salas</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Tipo de Sala</th>
+      <th>Setor</th>
+      <th>Capacidade</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @places.each do |place| %>
+      <tr>
+        <td><%= place.code %></td>
+        <td><%= place.name %></td>
+        <td><%= place.room_type.name %></td>
+        <td><%= place.sector.name %></td>
+        <td><%= place.capacity %></td>
+        <td><%= link_to 'Detalhes', place %></td>
+        <td><%= link_to 'Excluir', place, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nova Sala', new_place_path, class:"btn btn-success" %>
+

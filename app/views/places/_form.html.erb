@@ -1,0 +1,27 @@
+<%= simple_form_for(@place) do |f| %>
+  <% if @place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@place.errors.count, "error") %> impediu o salvamento desta Sala:</h2>
+
+      <ul>
+      <% @place.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <hr>
+  <div class="form-inputs">
+    <%= f.input :code %>
+    <%= f.input :name %>
+    <%= f.association :room_type %></br>
+    <%= f.input :description %>
+    <%= f.input :capacity %>
+    <%= f.association :sector %>
+  </div>
+  </br>
+  <%= f.button :submit, "OK", class:"btn btn-success" %>
+
+  <hr>
+<% end %>

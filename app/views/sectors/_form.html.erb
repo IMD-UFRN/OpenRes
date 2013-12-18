@@ -1,10 +1,10 @@
-<%= simple_form_for(@room_type) do |f| %>
-  <% if @room_type.errors.any? %>
+<%= simple_form_for(@sector) do |f| %>
+  <% if @sector.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@room_type.errors.count, "error") %> impediu o salvamento deste Tipo de Sala:</h2>
+      <h2><%= pluralize(@sector.errors.count, "error") %> prohibited this sector from being saved:</h2>
 
       <ul>
-      <% @room_type.errors.full_messages.each do |msg| %>
+      <% @sector.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -20,5 +20,4 @@
   <%= f.button :submit, "OK", class:"btn btn-success" %>
 
   <hr>
-
 <% end %>

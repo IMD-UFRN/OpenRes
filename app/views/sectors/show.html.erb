@@ -1,0 +1,13 @@
+<h1>Detalhes do Setor</h1>
+<%= link_to 'Editar Informações deste Setor', edit_sector_path(@sector), class:"btn-small btn-primary"%> 
+
+
+<hr>
+
+
+<dl>
+  <dt>Nome:</dt> <dd><%= @sector.name %></dd>
+  <dt>Descrição:</dt> <dd><%= @sector.description %></dd>
+</dl>
+
+<%= render 'back_index'%>

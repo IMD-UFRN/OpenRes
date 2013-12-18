@@ -1,20 +1,21 @@
-<h1>Listing room_types</h1>
+<h1>Listando Tipos de Sala</h1>
 
-<table>
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Ações</th>
     </tr>
   </thead>
 
   <tbody>
     <% @room_types.each do |room_type| %>
       <tr>
-        <td><%= link_to 'Show', room_type %></td>
-        <td><%= link_to 'Edit', edit_room_type_path(room_type) %></td>
-        <td><%= link_to 'Destroy', room_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=room_type.name%></td>
+        <td><%=room_type.description%></td>
+        <td><%= link_to 'Detalhes', room_type %></td>
+        <td><%= link_to 'Excluir', room_type, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Room type', new_room_type_path %>
+<%= link_to 'Novo Tipo de Sala', new_room_type_path, class:"btn btn-success" %>

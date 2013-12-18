@@ -28,7 +28,7 @@ class RoomTypesController < ApplicationController
 
     respond_to do |format|
       if @room_type.save
-        format.html { redirect_to @room_type, notice: 'Room type was successfully created.' }
+        format.html { redirect_to @room_type, notice: 'Tipo de Sala cadastrado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @room_type }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class RoomTypesController < ApplicationController
   def update
     respond_to do |format|
       if @room_type.update(room_type_params)
-        format.html { redirect_to @room_type, notice: 'Room type was successfully updated.' }
+        format.html { redirect_to @room_type, notice: 'Tipo de Sala atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +69,6 @@ class RoomTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_type_params
-      params[:room_type]
+      params.require(:room_type).permit(:name, :description)
     end
 end
