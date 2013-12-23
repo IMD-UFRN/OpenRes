@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223160022) do
+ActiveRecord::Schema.define(version: 20131223181403) do
 
   create_table "object_resources", force: true do |t|
     t.string   "name"

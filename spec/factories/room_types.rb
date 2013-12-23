@@ -2,7 +2,5 @@
 
 FactoryGirl.define do
   factory :room_type do
-    name "Sala de Aula"
-    description "Sala de aula comum."
   end
 end

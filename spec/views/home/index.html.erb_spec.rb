@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe RoomType do
+describe "home/index.html.erb" do
   pending "add some examples to (or delete) #{__FILE__}"
 end
