@@ -35,6 +35,8 @@ gem 'puma'
 
 gem 'cancan'
 
+gem 'draper'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -54,6 +56,10 @@ group :development, :test do
   gem 'magic_encoding', require: false
   gem 'sqlite3'
 end
+
+gem "database_cleaner", :group => :test
+
+ gem 'guard-rspec', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

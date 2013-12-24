@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  def after_sign_in_path_for(resource)
+    dashboard_path
+  end
+
   def set_locale
     if params[:locale].blank?
       I18n.locale = :'pt-BR'
