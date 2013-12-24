@@ -5,7 +5,9 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    can :manage, :all
+    can :manage, :all if Rails.env.development?
+
+    can :manage, Reservation, { user_id: user.id }
 
     if user.role == "admin"
       can :manage, :all

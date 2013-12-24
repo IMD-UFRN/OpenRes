@@ -7,6 +7,7 @@ OpenRes::Application.routes.draw do
   devise_for :users
   resources :places
   resources :sectors
+  resources :reservations
 
   get '/dashboard', to: 'dashboard#dashboard', as: :dashboard
 
