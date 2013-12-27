@@ -26,9 +26,7 @@ O sistema apresentará as seguintes funcionalidades:
 ####Permissões
 -O usuário básico do sistema poderá solicitar reservas.
 
--Um usuário aprovador de reservas pode possui as mesmas permissões de usuário básicos + a permissão para aprovar ou rejeitar reservas e de gerenciar usuários básicos.
-
--Um usuário alocador de recursos possui as mesmas permissões de usuário aprovador de reservas + a permissão para alocar recursos em seu setor e de gerenciar usuários aprovadores de reservas.
+-Um usuário secretário pode possui as mesmas permissões de usuário básicos + a permissão para aprovar ou rejeitar reservas + permissão de gerenciar usuários básicos + permissão para alocar recursos em seu setor.
 
 -Um usuário chefe de setor possui as mesmas permissões de um usuário alocador de recursos + a permissão de gerenciar usuários alocadores de recursos + a permissão de gerenciar novos chefes de setor de seu setor + a permissão de receber relatórios de uso dos recursos de seu departamento.
 
