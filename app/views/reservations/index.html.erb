@@ -1,20 +1,26 @@
-<h1>Listing reservations</h1>
+<h1>Listando Reservas</h1>
 
-<table>
+<table class = "table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>Local</th>
+      <th>Solicitante</th>
+      <th>Status</th>
+      <th>Ações</th>
     </tr>
   </thead>
 
   <tbody>
     <% @reservations.each do |reservation| %>
       <tr>
-        <td><%= link_to 'Show', reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= reservation.begin_time %></td>
+        <td><%= reservation.end_time %></td>
+        <td><%= reservation.place.name %></td>
+        <td><%= reservation.user.name %></td>
+        <td><%= reservation.status %></td>
+        <td><%= link_to 'Detalhes', reservation %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Reservation', new_reservation_path %>
+<%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>

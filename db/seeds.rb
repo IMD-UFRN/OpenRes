@@ -11,10 +11,10 @@ Sector.create(name: "BTI", description: "Departamento de Bacharelado em Tecnolog
 Sector.create(name: "BES", description: "Departamento de Bacharelado em Engenharia de Software")
 Sector.create(name: "IMD", description: "Departamento do Instituto Metrópole Digital")
 
-User.create(role: "admin", email: "admin@example.com", name: "Admin", cpf: "092.092.092-92", sector_id: 1)
-User.create(role: "sector_admin", email: "sector_admin@example.com", name: "Sector Admin", cpf: "093.092.092-93", sector_id: 1)
-User.create(role: "secretary", email: "secretary@example.com", name: "Secretary", cpf: "094.092.092-94", sector_id: 1)
-User.create(role: "basic", email: "basic@example.com", name: "Basic", cpf: "095.092.092-95", sector_id: 1)
+User.create(role: "admin", email: "admin@example.com", password: "rootadmin", name: "Admin", cpf: "092.092.092-92", sector_id: 1)
+User.create(role: "sector_admin", email: "sector_admin@example.com", password: "rootadmin", name: "Sector Admin", cpf: "093.092.092-93", sector_id: 1)
+User.create(role: "secretary", email: "secretary@example.com", password: "rootadmin", name: "Secretary", cpf: "094.092.092-94", sector_id: 1)
+User.create(role: "basic", email: "basic@example.com", password: "rootadmin", name: "Basic", cpf: "095.092.092-95", sector_id: 1)
 
 RoomType.create(name: "Laboratório", description: "Laboratório para uso diverso.")
 RoomType.create(name: "Sala de Aula", description: "Sala para aulas dos cursos que ocupam o prédio.")
