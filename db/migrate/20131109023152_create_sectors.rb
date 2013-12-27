@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSectors < ActiveRecord::Migration
   def change
     create_table :sectors do |t|

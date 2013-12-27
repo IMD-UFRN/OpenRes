@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 OpenRes::Application.routes.draw do
   resources :room_types
 

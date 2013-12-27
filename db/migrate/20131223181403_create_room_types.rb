@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateRoomTypes < ActiveRecord::Migration
   def change
     create_table :room_types do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UserDecorator < Draper::Decorator
   include Draper::LazyHelpers
 
