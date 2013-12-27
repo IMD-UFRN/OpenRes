@@ -1,5 +1,5 @@
-[![Stories in Ready](https://badge.waffle.io/IMD-UFRN/OpenRes.png?label=ready)](https://waffle.io/IMD-UFRN/OpenRes)  
-OpenRes
+[![Stories in Ready](https://badge.waffle.io/IMD-UFRN/OpenRes.png?label=ready)](https://waffle.io/IMD-UFRN/OpenRes)  [![Code Climate](https://codeclimate.com/github/IMD-UFRN/OpenRes.png)](https://codeclimate.com/github/IMD-UFRN/OpenRes)
+
 =======
 
 
