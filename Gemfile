@@ -57,6 +57,8 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+gem 'coveralls', require: false
+
 gem "database_cleaner", :group => :test
 
  gem 'guard-rspec', require: false
