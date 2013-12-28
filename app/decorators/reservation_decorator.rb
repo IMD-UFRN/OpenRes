@@ -21,6 +21,6 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def place
-    h.link_to(object.place.name, object.user)
+    h.link_to(object.place.name, object.place)
   end
 end
