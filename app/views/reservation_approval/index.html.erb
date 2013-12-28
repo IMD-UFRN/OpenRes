@@ -8,7 +8,7 @@
       <th>Local</th>
       <th>Solicitante</th>
       <th>Status</th>
-      <th>Ações</th>
+      <th colspan="2">Ações</th>
     </tr>
   </thead>
 
@@ -20,7 +20,8 @@
         <td><%= reservation.place %></td>
         <td><%= reservation.user %></td>
         <td><%= reservation.status %></td>
-        <td><%= link_to 'Detalhes', reservation %></td>
+        <td><%= link_to 'Aprovar', reservation %></td>
+        <td><%= link_to 'Rejeitar', reservation %></td>
       </tr>
     <% end %>
   </tbody>
