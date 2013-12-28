@@ -20,8 +20,9 @@
         <td><%= reservation.place %></td>
         <td><%= reservation.user %></td>
         <td><%= reservation.status %></td>
-        <td><%= link_to 'Aprovar', reservation %></td>
-        <td><%= link_to 'Rejeitar', reservation %></td>
+        <%= reservation.approve_link %>
+        <%= reservation.reject_link %>
+        <%= reservation.suspend_link %>
       </tr>
     <% end %>
   </tbody>

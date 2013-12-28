@@ -6,7 +6,7 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = ReservationDecorator.decorate_collection(Reservation.all)
+    @reservations = ReservationDecorator.decorate_collection(current_user.reservations)
   end
 
   # GET /reservations/1

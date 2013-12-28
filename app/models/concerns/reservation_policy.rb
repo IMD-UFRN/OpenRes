@@ -13,11 +13,12 @@ class ReservationPolicy
   end
 
   def self.approve(reservation)
-    conflicts = Reservation.where("place_id = ? and begin_time <= ? and end_time >= ?",
-     reservation.id, reservation.begin_time, reservation.end_time)
+    conflicts = Reservation.where("place_id = ? and status = ? and begin_time <= ? and end_time >= ? and id <> ?",
+     reservation.place.id, 'approved', reservation.end_time, reservation.begin_time, reservation.id)
 
     if conflicts.empty?
       reservation.status = "approved"
+      #send email
       reservation.save
     end
 
