@@ -55,6 +55,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'magic_encoding', require: false
   gem 'sqlite3'
+  gem 'simplecov', require: false
+  gem 'simplecov-html', require: false
 end
 
 gem 'coveralls', require: false
