@@ -1,15 +1,25 @@
 class ReservationPolicy
 
-  def self.suspend(reservation)
+  def self.suspend(reservation, justification)
     reservation.status = "pending"
-    #send email
-    reservation.save
+
+    ActiveRecord::Base.transaction do
+      justification.save
+      reservation.save
+    end
+
+    ReservationApprovalMailer.suspended_mail(justification).deliver
   end
 
-  def self.reject(reservation)
+  def self.reject(reservation, justification)
     reservation.status = "rejected"
-    #send email
-    reservation.save
+
+    ActiveRecord::Base.transaction do
+      justification.save
+      reservation.save
+    end
+    
+    ReservationApprovalMailer.rejected_mail(justification).deliver
   end
 
   def self.approve(reservation)
@@ -18,7 +28,8 @@ class ReservationPolicy
 
     if conflicts.empty?
       reservation.status = "approved"
-      #send email
+      
+      ReservationApprovalMailer.approved_mail(reservation).deliver
       reservation.save
     end
 

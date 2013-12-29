@@ -9,17 +9,21 @@ class ReservationApprovalController < ApplicationController
   end
 
   def reject
-    ReservationPolicy.reject(Reservation.find(params[:reservation_id]))
+    @justification = Justification.new(justification_params)
+
+    ReservationPolicy.reject(Reservation.find(params[:reservation_id]), @justification)
     redirect_to check_reservations_path
   end
 
   def suspend
-    ReservationPolicy.suspend(Reservation.find(params[:reservation_id]))
+    @justification = Justification.new(justification_params)
+
+    ReservationPolicy.suspend(Reservation.find(params[:reservation_id]), @justification)
     redirect_to check_reservations_path
   end
 
   def justify_status
-    @reservation = Reservation.find(params[:reservation_id])
+    @justification = Justification.new
 
     respond_to do |format|
       format.html
@@ -27,7 +31,8 @@ class ReservationApprovalController < ApplicationController
     end
   end
 
-  def justify_params
-    params.require(:justification).permit(:reason)
+  def justification_params
+    params.require(:justification).permit(:reason).
+      merge(user_id: current_user.id, reservation_id: params[:reservation_id])
   end
 end

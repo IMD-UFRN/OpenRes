@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223181403) do
+ActiveRecord::Schema.define(version: 20131229180325) do
+
+  create_table "justifications", force: true do |t|
+    t.text     "reason"
+    t.integer  "reservation_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "justifications", ["reservation_id"], name: "index_justifications_on_reservation_id"
+  add_index "justifications", ["user_id"], name: "index_justifications_on_user_id"
 
   create_table "object_resources", force: true do |t|
     t.string   "name"
