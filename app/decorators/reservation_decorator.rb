@@ -38,7 +38,8 @@ class ReservationDecorator < Draper::Decorator
     return if object.status == 'rejected'
 
     content_tag :td do
-      link_to 'Rejeitar', reservation_reject_path(reservation), method: :post
+      link_to 'Rejeitar', justify_reject_path(reservation),
+       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}
     end
   end
 
@@ -46,7 +47,8 @@ class ReservationDecorator < Draper::Decorator
     return if object.status == 'pending'
 
     content_tag :td do
-      link_to 'Suspender', reservation_set_pending_path(reservation), method: :post
+      link_to 'Suspender', justify_suspend_path(reservation),
+       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}
     end
   end
 

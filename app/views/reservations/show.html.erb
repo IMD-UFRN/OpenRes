@@ -8,7 +8,8 @@
   <dt>Término:</dt> <dd><%= @reservation.end_time %></dd>
   <dt>Sala:</dt> <dd><%= @reservation.place.name %></dd>
   <dt>Tipo de Sala:</dt> <dd><%= @reservation.place.room_type.name %></dd>
-  <dt>Setor:</dt> <dd><%= @reservation.place.sector.name %></dd>
+  <dt>Setor:</dt> <dd><%= @reservation.sector.name %></dd>
+  <dt>Motivo:</dt> <dd><%= @reservation.reason %></dd>
 </dl>
 
 <%= render 'back_index'%>

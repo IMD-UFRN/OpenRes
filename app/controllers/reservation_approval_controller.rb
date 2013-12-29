@@ -13,8 +13,21 @@ class ReservationApprovalController < ApplicationController
     redirect_to check_reservations_path
   end
 
-  def set_pending
-    ReservationPolicy.set_pending(Reservation.find(params[:reservation_id]))
+  def suspend
+    ReservationPolicy.suspend(Reservation.find(params[:reservation_id]))
     redirect_to check_reservations_path
+  end
+
+  def justify_status
+    @reservation = Reservation.find(params[:reservation_id])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def justify_params
+    params.require(:justification).permit(:reason)
   end
 end

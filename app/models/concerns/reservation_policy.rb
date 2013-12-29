@@ -1,6 +1,6 @@
 class ReservationPolicy
 
-  def self.set_pending(reservation)
+  def self.suspend(reservation)
     reservation.status = "pending"
     #send email
     reservation.save

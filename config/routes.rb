@@ -13,9 +13,13 @@ OpenRes::Application.routes.draw do
   
   post "reservations/:reservation_id/approve", to: "reservation_approval#approve", as: :reservation_approve
   post "check_reservations/:reservation_id/reject", to: "reservation_approval#reject", as: :reservation_reject
-  post "check_reservations/:reservation_id/set_pending", to: "reservation_approval#set_pending", as: :reservation_set_pending
+  post "check_reservations/:reservation_id/suspend", to: "reservation_approval#suspend", as: :reservation_suspend
+  
+  get "reservations/:reservation_id/reject" => 'reservation_approval#justify_status', as: :justify_reject
+  get "reservations/:reservation_id/suspend" => 'reservation_approval#justify_status', as: :justify_suspend
 
   get '/dashboard', to: 'dashboard#dashboard', as: :dashboard
+
 
   resources :users
 end

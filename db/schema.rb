@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20131223181403) do
     t.datetime "begin_time"
     t.datetime "end_time"
     t.string   "status"
+    t.text     "reason"
     t.integer  "user_id"
     t.integer  "place_id"
     t.datetime "created_at"
