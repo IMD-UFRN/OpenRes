@@ -3,7 +3,7 @@
     <tr colspan="4">
       <th>Reservas Pendentes</th>
     </tr>
-    <%= render 'reservations_user_header' %>
+    <%= render 'reservations/reservations_user_header' %>
   </thead>
 
   <tbody>
@@ -21,7 +21,7 @@
     <tr colspan="4">
       <th>Reservas Aprovadas</th>
     </tr>
-    <%= render 'reservations_user_header' %>
+    <%= render 'reservations/reservations_user_header' %>
   </thead>
   <tbody>
     <% @approved_reservations.each do |reservation| %>

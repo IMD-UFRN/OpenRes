@@ -87,6 +87,33 @@ class ReservationsController < ApplicationController
     @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(@user.sector))
   end
 
+  def all_user_reservations
+
+    @user = UserDecorator.decorate(current_user)
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(@user))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(@user))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(@user))
+
+  end
+
+  def future_user_reservations
+
+    @user = UserDecorator.decorate(current_user)
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user_to_come(@user))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user_to_come(@user))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user_to_come(@user))
+
+  end
+
+  def finished_user_reservations
+    @user = UserDecorator.decorate(current_user)
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_from_user(@user))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_from_user(@user))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_from_user(@user))
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation

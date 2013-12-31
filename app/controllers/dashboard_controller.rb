@@ -2,10 +2,10 @@
 class DashboardController < ApplicationController
   def dashboard
     @user = UserDecorator.decorate(current_user)
-    @reservations = ReservationDecorator.decorate_collection(current_user.reservations)
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(@user))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(@user))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(@user))
+
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user_to_come(@user))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user_to_come(@user))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user_to_come(@user))
 
     if @user.role == "secretary"
 
