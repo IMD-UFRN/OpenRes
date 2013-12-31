@@ -15,4 +15,9 @@ class User < ActiveRecord::Base
 
   belongs_to :sector
   has_many :reservations
+
+  def open_reservations
+    reservations.where.status=="open"
+  end
+
 end

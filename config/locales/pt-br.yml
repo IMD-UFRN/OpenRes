@@ -237,4 +237,6 @@ pt-BR:
         begin_time: Início
         end_time: Fim
         status: Status
-        reason: Razão da Reserva
+        reason: Motivo
+      justification:
+        reason: Motivo

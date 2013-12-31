@@ -1,31 +1,3 @@
 <h1>Listando Reservas</h1>
 
-<table class = "table table-striped table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Início</th>
-      <th>Fim</th>
-      <th>Local</th>
-      <th>Solicitante</th>
-      <th>Status</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-        <td><%= reservation.begin_time %></td>
-        <td><%= reservation.end_time %></td>
-        <td><%= reservation.place %></td>
-        <td><%= reservation.user %></td>
-        <td><%= reservation.status %></td>
-        <td><%= link_to 'Detalhes', reservation %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
+<%= render 'reservations_index' %>
