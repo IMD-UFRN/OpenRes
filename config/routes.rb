@@ -5,6 +5,8 @@ OpenRes::Application.routes.draw do
   root to: 'home#index'
 
   get "reservations/all", to: "reservations#all", as: :all
+  get "reservations/finished", to: "reservations#finished", as: :finished
+  get "reservations/future", to: "reservations#future", as: :future
 
   devise_for :users
   resources :places

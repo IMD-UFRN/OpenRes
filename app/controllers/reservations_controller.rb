@@ -64,12 +64,27 @@ class ReservationsController < ApplicationController
   end
 
   def all
-
     @user = UserDecorator.decorate(current_user)
 
     @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector(@user.sector))
     @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector(@user.sector))
     @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector(@user.sector))
+  end
+
+  def finished
+    @user = UserDecorator.decorate(current_user)
+
+    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_for_sector(@user.sector))
+    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_for_sector(@user.sector))
+    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_for_sector(@user.sector))
+  end
+
+  def future
+    @user = UserDecorator.decorate(current_user)
+    
+    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector_to_come(@user.sector))
+    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector_to_come(@user.sector))
+    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(@user.sector))
   end
 
   private

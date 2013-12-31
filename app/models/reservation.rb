@@ -52,6 +52,18 @@ class Reservation < ActiveRecord::Base
     return Reservation.rejected_for_sector(sector).where("begin_time > ?",  DateTime.now)
   }
 
+  scope :open_and_finished_for_sector, lambda{ |sector|
+    return Reservation.open_for_sector(sector).where("begin_time < ?",  DateTime.now)
+  }
+
+  scope :approved_and_finished_for_sector, lambda{ |sector|
+    return Reservation.approved_for_sector(sector).where("begin_time < ?",  DateTime.now)
+  }
+
+  scope :rejected_and_finished_for_sector, lambda{ |sector|
+    return Reservation.rejected_for_sector(sector).where("begin_time < ?",  DateTime.now)
+  }
+
 
   validates_presence_of :place_id, :user_id, :begin_time, :end_time
 
