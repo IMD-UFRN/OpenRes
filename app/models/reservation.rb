@@ -28,6 +28,31 @@ class Reservation < ActiveRecord::Base
     return user.reservations.where(status: 'rejected')
   }
 
+  scope :open_for_sector, lambda { |sector|
+    return Reservation.from_sector(sector).where(status: 'pending')
+  }
+  
+  scope :approved_for_sector, lambda { |sector|
+    return Reservation.from_sector(sector).where(status: 'approved')
+  }
+
+  scope :rejected_for_sector, lambda { |sector|
+    return Reservation.from_sector(sector).where(status: 'rejected')
+  }
+
+  scope :open_for_sector_to_come, lambda{ |sector|
+    return Reservation.open_for_sector(sector).where("begin_time > ?",  DateTime.now)
+  }
+
+  scope :approved_for_sector_to_come, lambda{ |sector|
+    return Reservation.approved_for_sector(sector).where("begin_time > ?",  DateTime.now)
+  }
+
+  scope :rejected_for_sector_to_come, lambda{ |sector|
+    return Reservation.rejected_for_sector(sector).where("begin_time > ?",  DateTime.now)
+  }
+
+
   validates_presence_of :place_id, :user_id, :begin_time, :end_time
 
   belongs_to :user

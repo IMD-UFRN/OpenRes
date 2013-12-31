@@ -63,6 +63,15 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def all
+
+    @user = UserDecorator.decorate(current_user)
+
+    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector(@user.sector))
+    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector(@user.sector))
+    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector(@user.sector))
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
