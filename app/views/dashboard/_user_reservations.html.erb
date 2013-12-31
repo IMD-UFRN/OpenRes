@@ -9,10 +9,7 @@
   <tbody>
     <% @open_reservations.each do |reservation| %>
       <tr>
-        <td><%= reservation.begin_time %></td>
-        <td><%= reservation.end_time %></td>
-        <td><%= reservation.place %></td>
-        <td><%= link_to 'Detalhes', reservation %></td>
+        <%= render reservation%>
       </tr>
     <% end %>
   </tbody>
@@ -29,10 +26,7 @@
   <tbody>
     <% @approved_reservations.each do |reservation| %>
       <tr>
-        <td><%= reservation.begin_time %></td>
-        <td><%= reservation.end_time %></td>
-        <td><%= reservation.place %></td>
-        <td><%= link_to 'Detalhes', reservation %></td>
+        <%= render reservation%>
       </tr>
     <% end %>
   </tbody>

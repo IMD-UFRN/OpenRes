@@ -20,7 +20,13 @@
               <ul class="nav">
               </ul>
               <ul class="nav pull-right">
-                <li><%= link_to "Sair", destroy_user_session_path, :method => :delete  %></li>
+                <li>
+                  <% if current_user %>
+                    <%= link_to "Sair", destroy_user_session_path, :method => :delete  %>
+                  <% else %>
+                    <%= link_to "Entrar", new_user_session_path  %>
+                  <% end %>
+                </li>
               </ul>
             </div>
           </div>
