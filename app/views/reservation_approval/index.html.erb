@@ -32,4 +32,8 @@
 
 <%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
 
+<%= link_to 'Reservas por Categoria', "/reservations/all", class:"btn btn-primary" %>
+<%= link_to 'Reservas Futuras', "/reservations/future", class:"btn btn-primary" %>
+<%= link_to 'Reservas Finalizadas', "/reservations/finished", class:"btn btn-primary" %>
+
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

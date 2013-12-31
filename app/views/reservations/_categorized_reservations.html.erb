@@ -36,7 +36,7 @@
       <tr colspan="4">
         <th>Reservas Aprovadas</th>
       </tr>
-      <%= render 'reservations_secretary_header' %>
+      <%= render 'reservations/reservations_secretary_header' %>
     </thead>
     <tbody>
       <% @approved_sector_reservations.each do |reservation| %>
@@ -61,7 +61,7 @@
       <tr colspan="4">
         <th>Reservas Rejeitadas</th>
       </tr>
-      <%= render 'reservations_secretary_header' %>
+      <%= render 'reservations/reservations_secretary_header' %>
     </thead>
     <tbody>
       <% @rejected_sector_reservations.each do |reservation| %>
