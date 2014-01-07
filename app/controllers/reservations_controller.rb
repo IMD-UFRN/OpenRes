@@ -87,7 +87,7 @@ class ReservationsController < ApplicationController
     @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(@user.sector))
   end
 
-  def all_user_reservations
+  def user_all_reservations
 
     @user = UserDecorator.decorate(current_user)
     @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(@user))
@@ -96,7 +96,7 @@ class ReservationsController < ApplicationController
 
   end
 
-  def future_user_reservations
+  def user_future_reservations
 
     @user = UserDecorator.decorate(current_user)
     @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user_to_come(@user))
@@ -105,7 +105,7 @@ class ReservationsController < ApplicationController
 
   end
 
-  def finished_user_reservations
+  def user_finished_reservations
     @user = UserDecorator.decorate(current_user)
     @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_from_user(@user))
     @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_from_user(@user))

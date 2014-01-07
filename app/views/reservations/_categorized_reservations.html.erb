@@ -61,7 +61,14 @@
       <tr colspan="4">
         <th>Reservas Rejeitadas</th>
       </tr>
-      <%= render 'reservations/reservations_secretary_header' %>
+       <tr>
+        <th>Início</th>
+        <th>Fim</th>
+        <th>Local</th>
+        <th>Solicitante</th>
+        <th>Motivo da Rejeição</th>
+        <th colspan="3">Ações</th>
+      </tr> 
     </thead>
     <tbody>
       <% @rejected_sector_reservations.each do |reservation| %>

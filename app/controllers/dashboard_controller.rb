@@ -7,11 +7,19 @@ class DashboardController < ApplicationController
     @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user_to_come(@user))
     @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user_to_come(@user))
 
-    if @user.role == "secretary"
+    if @user.role == "secretary" || "sector_admin"
 
       @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector_to_come(@user.sector))
       @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector_to_come(@user.sector))
       @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(@user.sector))
+
+    end
+
+    if @user.role == "admin"
+      
+      @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.where(status: 'pending'))
+      @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.where(status: 'approved'))
+      @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.where(status: 'closed'))
 
     end
   end

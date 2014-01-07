@@ -8,9 +8,9 @@ OpenRes::Application.routes.draw do
   get "reservations/finished", to: "reservations#finished", as: :finished
   get "reservations/future", to: "reservations#future", as: :future
 
-  get "reservations/basic_reservations", to: "reservations#all_user_reservations",as: :all_user_reservations
-  get "reservations/basic_finished_reservations", to: "reservations#user_finished_reservations",as: :finished_user_reservations
-  get "reservations/basic_future_reservations", to: "reservations#user_future_reservations",as: :future_user_reservations
+  get "reservations/basic_reservations", to: "reservations#user_all_reservations",as: :user_all_reservations
+  get "reservations/basic_finished_reservations", to: "reservations#user_finished_reservations",as: :user_finished_reservations
+  get "reservations/basic_future_reservations", to: "reservations#user_future_reservations",as: :user_future_reservations
 
   devise_for :users
   resources :places

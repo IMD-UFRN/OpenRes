@@ -1,3 +1,10 @@
 <h1>Dashboard de Administrador Geral</h1>
 
-<%= render 'reservations/reservations_index' %>
+<hr>
+
+<h3>Reservas Futuras</h3>
+
+<%= render 'reservations/categorized_reservations'%>
+
+<%= link_to 'Todas as Reservas', "/reservations/all", class:"btn btn-primary" %>
+<%= link_to 'Reservas Finalizadas', "/reservations/finished", class:"btn btn-primary" %>
