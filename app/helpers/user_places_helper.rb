@@ -1,0 +1,2 @@
+module UserPlacesHelper
+end
