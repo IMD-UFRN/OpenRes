@@ -66,9 +66,7 @@ end
 
 gem 'coveralls', require: false
 
-gem "database_cleaner", :group => :test
-
- gem 'guard-rspec', require: false
+gem 'guard-rspec', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
