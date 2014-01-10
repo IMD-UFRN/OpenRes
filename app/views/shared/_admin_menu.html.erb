@@ -1,8 +1,4 @@
-<% if current_user and current_user.role == "admin" %>
-
-
 <%= render 'shared/sector_admin_user_menu' %>
 <li><%= link_to "Setores", "/sectors"  %></li>
 <li><%= link_to "Lugares", "/places"  %></li>
 <li><%= link_to "Tipos de sala", "/room_types"  %></li>   
-<% end %>
