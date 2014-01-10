@@ -27,6 +27,8 @@ OpenRes::Application.configure do
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
+  config.assets.compress = true
+
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
@@ -80,7 +82,7 @@ OpenRes::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.serve_static_assets = true
-  
+
   config.action_mailer.smtp_settings = {
   :address              => "smtp.gmail.com",
   :port                 => 587,
