@@ -16,6 +16,9 @@ User.create(role: "sector_admin", email: "sector_admin@example.com", password: "
 User.create(role: "secretary", email: "secretary@example.com", password: "rootadmin", name: "Secretary", cpf: "094.092.092-94", sector_id: 1)
 User.create(role: "basic", email: "basic@example.com", password: "rootadmin", name: "Basic", cpf: "095.092.092-95", sector_id: 1)
 
+User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel", cpf: "096.092.092-96", sector_id: 3)
+User.create(role: "basic", email: "gleydson@example.com", password: "rootadmin", name: "Gleydson", cpf: "097.092.092-97", sector_id: 3)
+
 RoomType.create(name: "Laboratório", description: "Laboratório para uso diverso.")
 RoomType.create(name: "Sala de Aula", description: "Sala para aulas dos cursos que ocupam o prédio.")
 
@@ -23,4 +26,7 @@ Place.create(name: "A01", description: "Sala A01.", code: "101", capacity: 10, s
 Place.create(name: "A02", description: "Sala A02.", code: "102", capacity: 10, sector_id: 1, room_type_id: 2)
 Place.create(name: "B01", description: "Lab. B01.", code: "201", capacity: 10, sector_id: 2, room_type_id: 1)
 Place.create(name: "B02", description: "Lab. B02.", code: "202", capacity: 10, sector_id: 2, room_type_id: 1)
+
+UserPlace.create(code: "A11", user_id: 5)
+UserPlace.create(code: "A12", user_id: 6)
 
