@@ -46,6 +46,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :production do
+  gem 'pg'
+end
+
 gem 'compass-rails'
 gem 'bootstrap-sass', '~> 2.3.2'
 gem 'bootswatch-rails'
