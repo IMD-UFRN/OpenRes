@@ -1,2 +1,5 @@
+<% if current_user and current_user.role == "sector_admin" or current_user.role == "admin" %>
+
 <%= render 'shared/alocator_user_menu' %>
 <li><%= link_to "Relatórios", "#"  %></li>
+<% end %>

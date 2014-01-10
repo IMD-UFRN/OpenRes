@@ -20,8 +20,6 @@ OpenRes::Application.routes.draw do
 
   get "check_reservations/", to: "reservation_approval#index", as: :check_reservations
 
-
-  
   post "reservations/:reservation_id/approve", to: "reservation_approval#approve", as: :reservation_approve
   post "check_reservations/:reservation_id/reject", to: "reservation_approval#reject", as: :reservation_reject
   post "check_reservations/:reservation_id/suspend", to: "reservation_approval#suspend", as: :reservation_suspend
