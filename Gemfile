@@ -34,9 +34,11 @@ gem 'cancan'
 
 gem 'draper'
 
-gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git'
+gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'https://github.com/zpaulovics/datetimepicker-rails'
 
 gem 'chosen-rails'
+
+gem 'unicorn'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -62,6 +64,8 @@ group :development, :test do
   gem 'sqlite3'
   gem 'simplecov', require: false
   gem 'simplecov-html', require: false
+  gem 'capistrano', '~> 2.14.2'
+  gem 'rvm-capistrano'
 end
 
 gem 'coveralls', require: false

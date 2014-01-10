@@ -1,0 +1,30 @@
+working_directory "<%= current_path %>"
+pid "<%= unicorn_pid %>"
+stderr_path "<%= unicorn_log %>"
+stdout_path "<%= unicorn_log %>"
+
+listen "/tmp/unicorn.<%= application %>.sock"
+preload_app true
+worker_processes <%= unicorn_workers %>
+timeout 30
+
+before_fork do |server, worker|
+  old_pid = "#{server.config[:pid]}.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill('QUIT', File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end
+
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+end
+
+after_fork do |server, worker|
+  #defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+
+  #Sidekiq.configure_client do |config|
+  #  config.redis = { :namespace => 'seminario_ccsa_2013' }
+  #end
+end

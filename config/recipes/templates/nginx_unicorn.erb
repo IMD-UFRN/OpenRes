@@ -1,0 +1,27 @@
+upstream unicorn_<%= application %> {
+  server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
+}
+
+server {
+  listen 80;
+  server_name <%= application %>.safira-app.com.br www.<%= application %>.safira-app.com.br;
+  root <%= current_path %>/public;
+
+  location ^~ /assets/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  try_files $uri/index.html $uri @unicorn_<%= application %>;
+  location @unicorn_<%= application %> {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://unicorn_<%= application %>;
+  }
+
+  error_page 500 502 503 504 /500.html;
+  client_max_body_size 4G;
+  keepalive_timeout 10;
+}

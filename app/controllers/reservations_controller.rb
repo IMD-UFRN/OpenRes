@@ -17,6 +17,11 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /reservations/1/edit
@@ -64,52 +69,43 @@ class ReservationsController < ApplicationController
   end
 
   def all
-    @user = UserDecorator.decorate(current_user)
-
-    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector(@user.sector))
-    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector(@user.sector))
-    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector(@user.sector))
+    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector(current_user.object.sector))
+    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector(current_user.object.sector))
+    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector(current_user.object.sector))
   end
 
   def finished
-    @user = UserDecorator.decorate(current_user)
-
-    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_for_sector(@user.sector))
-    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_for_sector(@user.sector))
-    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_for_sector(@user.sector))
+    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_for_sector(current_user.object.sector))
+    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_for_sector(current_user.object.sector))
+    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_for_sector(current_user.object.sector))
   end
 
   def future
-    @user = UserDecorator.decorate(current_user)
-    
-    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector_to_come(@user.sector))
-    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector_to_come(@user.sector))
-    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(@user.sector))
+    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector_to_come(current_user.object.sector))
+    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector_to_come(current_user.object.sector))
+    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(current_user.object.sector))
   end
 
   def user_all_reservations
 
-    @user = UserDecorator.decorate(current_user)
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(@user))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(@user))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(@user))
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(current_user.object))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(current_user.object))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(current_user.object))
 
   end
 
   def user_future_reservations
 
-    @user = UserDecorator.decorate(current_user)
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user_to_come(@user))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user_to_come(@user))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user_to_come(@user))
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user_to_come(current_user.object))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user_to_come(current_user.object))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user_to_come(current_user.object))
 
   end
 
   def user_finished_reservations
-    @user = UserDecorator.decorate(current_user)
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_from_user(@user))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_from_user(@user))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_from_user(@user))
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_from_user(current_user.object))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_from_user(current_user.object))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_from_user(current_user.object))
   end
 
 
