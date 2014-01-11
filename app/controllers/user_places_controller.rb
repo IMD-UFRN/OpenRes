@@ -42,7 +42,7 @@ class UserPlacesController < ApplicationController
   def update
     respond_to do |format|
       if @user_place.update(user_place_params)
-        format.html { redirect_to @user_place, notice: 'Sala de Professor cadastrada com sucesso.' }
+        format.html { redirect_to @user_place, notice: 'Sala de Servidor cadastrada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
