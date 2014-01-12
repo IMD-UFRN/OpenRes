@@ -64,7 +64,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'simplecov', require: false
   gem 'simplecov-html', require: false
-  gem 'capistrano', '~> 2.14.2'
+  gem 'capistrano', '~> 2.15.4'
   gem 'rvm-capistrano'
 end
 

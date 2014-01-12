@@ -40,7 +40,7 @@ GEM
       railties (>= 3.1)
     builder (3.1.4)
     cancan (1.6.10)
-    capistrano (2.14.2)
+    capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -264,7 +264,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.2)
   bootswatch-rails
   cancan
-  capistrano (~> 2.14.2)
+  capistrano (~> 2.15.4)
   capybara
   chosen-rails
   coffee-rails (~> 4.0.0)
