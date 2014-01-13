@@ -238,5 +238,6 @@ pt-BR:
         end_time: Fim
         status: Status
         reason: Motivo
+        place: Sala
       justification:
         reason: Motivo
