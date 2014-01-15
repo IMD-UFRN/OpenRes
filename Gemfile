@@ -46,7 +46,7 @@ group :doc do
 end
 
 group :assets do 
-  gem 'therubyracer'
+  gem 'therubyracer', platform: :ruby
 end
 
 group :production do
