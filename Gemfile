@@ -45,6 +45,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :assets do 
+  gem 'therubyracer'
+end
+
 group :production do
   gem 'pg'
 end
