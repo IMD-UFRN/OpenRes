@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 20140108004830) do
   add_index "places", ["sector_id"], name: "index_places_on_sector_id"
 
   create_table "reservations", force: true do |t|
-    t.datetime "begin_time"
-    t.datetime "end_time"
+    t.date     "date"
+    t.time     "begin_time"
+    t.time     "end_time"
     t.string   "status"
     t.text     "reason"
     t.integer  "user_id"

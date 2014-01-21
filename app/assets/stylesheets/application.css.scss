@@ -8,6 +8,8 @@
 // Then bootstrap itself
 @import "bootstrap";
 
+@import "bootstrap-datetimepicker";
+
 // Bootstrap body padding for fixed navbar
 body { padding-top: 60px; }
 
@@ -18,8 +20,6 @@ body { padding-top: 60px; }
 @import "bootswatch/cosmo/bootswatch";
 
 @import "normalize";
-
-@import "bootstrap-datetimepicker";
 
 @import "chosen";
 

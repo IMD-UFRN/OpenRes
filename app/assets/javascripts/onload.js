@@ -1,8 +1,17 @@
-$(document).on('page:change', function() {
+var ready = function() {
   $('.chosen-select').chosen({
     allow_single_deselect: true,
-    no_results_text: 'No results matched'
+    no_results_text: 'Nenhum resultado para'
   });
 
-  $('.datetime_picker').datetimepicker({});
-});
+  $('.date_picker').datetimepicker({
+    pickTime: false
+  });
+  
+  $('.time_picker').datetimepicker({
+    pickDate: false
+  });
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

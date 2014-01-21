@@ -2,8 +2,9 @@
 class CreateReservations < ActiveRecord::Migration
   def change
     create_table :reservations do |t|
-      t.datetime :begin_time
-      t.datetime :end_time
+      t.date :date
+      t.time :begin_time
+      t.time :end_time
       t.string :status
       t.text :reason
       t.references :user, index: true
