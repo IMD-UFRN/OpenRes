@@ -19,7 +19,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def date
-    I18n.l object.date, format: :short    
+    object.date.strftime("%d/%m/%Y")  
   end
 
   def user
