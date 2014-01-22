@@ -234,6 +234,7 @@ pt-BR:
         description: Descrição
       reservation:  
         user: Solicitante
+        date: Data
         begin_time: Início
         end_time: Fim
         status: Status
