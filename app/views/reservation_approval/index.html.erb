@@ -1,40 +1,7 @@
 <h1>Listando Reservas</h1>
 
-<table class = "table table-striped table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Início</th>
-      <th>Fim</th>
-      <th>Local</th>
-      <th>Solicitante</th>
-      <th>Status</th>
-      <th colspan="3">Ações</th>
-    </tr>
-  </thead>
+<%= render 'reservations/categorized_reservations'%>
 
-  <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-        <td><%= reservation.date %></td>
-        <td><%= reservation.begin_time %></td>
-        <td><%= reservation.end_time %></td>
-        <td><%= reservation.place %></td>
-        <td><%= reservation.user %></td>
-        <td><%= reservation.status %></td>
-        <%= reservation.approve_link %>
-        <%= reservation.reject_link %>
-        <%= reservation.suspend_link %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
-
-<%= link_to 'Reservas por Categoria', "/reservations/all", class:"btn btn-primary" %>
 <%= link_to 'Reservas Futuras', "/reservations/future", class:"btn btn-primary" %>
 <%= link_to 'Reservas Finalizadas', "/reservations/finished", class:"btn btn-primary" %>
 

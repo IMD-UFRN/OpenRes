@@ -6,7 +6,9 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = ReservationDecorator.decorate_collection(current_user.reservations)
+    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(current_user.object))
+    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(current_user.object))
+    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(current_user.object))
   end
 
   # GET /reservations/1
@@ -68,12 +70,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def all
-    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector(current_user.object.sector))
-    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector(current_user.object.sector))
-    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector(current_user.object.sector))
-  end
-
   def finished
     @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_for_sector(current_user.object.sector))
     @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_for_sector(current_user.object.sector))
@@ -86,13 +82,6 @@ class ReservationsController < ApplicationController
     @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(current_user.object.sector))
   end
 
-  def user_all_reservations
-
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(current_user.object))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(current_user.object))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(current_user.object))
-
-  end
 
   def user_future_reservations
 

@@ -1,6 +1,10 @@
 class ReservationApprovalController < ApplicationController
   def index
-    @reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user))
+    #@reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user))
+
+    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).open_for_sector(current_user.object.sector))
+    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved_for_sector(current_user.object.sector))
+    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected_for_sector(current_user.object.sector))
   end
 
   def approve
