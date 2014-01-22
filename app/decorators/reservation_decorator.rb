@@ -11,11 +11,15 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def begin_time
-    I18n.l object.begin_time, format: :short
+    object.begin_time.strftime("%H:%M")
   end
 
   def end_time
-    I18n.l object.end_time, format: :short
+    object.end_time.strftime("%H:%M")
+  end
+
+  def date
+    I18n.l object.date, format: :short    
   end
 
   def user

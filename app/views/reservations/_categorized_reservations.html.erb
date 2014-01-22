@@ -16,6 +16,7 @@
     <tbody>
       <% @open_sector_reservations.each do |reservation| %>
         <tr>
+          <td><%= reservation.date %></td>
           <td><%= reservation.begin_time %></td>
           <td><%= reservation.end_time %></td>
           <td><%= reservation.place %></td>
@@ -41,6 +42,7 @@
     <tbody>
       <% @approved_sector_reservations.each do |reservation| %>
         <tr>
+          <td><%= reservation.date %></td>
           <td><%= reservation.begin_time %></td>
           <td><%= reservation.end_time %></td>
           <td><%= reservation.place %></td>
@@ -62,6 +64,7 @@
         <th>Reservas Rejeitadas</th>
       </tr>
        <tr>
+        <th>Data</th>
         <th>Início</th>
         <th>Fim</th>
         <th>Local</th>
@@ -73,6 +76,7 @@
     <tbody>
       <% @rejected_sector_reservations.each do |reservation| %>
         <tr>
+          <td><%= reservation.date %></td>
           <td><%= reservation.begin_time %></td>
           <td><%= reservation.end_time %></td>
           <td><%= reservation.place %></td>

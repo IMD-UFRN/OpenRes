@@ -3,6 +3,7 @@
 <table class = "table table-striped table-bordered table-hover">
   <thead>
     <tr>
+      <th>Data</th>
       <th>Início</th>
       <th>Fim</th>
       <th>Local</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @reservations.each do |reservation| %>
       <tr>
+        <td><%= reservation.date %></td>
         <td><%= reservation.begin_time %></td>
         <td><%= reservation.end_time %></td>
         <td><%= reservation.place %></td>
