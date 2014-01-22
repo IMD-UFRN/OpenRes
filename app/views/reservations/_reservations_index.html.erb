@@ -12,15 +12,20 @@
   </thead>
 
   <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-        <td><%= reservation.date %></td>
-        <td><%= reservation.begin_time %></td>
-        <td><%= reservation.end_time %></td>
-        <td><%= reservation.place %></td>
-        <td><%= reservation.user %></td>
-        <td><%= reservation.status %></td>
-        <td><%= link_to 'Detalhes', reservation %></td>
+   <% if @reservations.count > 0 %>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.date %></td>
+          <td><%= reservation.begin_time %></td>
+          <td><%= reservation.end_time %></td>
+          <td><%= reservation.place %></td>
+          <td><%= reservation.user %></td>
+          <td><%= reservation.status %></td>
+          <td><%= link_to 'Detalhes', reservation %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr> <td colspan="12">Não existem reservas desse tipo cadastradas.</td>
       </tr>
     <% end %>
   </tbody>
