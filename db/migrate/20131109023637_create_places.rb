@@ -6,7 +6,7 @@ class CreatePlaces < ActiveRecord::Migration
       t.text :description
       t.string :code
       t.integer :capacity
-      t.references :sector, index: true
+      #t.references :sector, index: true
       t.references :room_type, index: true
 
       t.timestamps

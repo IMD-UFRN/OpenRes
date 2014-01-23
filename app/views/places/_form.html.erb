@@ -18,7 +18,7 @@
     <%= f.association :room_type %></br>
     <%= f.input :description %>
     <%= f.input :capacity %>
-    <%= f.association :sector %>
+    <%= f.association :sectors, :include_blank => false, input_html: { class: 'chosen-select' }%>
   </div>
   </br>
   <%= f.button :submit, "OK", class:"btn btn-success" %>

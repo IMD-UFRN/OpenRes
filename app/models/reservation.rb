@@ -97,5 +97,5 @@ class Reservation < ActiveRecord::Base
 
   has_one :justification
 
-  delegate :sector, to: :place
+  delegate :sectors, to: :place
 end

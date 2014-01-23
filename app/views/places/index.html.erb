@@ -18,7 +18,13 @@
         <td><%= place.code %></td>
         <td><%= place.name %></td>
         <td><%= place.room_type.name %></td>
-        <td><%= place.sector.name %></td>
+        <td>
+          <% place.sectors.each do |sector| %>
+            <%= sector.name  %>
+            <%= "/" if place.sectors.count > 1 %>
+          <%end%>
+
+        </td>
         <td><%= place.capacity %></td>
         <td><%= link_to 'Detalhes', place %></td>
         <td><%= link_to 'Excluir', place, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' } %></td>
