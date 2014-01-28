@@ -98,4 +98,8 @@ class Reservation < ActiveRecord::Base
   has_one :justification
 
   delegate :sectors, to: :place
+
+  def sector_ids
+    place.sector_ids
+  end
 end

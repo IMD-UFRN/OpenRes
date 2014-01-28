@@ -5,16 +5,25 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    can :manage, :all if Rails.env.development?
+    #can :manage, :all if Rails.env.development?
 
     can :manage, Reservation, { user_id: user.id }
 
     if user.role == "admin"
       can :manage, :all
     elsif user.role == "sector_admin"
-      can :manage, :all, { sector_id: user.sector.id }
+      can :manage, Reservation do |reservation|
+        unless reservation.place.nil?
+          reservation.sector_ids.include?(user.sector.id)
+        end
+      end
     elsif user.role == "secretary"
-      can :manage, Reservation, { sector_id: user.sector.id }
+      can :manage, Reservation do |reservation|
+        unless reservation.place.nil?
+          reservation.sector_ids.include?(user.sector.id)
+        end
+      end
+
       can :manage, User
     elsif user.role == "basic"
       can :create, Reservation

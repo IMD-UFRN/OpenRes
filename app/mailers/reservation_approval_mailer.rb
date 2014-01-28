@@ -19,6 +19,7 @@ class ReservationApprovalMailer < ActionMailer::Base
   #
   def rejected_mail(justification)
     @greeting = "Hi"
+    @justification = justification
 
     mail to: "to@example.org"
   end
