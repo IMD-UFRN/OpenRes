@@ -1,0 +1,22 @@
+<h1>Detalhes da Sala</h1>
+<%= link_to 'Editar Informações deste Tipo de Sala', edit_place_path(@place), class:"btn-small btn-primary"%> 
+
+
+<hr>
+
+
+<dl>
+  <dt>Código:</dt> <dd><%= @place.code %></dd>
+  <dt>Nome:</dt> <dd><%= @place.name %></dd>
+  <dt>Tipo de Sala:</dt> <dd><%= @place.room_type.name %></dd>
+  <dt>Descrição:</dt> <dd><%= @place.description %></dd>
+  <dt>Capacidade:</dt> <dd><%= @place.capacity %></dd>
+  <dt>Departamento Responsável:</dt> 
+    <dd>
+      <% @place.sectors.each do |sector| %>
+        <%= sector.name %> </br>
+      <% end %> 
+    </dd>
+</dl>
+
+<%= render 'back_index'%>

@@ -97,6 +97,10 @@ class ReservationsController < ApplicationController
     @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_from_user(current_user.object))
   end
 
+  def preview
+    @place = Place.find(params[:id])
+    render :partial => 'place_preview', :content_type => 'text/html'
+  end
 
 
   private
