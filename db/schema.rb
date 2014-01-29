@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20140122211044) do
 
   create_table "places", force: true do |t|
     t.string   "name"
-    t.text     "description"
     t.string   "code"
     t.integer  "capacity"
     t.integer  "room_type_id"

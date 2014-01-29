@@ -3,7 +3,6 @@ class CreatePlaces < ActiveRecord::Migration
   def change
     create_table :places do |t|
       t.string :name
-      t.text :description
       t.string :code
       t.integer :capacity
       #t.references :sector, index: true
