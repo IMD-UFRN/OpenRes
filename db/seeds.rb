@@ -31,10 +31,11 @@ RoomType.create(name: "Sala de Professores", description: "Ambiente para profess
 RoomType.create(name: "Laboratório de Pesquisa", description: "Laboratório para a realização de pesquisas por docentes.")
 RoomType.create(name: "Empresas", description: "Sala para empresas incubadas no prédio.")
 
-Place.create(name: "A01", description: "Sala A01.", code: "101", capacity: 10, sector_ids: 1, room_type_id: 2)
-Place.create(name: "A02", description: "Sala A02.", code: "102", capacity: 10, sector_ids: 1, room_type_id: 2)
-Place.create(name: "B01", description: "Lab. B01.", code: "201", capacity: 10, sector_ids: 2, room_type_id: 1)
-Place.create(name: "B02", description: "Lab. B02.", code: "202", capacity: 10, sector_ids: 2, room_type_id: 1)
+Place.create(name: "A101", description: RoomType.first.description, code: "101", capacity: 10, sector_ids: 1, room_type_id: 2)
+Place.create(name: "A102", description: RoomType.first.description, code: "101", capacity: 10, sector_ids: 1, room_type_id: 2)
+Place.create(name: "A101", description: RoomType.first.description, code: "101", capacity: 10, sector_ids: 1, room_type_id: 2)
+Place.create(name: "A101", description: RoomType.first.description, code: "101", capacity: 10, sector_ids: 1, room_type_id: 2)
+
 
 UserPlace.create(code: "A11", user_id: 5)
 UserPlace.create(code: "A12", user_id: 6)
