@@ -98,7 +98,12 @@ class ReservationsController < ApplicationController
   end
 
   def preview
-    @place = Place.find(params[:id])
+    @place = Place.find(params[:place_id])
+    @date = Date.parse(params[:date], '%d/%m/%Y') if params[:date]
+
+    @reservations = ReservationDecorator.decorate_collection(
+      Reservation.where(date: @date, place_id: params[:place_id]))
+
     render :partial => 'place_preview', :content_type => 'text/html'
   end
 

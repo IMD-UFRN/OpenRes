@@ -2,6 +2,8 @@
 OpenRes::Application.routes.draw do
   resources :room_types
 
+  get '/places/preview', to: 'reservations#preview', as: :place_preview
+
   root to: 'home#index'
 
   get "reservations/all", to: "reservations#all", as: :all
@@ -28,9 +30,6 @@ OpenRes::Application.routes.draw do
   get "reservations/:reservation_id/suspend" => 'reservation_approval#justify_status', as: :justify_suspend
 
   get '/dashboard', to: 'dashboard#dashboard', as: :dashboard
-
-
-  get '/places/preview/:id', to: 'reservations#preview', as: :place_preview
 
   resources :users
 end

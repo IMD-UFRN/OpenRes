@@ -10,6 +10,16 @@ function xinspect(o,i){
 }
 
 
+function build_url(place_id, date) {
+  var result = 'http://localhost:3000/places/preview/?place_id=' + place_id;
+
+  if (date) {
+    result += '&date=' + date;
+  }
+
+  return result + '&locale=pt-BR'
+}
+
 var ready = function() {
   $('.chosen-select').chosen({
     allow_single_deselect: true,
@@ -18,7 +28,7 @@ var ready = function() {
 
   $('#place_selector').on('change', function(evt, params) {
 
-    $.get('http://localhost:3000/places/preview/' + params.selected + '?locale=pt-BR', function(data) {
+    $.get(build_url(params.selected, $('#reservation_date').val()), function(data) {
         $('#place_preview').html(data);
     });
 

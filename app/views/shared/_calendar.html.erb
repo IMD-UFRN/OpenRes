@@ -1,0 +1,38 @@
+<div class="calendar">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Horário</th>
+        <th>Reservas</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% 24.times do |i| %>
+        <tr>
+          <td><%= (Time.now.midnight + (i * 60).minutes).strftime('%H:%M') %> - 
+            <%= (Time.now.midnight + (i * 60).minutes + 60.minutes).strftime('%H:%M') %></td>
+          <td>
+            <ul>
+              <% reservations.each do |reservation| %>
+                <li><%= reservation.begin_time %> - <%= reservation.end_time %></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+  <% reservations.each do |reservation| %>
+    
+    <div style="width: 150px; background: #<%= "#{reservation.random_color}" %>; position:relative; float: left; display: block; top: <%=  "#{reservation.top_rect}px" %>; height: <%= "#{reservation.rect_height}px" %>">
+      <%= reservation.begin_time %>
+      <br />
+      <%= reservation.end_time %>
+    </div>
+  <% end %>
+
+  <div style="clear:both; position: relative; top: 725px"></div>
+</div>

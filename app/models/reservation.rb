@@ -89,7 +89,6 @@ class Reservation < ActiveRecord::Base
     return Reservation.rejected_for_sector(sector).where("date < ?",  DateTime.now)
   }
 
-
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time
 
   belongs_to :user

@@ -30,6 +30,18 @@ class ReservationDecorator < Draper::Decorator
     link_to(object.place.name, object.place)
   end
 
+  def top_rect
+    @top_rect ||= (object.begin_time.hour * 60 + object.begin_time.min) * 0.5
+  end  
+
+  def rect_height
+    ((object.end_time.hour * 60 + object.end_time.min) * 0.5) - top_rect
+  end
+
+  def random_color
+    "%06x" % (rand * 0xffffff)
+  end
+
   def approve_link
     return if object.status == 'approved'
 

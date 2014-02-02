@@ -1,9 +1,7 @@
 <h1>Detalhes da Sala</h1>
-<%= link_to 'Editar Informações deste Tipo de Sala', edit_place_path(@place), class:"btn-small btn-primary"%> 
-
-
 <hr>
 
+<%= render 'shared/calendar', reservations: @reservations %>
 
 <dl>
   <dt>Código:</dt> <dd><%= @place.code %></dd>
@@ -18,5 +16,3 @@
       <% end %> 
     </dd>
 </dl>
-
-<%= render 'back_index'%>
