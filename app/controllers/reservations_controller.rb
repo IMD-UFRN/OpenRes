@@ -102,7 +102,6 @@ class ReservationsController < ApplicationController
     render :partial => 'place_preview', :content_type => 'text/html'
   end
 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation

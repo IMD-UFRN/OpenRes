@@ -18,9 +18,19 @@ var ready = function() {
 
   $('#place_selector').on('change', function(evt, params) {
 
-    $.get('http://localhost:3000/places/preview/' + params.selected + '?locale=pt-BR', function(data) {
-        $('#place_preview').html(data);
+    $.ajax("/places/" + params.selected + ".json").done(function(data) {
+      // I'm only using extend to add in the id. You could just use data[0]
+      var placeModel = new PlaceModel(data);
+      var placeView = new PlaceView({ model: placeModel });
+    
+      placeView.render();
+
+      $('#place_preview').html(placeView.$el);
     });
+
+  //$.get('http://localhost:3000/places/preview/' + params.selected + '?locale=pt-BR', function(data) {
+  //    $('#place_preview').html(data);
+  //});
 
   });
 };
