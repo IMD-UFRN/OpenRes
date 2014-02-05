@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OpenRes</title>
+  <title>IMD - Gerenciador de Reservas</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -15,7 +15,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="/dashboard">OpenRes</a>
+                  <a class="brand" href="/dashboard">
+            <%= image_tag "logo.png", size: "120x120" %>
+          </a>
+          
+        <%= image_tag class="img" "logo.png", z-index: -1 %>
         <div class="container-fluid nav-collapse">
           <ul class="nav pull-right">
             <li>

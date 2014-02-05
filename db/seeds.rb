@@ -21,7 +21,7 @@ psicol = Sector.create(name: "Psicologia e Serviço Social"             , descri
 lab_info       = RoomType.create(name: "Laboratório de Informática", description: "Laboratório para uso diverso.")
 administrativo = RoomType.create(name: "Administrativo", description: "Sala atividades técnico administrativas do instituto.")
 reuniao        = RoomType.create(name: "Sala de Reuniões", description: "Sala de reuniões e video-conferências.")
-professor      = RoomType.create(name: "Sala de Professores", description: "Sala de docentes da instituição.")
+professores    = RoomType.create(name: "Sala de Professores", description: "Sala de docentes da instituição.")
 auditorio      = RoomType.create(name: "Auditório", description: "Auditório para eventos.")
 
 RoomType.create(name: "Sala de Aula", description: "Sala para aulas dos cursos que ocupam o prédio.")
