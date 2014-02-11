@@ -15,6 +15,8 @@
   <div class="form-inputs">
     <%= f.input :code %>
     <%= f.input :name %>
+    <%= f.input :reservable %>
+    <br>
     <%= f.association :room_type, input_html: { class: 'chosen-select', data: { placeholder: "Selecione o tipo de sala" }} %></br>
     <%= f.input :capacity %>
     <%= f.association :sectors, :include_blank => false, input_html: { class: 'chosen-select', data: { placeholder: "Selecione os departamentos" }} %>

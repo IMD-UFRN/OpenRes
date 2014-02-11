@@ -229,6 +229,7 @@ pt-BR:
         room_type: Tipo de sala 
         sectors: Departamentos
         capacity: Capacidade
+        reservable: Reservável?
       sector: 
         name: Nome
         description: Descrição

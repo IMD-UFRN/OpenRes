@@ -20,5 +20,8 @@ class Place < ActiveRecord::Base
     return groups
   end
 
-
+  def full_name
+    code + " - " + name
+  end
 end
+  
