@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Place < ActiveRecord::Base
 
-  validates_presence_of :name, :description, :sector_ids
+  validates_presence_of :name, :code, :sector_ids
 
   belongs_to :sector
 
