@@ -2,8 +2,6 @@
 OpenRes::Application.routes.draw do
   resources :room_types
 
-  get '/places/preview', to: 'reservations#preview', as: :place_preview
-
   root to: 'home#index'
 
   get "reservations/all", to: "reservations#all", as: :all
@@ -31,13 +29,9 @@ OpenRes::Application.routes.draw do
 
   get '/dashboard', to: 'dashboard#dashboard', as: :dashboard
 
-<<<<<<< HEAD
   get '/places/preview/:id', to: 'reservations#preview', as: :place_preview
 
   get '/places/:id/get_reservations', to: 'places#get_reservations', as: :get_place_reservations
 
-
-=======
->>>>>>> 3e75695633c11a45751a2fd8dc401b0354134737
   resources :users
 end

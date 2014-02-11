@@ -209,7 +209,6 @@ User.create(role: "basic", email: "basic@example.com", password: "rootadmin", na
 User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel", cpf: "096.092.092-96", sector_id: 3)
 User.create(role: "basic", email: "gleydson@example.com", password: "rootadmin", name: "Gleydson", cpf: "097.092.092-97", sector_id: 3)
 
-<<<<<<< HEAD
 RoomType.create(name: "Laboratório de Informática", description: "Laboratório para uso diverso.")
 RoomType.create(name: "Sala de Aula", description: "Sala para aulas dos cursos que ocupam o prédio.")
 RoomType.create(name: "Sala de Professores", description: "Ambiente para professores.")
