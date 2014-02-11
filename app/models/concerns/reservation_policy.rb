@@ -24,7 +24,7 @@ class ReservationPolicy
 
   def self.approve(reservation)
     conflicts = Reservation.where("place_id = ? and date = ? and status = ? and begin_time <= ? and end_time >= ? and id <> ?",
-     reservation.place.id, reservation.date, 'approved', reservation.end_time, reservation.begin_time, reservation.id)
+     reservation.place_id, reservation.date, 'approved', reservation.end_time, reservation.begin_time, reservation.id)
 
     if conflicts.empty?
       reservation.status = "approved"
