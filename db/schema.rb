@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140122211044) do
     t.string   "name"
     t.string   "code"
     t.integer  "capacity"
+    t.boolean  "reservable"
     t.integer  "room_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"

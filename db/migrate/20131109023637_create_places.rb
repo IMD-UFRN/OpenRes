@@ -5,6 +5,7 @@ class CreatePlaces < ActiveRecord::Migration
       t.string :name
       t.string :code
       t.integer :capacity
+      t.boolean :reservable
       #t.references :sector, index: true
       t.references :room_type, index: true
 

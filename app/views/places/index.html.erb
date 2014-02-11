@@ -1,39 +1,45 @@
 <h1>Listando Salas</h1>
 
-<table class="table table-striped table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Código</th>
-      <th>Nome</th>
-      <th>Tipo de Sala</th>
-      <th>Departamento</th>
-      <th>Capacidade</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
+ <% @sectors.each do |sector| %>
 
-  <tbody>
-    <% @places.each do |place| %>
-      <tr>
-        <td><%= place.code %></td>
-        <td><%= place.name %></td>
-        <td><%= place.room_type.name %></td>
-        <td>
-          <% place.sectors.each do |sector| %>
-            <%= sector.name  %>
-            <%= "/" if place.sectors.count > 1 %>
-          <%end%>
-
-        </td>
-        <td><%= place.capacity %></td>
-        <td><%= link_to 'Detalhes', place %></td>
-        <td><%= link_to 'Excluir', place, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' } %></td>
+   <table class="table table-striped table-bordered table-hover places_table">
+    <thead>
+      <tr>  
+        <th class ="table-title" colspan="5">
+          Setor: <%= link_to sector.name, sector %>
+        </th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Tipo de Sala</th>
+        <th>Capacidade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
 
-<br>
+    <tbody>
+      <% sector.places.each do |place| %>
+        <tr>
+          <td><%= link_to place.code, place %></td>
+          <td class= "fix-colum"><%= place.name %></td>
+          <td><%= link_to place.room_type.name, place.room_type %></td>
+          <td><%= place.capacity %></td>
+          <td>
+            <%= link_to 'Detalhes', place, class: 'btn btn-info btn-small' %>
+            <%= link_to 'Editar', edit_place_path(place), class: 'btn btn-primary btn-small'  %>
+            <%= link_to 'Excluir', place, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' }, class: 'btn btn-danger btn-small'  %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+<% end %>
+
+
 
 <%= link_to 'Nova Sala', new_place_path, class:"btn btn-success" %>
 
