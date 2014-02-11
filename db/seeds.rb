@@ -209,8 +209,6 @@ User.create(role: "basic", email: "gleydson@example.com", password: "rootadmin",
 UserPlace.create(code: "A11", user_id: 5)
 UserPlace.create(code: "A12", user_id: 6)
 
-Reservation.create(user_id: 5, reason: "Minicurso.", date: Date.today - 1.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:1)
-Reservation.create(user_id: 6, reason: "Minicurso.", date: Date.today - 1.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:1)
 Reservation.create(user_id: 6, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)
 Reservation.create(user_id: 5, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 4.hour, place_id:1)
 Reservation.create(user_id: 5, reason: "Reunião.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 5.hour, place_id:1)
