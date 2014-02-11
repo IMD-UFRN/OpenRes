@@ -42,6 +42,10 @@ gem 'unicorn'
 
 gem "rails-backbone"
 
+gem 'handlebars_assets'
+
+gem 'momentjs-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

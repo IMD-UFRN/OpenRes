@@ -29,8 +29,10 @@ OpenRes::Application.routes.draw do
 
   get '/dashboard', to: 'dashboard#dashboard', as: :dashboard
 
-
   get '/places/preview/:id', to: 'reservations#preview', as: :place_preview
+
+  get '/places/:id/get_reservations', to: 'places#get_reservations', as: :get_place_reservations
+
 
   resources :users
 end

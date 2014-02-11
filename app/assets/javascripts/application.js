@@ -21,4 +21,12 @@
 //= require bootstrap-datetimepicker
 //= require chosen-jquery
 //= require turbolinks
+//= require moment
+//= require moment/pt-br.js
+//= require handlebars
 //= require_tree .
+
+Handlebars.registerHelper("prettifyDate", function(timestamp) {
+  timestamp = timestamp.slice(0, -1);
+  return moment(timestamp).format("HH:mm");
+});

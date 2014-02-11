@@ -114,6 +114,11 @@ GEM
     guard-rspec (4.2.4)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
+    handlebars_assets (0.15)
+      execjs (>= 1.2.9)
+      multi_json
+      sprockets (>= 2.0.3)
+      tilt
     highline (1.6.20)
     hike (1.2.3)
     i18n (0.6.9)
@@ -139,6 +144,8 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
+    momentjs-rails (2.5.1)
+      railties (>= 3.1)
     multi_json (1.8.4)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
@@ -286,9 +293,11 @@ DEPENDENCIES
   draper
   factory_girl_rails
   guard-rspec
+  handlebars_assets
   jbuilder (~> 1.2)
   jquery-rails
   magic_encoding
+  momentjs-rails
   pg
   pry-rails
   puma

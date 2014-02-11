@@ -10,6 +10,7 @@ class Place < ActiveRecord::Base
 
   belongs_to :room_type
   has_many :object_resources
+  has_many :reservations
 
   def self.grouped_by_type
     groups = []

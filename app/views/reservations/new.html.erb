@@ -1,8 +1,46 @@
-<h1>Nova Reserva</h1>
+<div id="new_reservation">
+  <div class="row-fluid">
+    <div class="span9">
+      <h1>Nova Reserva</h1>
+    </div>
+  </div>
 
-<%= render 'form' %>
+  <div class="row-fluid">
+    <div class="span5" >
+      <%= render 'form' %>
+    </div>
 
-<div class="span6" id="place_preview">
+    <div class="span4" id="place_preview">
+    </div>
+  </div>
+
 </div>
 
+
 <%= render 'back_index'%>
+
+<script id="place_preview_template" type="text/x-handlebars-template">
+
+<h3>Detalhes da sala</h3>
+
+<p>Data: {{this.date}}</p>
+<p>Nome da sala: {{this.name}}</p>
+<p>Capacidade: {{this.capacity}}</p>
+
+<hr>
+
+<p>Reservas marcadas para este dia:</p>
+
+<ul>
+{{#each this.reservations}}
+  <li class="reservation">
+    <p>Horário: {{prettifyDate begin_time}} até {{prettifyDate end_time}}</p>
+    <p>Motivo: {{reason}}</p>
+  </li>
+{{else}}
+  <li class="no-reservation">Nenhuma reserva</li>
+{{/each}}
+</ul>
+
+</script>
+ 

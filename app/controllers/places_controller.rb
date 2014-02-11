@@ -64,6 +64,22 @@ class PlacesController < ApplicationController
     end
   end
 
+  def get_reservations
+    reservations = @place.reservations.where(status: "approved")
+
+    begin
+      date = Date.strptime(params[:date], "%d/%m/%Y")
+    rescue
+      date = nil
+    end
+
+    reservations = reservations.where(date: date) if date
+
+    reservations.order!(:date)
+
+    render json: @place.attributes.merge(reservations: reservations)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_place
