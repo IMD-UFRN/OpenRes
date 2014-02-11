@@ -77,7 +77,9 @@ class PlacesController < ApplicationController
 
     reservations.order!(:date)
 
-    render json: @place.attributes.merge(reservations: reservations)
+    users = User.where(sector_id: @place.sectors, role: ["secretary"])
+
+    render json: @place.attributes.merge(reservations: reservations).merge(users: users)
   end
 
   private

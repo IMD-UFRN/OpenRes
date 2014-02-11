@@ -30,7 +30,7 @@ incubada       = RoomType.create(name: "Incubadação"                , descript
 
 ######################### PRIMEIRO PAVIMENTO #########################
 
-Place.create(code: "A101" , name: "Laboratório de Informática 01"     , capacity: 40, sector_ids: tec_ti.id, reservable: false, room_type_id: lab_info.id)
+Place.create(code: "A101" , name: "Laboratório de Informática 01"     , capacity: 40, sector_ids: tec_ti.id, reservable: true, room_type_id: lab_info.id)
 Place.create(code: "A102" , name: "Laboratório de Informática 02"     , capacity: 40, sector_ids: tec_ti.id, reservable: false, room_type_id: lab_info.id)
 Place.create(code: "A103" , name: "Laboratório de Informática 03"     , capacity: 40, sector_ids: tec_ti.id, reservable: false, room_type_id: lab_info.id)
 Place.create(code: "A104" , name: "Laboratório de Informática 04"     , capacity: 40, sector_ids: tec_ti.id, reservable: false, room_type_id: lab_info.id)
@@ -203,11 +203,20 @@ User.create(role: "sector_admin", email: "sector_admin@example.com", password: "
 User.create(role: "secretary", email: "secretary@example.com", password: "rootadmin", name: "Secretary", cpf: "094.092.092-94", sector_id: 1)
 User.create(role: "basic", email: "basic@example.com", password: "rootadmin", name: "Basic", cpf: "095.092.092-95", sector_id: 1)
 
+User.create(role: "secretary", email: "secretary1@example.com", password: "rootadmin", name: "Secretary", cpf: "11111111111111", sector_id: lab_info.id)
+User.create(role: "secretary", email: "secretary2@example.com", password: "rootadmin", name: "Secretary", cpf: "22222222222222", sector_id: 2)
+User.create(role: "secretary", email: "secretary3@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333333", sector_id: 3)
+User.create(role: "secretary", email: "secretary4@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333335", sector_id: 4)
+User.create(role: "secretary", email: "secretary5@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333337", sector_id: 5)
+User.create(role: "secretary", email: "secretary6@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333336", sector_id: 6)
+User.create(role: "secretary", email: "secretary7@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333331", sector_id: 7)
+User.create(role: "secretary", email: "secretary8@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333339", sector_id: 8)
+User.create(role: "secretary", email: "secretary9@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333330", sector_id: 9)
+
+
+
 User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel", cpf: "096.092.092-96", sector_id: 3)
 User.create(role: "basic", email: "gleydson@example.com", password: "rootadmin", name: "Gleydson", cpf: "097.092.092-97", sector_id: 3)
-
-UserPlace.create(code: "A11", user_id: 5)
-UserPlace.create(code: "A12", user_id: 6)
 
 Reservation.create(user_id: 6, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)
 Reservation.create(user_id: 5, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 4.hour, place_id:1)

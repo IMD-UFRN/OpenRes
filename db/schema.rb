@@ -83,13 +83,6 @@ ActiveRecord::Schema.define(version: 20140122211044) do
     t.datetime "updated_at"
   end
 
-  create_table "user_places", force: true do |t|
-    t.string   "code"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "encrypted_password",     default: "", null: false

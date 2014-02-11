@@ -25,6 +25,16 @@
 <p>Nome da sala: {{this.name}}</p>
 <p>Capacidade: {{this.capacity}}</p>
 
+<p>Usuários responsáveis por esta sala:</p>
+<ul>
+{{#each this.users}}
+  <li class="user">
+    <p>Nome: {{name}}</p>
+    <p>E-mail: {{email}}</p>
+  </li>
+{{/each}}
+</ul>
+
 <hr>
 
 <p>Reservas marcadas para este dia:</p>
@@ -36,7 +46,7 @@
     <p>Motivo: {{reason}}</p>
   </li>
 {{else}}
-  <li class="no-reservation">Nenhuma reserva</li>
+  <li class="muted">Nenhuma reserva</li>
 {{/each}}
 </ul>
 
