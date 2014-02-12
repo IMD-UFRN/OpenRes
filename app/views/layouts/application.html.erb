@@ -19,10 +19,14 @@
           <%= image_tag "logo.png", size: "120x120" %>
         </a>
         <div class="container-fluid nav-collapse">
-          <ul class="nav pull-right">
-            <li>
-              <%= link_to "Sair", destroy_user_session_path, :method => :delete  %>
-            </li>
+          <ul class="text-right">
+            <% if user_signed_in? %>              
+                Usuário: 
+                <%= current_user.name %>
+                <strong>(<%= current_user.email %></strong>)<br>
+                <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  
+            <% end %>
           </ul>
         </div>
       </div>
