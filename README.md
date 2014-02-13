@@ -1,8 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/IMD-UFRN/OpenRes.png?label=ready)](https://waffle.io/IMD-UFRN/OpenRes)  [![Code Climate](https://codeclimate.com/github/IMD-UFRN/OpenRes.png)](https://codeclimate.com/github/IMD-UFRN/OpenRes) [![Build Status](https://travis-ci.org/IMD-UFRN/OpenRes.png?branch=master)](https://travis-ci.org/IMD-UFRN/OpenRes) [![Coverage Status](https://coveralls.io/repos/IMD-UFRN/OpenRes/badge.png)](https://coveralls.io/r/IMD-UFRN/OpenRes)
-
-=======
-
-
 ##Resumo
 
 O sistema será responsável pelo gerenciamento de recursos (salas e equipamentos) bem como suas reservas a servidores e colaboradores do Instituto Metrópole Digital.
