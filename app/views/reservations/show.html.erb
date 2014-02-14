@@ -9,7 +9,7 @@
   <dt>Término:</dt> <dd><%= @reservation.end_time %></dd>
   <dt>Sala:</dt> <dd><%= @reservation.place.name %></dd>
   <dt>Tipo de Sala:</dt> <dd><%= @reservation.place.room_type.name %></dd>
-  <dt>Departamento Responsável:</dt> <dd><% @reservation.sectors.each do |sector| %><%= link_to sector.name, sector_path(sector) %><%end%></dd>
+  <dt>Setor Responsável:</dt> <dd><% @reservation.sectors.each do |sector| %><%= link_to sector.name, sector_path(sector) %><%end%></dd>
   <dt>Motivo:</dt> <dd><%= @reservation.reason %></dd>
 </dl>
 

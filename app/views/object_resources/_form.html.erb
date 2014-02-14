@@ -1,0 +1,23 @@
+<%= simple_form_for(@object_resource) do |f| %>
+  <% if @object_resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@object_resource.errors.count, "error") %> prohibited this object_resource from being saved:</h2>
+
+      <ul>
+      <% @object_resource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <hr>
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+  </div>
+  </br>
+  <%= f.button :submit, "OK", class:"btn btn-success" %>
+
+  <hr>
+<% end %>
