@@ -4,7 +4,7 @@
 <hr>
 
 <dl>
-  <dt>Data:</dt> <dd><%= @reservation.date %></dd>
+  <dt>Data:</dt> <dd><%= @reservation.date.strftime("%d/%m/%Y") %></dd>
   <dt>Início:</dt> <dd><%= @reservation.begin_time.strftime("%H:%M") %></dd>
   <dt>Término:</dt> <dd><%= @reservation.end_time.strftime("%H:%M") %></dd>
   <dt>Sala:</dt> <dd><%= @reservation.place.name %></dd>
