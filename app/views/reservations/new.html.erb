@@ -39,16 +39,25 @@
 
 <p>Reservas marcadas para este dia:</p>
 
-<ul>
 {{#each this.reservations}}
-  <li class="reservation">
-    <p>Horário: {{prettifyDate begin_time}} até {{prettifyDate end_time}}</p>
-    <p>Motivo: {{reason}}</p>
+
+   <div class="panel panel-sucess">
+    <div class="panel-heading">
+      <h3 class="panel-title"> Horário: {{prettifyDate begin_time}} até {{prettifyDate end_time}}</h3>
+    </div>
+    <div class="panel-body">
+      <dl>
+        <dt>Motivo:</dt> <dd>{{reason}} </dd>
+        <dt>Requisitor:</dt> <dd>{{user}}</dd>
+
+      </dl>
+    </div>
+  </div>
   </li>
 {{else}}
-  <li class="muted">Nenhuma reserva</li>
+  <p class="muted">Nenhuma reserva</p>
 {{/each}}
-</ul>
+
 
 </script>
  
