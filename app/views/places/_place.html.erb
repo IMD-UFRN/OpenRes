@@ -1,0 +1,17 @@
+<tr>
+  <td><%= link_to place.code, place %></td>
+  <td class= "fix-colum"><%= place.name %></td>
+  <td><%= link_to place.room_type.name, place.room_type %></td>
+  <td>
+    <% place.sectors.each do |sector| %> 
+      <%= link_to sector.name, sector %>
+    <%end%>
+
+  </td>
+  <td><%= place.capacity %></td>
+  <td>
+    <%= link_to 'Detalhes', place, class: 'btn btn-info btn-small' %>
+    <%= link_to 'Editar', edit_place_path(place), class: 'btn btn-primary btn-small'  %>
+    <%= link_to 'Excluir', place, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' }, class: 'btn btn-danger btn-small'  %>
+  </td>
+</tr>

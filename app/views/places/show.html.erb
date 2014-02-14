@@ -8,14 +8,14 @@
 <dl>
   <dt>Código:</dt> <dd><%= @place.code %></dd>
   <dt>Nome:</dt> <dd><%= @place.name %></dd>
-  <dt>Tipo de Sala:</dt> <dd><%= @place.room_type.name %></dd>
+  <dt>Tipo de Sala:</dt> <dd><%= link_to @place.room_type.name, @place.room_type %></dd>
   <dt>Capacidade:</dt> <dd><%= @place.capacity %></dd>
   <dt>Departamento Responsável:</dt> 
     <dd>
       <% @place.sectors.each do |sector| %>
-        <%= sector.name %> </br>
+        <%= link_to sector.name, sector%> </br>
       <% end %> 
     </dd>
 </dl>
 
-<%= render 'back_index'%>
+<%= render 'shared/back'%>
