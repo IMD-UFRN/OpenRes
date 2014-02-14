@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # New Relic Account License
 set_default :newrelic_key, 'ed151cdd5690c9a384ba021081b0f8442188264d'
 

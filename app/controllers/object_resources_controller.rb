@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ObjectResourcesController < ApplicationController
   before_action :set_object_resource, only: [:show, :edit, :update, :destroy]
 

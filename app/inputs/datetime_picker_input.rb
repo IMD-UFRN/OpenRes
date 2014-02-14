@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DatetimePickerInput < SimpleForm::Inputs::StringInput
   def input
     value = object.send(attribute_name) if object.respond_to? attribute_name

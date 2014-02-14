@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReservationApprovalController < ApplicationController
   def index
     #@reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user))

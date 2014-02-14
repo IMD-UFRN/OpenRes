@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ObjectResourceDecorator < Draper::Decorator
   delegate_all
 

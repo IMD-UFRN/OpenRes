@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreatePlaceObjects < ActiveRecord::Migration
   def change
     create_table :place_objects do |t|

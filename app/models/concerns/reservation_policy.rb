@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReservationPolicy
 
   def self.suspend(reservation, justification)
@@ -8,7 +9,7 @@ class ReservationPolicy
       reservation.save
     end
 
-    ReservationApprovalMailer.suspended_mail(justification).deliver
+    ReservationApprovalMailer.suspended_mail(reservation, justification).deliver
   end
 
   def self.reject(reservation, justification)
@@ -19,7 +20,7 @@ class ReservationPolicy
       reservation.save
     end
     
-    ReservationApprovalMailer.rejected_mail(justification).deliver
+    ReservationApprovalMailer.rejected_mail(reservation, justification).deliver
   end
 
   def self.approve(reservation)
