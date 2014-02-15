@@ -1,6 +1,4 @@
 # -*- encoding : utf-8 -*-
-#require 'users/user_service.rb'
-
 class UsersController < ApplicationController
   load_and_authorize_resource
 
@@ -17,18 +15,12 @@ class UsersController < ApplicationController
   def show
   end
 
-  def profile
-    @user = current_user
-    render :show
+  def edit
   end
 
   # GET /users/new
   def new
     @user = User.new
-  end
-
-  def edit
-    @user = current_user
   end
 
   # POST /users
@@ -48,15 +40,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = Users::UserService.update(current_user, user_params)
-
     respond_to do |format|
-      if @user.errors.any?
+      if @user.update(user_params)
+        format.html { redirect_to users_url, notice: 'User atualizado com sucesso.' }
+        format.json { head :no_content }
+      else
         format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      else
-        format.html { redirect_to profile_path, notice: 'User atualizado com sucesso.' }
-        format.json { head :no_content }
       end
     end
   end
@@ -79,8 +69,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :email, :name, :cpf, :role, :sector_id,
-       :old_password, :password, :password_confirmation)
+      params.require(:user).permit(:id, :email, :name, :cpf, :role, :sector_id)
     end
 
 end

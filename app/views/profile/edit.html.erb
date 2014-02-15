@@ -1,22 +1,15 @@
-<%= simple_form_for(@user) do |f| %>
+<h1>Editando informações</h1>
+
+<%= simple_form_for(@user, url: profile_edit_path) do |f| %>
   <%= f.error_notification %>
-
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this sector from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="form-inputs">
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :name, :required => true %>
     <%= f.input :cpf, :required => true %>
+    <%= f.input :old_password, :required => true %>
+    <%= f.input :password, :required => true %>
+    <%= f.input :password_confirmation, :required => true %>
     <%= f.input :role, collection: %w(admin sector_admin secretary basic), input_html: { class: 'chosen-select' }, required: true %>
     <%= f.association :sector, input_html: { class: 'chosen-select' }, :required => true %>
   </div>
