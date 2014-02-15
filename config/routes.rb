@@ -13,6 +13,7 @@ OpenRes::Application.routes.draw do
   get "reservations/basic_future_reservations", to: "reservations#user_future_reservations",as: :user_future_reservations
 
   devise_for :users
+  
   resources :places
   resources :sectors
   resources :reservations
@@ -33,5 +34,5 @@ OpenRes::Application.routes.draw do
 
   get '/places/:id/get_reservations', to: 'places#get_reservations', as: :get_place_reservations
 
-  resources :users
+  resources :users, path: 'accounts'
 end

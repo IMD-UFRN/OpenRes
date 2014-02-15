@@ -3,12 +3,13 @@
 
   <div class="form-inputs">
     <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :password, :required => true %>
-    <%= f.input :password_confirmation, :required => true %>
-    <%= f.input :role, required: true %>
+    <%= f.input :name, :required => true %>
+    <%= f.input :cpf, :required => true %>
+    <%= f.input :role, collection: %w(admin sector_admin secretary basic), input_html: { class: 'chosen-select' }, required: true %>
+    <%= f.association :sector, input_html: { class: 'chosen-select' }, :required => true %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Criar usuário" %>
   </div>
 <% end %>

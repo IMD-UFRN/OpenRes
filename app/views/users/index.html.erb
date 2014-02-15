@@ -1,0 +1,27 @@
+<h1>Salas de Servidores</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Setor</th>
+      <th colspan="2">Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to user.sector.name, user %></td>
+        <td><%= link_to 'Detalhes', user %></td>
+        <td><%= link_to 'Excluir', user, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esta sala?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Novo Usuário', new_user_path, class:"btn btn-success" %>
