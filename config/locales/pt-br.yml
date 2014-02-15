@@ -245,3 +245,9 @@ pt-BR:
         place: Sala
       justification:
         reason: Motivo
+      user:
+        name: Nome
+        cpf: CPF 
+        email: E-mail
+        sector: Setor
+        role: Função no Sistema
