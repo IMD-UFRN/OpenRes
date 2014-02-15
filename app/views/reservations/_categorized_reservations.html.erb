@@ -1,31 +1,26 @@
-<% if @open_sector_reservations.length > 0 %>
+<% if @pending_sector_reservations.length > 0 %>
   <table class = "table table-striped table-bordered table-hover">
     <thead>
       <tr colspan="4">
         <th>Reservas Pendentes</th>
       </tr>
-      <tr>
-        <th>Data</th>
-        <th>Início</th>
-        <th>Fim</th>
-        <th>Local</th>
-        <th>Solicitante</th>
-        <th colspan="3">Ações</th>
-      </tr>
+      <%= render 'reservations/reservations_secretary_header' %>
     </thead>
 
     <tbody>
-      <% @open_sector_reservations.each do |reservation| %>
+      <% @pending_sector_reservations.each do |reservation| %>
         <tr>
           <td><%= reservation.date %></td>
           <td><%= reservation.begin_time %></td>
           <td><%= reservation.end_time %></td>
           <td><%= reservation.place %></td>
           <td><%= reservation.user %></td>
-          <td><%= link_to 'Detalhes', reservation %></td>
-          <%= reservation.approve_link %>
-          <%= reservation.reject_link %>
-          <%= reservation.suspend_link %>
+          <td>
+            <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
+            <%= reservation.approve_link %>
+            <%= reservation.reject_link %>
+            <%= reservation.suspend_link %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -48,10 +43,12 @@
           <td><%= reservation.end_time %></td>
           <td><%= reservation.place %></td>
           <td><%= reservation.user %></td>
-          <td><%= link_to 'Detalhes', reservation %></td>
-          <%= reservation.approve_link %>
-          <%= reservation.reject_link %>
-          <%= reservation.suspend_link %>
+          <td>
+            <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
+            <%= reservation.approve_link %>
+            <%= reservation.reject_link %>
+            <%= reservation.suspend_link %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -83,10 +80,12 @@
           <td><%= reservation.place %></td>
           <td><%= reservation.user %></td>
           <td><%= reservation.justification.reason %></td>
-          <td><%= link_to 'Detalhes', reservation %></td>
-          <%= reservation.approve_link %>
-          <%= reservation.reject_link %>
-          <%= reservation.suspend_link %>
+          <td>
+            <%= link_to 'Detalhes', reservation, class:"btn-small btn-info" %>
+            <%= reservation.approve_link   %>
+            <%= reservation.reject_link %>
+            <%= reservation.suspend_link %>
+          </td>
         </tr>
       <% end %>
     </tbody>

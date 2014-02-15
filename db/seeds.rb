@@ -199,30 +199,31 @@ Place.create(code: "B436" , name: "Empresa"                           , capacity
 
 
 User.create(role: "admin", email: "admin@example.com", password: "rootadmin", name: "Admin", cpf: "092.092.092-92", sector_id: 1)
-User.create(role: "sector_admin", email: "sector_admin@example.com", password: "rootadmin", name: "Sector Admin", cpf: "093.092.092-93", sector_id: 1)
-User.create(role: "secretary", email: "secretary@example.com", password: "rootadmin", name: "Secretary", cpf: "094.092.092-94", sector_id: 1)
-User.create(role: "basic", email: "basic@example.com", password: "rootadmin", name: "Basic", cpf: "095.092.092-95", sector_id: 1)
-
-User.create(role: "secretary", email: "secretary1@example.com", password: "rootadmin", name: "Secretary", cpf: "11111111111111", sector_id: lab_info.id)
-User.create(role: "secretary", email: "secretary2@example.com", password: "rootadmin", name: "Secretary", cpf: "22222222222222", sector_id: 2)
-User.create(role: "secretary", email: "secretary3@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333333", sector_id: 3)
-User.create(role: "secretary", email: "secretary4@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333335", sector_id: 4)
-User.create(role: "secretary", email: "secretary5@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333337", sector_id: 5)
-User.create(role: "secretary", email: "secretary6@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333336", sector_id: 6)
-User.create(role: "secretary", email: "secretary7@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333331", sector_id: 7)
-User.create(role: "secretary", email: "secretary8@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333339", sector_id: 8)
-User.create(role: "secretary", email: "secretary9@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333330", sector_id: 9)
-
-
-
 User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel", cpf: "096.092.092-96", sector_id: 3)
 User.create(role: "basic", email: "gleydson@example.com", password: "rootadmin", name: "Gleydson", cpf: "097.092.092-97", sector_id: 3)
 
-Reservation.create(user_id: 6, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)
-Reservation.create(user_id: 5, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 4.hour, place_id:1)
-Reservation.create(user_id: 5, reason: "Reunião.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 5.hour, place_id:1)
-Reservation.create(user_id: 6, reason: "Reunião.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 6.hour, place_id:1)
-Reservation.create(user_id: 5, reason: "Reunião.", date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:1)
-Reservation.create(user_id: 6, reason: "Reunião.", date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:1)
-Reservation.create(user_id: 5, reason: "Reunião.", date: Date.today + 4.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:1)
-Reservation.create(user_id: 6, reason: "Reunião.", date: Date.today + 4.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)
+
+
+User.create(role: "sector_admin", email: "sector_admin@example.com", password: "rootadmin", name: "Sector Admin", cpf: "093.092.092-93", sector_id: 1)
+
+User.create(role: "secretary", email: "secretary_dep_ti@example.com", password: "rootadmin", name: "Secretary TI", cpf: "11111111111111", sector_id: dep_ti.id)
+User.create(role: "secretary", email: "secretary_tec_ti@example.com", password: "rootadmin", name: "Secretary Tec TI", cpf: "22222222222222", sector_id: tec_ti.id)
+# User.create(role: "secretary", email: "secretary_dep_es@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333333", sector_id: 3)
+# User.create(role: "secretary", email: "secretary_imd_ad@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333335", sector_id: 4)
+# User.create(role: "secretary", email: "secretary_data_c@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333337", sector_id: 5)
+# User.create(role: "secretary", email: "secretary_imd_ug@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333336", sector_id: 6)
+# User.create(role: "secretary", email: "secretary_incuba@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333331", sector_id: 7)
+# User.create(role: "secretary", email: "secretary_imd_ed@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333339", sector_id: 8)
+# User.create(role: "secretary", email: "secretary_psicol@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333330", sector_id: 9)
+
+
+
+
+Reservation.create(user_id: 2, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)
+Reservation.create(user_id: 2, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 4.hour, place_id:1)
+Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 5.hour, place_id:1)
+Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 6.hour, place_id:1)
+Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:1)
+Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:1)
+Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 4.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:1)
+Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 4.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)

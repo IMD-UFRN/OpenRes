@@ -2,10 +2,19 @@
 class ReservationApprovalController < ApplicationController
   def index
     #@reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user))
-
-    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).open_for_sector(current_user.object.sector))
-    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved_for_sector(current_user.object.sector))
-    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected_for_sector(current_user.object.sector))
+    if params[:filter_by] == "future"
+      @pending_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending.from_future)
+      @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved.from_future)
+      @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected.from_future)
+    elsif params[:filter_by] == "finished"
+      @pending_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending.from_past)
+      @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved.from_past)
+      @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected.from_past)
+    else      
+      @pending_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending)
+      @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved)
+      @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected)
+    end
   end
 
   def approve

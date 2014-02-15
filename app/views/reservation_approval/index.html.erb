@@ -1,8 +1,15 @@
-<h1>Listando Reservas</h1>
+<%if params[:filter_by] == "future" %>
+  <h1>Listando Reservas Futuras</h1>
+<% elsif params[:filter_by] == "finished" %>
+  <h1>Listando Reservas Finalizadas</h1>
+<%else%>
+  <h1>Listando Reservas</h1>
+<%end%>
 
 <%= render 'reservations/categorized_reservations'%>
 
-<%= link_to 'Reservas Futuras', "/reservations/future", class:"btn btn-primary" %>
-<%= link_to 'Reservas Finalizadas', "/reservations/finished", class:"btn btn-primary" %>
+<%= link_to 'Reservas Futuras', check_reservations_path(filter_by: "future"), class:"btn btn-primary" %>
+<%= link_to 'Reservas Finalizadas', check_reservations_path(filter_by: "finished"), class:"btn btn-primary" %>
+<%= link_to 'Todas as Reservas', check_reservations_path, class:"btn btn-primary" %>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
