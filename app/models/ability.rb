@@ -25,8 +25,13 @@ class Ability
       end
 
       can :manage, User
+      can :read, Place
+      can :read, RoomType
+      can :read, Sector
+
     elsif user.role == "basic"
       can :create, Reservation
+      can :read, Place
     end
     
     # Define abilities for the passed in user here. For example:

@@ -13,6 +13,7 @@ class PlacesController < ApplicationController
   # GET /places/1
   # GET /places/1.json
   def show
+    @reservations= ReservationDecorator.decorate_collection(@place.reservations)
   end
 
   # GET /places/new

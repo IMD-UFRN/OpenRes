@@ -10,6 +10,9 @@
   <dt>Nome:</dt> <dd><%= @place.name %></dd>
   <dt>Tipo de Sala:</dt> <dd><%= link_to @place.room_type.name, @place.room_type %></dd>
   <dt>Capacidade:</dt> <dd><%= @place.capacity %></dd>
+  <dt>Aceita reservas:</dt> 
+    <dd><% if @place.reservable? %> Sim <% else %> Não <%end%>
+    </dd>
   <dt>Setor Responsável:</dt> 
     <dd>
       <% @place.sectors.each do |sector| %>
@@ -31,14 +34,58 @@
   </thead>
 
   <tbody>
-    <% @place.object_resources.each do |object_resource| %>
+    <% unless @place.object_resources.count == 0 %>
+      <% @place.object_resources.each do |object_resource| %>
+        <tr>
+          <td><%= link_to object_resource.name, object_resource %></td>
+          <td><%= object_resource.description %></td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr>
-        <td><%= link_to object_resource.name, object_resource %></td>
-        <td><%= object_resource.description %></td>
+        <th colspan="6">Esta sala não possui nenhum objeto.</th>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
+
+<hr>
+
+<% if @place.reservable? %>
+<h2>Reservas desta Sala</h2>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>Solicitante</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @reservations.count == 0 %>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.date %></td>
+          <td><%= reservation.begin_time %></td>
+          <td><%= reservation.end_time %></td>
+          <td><%= reservation.user %></td>
+          <td><%= reservation.status %></td>
+          <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-info" %></td>
+        </tr>   
+    <%end%>  
+    <% else %>
+      <tr>
+        <th colspan="6">Esta sala não possui nenhum objeto.</th>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%end%>
 
 
 <%= render 'shared/back'%>
