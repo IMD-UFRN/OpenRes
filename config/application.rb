@@ -21,6 +21,8 @@ module OpenRes
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    
     config.to_prepare do
         Devise::SessionsController.layout proc{ |controller| action_name == 'new' ? "homepage" : "application" }
     end

@@ -34,5 +34,8 @@ OpenRes::Application.routes.draw do
 
   get '/places/:id/get_reservations', to: 'places#get_reservations', as: :get_place_reservations
 
-  resources :users, path: 'accounts'
+  resources :users, path: 'accounts', except: [:edit]
+
+  get '/profile/edit', to: 'users#edit', as: :edit_profile
+  get '/profile', to: 'users#profile', as: :profile
 end
