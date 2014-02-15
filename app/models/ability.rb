@@ -17,6 +17,17 @@ class Ability
           reservation.sector_ids.include?(user.sector.id)
         end
       end
+
+      can :manage , Place do |place|
+        unless place.sector_ids.nil?
+          place.sector_ids.include?(user.sector.id)
+        end 
+      end
+
+      can :read, Place
+      can :read, RoomType
+      can :read, Sector
+
     elsif user.role == "secretary"
       can :manage, Reservation do |reservation|
         unless reservation.place.nil?
@@ -32,6 +43,8 @@ class Ability
     elsif user.role == "basic"
       can :create, Reservation
       can :read, Place
+      can :read, RoomType
+      can :read, Sector
     end
     
     # Define abilities for the passed in user here. For example:

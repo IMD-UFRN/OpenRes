@@ -21,6 +21,7 @@ class ReservationsController < ApplicationController
       @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved)
       @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected)
     end
+    
   end
 
   # GET /reservations/1
