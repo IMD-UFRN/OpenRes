@@ -213,6 +213,7 @@ pt-BR:
       place: Local
       sector: Setor 
       reservation: Reserva 
+      user: Usuário
     attributes:
       room_type:
         name: Nome

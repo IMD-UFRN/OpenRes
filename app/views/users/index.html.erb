@@ -1,4 +1,4 @@
-<h1>Salas de Servidores</h1>
+<h1>Usuários</h1>
 
 <table class="table table-striped table-bordered table-hover">
   <thead>
@@ -6,7 +6,7 @@
       <th>Nome</th>
       <th>Email</th>
       <th>Setor</th>
-      <th colspan="3">Ações</th>
+      <th>Ações</th>
     </tr>
   </thead>
 
@@ -16,9 +16,11 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= link_to user.sector.name, user %></td>
-        <td><%= link_to 'Detalhes', user %></td>
-        <td><%= link_to 'Editar', edit_user_path(user) %></td>
-        <td><%= link_to 'Excluir', user, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar este usuário?' } %></td>
+        <td>
+          <%= link_to 'Detalhes', user, class: "btn-small btn-info" %>
+          <%= link_to 'Editar', edit_user_path(user), class: "btn-small btn-primary" %>
+          <%= link_to 'Excluir', user, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar este usuário?' }, class: "btn-small btn-danger" %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -33,7 +33,7 @@ class UsersController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       else
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'Usuário cadastrado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @user }
       end
     end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to users_url, notice: 'User atualizado com sucesso.' }
+        format.html { redirect_to users_url, notice: 'Usuário atualizado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
