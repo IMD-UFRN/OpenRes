@@ -1,5 +1,4 @@
 <%= simple_form_for(@user) do |f| %>
-  <%= f.error_notification %>
 
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -17,11 +16,13 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :name, :required => true %>
     <%= f.input :cpf, :required => true %>
-    <%= f.input :role, collection: %w(admin sector_admin secretary basic), input_html: { class: 'chosen-select' }, required: true %>
-    <%= f.association :sector, input_html: { class: 'chosen-select' }, :required => true %>
+    <%= f.input :role, collection: %w(admin sector_admin secretary basic), input_html: { class: 'chosen-select',  data: { placeholder: "Selecione uma função" } }, required: true %>
+    <br>
+    <%= f.association :sector, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma setor" } }, :required => true %>
+    <br>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Criar usuário" %>
-  </div>
+  <%= f.button :submit, "OK", class:"btn btn-success" %>
 <% end %>
+
+<%= render 'shared/back'%>  

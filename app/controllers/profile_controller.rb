@@ -3,6 +3,7 @@ class ProfileController < ApplicationController
 
   def profile
     @user = current_user
+    @reservations= ReservationDecorator.decorate_collection(@user.reservations)
   end
 
   def edit

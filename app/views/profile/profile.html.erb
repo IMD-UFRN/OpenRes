@@ -1,2 +1,53 @@
-<h1>Profile#show</h1>
-<p>Find me in app/views/profile/show.html.erb</p>
+<h1>Meu Perfil</h1>
+<%= link_to 'Editar Minhas Informações', edit_profile_path(@user), class:"btn-small btn-primary"%> 
+
+<hr>
+
+<dl>
+  <dt>Nome:</dt> <dd><%= @user.name %></dd>
+  <dt>E-mail:</dt> <dd><%= @user.email %></dd>
+  <dt>Função:</dt> <dd><%= @user.role%></dd>
+  <dt>Cpf:</dt> <dd><%= @user.cpf %></dd>
+  <dt>Setor:</dt> <dd><%= link_to @user.sector.name, @user.sector%></dd>
+</dl>
+
+<hr>
+
+<h2>Minhas Reservas</h2>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>Local</th>
+      <th>Situação</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @reservations.count == 0 %>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.date %></td>
+          <td><%= reservation.begin_time %></td>
+          <td><%= reservation.end_time %></td>
+          <td><%= reservation.place %></td>
+          <td><%= reservation.status %></td>
+          <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-info" %></td>
+        </tr>   
+    <%end%>  
+    <% else %>
+      <tr>
+        <th colspan="6">Você ainda não fez reservas!</th>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
+<%= link_to 'Reservas Categorizadas', reservations_path, class:"btn btn-primary" %>
+
+

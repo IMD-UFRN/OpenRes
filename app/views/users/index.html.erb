@@ -13,13 +13,13 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
+        <td><%= link_to user.name, user %></td>
         <td><%= user.email %></td>
         <td><%= link_to user.sector.name, user %></td>
         <td>
           <%= link_to 'Detalhes', user, class: "btn-small btn-info" %>
           <%= link_to 'Editar', edit_user_path(user), class: "btn-small btn-primary" %>
-          <%= link_to 'Excluir', user, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar este usuário?' }, class: "btn-small btn-danger" %>
+          <%= link_to 'Excluir', user, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este usuário?' }, class: "btn-small btn-danger" %>
         </td>
       </tr>
     <% end %>

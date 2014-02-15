@@ -52,38 +52,40 @@
 <hr>
 
 <% if @place.reservable? %>
-<h2>Reservas desta Sala</h2>
 
-<table class="table table-striped table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Início</th>
-      <th>Fim</th>
-      <th>Solicitante</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
+  <h2>Reservas desta Sala</h2>
 
-  <tbody>
-    <% unless @reservations.count == 0 %>
-      <% @reservations.each do |reservation| %>
-        <tr>
-          <td><%= reservation.date %></td>
-          <td><%= reservation.begin_time %></td>
-          <td><%= reservation.end_time %></td>
-          <td><%= reservation.user %></td>
-          <td><%= reservation.status %></td>
-          <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-info" %></td>
-        </tr>   
-    <%end%>  
-    <% else %>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
       <tr>
-        <th colspan="6">Esta sala não possui nenhum objeto.</th>
+        <th>Data</th>
+        <th>Início</th>
+        <th>Fim</th>
+        <th>Solicitante</th>
+        <th>Situação</th>
+        <th>Ações</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% unless @reservations.count == 0 %>
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.date %></td>
+            <td><%= reservation.begin_time %></td>
+            <td><%= reservation.end_time %></td>
+            <td><%= reservation.user %></td>
+            <td><%= reservation.status %></td>
+            <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-info" %></td>
+          </tr>   
+      <%end%>  
+      <% else %>
+        <tr>
+          <th colspan="6">Esta sala não possui nenhum objeto.</th>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
 <%end%>
 

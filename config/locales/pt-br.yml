@@ -251,3 +251,6 @@ pt-BR:
         email: E-mail
         sector: Setor
         role: Função no Sistema
+        password: Senha
+        old_password: Senha Antiga
+        password_confirmation: Confirme a senha

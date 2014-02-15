@@ -1,4 +1,4 @@
-<h1>Editando informações</h1>
+<h1>Editando minhas Informações</h1>
 
 <%= simple_form_for(@user, url: profile_edit_path) do |f| %>
   <%= f.error_notification %>
@@ -11,10 +11,12 @@
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
     <%= f.input :role, collection: %w(admin sector_admin secretary basic), input_html: { class: 'chosen-select' }, required: true %>
+    <br>
     <%= f.association :sector, input_html: { class: 'chosen-select' }, :required => true %>
+    <br>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Criar usuário" %>
-  </div>
+  <%= f.button :submit, "OK", class:"btn btn-success" %>
 <% end %>
+
+<%= render 'shared/back'%>
