@@ -20,6 +20,8 @@
     <%= f.association :room_type, input_html: { class: 'chosen-select', data: { placeholder: "Selecione o tipo de sala" }} %></br>
     <%= f.input :capacity %>
     <%= f.association :sectors, :include_blank => false, input_html: { class: 'chosen-select', data: { placeholder: "Selecione os departamentos" }} %>
+    <br>
+    <%= f.association :object_resources, :include_blank => false, input_html: { class: 'chosen-select', data: { placeholder: "Selecione os recursos desta sala" }} %>
   </div>
   </br>
   <%= f.button :submit, "OK", class:"btn btn-success" %>

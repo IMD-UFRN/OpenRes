@@ -7,9 +7,10 @@ class Place < ActiveRecord::Base
 
   has_many :place_sectors
   has_many :sectors, through: :place_sectors
+  has_many :place_objects
+  has_many :object_resources, through: :place_objects
 
   belongs_to :room_type
-  has_many :object_resources
   has_many :reservations
 
   def self.grouped_by_type

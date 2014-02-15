@@ -1,3 +1,7 @@
-Olá, sua reserva foi aprovada!
+<p>
+  Olá <%= @reservation.user.name %>, sua reserva para a sala <%=@reservation.place.name %> entre as <%=@reservation.begin_time.strftime("%H:%M") %> e <%=@reservation.end_time.strftime("%H:%M") %> foi APROVADA!
+</p>
 
-(este é um e-mail automático. Dúvidas, entre em contato com a secretaria do seu departamento.)
+<p>
+(este é um e-mail automático. Dúvidas, entre em contato com a secretaria do departamento responsável pela sala solicitada.)
+</p>

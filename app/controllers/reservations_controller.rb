@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReservationsController < ApplicationController
   load_and_authorize_resource
   
@@ -6,9 +7,20 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(current_user.object))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(current_user.object))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(current_user.object))
+
+    if params[:filter_by] == "future"
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_future)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_future)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_future)
+    elsif params[:filter_by] == "finished"
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_past)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_past)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_past)
+    else      
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected)
+    end
   end
 
   # GET /reservations/1
@@ -68,33 +80,6 @@ class ReservationsController < ApplicationController
       format.html { redirect_to reservations_url }
       format.json { head :no_content }
     end
-  end
-
-  def finished
-    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_for_sector(current_user.object.sector))
-    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_for_sector(current_user.object.sector))
-    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_for_sector(current_user.object.sector))
-  end
-
-  def future
-    @open_sector_reservations = ReservationDecorator.decorate_collection(Reservation.open_for_sector_to_come(current_user.object.sector))
-    @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.approved_for_sector_to_come(current_user.object.sector))
-    @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_for_sector_to_come(current_user.object.sector))
-  end
-
-
-  def user_future_reservations
-
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user_to_come(current_user.object))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user_to_come(current_user.object))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user_to_come(current_user.object))
-
-  end
-
-  def user_finished_reservations
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_and_finished_from_user(current_user.object))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_and_finished_from_user(current_user.object))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_and_finished_from_user(current_user.object))
   end
 
   def preview

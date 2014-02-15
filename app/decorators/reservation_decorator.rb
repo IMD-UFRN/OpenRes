@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReservationDecorator < Draper::Decorator
   include Draper::LazyHelpers
 
@@ -45,27 +46,27 @@ class ReservationDecorator < Draper::Decorator
   def approve_link
     return if object.status == 'approved'
 
-    content_tag :td do
-      link_to 'Aprovar', reservation_approve_path(reservation), method: :post
-    end
+    
+      link_to 'Aprovar', reservation_approve_path(reservation), method: :post, class:"btn-small btn-success"
+
   end
 
   def reject_link
     return if object.status == 'rejected'
 
-    content_tag :td do
-      link_to 'Rejeitar', justify_reject_path(reservation),
-       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}
-    end
+  
+    link_to 'Rejeitar', justify_reject_path(reservation),
+      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-danger"}
+  
   end
 
   def suspend_link
     return if object.status == 'pending'
 
-    content_tag :td do
-      link_to 'Suspender', justify_suspend_path(reservation),
-       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}
-    end
+  
+    link_to 'Suspender', justify_suspend_path(reservation),
+     {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-warning"}
+  
   end
 
 end

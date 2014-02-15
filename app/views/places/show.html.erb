@@ -1,5 +1,5 @@
 <h1>Detalhes da Sala</h1>
-<%= link_to 'Editar Informaçõees desta Sala', edit_place_path(@place), class:"btn-small btn-primary"%> 
+<%= link_to 'Editar Informações desta Sala', edit_place_path(@place), class:"btn-small btn-primary"%> 
 
 
 <hr>
@@ -8,14 +8,37 @@
 <dl>
   <dt>Código:</dt> <dd><%= @place.code %></dd>
   <dt>Nome:</dt> <dd><%= @place.name %></dd>
-  <dt>Tipo de Sala:</dt> <dd><%= @place.room_type.name %></dd>
+  <dt>Tipo de Sala:</dt> <dd><%= link_to @place.room_type.name, @place.room_type %></dd>
   <dt>Capacidade:</dt> <dd><%= @place.capacity %></dd>
-  <dt>Departamento Responsável:</dt> 
+  <dt>Setor Responsável:</dt> 
     <dd>
       <% @place.sectors.each do |sector| %>
-        <%= sector.name %> </br>
+        <%= link_to sector.name, sector%> </br>
       <% end %> 
     </dd>
 </dl>
 
-<%= render 'back_index'%>
+<hr>
+
+<h2>Objetos desta Sala</h2>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @place.object_resources.each do |object_resource| %>
+      <tr>
+        <td><%= link_to object_resource.name, object_resource %></td>
+        <td><%= object_resource.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= render 'shared/back'%>

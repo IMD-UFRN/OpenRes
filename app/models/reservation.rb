@@ -16,77 +16,28 @@ class Reservation < ActiveRecord::Base
     return Reservation.from_sector(user.sector) # if user.role == 'secretary' or 'sector_admin'
   }
 
-  scope :open_from_user, lambda{ |user|
-    return user.reservations.where(status: 'pending')
+  scope :from_user, lambda{ |user| 
+    Reservation.where(user_id: user.id)
+  }
+
+  scope :approved, lambda{
+    return Reservation.where(status: 'approved')
   } 
 
-  scope :approved_from_user, lambda{ |user|
-    return user.reservations.where(status: 'approved')
-  }
-
-  scope :rejected_from_user, lambda{ |user|
-    return user.reservations.where(status: 'rejected')
-  }
-
-  scope :open_from_user_to_come, lambda{ |user|
-    return Reservation.open_from_user(user).where("date > ?",  Date.today)
+  scope :pending, lambda{
+    return Reservation.where(status: 'pending')
   } 
 
-  scope :approved_from_user_to_come, lambda{ |user|
-    return Reservation.approved_from_user(user).where("date > ?",  Date.today)
+  scope :rejected, lambda{
+    return Reservation.where(status: 'rejected')
   }
 
-  scope :rejected_from_user_to_come, lambda{ |user|
-    return Reservation.rejected_from_user(user).where("date > ?",  Date.today)
-  }
+  scope :from_future, lambda{
+    return Reservation.where("date >= ?",  DateTime.now.to_date)
+  }  
 
-  scope :open_and_finished_from_user, lambda{ |user|
-    return Reservation.open_from_user(user).where("date < ?",  Date.today)
-  } 
-
-  scope :approved_and_finished_from_user, lambda{ |user|
-    return Reservation.approved_from_user(user).where("date < ?",  Date.today)
-  }
-
-  scope :rejected_and_finished_from_user, lambda{ |user|
-    return Reservation.rejected_from_user(user).where("date < ?",  Date.today)
-  }
-
-
-  scope :open_for_sector, lambda { |sector|
-    return Reservation.from_sector(sector).where(status: 'pending')
-  }
-  
-  scope :approved_for_sector, lambda { |sector|
-    return Reservation.from_sector(sector).where(status: 'approved')
-  }
-
-  scope :rejected_for_sector, lambda { |sector|
-    return Reservation.from_sector(sector).where(status: 'rejected')
-  }
-
-  scope :open_for_sector_to_come, lambda{ |sector|
-    return Reservation.open_for_sector(sector).where("date > ?",  Date.today)
-  }
-
-  scope :approved_for_sector_to_come, lambda{ |sector|
-    return Reservation.approved_for_sector(sector).where("date > ?",  Date.today)
-  }
-
-  scope :rejected_for_sector_to_come, lambda{ |sector|
-    return Reservation.rejected_for_sector(sector).where("date > ?",  Date.today)
-  }
-
-  scope :open_and_finished_for_sector, lambda{ |sector|
-    return Reservation.open_for_sector(sector).where("date < ?",  Date.today)
-  }
-
-  scope :approved_and_finished_for_sector, lambda{ |sector|
-    return Reservation.approved_for_sector(sector).where("date < ?",  Date.today)
-  }
-
-  scope :rejected_and_finished_for_sector, lambda{ |sector|
-    return Reservation.rejected_for_sector(sector).where("date < ?",  Date.today)
+  scope :from_past, lambda{
+    return Reservation.where("date < ?",  DateTime.now.to_date)
   }
 
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time

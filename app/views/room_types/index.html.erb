@@ -5,17 +5,18 @@
     <tr>
       <th>Nome</th>
       <th>Descrição</th>
-      <th>Ações</th>
+      <th colspan="3">Ações</th>
     </tr>
   </thead>
 
   <tbody>
     <% @room_types.each do |room_type| %>
       <tr>
-        <td><%=room_type.name%></td>
+        <td><%=link_to room_type.name, room_type%>
         <td><%=room_type.description%></td>
-        <td><%= link_to 'Detalhes', room_type %></td>
-        <td><%= link_to 'Excluir', room_type, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' } %></td>
+        <td><%= link_to 'Detalhes', room_type, class: 'btn btn-info btn-small' %>
+        <%= link_to 'Editar', edit_room_type_path(room_type), class: 'btn btn-primary btn-small' %>
+        <%= link_to 'Excluir', room_type, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' }, class: 'btn btn-danger btn-small' %></td>
       </tr>
     <% end %>
   </tbody>

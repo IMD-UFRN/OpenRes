@@ -1,0 +1,27 @@
+<h1>Listando Objetos</h1>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @object_resources.each do |object_resource| %>
+      <tr>
+        <td><%= link_to object_resource.name, object_resource %></td>
+        <td><%= object_resource.description %></td>
+        <td><%= link_to 'Detalhes', object_resource, class: 'btn btn-info btn-small' %>
+        <%= link_to 'Editar', edit_object_resource_path(object_resource), class: 'btn btn-primary btn-small' %>
+        <%= link_to 'Excluir', object_resource, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar este Objeto?' }, class: 'btn btn-danger btn-small' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo Objeto', new_object_resource_path,class:"btn btn-success" %>

@@ -211,7 +211,7 @@ pt-BR:
       room_type: Tipo de Local
       object_resource:  Objeto
       place: Local
-      sector: Departamento 
+      sector: Setor 
       reservation: Reserva 
     attributes:
       room_type:
@@ -220,16 +220,17 @@ pt-BR:
       object_resource: 
         name: Nome
         description: Descrição 
-        sector: Departamento
+        sector: Setor
         serial_number: Tombamento
       place: 
         code: Código
         name: Nome
         description: Descrição
         room_type: Tipo de sala 
-        sectors: Departamentos
+        sectors: Setores
         capacity: Capacidade
         reservable: Reservável?
+        object_resources: Objetos desta sala
       sector: 
         name: Nome
         description: Descrição

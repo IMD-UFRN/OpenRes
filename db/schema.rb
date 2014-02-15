@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122211044) do
+ActiveRecord::Schema.define(version: 20140214024349) do
 
   create_table "justifications", force: true do |t|
     t.text     "reason"
@@ -27,15 +27,14 @@ ActiveRecord::Schema.define(version: 20140122211044) do
   create_table "object_resources", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "sector_id"
-    t.integer  "place_id"
-    t.string   "serial_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "object_resources", ["place_id"], name: "index_object_resources_on_place_id"
-  add_index "object_resources", ["sector_id"], name: "index_object_resources_on_sector_id"
+  create_table "place_objects", force: true do |t|
+    t.integer "object_resource_id"
+    t.integer "place_id"
+  end
 
   create_table "place_sectors", force: true do |t|
     t.integer "sector_id"

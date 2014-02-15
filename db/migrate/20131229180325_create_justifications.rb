@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateJustifications < ActiveRecord::Migration
   def change
     create_table :justifications do |t|

@@ -1,3 +1,9 @@
-Olá, sua reserva foi rejeitada.
+<p>
+  Olá <%= @reservation.user.name %>, sua reserva para a sala <%=@reservation.place.name %> entre as <%=@reservation.begin_time.strftime("%H:%M") %> e <%=@reservation.end_time.strftime("%H:%M") %> foi REJEITADA.
+</p>
 
-(este é um e-mail automático. Dúvidas, entre em contato com a secretaria do seu departamento.)
+<p> Motivo: <%= @justification.reason %> </p>
+
+<p>
+(este é um e-mail automático. Dúvidas, entre em contato com a secretaria do departamento responsável pela sala solicitada.)
+</p>

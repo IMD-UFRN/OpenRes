@@ -18,6 +18,7 @@ OpenRes::Application.routes.draw do
   resources :sectors
   resources :reservations
   resources :user_places
+  resources :object_resources
 
   get "check_reservations/", to: "reservation_approval#index", as: :check_reservations
 

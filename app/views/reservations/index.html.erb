@@ -1,6 +1,87 @@
-<h3>Listando Reservas</h3>
+<%if params[:filter_by] == "future" %>
+  <h1>Minhas Reservas Futuras</h1>
+<% elsif params[:filter_by] == "finished" %>
+  <h1>Minhas Reservas Finalizadas</h1>
+<%else%>
+  <h1>Minhas Reservas</h1>
+<%end%>
 
-<%= render 'reservations/user_reservations' %>
+<% if  @pending_reservations.length > 0 ||  @approved_reservations.length > 0 || @rejected_reservations.length > 0 %>
 
-<%= link_to 'Reservas Futuras', "/reservations/basic_future_reservations", class:"btn btn-primary" %>
-<%= link_to 'Reservas Finalizadas', "/reservations/basic_finished_reservations", class:"btn btn-primary" %>
+  <% if @pending_reservations.length > 0 %>
+    <table class = "table table-striped table-bordered table-hover">
+      <thead>
+        <tr colspan="4">
+          <th>Reservas Pendentes</th>
+        </tr>
+        <%= render 'reservations/reservations_user_header' %>
+      </thead>
+
+      <tbody>
+        <% @pending_reservations.each do |reservation| %>
+          <tr>
+            <%= render reservation%>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%end%>
+
+  <% if @approved_reservations.length > 0 %>
+    <table class = "table table-striped table-bordered table-hover">
+      <thead>
+        <tr colspan="4">
+          <th>Reservas Aprovadas</th>
+        </tr>
+        <%= render 'reservations/reservations_user_header' %>
+      </thead>
+      <tbody>
+        <% @approved_reservations.each do |reservation| %>
+          <tr>
+            <%= render reservation%>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%end%>
+
+  <% if @rejected_reservations.length > 0 %>
+    <table class = "table table-striped table-bordered table-hover">
+      <thead>
+        <tr colspan="4">
+          <th>Reservas Rejeitadas</th>
+        </tr>
+        <tr>
+          <th>Data</th>
+          <th>Início</th>
+          <th>Fim</th>
+          <th>Local</th>
+          <th>Motivo da Rejeição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rejected_reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.date %></td>
+            <td><%= reservation.begin_time %></td>
+            <td><%= reservation.end_time %></td>
+            <td><%= reservation.place %></td>
+            <td><%= reservation.justification.reason %></td>
+            <td><%= link_to 'Detalhes', reservation, class: "btn-small btn-info" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%end%>
+  <br>
+
+<%else%>
+  <p>Não existe nenhuma reserva deste tipo.</p>
+<%end%>
+
+<%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
+
+<%= link_to 'Reservas Futuras', reservations_path(filter_by: "future"), class:"btn btn-primary" %>
+<%= link_to 'Reservas Finalizadas', reservations_path(filter_by: "finished"), class:"btn btn-primary" %>
+<%= link_to 'Todas as Reservas', reservations_path, class:"btn btn-primary" %>
