@@ -7,9 +7,20 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @open_reservations = ReservationDecorator.decorate_collection(Reservation.open_from_user(current_user.object))
-    @approved_reservations = ReservationDecorator.decorate_collection(Reservation.approved_from_user(current_user.object))
-    @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.rejected_from_user(current_user.object))
+
+    if params[:filter_by] == "future"
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_future)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_future)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_future)
+    elsif params[:filter_by] == "finished"
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_past)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_past)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_past)
+    else      
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected)
+    end
   end
 
   # GET /reservations/1

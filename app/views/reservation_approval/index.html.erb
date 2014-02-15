@@ -1,9 +1,9 @@
 <%if params[:filter_by] == "future" %>
-  <h1>Listando Reservas Futuras</h1>
+  <h1>Checando Reservas Futuras</h1>
 <% elsif params[:filter_by] == "finished" %>
-  <h1>Listando Reservas Finalizadas</h1>
+  <h1>Checando Reservas Finalizadas</h1>
 <%else%>
-  <h1>Listando Reservas</h1>
+  <h1>Checando Reservas</h1>
 <%end%>
 
 <%= render 'reservations/categorized_reservations'%>

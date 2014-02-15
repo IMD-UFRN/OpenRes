@@ -1,6 +1,6 @@
-<% if  @open_reservations.length > 0 ||  @approved_reservations.length > 0 || @rejected_reservations.length > 0 %>
+<% if  @pending_reservations.length > 0 ||  @approved_reservations.length > 0 || @rejected_reservations.length > 0 %>
 
-  <% if @open_reservations.length > 0 %>
+  <% if @pending_reservations.length > 0 %>
     <table class = "table table-striped table-bordered table-hover">
       <thead>
         <tr colspan="4">
@@ -10,7 +10,7 @@
       </thead>
 
       <tbody>
-        <% @open_reservations.each do |reservation| %>
+        <% @pending_reservations.each do |reservation| %>
           <tr>
             <%= render reservation%>
           </tr>

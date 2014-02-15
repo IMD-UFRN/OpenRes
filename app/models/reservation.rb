@@ -16,42 +16,9 @@ class Reservation < ActiveRecord::Base
     return Reservation.from_sector(user.sector) # if user.role == 'secretary' or 'sector_admin'
   }
 
-  scope :open_from_user, lambda{ |user|
-    return user.reservations.where(status: 'pending')
-  } 
-
-  scope :approved_from_user, lambda{ |user|
-    return user.reservations.where(status: 'approved')
+  scope :from_user, lambda{ |user| 
+    Reservation.where(user_id: user.id)
   }
-
-  scope :rejected_from_user, lambda{ |user|
-    return user.reservations.where(status: 'rejected')
-  }
-
-  scope :open_from_user_to_come, lambda{ |user|
-    return Reservation.open_from_user(user).where("date > ?",  DateTime.now)
-  } 
-
-  scope :approved_from_user_to_come, lambda{ |user|
-    return Reservation.approved_from_user(user).where("date > ?",  DateTime.now)
-  }
-
-  scope :rejected_from_user_to_come, lambda{ |user|
-    return Reservation.rejected_from_user(user).where("date > ?",  DateTime.now)
-  }
-
-  scope :open_and_finished_from_user, lambda{ |user|
-    return Reservation.open_from_user(user).where("date < ?",  DateTime.now)
-  } 
-
-  scope :approved_and_finished_from_user, lambda{ |user|
-    return Reservation.approved_from_user(user).where("date < ?",  DateTime.now)
-  }
-
-  scope :rejected_and_finished_from_user, lambda{ |user|
-    return Reservation.rejected_from_user(user).where("date < ?",  DateTime.now)
-  }
-
 
   scope :approved, lambda{
     return Reservation.where(status: 'approved')
