@@ -50,13 +50,15 @@ img{
 }
 
 .nav {
-  a {
-    color: black;
-    background: fuchsia;
-    text-shadow: none !important;
+  .login_path{
+    a {
+      color: black;
+      background: #AAB3AB;
+      text-shadow: none !important;
 
-    &:hover {
-      background: yellow !important;
+      &:hover {
+        background: #413D3D !important;
+      }
     }
   }
 }
