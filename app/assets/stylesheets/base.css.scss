@@ -27,16 +27,24 @@ img{
 
 .text-right{
   padding-top:5px;
-  color: #fff;
+  color: black;
 }
 
 .login_form{
   margin-left:auto;
   width:30%;
-text-align:center;
+  text-align:center;
   margin-right:auto;
 }
 
-.centered_text{
-    
+
+.session{
+  color: black;
+}
+
+.navbar {
+  .navbar-inner {
+    background-color: #eeeeee;
+    background-image: none;
+  }
 }
