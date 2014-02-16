@@ -17,11 +17,13 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @functions =[["Adminitração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
   end
 
   # GET /users/new
   def new
     @user = User.new
+    @functions =[["Adminitração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
   end
 
   # POST /users

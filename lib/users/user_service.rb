@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Users::UserService
   attr_reader :user
 

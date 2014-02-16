@@ -16,9 +16,9 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :name, :required => true %>
     <%= f.input :cpf, :required => true %>
-    <%= f.input :role, collection: %w(admin sector_admin secretary basic), input_html: { class: 'chosen-select',  data: { placeholder: "Selecione uma função" } }, required: true %>
+    <%= f.input :role, collection: @functions,  label_method: :first, value_method: :last, input_html: { class: 'chosen-select',  data: { placeholder: "Selecione uma função" } }, required: true %>
     <br>
-    <%= f.association :sector, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma setor" } }, :required => true %>
+    <%= f.association :sector, input_html: { class: 'chosen-select', data: { placeholder: "Selecione um setor" } }, :required => true %>
     <br>
   </div>
 

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ProfileController < ApplicationController
   before_filter :authenticate_user!
 
@@ -8,6 +9,16 @@ class ProfileController < ApplicationController
 
   def edit
     @user = current_user
+
+    if @user.role == "sector_admin"
+      @functions = [["Adminitração de Setor", "sector_admin"]]
+    elsif @user.role == "secretary"
+       @functions = [["Secretaria", "secretary"]]
+    elsif @user.role == "basic"
+       @functions = [["Básica", "basic"]]
+    else 
+       @functions =[["Adminitração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
+    end
   end
 
   def update
