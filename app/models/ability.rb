@@ -43,6 +43,7 @@ class Ability
     elsif user.role == "basic"
       can :create, Reservation
       can :read, Place
+      can :read, Reservation
       can :read, RoomType
       can :read, Sector
     end
