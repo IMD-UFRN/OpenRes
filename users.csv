@@ -1,0 +1,28 @@
+NOME;EMAIL;SETOR;PAPEL;CPF
+Básico      BTI;basico_bti@example.com;BTI;Básica;9230192
+Secretária  BTI;secret_bti@example.com;BTI;Secretaria;3123141
+Admin Setor BTI;sector_bti@example.com;BTI;Adminitração de Setor;3124151
+Básico      BES;basico_bes@example.com;BES;Básica;92301928921
+Secretária  BES;secret_bes@example.com;BES;Secretaria;1123141
+Admin Setor BES;sector_bes@example.com;BES;Adminitração de Setor;2123141
+Básico      TEC;basico_TEC@example.com;Técnigo em TI;Básica;3230192
+Secretária  TEC;secret_TEC@example.com;Técnigo em TI;Secretaria;4123141
+Admin Setor TEC;sector_TEC@example.com;Técnigo em TI;Adminitração de Setor;5123141
+Básico      ADM;basico_ADM@example.com;IMD Administrativo;Básica;6230192
+Secretária  ADM;secret_ADM@example.com;IMD Administrativo;Secretaria;7123141
+Admin Setor ADM;sector_ADM@example.com;IMD Administrativo;Adminitração de Setor;8123141
+Básico      DAT;basico_DAT@example.com;IMD Datacenter e Suporte Técnico;Básica;9238192
+Secretária  DAT;secret_DAT@example.com;IMD Datacenter e Suporte Técnico;Secretaria;31231141
+Admin Setor DAT;sector_DAT@example.com;IMD Datacenter e Suporte Técnico;Adminitração de Setor;42123141
+Básico      USG;basico_USG@example.com;IMD Uso Geral;Básica;9230193122
+Secretária  USG;secret_USG@example.com;IMD Uso Geral;Secretaria;3123341141
+Admin Setor USG;sector_USG@example.com;IMD Uso Geral;Adminitração de Setor;354123141
+Básico      INC;basico_INC@example.com;Incubação;Básica;923019293128
+Secretária  INC;secret_INC@example.com;Incubação;Secretaria;31239151141
+Admin Setor INC;sector_INC@example.com;Incubação;Adminitração de Setor;31231414241401
+Básico      DEC;basico_DEC@example.com;Departamento de Informática Educacional;Básica;9230112392
+Secretária  DEC;secret_DEC@example.com;Departamento de Informática Educacional;Secretaria;3123141000
+Admin Setor DEC;sector_DEC@example.com;Departamento de Informática Educacional;Adminitração de Setor;31233867141
+Básico      PSI;basico_PSI@example.com;Psicologia e Serviço Social;Básica;923034638192
+Secretária  PSI;secret_PSI@example.com;Psicologia e Serviço Social;Secretaria;312341678141
+Admin Setor PSI;sector_PSI@example.com;Psicologia e Serviço Social;Adminitração de Setor;312329813141
