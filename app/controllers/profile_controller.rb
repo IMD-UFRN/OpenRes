@@ -5,6 +5,7 @@ class ProfileController < ApplicationController
   def profile
     @user = current_user
     @reservations= ReservationDecorator.decorate_collection(@user.reservations)
+    @functions_hash ={"admin"=> "Administrador do Sistema", "sector_admin"=> "Adminitração de Setor", "secretary"=>"Secretaria", "basic"=> "Básica"}
   end
 
   def edit

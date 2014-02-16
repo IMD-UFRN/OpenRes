@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @reservations= ReservationDecorator.decorate_collection(@user.reservations)
+    @functions_hash ={"admin"=> "Administrador do Sistema", "sector_admin"=> "Adminitração de Setor", "secretary"=>"Secretaria", "basic"=> "Básica"}
   end
 
   def edit
