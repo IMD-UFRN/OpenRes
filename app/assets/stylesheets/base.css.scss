@@ -48,3 +48,15 @@ img{
     background-image: none;
   }
 }
+
+.nav {
+  a {
+    color: black;
+    background: fuchsia;
+    text-shadow: none !important;
+
+    &:hover {
+      background: yellow !important;
+    }
+  }
+}
