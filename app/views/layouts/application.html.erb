@@ -22,9 +22,9 @@
           <ul class="text-right">
             <% if user_signed_in? %>              
                 Usuário: 
-                <%= current_user.name %>
+                <%= link_to current_user.name, profile_path(current_user) %>
                 <strong>(<%= current_user.email %></strong>)<br>
-                <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+                 <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
   
             <% end %>
           </ul>

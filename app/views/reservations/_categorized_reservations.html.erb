@@ -1,96 +1,103 @@
-<% if @pending_sector_reservations.length > 0 %>
-  <table class = "table table-striped table-bordered table-hover">
-    <thead>
-      <tr colspan="4">
-        <th>Reservas Pendentes</th>
-      </tr>
-      <%= render 'reservations/reservations_secretary_header' %>
-    </thead>
+<% if  @pending_sector_reservations.length > 0 ||  @approved_sector_reservations.length > 0 || @rejected_sector_reservations.length > 0 %>
 
-    <tbody>
-      <% @pending_sector_reservations.each do |reservation| %>
-        <tr>
-          <td><%= reservation.date %></td>
-          <td><%= reservation.begin_time %></td>
-          <td><%= reservation.end_time %></td>
-          <td><%= reservation.place %></td>
-          <td><%= reservation.user %></td>
-          <td>
-            <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
-            <%= reservation.approve_link %>
-            <%= reservation.reject_link %>
-            <%= reservation.suspend_link %>
-          </td>
+  <% if @pending_sector_reservations.length > 0 %>
+    <table class = "table table-striped table-bordered table-hover">
+      <thead>
+        <tr colspan="4">
+          <th>Reservas Pendentes</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <%= render 'reservations/reservations_secretary_header' %>
+      </thead>
+
+      <tbody>
+        <% @pending_sector_reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.date %></td>
+            <td><%= reservation.begin_time %></td>
+            <td><%= reservation.end_time %></td>
+            <td><%= reservation.place %></td>
+            <td><%= reservation.user %></td>
+            <td>
+              <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
+              <%= reservation.approve_link %>
+              <%= reservation.reject_link %>
+              <%= reservation.suspend_link %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%end%>
+
+  <% if @approved_sector_reservations.length > 0 %>
+    <table class = "table table-striped table-bordered table-hover">
+      <thead>
+        <tr colspan="4">
+          <th>Reservas Aprovadas</th>
+        </tr>
+        <%= render 'reservations/reservations_secretary_header' %>
+      </thead>
+      <tbody>
+        <% @approved_sector_reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.date %></td>
+            <td><%= reservation.begin_time %></td>
+            <td><%= reservation.end_time %></td>
+            <td><%= reservation.place %></td>
+            <td><%= reservation.user %></td>
+            <td>
+              <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
+              <%= reservation.approve_link %>
+              <%= reservation.reject_link %>
+              <%= reservation.suspend_link %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%end%>
+
+  <% if @rejected_sector_reservations.length > 0 %>
+    <table class = "table table-striped table-bordered table-hover">
+      <thead>
+        <tr colspan="4">
+          <th>Reservas Rejeitadas</th>
+        </tr>
+         <tr>
+          <th>Data</th>
+          <th>Início</th>
+          <th>Fim</th>
+          <th>Local</th>
+          <th>Solicitante</th>
+          <th>Motivo da Rejeição</th>
+          <th colspan="3">Ações</th>
+        </tr> 
+      </thead>
+      <tbody>
+        <% @rejected_sector_reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.date %></td>
+            <td><%= reservation.begin_time %></td>
+            <td><%= reservation.end_time %></td>
+            <td><%= reservation.place %></td>
+            <td><%= reservation.user %></td>
+            <td><%= reservation.justification.reason %></td>
+            <td>
+              <%= link_to 'Detalhes', reservation, class:"btn-small btn-info" %>
+              <%= reservation.approve_link   %>
+              <%= reservation.reject_link %>
+              <%= reservation.suspend_link %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <%end %>
+
+<%else%>
+  <p>Não existe nenhuma reserva nestas condições.</p>
 <%end%>
 
-<% if @approved_sector_reservations.length > 0 %>
-  <table class = "table table-striped table-bordered table-hover">
-    <thead>
-      <tr colspan="4">
-        <th>Reservas Aprovadas</th>
-      </tr>
-      <%= render 'reservations/reservations_secretary_header' %>
-    </thead>
-    <tbody>
-      <% @approved_sector_reservations.each do |reservation| %>
-        <tr>
-          <td><%= reservation.date %></td>
-          <td><%= reservation.begin_time %></td>
-          <td><%= reservation.end_time %></td>
-          <td><%= reservation.place %></td>
-          <td><%= reservation.user %></td>
-          <td>
-            <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
-            <%= reservation.approve_link %>
-            <%= reservation.reject_link %>
-            <%= reservation.suspend_link %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<%end%>
-
-<% if @rejected_sector_reservations.length > 0 %>
-  <table class = "table table-striped table-bordered table-hover">
-    <thead>
-      <tr colspan="4">
-        <th>Reservas Rejeitadas</th>
-      </tr>
-       <tr>
-        <th>Data</th>
-        <th>Início</th>
-        <th>Fim</th>
-        <th>Local</th>
-        <th>Solicitante</th>
-        <th>Motivo da Rejeição</th>
-        <th colspan="3">Ações</th>
-      </tr> 
-    </thead>
-    <tbody>
-      <% @rejected_sector_reservations.each do |reservation| %>
-        <tr>
-          <td><%= reservation.date %></td>
-          <td><%= reservation.begin_time %></td>
-          <td><%= reservation.end_time %></td>
-          <td><%= reservation.place %></td>
-          <td><%= reservation.user %></td>
-          <td><%= reservation.justification.reason %></td>
-          <td>
-            <%= link_to 'Detalhes', reservation, class:"btn-small btn-info" %>
-            <%= reservation.approve_link   %>
-            <%= reservation.reject_link %>
-            <%= reservation.suspend_link %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<%end %>
 <br>
 
 <%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
