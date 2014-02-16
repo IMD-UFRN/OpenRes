@@ -8,7 +8,7 @@
   <dt>Nome:</dt> <dd><%= @user.name %></dd>
   <dt>E-mail:</dt> <dd><%= @user.email %></dd>
   <dt>Função:</dt> <dd><%= @user.role%></dd>
-  <dt>Cpf:</dt> <dd><%= @user.cpf %></dd>
+  <dt>CPF:</dt> <dd><%= @user.cpf %></dd>
   <dt>Setor:</dt> <dd><%= link_to @user.sector.name, @user.sector%></dd>
 </dl>
 
@@ -42,7 +42,7 @@
       <%end%>  
       <% else %>
         <tr>
-          <th colspan="6">Esta sala não possui nenhum objeto.</th>
+          <th colspan="6">Este usuário ainda não realizou reservas.</th>
         </tr>
     <% end %>
     </tbody>
