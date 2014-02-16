@@ -28,7 +28,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def place
-    link_to(object.place.name, object.place)
+    link_to(object.place.full_name, object.place)
   end
 
   def top_rect

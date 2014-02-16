@@ -8,6 +8,11 @@ class Ability
     #can :manage, :all if Rails.env.development?
 
     can :manage, Reservation, { user_id: user.id }
+    can :read, Place
+    can :read, Reservation
+    can :read, RoomType
+    can :read, Sector
+    can :read, ObjectResource
 
     if user.role == "admin"
       can :manage, :all
@@ -24,10 +29,6 @@ class Ability
         end 
       end
 
-      can :read, Place
-      can :read, RoomType
-      can :read, Sector
-
     elsif user.role == "secretary"
       can :manage, Reservation do |reservation|
         unless reservation.place.nil?
@@ -35,17 +36,9 @@ class Ability
         end
       end
 
-      can :manage, User
-      can :read, Place
-      can :read, RoomType
-      can :read, Sector
-
     elsif user.role == "basic"
       can :create, Reservation
-      can :read, Place
-      can :read, Reservation
-      can :read, RoomType
-      can :read, Sector
+
     end
     
     # Define abilities for the passed in user here. For example:

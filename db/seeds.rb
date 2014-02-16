@@ -30,7 +30,7 @@ incubada       = RoomType.create(name: "Incubadação"                , descript
 
 ######################### PRIMEIRO PAVIMENTO #########################
 
-Place.create(code: "A101" , name: "Laboratório de Informática 01"     , capacity: 40, sector_ids: tec_ti.id, reservable: true, room_type_id: lab_info.id)
+tec_place = Place.create(code: "A101" , name: "Laboratório de Informática 01"     , capacity: 40, sector_ids: tec_ti.id, reservable: true, room_type_id: lab_info.id)
 Place.create(code: "A102" , name: "Laboratório de Informática 02"     , capacity: 40, sector_ids: tec_ti.id, reservable: false, room_type_id: lab_info.id)
 Place.create(code: "A103" , name: "Laboratório de Informática 03"     , capacity: 40, sector_ids: tec_ti.id, reservable: false, room_type_id: lab_info.id)
 Place.create(code: "A104" , name: "Laboratório de Informática 04"     , capacity: 40, sector_ids: tec_ti.id, reservable: false, room_type_id: lab_info.id)
@@ -107,7 +107,7 @@ Place.create(code: "B205" , name: "Auditório"                         , capacit
 
 ######################### TERCEIRO PAVIMENTO #########################
 
-Place.create(code: "A301" , name: "Laboratório de Estudos 01"         , capacity: 30, sector_ids: dep_ti.id, reservable: false, room_type_id: lab_info.id)
+bti_place= Place.create(code: "A301" , name: "Laboratório de Estudos 01"         , capacity: 30, sector_ids: dep_ti.id, reservable: true, room_type_id: lab_info.id)
 Place.create(code: "A302" , name: "Sala de Apoio"                     , capacity: 00, sector_ids: data_c.id, reservable: false, room_type_id: administrativo.id)
 Place.create(code: "A302a", name: "Sala de Racks"                     , capacity: 00, sector_ids: data_c.id, reservable: false, room_type_id: administrativo.id)
 Place.create(code: "A303" , name: "Laboratório de Estudos 02"         , capacity: 30, sector_ids: dep_ti.id, reservable: false, room_type_id: lab_info.id)
@@ -148,7 +148,7 @@ Place.create(code: "B327" , name: "Professores ES"                    , capacity
 
 ######################### QUARTO PAVIMENTO #########################
 
-Place.create(code: "A401" , name: "Sala de Reuniões"                  , capacity: 00, sector_ids: dep_es.id, reservable: false, room_type_id: reuniao.id)
+bes_place = Place.create(code: "A401" , name: "Sala de Reuniões"                  , capacity: 00, sector_ids: dep_es.id, reservable: true, room_type_id: reuniao.id)
 Place.create(code: "A402" , name: "Empresa"                           , capacity: 00, sector_ids: incuba.id, reservable: false, room_type_id: empresa.id)
 Place.create(code: "A403" , name: "Sala de Apoio"                     , capacity: 00, sector_ids: data_c.id, reservable: false, room_type_id: administrativo.id)
 Place.create(code: "A403a", name: "Sala de Racks"                     , capacity: 00, sector_ids: data_c.id, reservable: false, room_type_id: administrativo.id)
@@ -199,31 +199,36 @@ Place.create(code: "B436" , name: "Empresa"                           , capacity
 
 
 User.create(role: "admin", email: "admin@example.com", password: "rootadmin", name: "Admin", cpf: "092.092.092-92", sector_id: 1)
-User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel", cpf: "096.092.092-96", sector_id: 3)
-User.create(role: "basic", email: "gleydson@example.com", password: "rootadmin", name: "Gleydson", cpf: "097.092.092-97", sector_id: 3)
 
+bes_user = User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel BES", cpf: "096.092.092-96", sector_id: dep_es.id)
+bti_user = User.create(role: "basic", email: "jose@example.com", password: "rootadmin", name: "José BTI", cpf: "097.092.092-97", sector_id: dep_ti.id)
+tec_user = User.create(role: "basic", email: "mariana@example.com", password: "rootadmin", name: "Mariana Técnico TI", cpf: "087.092.092-97", sector_id: tec_ti.id)
 
+User.create(role: "sector_admin", email: "sector_admin_dep_ti@example.com", password: "rootadmin", name: "Admin do Setor BTI", cpf: "093.092.092-93", sector_id: dep_ti.id)
+User.create(role: "sector_admin", email: "sector_admin_tec_ti@example.com", password: "rootadmin", name: "Admin do Setor Tec TI", cpf: "093.091.092-93", sector_id: tec_ti.id)
+User.create(role: "sector_admin", email: "sector_admin_dep_es@example.com", password: "rootadmin", name: "Admin do Setor BES", cpf: "093.091.082-93", sector_id: dep_es.id)
 
-User.create(role: "sector_admin", email: "sector_admin@example.com", password: "rootadmin", name: "Sector Admin", cpf: "093.092.092-93", sector_id: 1)
+User.create(role: "secretary", email: "secretary_dep_ti@example.com", password: "rootadmin", name: "Secretário BTI", cpf: "11111111111111", sector_id: dep_ti.id)
+User.create(role: "secretary", email: "secretary_tec_ti@example.com", password: "rootadmin", name: "Secretário Tec TI", cpf: "22222222222222", sector_id: tec_ti.id)
+User.create(role: "secretary", email: "secretary_dep_es@example.com", password: "rootadmin", name: "Secretário BES", cpf: "33333333333333", sector_id: dep_es.id)
 
-User.create(role: "secretary", email: "secretary_dep_ti@example.com", password: "rootadmin", name: "Secretary TI", cpf: "11111111111111", sector_id: dep_ti.id)
-User.create(role: "secretary", email: "secretary_tec_ti@example.com", password: "rootadmin", name: "Secretary Tec TI", cpf: "22222222222222", sector_id: tec_ti.id)
-# User.create(role: "secretary", email: "secretary_dep_es@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333333", sector_id: 3)
-# User.create(role: "secretary", email: "secretary_imd_ad@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333335", sector_id: 4)
-# User.create(role: "secretary", email: "secretary_data_c@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333337", sector_id: 5)
-# User.create(role: "secretary", email: "secretary_imd_ug@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333336", sector_id: 6)
-# User.create(role: "secretary", email: "secretary_incuba@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333331", sector_id: 7)
-# User.create(role: "secretary", email: "secretary_imd_ed@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333339", sector_id: 8)
-# User.create(role: "secretary", email: "secretary_psicol@example.com", password: "rootadmin", name: "Secretary", cpf: "33333333333330", sector_id: 9)
+Reservation.create(user_id: bes_user.id, reason: "Palestra." , date: Date.today - 1.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:bes_place.id)
+Reservation.create(user_id: bes_user.id, reason: "Minicurso.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:tec_place.id)
+Reservation.create(user_id: bes_user.id, reason: "Reunião."  , date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:bti_place.id)
+Reservation.create(user_id: bti_user.id, reason: "Palestra." , date: Date.today - 1.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:bes_place.id)
+Reservation.create(user_id: bti_user.id, reason: "Minicurso.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:tec_place.id)
+Reservation.create(user_id: bti_user.id, reason: "Reunião."  , date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:bti_place.id)
+Reservation.create(user_id: tec_user.id, reason: "Palestra." , date: Date.today - 1.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:bes_place.id)
+Reservation.create(user_id: tec_user.id, reason: "Minicurso.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:tec_place.id)
+Reservation.create(user_id: tec_user.id, reason: "Reunião."  , date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:bti_place.id)
 
+projetor = ObjectResource.create(name: "Projetor", description: "Datashow fixo.")
+computador= ObjectResource.create(name: "Computador", description: "Computador fixo.")
 
+bes_place.object_resources << projetor
+tec_place.object_resources << projetor
+bti_place.object_resources << projetor
 
-
-Reservation.create(user_id: 2, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)
-Reservation.create(user_id: 2, reason: "Palestra.", date: Date.today + 1.day, begin_time: Time.now, end_time: Time.now + 4.hour, place_id:1)
-Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 5.hour, place_id:1)
-Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 6.hour, place_id:1)
-Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:1)
-Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 3.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:1)
-Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 4.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:1)
-Reservation.create(user_id: 2, reason: "Reunião.", date: Date.today + 4.day, begin_time: Time.now, end_time: Time.now + 3.hour, place_id:1)
+bes_place.object_resources << computador
+tec_place.object_resources << computador
+bti_place.object_resources << computador

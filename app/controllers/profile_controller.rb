@@ -1,7 +1,9 @@
 # -*- encoding : utf-8 -*-
 class ProfileController < ApplicationController
-  authorize_resource :class => false
+  #authorize_resource :class => false
 
+  before_action: :authenticate_user!
+  
   def profile
     @user = current_user
     @reservations= ReservationDecorator.decorate_collection(@user.reservations)
