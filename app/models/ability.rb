@@ -29,12 +29,16 @@ class Ability
         end 
       end
 
+      can :read, User
+
     elsif user.role == "secretary"
       can :manage, Reservation do |reservation|
         unless reservation.place.nil?
           reservation.sector_ids.include?(user.sector.id)
         end
       end
+
+      can :read, User
 
     elsif user.role == "basic"
       can :create, Reservation
