@@ -34,15 +34,23 @@ ssh_options[:forward_agent] = true
 
 after 'deploy', 'deploy:cleanup' # keep only the last 5 releases
 
-load 'deploy/assets'
 namespace :assets do
-    desc "compile assets locally and upload before finalize_update"
-    task :deploy do
-        %x[bundle exec rake assets:clean && bundle exec rake assets:precompile]
-        ENV['COMMAND'] = " mkdir '#{release_path}/public/assets'"
-        invoke
-        upload '/path/to/app/public/assets', "#{release_path}/public/assets", {:recursive => true}
-    end
+  desc 'Run the precompile task locally and rsync with shared'
+  task :precompile do
+    run_locally('rm -rf public/assets/*')
+    run_locally("RAILS_ENV=#{rails_env} rake assets:precompile")
+    run_locally('touch assets.tgz && rm assets.tgz')
+    run_locally('tar zcvf assets.tgz public/assets/')
+    run_locally('mv assets.tgz public/assets/')
+  end
+
+  desc 'Upload precompiled assets'
+  task :upload_assets do
+    upload "public/assets/assets.tgz", "#{release_path}/assets.tgz"
+    run "cd #{release_path}; tar zxvf assets.tgz; rm assets.tgz"
+  end
 end
-after "deploy:finalize_update", "assets:deploy"
+
+before 'deploy:update_code', 'assets:precompile'
+after 'deploy:create_symlink', 'assets:upload_assets'
 # postgres db pass ELnGJfiKUBPe88jPvAfgM
