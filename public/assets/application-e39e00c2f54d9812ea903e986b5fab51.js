@@ -12799,7 +12799,8 @@ var PlacePreviewView = Backbone.View.extend({
   },
 
   events: {
-    'change #reservation_date' : 'updatePreview',
+    'changeDate .time_picker' : 'updatePreview',
+    'changeDate .date_picker' : 'updatePreview',
     'change #place_selector' : 'updatePreview'
   },
 
@@ -12815,6 +12816,12 @@ var PlacePreviewView = Backbone.View.extend({
   },
 
   updatePreview: function(evt) {
+    //dont fire events on reservation_end_time, only way to it works
+    //if u remove the changeDate to only reservation_begin_time, the event isnt fired
+    //if u remove this line, it will fire in the reservation_end_time timepicker
+    if ($(evt.currentTarget).hasClass("reservation_end_time"))
+      return;
+
     var that = this;
     var selected = $('#place_selector').val();
 
@@ -12825,9 +12832,12 @@ var PlacePreviewView = Backbone.View.extend({
     var day = parseInt(split[0]);
 
     var date = moment([year, month, day]);
+    var time = moment($('#reservation_begin_time').val(), "HH:mm").add('minutes', 30)
 
     if (!date.isValid())
       date = moment();
+
+    $('#reservation_end_time').val(time.format("HH:mm"));
 
     $('#reservation_date').val(date.format('DD/MM/YYYY'));
 
@@ -21722,12 +21732,26 @@ var ready = function() {
     no_results_text: 'Nenhum resultado para'
   });
 
+  $('.datetimepicker').datetimepicker({
+    pickSeconds: false
+  });
+
+  $('.timepicker').datetimepicker({
+    pickDate: false,
+    pickSeconds: false
+  });
+
+  $('.datepicker').datetimepicker({
+    pickTime: false
+  });
+
   var placeModel = new PlacePreviewModel({});
   var placeView = new PlacePreviewView({ model: placeModel });
 };
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
