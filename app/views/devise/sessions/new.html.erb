@@ -7,8 +7,9 @@
 
   <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
     <div class="form-inputs">
-      <%= f.input :email, :required => false, :autofocus => true %>
-      <%= f.input :password, :required => false %>
+      <%= f.input :email, :required => false, :autofocus => true, label: "E-mail" %>
+      <%= f.input :password, :required => false, label: "Senha" %>
+      <%= render "devise/shared/links" %>
       <%= f.input :remember_me, label: "Mantenha-me conectado", :as => :boolean if devise_mapping.rememberable? %>
     </div>
 
@@ -18,6 +19,7 @@
     <hr>
 
     <p>Quer reservar e não possui uma conta? <br> Entre em contato com a secretaria do seu departamento.</p>
+
   <% end %>
 
 </div>
