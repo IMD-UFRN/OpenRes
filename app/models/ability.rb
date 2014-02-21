@@ -5,14 +5,14 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
     #can :manage, :all if Rails.env.development?
 
-    can :manage, Reservation, { user_id: user.id }
-    can :read, Place
-    can :read, Reservation
-    can :read, RoomType
-    can :read, Sector
-    can :read, ObjectResource
+    #all permissions
+    can :crud, Reservation, { user_id: user.id }
+    can :read, :all
+    can :get_reservations, Place
 
     if user.role == "admin"
       can :manage, :all
@@ -41,8 +41,6 @@ class Ability
       can :read, User
 
     elsif user.role == "basic"
-      can :create, Reservation
-
     end
     
     # Define abilities for the passed in user here. For example:
