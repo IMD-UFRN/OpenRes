@@ -40,6 +40,11 @@ class Reservation < ActiveRecord::Base
     return Reservation.where("date < ?",  DateTime.now.to_date)
   }
 
+  scope :conflicting, lambda { |reservation|
+    Reservation.where("place_id = ? and date = ? and status = ? and begin_time <= ? and end_time >= ? and id <> ?",
+     reservation.place_id, reservation.date, 'approved', reservation.end_time, reservation.begin_time, reservation.id) 
+  }
+
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time
 
   belongs_to :user
