@@ -15,6 +15,11 @@ namespace :unicorn do
     run "#{sudo} mv /tmp/unicorn_init /etc/init.d/unicorn_#{application}"
     run "#{sudo} update-rc.d -f unicorn_#{application} defaults"
   end
+  
+  desc 'Kill Unicorn'
+  task :kill do
+    run "kill -9 #{capture("cat #{unicorn_pid}")}"
+  end
   after "deploy:setup", "unicorn:setup"
 
   %w[start stop restart upgrade].each do |command|
