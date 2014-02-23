@@ -7,8 +7,8 @@
   <dt>Data:</dt> <dd><%= @reservation.date.strftime("%d/%m/%Y") %></dd>
   <dt>Início:</dt> <dd><%= @reservation.begin_time.strftime("%H:%M") %></dd>
   <dt>Término:</dt> <dd><%= @reservation.end_time.strftime("%H:%M") %></dd>
-  <dt>Sala:</dt> <dd><%= @reservation.place.name %></dd>
-  <dt>Tipo de Sala:</dt> <dd><%= @reservation.place.room_type.name %></dd>
+  <dt>Sala:</dt> <dd><%= link_to @reservation.place.name, @reservation.place %></dd>
+  <dt>Tipo de Sala:</dt> <dd><%= link_to @reservation.place.room_type.name, @reservation.place.room_type %></dd>
   <dt>Setor Responsável:</dt> <dd><% @reservation.sectors.each do |sector| %><%= link_to sector.name, sector_path(sector) %><%end%></dd>
   <dt>Motivo:</dt> <dd><%= @reservation.reason %></dd>
 </dl>
