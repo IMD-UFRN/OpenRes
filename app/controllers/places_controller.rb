@@ -66,7 +66,7 @@ class PlacesController < ApplicationController
   end
 
   def get_reservations
-    reservations = @place.reservations.where("status= ? or status = ?", "approved", "pending" )
+    reservations = @place.reservations.where("status = ? or status = ?", "approved", "pending" )
 
     begin
       date = Date.strptime(params[:date], "%d/%m/%Y")

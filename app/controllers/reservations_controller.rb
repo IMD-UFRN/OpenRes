@@ -49,13 +49,15 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
 
+    @conflicts = Reservation.conflicting(@reservation)
+
     respond_to do |format|
-      if @reservation.save
+      if @conflicts.empty? and @reservation.save
         format.html { redirect_to @reservation, notice: 'Reserva criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @reservation }
       else
         format.html { render action: 'new' }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        format.json { render json: [@conflicts, @reservation.errors], status: :unprocessable_entity }
       end
     end
   end

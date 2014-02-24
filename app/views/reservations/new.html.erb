@@ -49,6 +49,7 @@
             <th>Fim</th>
             <th>Motivo</th>
             <th>Requisitor</th>
+            <th>Status</th>
           </tr>
         </thead>
 
@@ -59,7 +60,8 @@
             <td>{{prettifyDate begin_time}}</td>
             <td>{{prettifyDate end_time}}</td>
             <td> {{reason}} </td>
-            <td>{{this.user}}</td>
+            <td>{{user_id}}</td>
+            <td>{{prettyStatus status}}</td>
           {{else}}
             <tr><td class="muted" colspan="4">Nenhuma reserva</td></tr>
           {{/each}} 

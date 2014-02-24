@@ -30,3 +30,14 @@ Handlebars.registerHelper("prettifyDate", function(timestamp) {
   timestamp = timestamp.slice(0, -1);
   return moment(timestamp).format("HH:mm");
 });
+
+Handlebars.registerHelper("prettyStatus", function(status) {
+  if (status == "approved")
+    return "aprovada";
+  else if (status == "rejected")
+    return "rejeitada";
+  else if (status == "pending")
+    return "em aberto";
+
+  return "?";
+});
