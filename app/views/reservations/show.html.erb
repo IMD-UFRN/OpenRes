@@ -4,11 +4,13 @@
 <hr>
 
 <dl>
-  <dt>Data:</dt> <dd><%= @reservation.date.strftime("%d/%m/%Y") %></dd>
-  <dt>Início:</dt> <dd><%= @reservation.begin_time.strftime("%H:%M") %></dd>
-  <dt>Término:</dt> <dd><%= @reservation.end_time.strftime("%H:%M") %></dd>
-  <dt>Sala:</dt> <dd><%= @reservation.place.name %></dd>
-  <dt>Tipo de Sala:</dt> <dd><%= @reservation.place.room_type.name %></dd>
+  <dt>Data:</dt> <dd><%= @reservation.date %></dd>
+  <dt>Solicitante:</dt> <dd><%= @reservation.user %></dd>
+  <dt>Início:</dt> <dd><%= @reservation.begin_time %></dd>
+  <dt>Término:</dt> <dd><%= @reservation.end_time %></dd>
+  <dt>Solicitada em:</dt> <dd><%= @reservation.created_at %></dd>
+  <dt>Sala:</dt> <dd><%= link_to @reservation.place %></dd>
+  <dt>Tipo de Sala:</dt> <dd><%= link_to @reservation.room_type%></dd>
   <dt>Setor Responsável:</dt> <dd><% @reservation.sectors.each do |sector| %><%= link_to sector.name, sector_path(sector) %><%end%></dd>
   <dt>Motivo:</dt> <dd><%= @reservation.reason %></dd>
 </dl>

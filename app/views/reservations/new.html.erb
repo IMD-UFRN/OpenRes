@@ -10,7 +10,7 @@
       <%= render 'form' %>
     </div>
 
-    <div class="span4" id="place_preview">
+    <div class="span6" id="place_preview">
     </div>
   </div>
 </div>
@@ -19,45 +19,57 @@
 
 <script id="place_preview_template" type="text/x-handlebars-template">
 
-<h3>Detalhes da sala</h3>
+<div class= "panel panel-info">
 
-<p>Data: {{this.date}}</p>
-<p>Nome da sala: {{this.name}}</p>
-<p>Capacidade: {{this.capacity}}</p>
+  <h3 class= "panel-heading">Detalhes da sala</h3>
 
-<p>Usuários responsáveis por esta sala:</p>
-<ul>
-{{#each this.users}}
-  <li class="user">
-    <p>Nome: {{name}}</p>
-    <p>E-mail: {{email}}</p>
-  </li>
-{{/each}}
-</ul>
+  <div class = "panel-body">
 
-<hr>
+    <p>Data: {{this.date}}</p>
+    <p>Nome da sala: {{this.name}}</p>
+    <p>Capacidade: {{this.capacity}}</p>
 
-<p>Reservas marcadas para este dia:</p>
-
-{{#each this.reservations}}
-
-   <div class="panel panel-sucess">
-    <div class="panel-heading">
-      <h3 class="panel-title"> Horário: {{prettifyDate begin_time}} até {{prettifyDate end_time}}</h3>
+    <div class= "panel panel-info">
+      <p class= "panel-heading">Usuários responsáveis por esta sala:</p>
+      {{#each this.users}}
+          <p> {{name}}  ({{email}})</p>
+      {{else}}
+        <p class="muted">Nenhum responsável</p>  
+      {{/each}}
     </div>
-    <div class="panel-body">
-      <dl>
-        <dt>Motivo:</dt> <dd>{{reason}} </dd>
-        <dt>Requisitor:</dt> <dd>{{user}}</dd>
 
-      </dl>
+    <div class= "panel panel-info">
+
+      <p class= "panel-heading">Reservas marcadas para esta sala no dia selecionado:</p>
+
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Motivo</th>
+            <th>Requisitor</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {{#each this.reservations}}
+          <tr>
+            <td>{{prettifyDate begin_time}}</td>
+            <td>{{prettifyDate end_time}}</td>
+            <td> {{reason}} </td>
+            <td>{{this.user}}</td>
+          {{else}}
+            <tr><td class="muted" colspan="4">Nenhuma reserva</td></tr>
+          {{/each}} 
+        </tbody>
+      </table>
     </div>
   </div>
-  </li>
-{{else}}
-  <p class="muted">Nenhuma reserva</p>
-{{/each}}
-
-
 </script>
+
+
+
+
  

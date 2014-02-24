@@ -27,6 +27,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/1
   # GET /reservations/1.json
   def show
+    @reservation = ReservationDecorator.decorate(Reservation.find(params[:id]))
   end
 
   # GET /reservations/new

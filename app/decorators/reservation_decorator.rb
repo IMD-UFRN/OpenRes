@@ -19,6 +19,10 @@ class ReservationDecorator < Draper::Decorator
     object.end_time.strftime("%H:%M")
   end
 
+  def created_at
+    object.created_at.strftime("%d/%m/%Y - %H:%M") 
+  end
+
   def date
     object.date.strftime("%d/%m/%Y")  
   end
@@ -34,6 +38,10 @@ class ReservationDecorator < Draper::Decorator
   def top_rect
     @top_rect ||= (object.begin_time.hour * 60 + object.begin_time.min) * 0.5
   end  
+
+  def room_type
+    link_to(object.place.room_type.name, object.place.room_type)
+  end
 
   def rect_height
     ((object.end_time.hour * 60 + object.end_time.min) * 0.5) - top_rect

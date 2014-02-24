@@ -15,6 +15,7 @@
             <td><%= reservation.date %></td>
             <td><%= reservation.begin_time %></td>
             <td><%= reservation.end_time %></td>
+            <td><%= reservation.created_at %></td>
             <td><%= reservation.place %></td>
             <td><%= reservation.user %></td>
             <td>
@@ -43,6 +44,7 @@
             <td><%= reservation.date %></td>
             <td><%= reservation.begin_time %></td>
             <td><%= reservation.end_time %></td>
+            <td><%= reservation.created_at %></td>
             <td><%= reservation.place %></td>
             <td><%= reservation.user %></td>
             <td>
@@ -67,6 +69,7 @@
           <th>Data</th>
           <th>Início</th>
           <th>Fim</th>
+          <th>Solicitada em</th>
           <th>Local</th>
           <th>Solicitante</th>
           <th>Motivo da Rejeição</th>
@@ -79,9 +82,10 @@
             <td><%= reservation.date %></td>
             <td><%= reservation.begin_time %></td>
             <td><%= reservation.end_time %></td>
-            <td><%= reservation.place %></td>
+            <td><%= reservation.created_at %></td>
+            <td style= "max-width:25%; width:15%; word-wrap:break-word"><%= reservation.place %></td>
             <td><%= reservation.user %></td>
-            <td><%= reservation.justification.reason %></td>
+            <td style= "max-width:15%; width:15%; word-wrap:break-word"><%= reservation.justification.reason %></td>
             <td>
               <%= link_to 'Detalhes', reservation, class:"btn-small btn-info" %>
               <%= reservation.approve_link   %>
