@@ -2,7 +2,7 @@
 class PlacesController < ApplicationController
   load_and_authorize_resource
   
-  before_action :set_place, only: [:show, :edit, :update, :destroy]
+  before_action :set_place, only: [:show, :edit, :update, :destroy, :get_reservations]
 
   # GET /places
   # GET /places.json
@@ -66,7 +66,7 @@ class PlacesController < ApplicationController
   end
 
   def get_reservations
-    reservations = @place.reservations.where("status = ? or status = ?", "approved", "pending" )
+    @reservations = @place.reservations.where("status = ? or status = ?", "approved", "pending" )
 
     begin
       date = Date.strptime(params[:date], "%d/%m/%Y")
@@ -74,13 +74,13 @@ class PlacesController < ApplicationController
       date = nil
     end
 
-    reservations = reservations.where(date: date) if date
+    @reservations = @reservations.where(date: date) if date
 
-    reservations.order!(:date)
+    @reservations.order!(:date)
 
-    users = User.where(sector_id: @place.sectors, role: ["secretary"])
+    @responsibles = User.where(sector_id: @place.sectors, role: ["secretary"])
 
-    render json: @place.attributes.merge(reservations: reservations).merge(users: users)
+    #render json: @place.attributes.merge(reservations: reservations).merge(users: users)
   end
 
   private

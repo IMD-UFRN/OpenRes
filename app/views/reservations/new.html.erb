@@ -31,7 +31,7 @@
 
     <div class= "panel panel-info">
       <p class= "panel-heading">Usuários responsáveis por esta sala:</p>
-      {{#each this.users}}
+      {{#each this.responsibles}}
           <p> {{name}}  ({{email}})</p>
       {{else}}
         <p class="muted">Nenhum responsável</p>  
@@ -47,8 +47,8 @@
           <tr>
             <th>Início</th>
             <th>Fim</th>
-            <th>Motivo</th>
             <th>Requisitor</th>
+            <th>Motivo</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -59,8 +59,8 @@
           <tr>
             <td>{{prettifyDate begin_time}}</td>
             <td>{{prettifyDate end_time}}</td>
-            <td> {{reason}} </td>
-            <td>{{user_id}}</td>
+            <td><a href={{requester_url}}>{{requester}}</a></td>
+            <td>{{reason}}</td>
             <td>{{prettyStatus status}}</td>
           {{else}}
             <tr><td class="muted" colspan="4">Nenhuma reserva</td></tr>
