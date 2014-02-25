@@ -33,11 +33,11 @@ Handlebars.registerHelper("prettifyDate", function(timestamp) {
 
 Handlebars.registerHelper("prettyStatus", function(status) {
   if (status == "approved")
-    return "aprovada";
+    return "Aprovada";
   else if (status == "rejected")
-    return "rejeitada";
+    return "Rejeitada";
   else if (status == "pending")
-    return "em aberto";
+    return "Pendente";
 
   return "?";
 });
