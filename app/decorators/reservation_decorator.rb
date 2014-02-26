@@ -55,7 +55,7 @@ class ReservationDecorator < Draper::Decorator
     return if object.status == 'approved'
 
     
-      link_to 'Aprovar', reservation_approve_path(reservation), method: :post, class:"btn-small btn-success"
+      link_to 'Aprovar', reservation_approve_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?' }, class:"btn-small btn-success"
 
   end
 
