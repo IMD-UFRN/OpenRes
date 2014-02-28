@@ -7,6 +7,7 @@ class CreateReservations < ActiveRecord::Migration
       t.time :end_time
       t.string :status
       t.text :reason
+      t.references :reservation_group, index: true
       t.references :user, index: true
       t.references :place, index: true
 

@@ -1,8 +1,5 @@
 # -*- encoding : utf-8 -*-
 OpenRes::Application.routes.draw do
-  get "profile/show"
-  get "profile/edit"
-  get "profile/update"
   resources :room_types
 
   root to: 'home#index'
@@ -40,6 +37,13 @@ OpenRes::Application.routes.draw do
 
   resources :users, path: 'accounts'
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
+
+  controller :reservation_group do
+    get "/reservation_groups/new", to: 'reservation_group#new'
+    get "/reservation_groups/preview", to: 'reservation_group#preview'
+
+    post '/reservation_groups/create', to: 'reservation_group#create', as: :create_reservation_group
+  end
 
   controller :profile do
     get '/profile/edit', to: 'profile#edit', as: :edit_profile

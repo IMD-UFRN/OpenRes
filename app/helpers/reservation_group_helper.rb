@@ -1,0 +1,2 @@
+module ReservationGroupHelper
+end

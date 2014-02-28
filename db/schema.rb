@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214024349) do
+ActiveRecord::Schema.define(version: 20140228210308) do
 
   create_table "justifications", force: true do |t|
     t.text     "reason"
@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(version: 20140214024349) do
   end
 
   add_index "places", ["room_type_id"], name: "index_places_on_room_type_id"
+
+  create_table "reservation_groups", force: true do |t|
+    t.string   "name"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "reservations", force: true do |t|
     t.date     "date"
