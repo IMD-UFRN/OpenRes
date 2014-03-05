@@ -1,0 +1,91 @@
+<%= simple_form_for(:reservation_group_form, url: reservation_groups_path) do |f| %>
+  <%= f.input :name %>
+
+  <%= f.input :place_id, as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'} %>
+
+  <%= f.input :reason, as: :text %>
+  <%= f.input :notes, as: :text %>
+
+  <div class="multi-field-wrapper">
+    <div class="multi-fields">
+    </div>
+
+    <button type="button" class="add-field">Add field</button>
+  </div>
+
+  <%= f.submit %>
+
+  <script id="repetitions_fields" type="text/x-handlebars-template">
+    <div class="multi-field panel">
+      <h2>Data</h2>
+      <%= f.input "repetitions[{{number}}][begin_date]", as: :date_picker, label: "De" %>
+      <%= f.input "repetitions[{{number}}][end_date]", as: :date_picker, label: "Até" %>
+
+      <h2>Horário</h2>
+      <%= f.input "repetitions[{{number}}][begin_time]", as: :time_picker, label: "De" %>
+      <%= f.input "repetitions[{{number}}][end_time]", as: :time_picker, label: "Até" %>
+
+      <h2>Dias</h2>
+      <%= f.collection_check_boxes "repetitions[{{number}}][weekly_repeat]", [[0, 'Domingo'], [1, 'Segunda'], [2, 'Terça'],  [3, 'Quarta'], [4, 'Quinta'], [5, 'Sexta'], [6, 'Sábado']], :first, :last, :item_wrapper_class => 'inline' %>
+
+      <button type="button" class="remove-field">Remove</button>
+      <br>
+    </div>
+  </script>
+
+<% end %>
+
+<script type="text/javascript">
+  var number = 0;
+  var $wrapper = $('.multi-field-wrapper .multi-fields');
+
+  var ready = function() {
+    addField();
+
+    $(".add-field", $(this)).click(function(e) {
+      number += 1;
+      addField($wrapper);
+    });
+  };
+
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
+
+  function bindEvents() {
+    $('.datetimepicker').datetimepicker({
+      pickSeconds: false
+    });
+
+    $('.timepicker').datetimepicker({
+      pickDate: false,
+      pickSeconds: false
+    });
+
+    $('.datepicker').datetimepicker({
+      pickTime: false
+    });
+
+    $('.multi-field .remove-field', $wrapper).click(function() {
+      removeField($wrapper, this);
+    });
+  }
+
+  function addField(wrapper) {
+    var source = $('#repetitions_fields').html();
+
+    if (!source)
+      return;
+
+    var template = Handlebars.compile(source);
+    var html = template({number: number});
+    
+    $wrapper.append(html);
+    bindEvents();
+  }
+
+  function removeField(wrapper, button) {
+    if ($('.multi-field', wrapper).length > 1)
+      $(button).parent('.multi-field').remove();
+  }
+
+</script>

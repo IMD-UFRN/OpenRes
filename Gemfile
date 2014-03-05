@@ -46,6 +46,10 @@ gem 'handlebars_assets'
 
 gem 'momentjs-rails'
 
+gem "nested_form"
+
+gem 'virtus', git: 'https://github.com/solnic/virtus.git'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
