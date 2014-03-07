@@ -11,7 +11,7 @@ class ReservationApprovalMailer < ActionMailer::Base
     @greeting = "Hi"
     @reservation = reservation
 
-    mail to: "to@example.org", subject: "[IMD- UFRN] Situação de reserva para sala #{@reservation.place.name}"
+    mail to: @reservation.user.email, subject: "[IMD- UFRN] Situação de reserva para sala #{@reservation.place.name}"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -24,7 +24,7 @@ class ReservationApprovalMailer < ActionMailer::Base
     @justification = justification
     @reservation = reservation
 
-    mail to: "to@example.org", subject: "[IMD- UFRN] Situação de reserva para sala #{@reservation.place.name}"
+    mail to: @reservation.user.email, subject: "[IMD- UFRN] Situação de reserva para sala #{@reservation.place.name}"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -37,6 +37,6 @@ class ReservationApprovalMailer < ActionMailer::Base
     @reservation = reservation
     @justification = justification
 
-    mail to: "to@example.org", subject: "[IMD- UFRN] Situação de reserva para sala #{@reservation.place.name}"
+    mail to: @reservation.user.email, subject: "[IMD- UFRN] Situação de reserva para sala #{@reservation.place.name}"
   end
 end
