@@ -44,6 +44,15 @@ img{
   color: black;
 }
 
+.myBrand{
+  color: #AAB3AB;
+  display: inline;
+  padding: 0.5em;
+  &:hover {
+    color: #413D3D !important;
+  }
+}
+
 .navbar {
   .navbar-inner {
     background-color: #eeeeee;
