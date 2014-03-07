@@ -1,10 +1,30 @@
-<h1>Gerenciador de Salas IMD</h1>
+<div class = "well login_form">
 
-<h4>
-<p>Bem vindo ao sistema web que irá mudar a forma como as reservas e marcação de salas são feitas.</p>
-<p>Precisa de uma sala? Entre, escolha o tipo, um horário e pronto!</p>
-<p>Depois que a reserva foi feita, não se preocupe! Você receberá e-mail de acompanhamento da situação de sua reserva.</p>
-<p>E mais! Você também pode facilmente verificar qual a sala de algum servidor do prédio.</p>
-<p>Novas funcionaldides serão implementadas constantemente, não deixe de checar!</p>
-</h4>
+  <%= image_tag "logo.png", size: "120x120" %>
 
+  <br>
+  <br>
+  <p>
+    <strong class= "centered_text">OpenRes - Gerenciador de Salas do Instituto Metrópole Digital</strong>
+  </p>
+  <hr>
+  <h2 class= "centered_text">Entrar</h2>
+
+  <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email, :required => false, :autofocus => true, label: "E-mail" %>
+      <%= f.input :password, :required => false, label: "Senha" %>
+      <%= render "devise/shared/links" %>
+      <%= f.input :remember_me, label: "Mantenha-me conectado", :as => :boolean if devise_mapping.rememberable? %>
+    </div>
+
+    <br>
+    <%= f.button :submit, "Entrar", class: "btn btn-success" %>
+
+    <hr>
+
+    <p>Quer reservar e não possui uma conta? <br> Entre em contato com a secretaria do seu departamento.</p>
+
+  <% end %>
+
+</div>
