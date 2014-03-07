@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20140228210308) do
     t.time     "end_time"
     t.string   "status"
     t.text     "reason"
-    t.integer  "reservation_group_id"
     t.integer  "user_id"
     t.integer  "place_id"
     t.datetime "created_at"
@@ -74,7 +73,6 @@ ActiveRecord::Schema.define(version: 20140228210308) do
   end
 
   add_index "reservations", ["place_id"], name: "index_reservations_on_place_id"
-  add_index "reservations", ["reservation_group_id"], name: "index_reservations_on_reservation_group_id"
   add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
 
   create_table "room_types", force: true do |t|
