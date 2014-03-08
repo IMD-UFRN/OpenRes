@@ -19,7 +19,7 @@
             <td><%= reservation.place %></td>
             <td><%= reservation.user %></td>
             <td>
-              <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
+              <%= reservation.details_link  %>
               <%= reservation.approve_link %>
               <%= reservation.reject_link %>
               <%= reservation.suspend_link %>
@@ -48,7 +48,7 @@
             <td><%= reservation.place %></td>
             <td><%= reservation.user %></td>
             <td>
-              <%= link_to 'Detalhes', reservation, class:"btn-small btn-info"  %>
+              <%= reservation.details_link  %>
               <%= reservation.approve_link %>
               <%= reservation.reject_link %>
               <%= reservation.suspend_link %>
@@ -74,7 +74,7 @@
           <th>Solicitante</th>
           <th>Motivo da Rejeição</th>
           <th colspan="3">Ações</th>
-        </tr> 
+        </tr>
       </thead>
       <tbody>
         <% @rejected_sector_reservations.each do |reservation| %>
@@ -87,7 +87,7 @@
             <td><%= reservation.user %></td>
             <td style= "max-width:15%; width:15%; word-wrap:break-word"><%= reservation.justification.reason %></td>
             <td>
-              <%= link_to 'Detalhes', reservation, class:"btn-small btn-info" %>
+              <%= reservation.details_link %>
               <%= reservation.approve_link   %>
               <%= reservation.reject_link %>
               <%= reservation.suspend_link %>

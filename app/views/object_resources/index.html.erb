@@ -14,9 +14,9 @@
       <tr>
         <td><%= link_to object_resource.name, object_resource %></td>
         <td><%= object_resource.description %></td>
-        <td><%= link_to 'Detalhes', object_resource, class: 'btn btn-info btn-small' %>
-        <%= link_to 'Editar', edit_object_resource_path(object_resource), class: 'btn btn-primary btn-small' %>
-        <%= link_to 'Excluir', object_resource, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar este Objeto?' }, class: 'btn btn-danger btn-small' %></td>
+        <td><%= link_to 'Detalhes', object_resource, class: 'btn btn-normal btn-small' %>
+        <%= link_to 'Editar', edit_object_resource_path(object_resource), class: 'btn btn-normal btn-small' %>
+        <%= link_to 'Excluir', object_resource, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar este Objeto?' }, class: 'btn btn-normal btn-small' %></td>
       </tr>
     <% end %>
   </tbody>

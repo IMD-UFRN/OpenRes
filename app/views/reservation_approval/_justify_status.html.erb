@@ -8,7 +8,7 @@
     <%= f.input :reason, as: :text, label: "Motivo" %>
   </div>
   <div class="modal-footer">
-    <%= f.submit (request.original_url.include?("reject") ? "Rejeitar" : "Suspender"), class: "btn btn-primary" %>
+    <%= f.submit (request.original_url.include?("reject") ? "Rejeitar" : "Suspender"), class: "btn btn-normal" %>
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
   </div>
 

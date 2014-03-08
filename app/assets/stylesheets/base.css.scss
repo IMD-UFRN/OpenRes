@@ -79,6 +79,15 @@ img{
   }
 }
 
+.btn-normal{
+  background:#9E9E9E;
+  color: white;
+  &:hover {
+    background: #AAB3AA !important;
+    color: white;
+  }
+}
+
 .big {
   font-size: 1.5em;
   color: black;

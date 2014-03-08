@@ -1,6 +1,6 @@
 <h1>Detalhes do Usuário</h1>
-<%= link_to 'Editar Informações deste Usuário', edit_user_path(@user), class:"btn-small btn-primary"%> 
-<%= link_to 'Excluir Usuário', @user, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este usuário?' }, class: "btn-small btn-danger" %>
+<%= link_to 'Editar Informações deste Usuário', edit_user_path(@user), class:"btn-small btn-normal"%> 
+<%= link_to 'Excluir Usuário', @user, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este usuário?' }, class: "btn-small btn-normal" %>
 
 <hr>
 
@@ -37,7 +37,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.place %></td>
             <td><%= reservation.status %></td>
-            <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-info" %></td>
+            <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
           </tr>   
       <%end%>  
       <% else %>

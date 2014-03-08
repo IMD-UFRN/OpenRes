@@ -20,11 +20,11 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def created_at
-    object.created_at.strftime("%d/%m/%Y - %H:%M") 
+    object.created_at.strftime("%d/%m/%Y - %H:%M")
   end
 
   def date
-    object.date.strftime("%d/%m/%Y")  
+    object.date.strftime("%d/%m/%Y")
   end
 
   def user
@@ -37,7 +37,7 @@ class ReservationDecorator < Draper::Decorator
 
   def top_rect
     @top_rect ||= (object.begin_time.hour * 60 + object.begin_time.min) * 0.5
-  end  
+  end
 
   def room_type
     link_to(object.place.room_type.name, object.place.room_type)
@@ -51,30 +51,33 @@ class ReservationDecorator < Draper::Decorator
     "%06x" % (rand * 0xffffff)
   end
 
+  def details_link
+    link_to 'Detalhes', reservation_path(reservation), class:"btn-small btn-normal"
+  end
+
   def approve_link
     return if object.status == 'approved'
 
-    
-      link_to 'Aprovar', reservation_approve_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?' }, class:"btn-small btn-success"
+      link_to 'Aprovar', reservation_approve_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?' }, class:"btn-small btn-normal"
 
   end
 
   def reject_link
     return if object.status == 'rejected'
 
-  
+
     link_to 'Rejeitar', justify_reject_path(reservation),
-      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-danger"}
-  
+      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
+
   end
 
   def suspend_link
     return if object.status == 'pending'
 
-  
+
     link_to 'Suspender', justify_suspend_path(reservation),
-     {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-warning"}
-  
+     {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
+
   end
 
 end

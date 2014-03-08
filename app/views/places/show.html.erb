@@ -1,5 +1,5 @@
 <h1>Detalhes da Sala</h1>
-<%= link_to 'Editar Informações desta Sala', edit_place_path(@place), class:"btn-small btn-primary"%> 
+<%= link_to 'Editar Informações desta Sala', edit_place_path(@place), class:"btn-small btn-normal"%> 
 
 
 <hr>
@@ -76,7 +76,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.user %></td>
             <td><%= reservation.status %></td>
-            <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-info" %></td>
+            <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
           </tr>   
       <%end%>  
       <% else %>

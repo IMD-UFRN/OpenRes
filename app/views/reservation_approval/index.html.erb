@@ -8,8 +8,8 @@
 
 <%= render 'reservations/categorized_reservations'%>
 
-<%= link_to 'Reservas Futuras', check_reservations_path(filter_by: "future"), class:"btn btn-primary" %>
-<%= link_to 'Reservas Finalizadas', check_reservations_path(filter_by: "finished"), class:"btn btn-primary" %>
-<%= link_to 'Todas as Reservas', check_reservations_path, class:"btn btn-primary" %>
+<%= link_to 'Reservas Futuras', check_reservations_path(filter_by: "future"), class:"btn btn-normal" %>
+<%= link_to 'Reservas Finalizadas', check_reservations_path(filter_by: "finished"), class:"btn btn-normal" %>
+<%= link_to 'Todas as Reservas', check_reservations_path, class:"btn btn-normal" %>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

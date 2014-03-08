@@ -17,9 +17,9 @@
         <td><%= user.email %></td>
         <td><%= link_to user.sector.name, user %></td>
         <td>
-          <%= link_to 'Detalhes', user, class: "btn-small btn-info" %>
-          <%= link_to 'Editar', edit_user_path(user), class: "btn-small btn-primary" %>
-          <%= link_to 'Excluir', user, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este usuário?' }, class: "btn-small btn-danger" %>
+          <%= link_to 'Detalhes', user, class: "btn-small btn-normal" %>
+          <%= link_to 'Editar', edit_user_path(user), class: "btn-small btn-normal" %>
+          <%= link_to 'Excluir', user, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este usuário?' }, class: "btn-small btn-normal" %>
         </td>
       </tr>
     <% end %>
