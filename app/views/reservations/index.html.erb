@@ -6,6 +6,12 @@
   <h1>Minhas Reservas</h1>
 <%end%>
 
+<ul class="nav nav-tabs" style="margin-bottom: 20px;">
+  <li><%= link_to 'Reservas Futuras', reservations_path(filter_by: "future") %></li>
+  <li><%= link_to 'Reservas Finalizadas', reservations_path(filter_by: "finished") %></li>
+  <li><%= link_to 'Todas as Reservas', reservations_path %></li>
+</ul>
+
 <% if  @pending_reservations.length > 0 ||  @approved_reservations.length > 0 || @rejected_reservations.length > 0 %>
 
   <% if @pending_reservations.length > 0 %>
@@ -68,7 +74,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.place %></td>
             <td><%= reservation.justification.reason %></td>
-            <td><%= link_to 'Detalhes', reservation, class: "btn-small btn-normal" %></td>
+            <td><%= reservation.details_link%></td>
           </tr>
         <% end %>
       </tbody>
@@ -77,11 +83,12 @@
   <br>
 
 <%else%>
-  <p>Não existe nenhuma reserva deste tipo.</p>
+  <br>
+  <br>
+  <big>Não existe nenhuma reserva deste tipo.</big>
+  <br>
+  <br>
+  <br>
 <%end%>
 
 <%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
-
-<%= link_to 'Reservas Futuras', reservations_path(filter_by: "future"), class:"btn btn-normal" %>
-<%= link_to 'Reservas Finalizadas', reservations_path(filter_by: "finished"), class:"btn btn-normal" %>
-<%= link_to 'Todas as Reservas', reservations_path, class:"btn btn-normal" %>
