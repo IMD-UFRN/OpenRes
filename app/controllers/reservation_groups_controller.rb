@@ -52,6 +52,9 @@ class ReservationGroupsController < ApplicationController
   def new
   end
 
+  def index
+  end
+
   def show
     @reservation_group = ReservationGroup.find(params[:id])
   end
@@ -59,7 +62,7 @@ class ReservationGroupsController < ApplicationController
   def create
     @reservation_group = ReservationGroup.new(name: reservation_group_params[:name],
      notes: reservation_group_params[:notes])
-    
+
     group_processor = ReservationGroupProcessor.new(reservation_group_params)
     group_processor.process
     group_processor.save
