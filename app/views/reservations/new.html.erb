@@ -15,7 +15,13 @@
   </div>
 </div>
 
-<%= render 'shared/back'%>
+<ul class= pager>
+  <li class= "previous">
+    <%=link_to "← Minhas Reservas",reservations_path%>
+  </li>
+</ul>
+
+
 
 <script id="place_preview_template" type="text/x-handlebars-template">
 
@@ -34,7 +40,7 @@
       {{#each this.responsibles}}
           <p> {{name}}  ({{email}})</p>
       {{else}}
-        <p class="muted">Nenhum responsável</p>  
+        <p class="muted">Nenhum responsável</p>
       {{/each}}
     </div>
 
@@ -64,14 +70,9 @@
             <td>{{prettyStatus status}}</td>
           {{else}}
             <tr><td class="muted" colspan="5">Nenhuma reserva</td></tr>
-          {{/each}} 
+          {{/each}}
         </tbody>
       </table>
     </div>
   </div>
 </script>
-
-
-
-
- 
