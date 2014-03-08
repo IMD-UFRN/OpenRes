@@ -1,5 +1,5 @@
 <h1>Detalhes da Reserva</h1>
-<%= link_to 'Editar Informações desta Reserva', edit_reservation_path(@reservation), class:"btn-small btn-normal"%> 
+<%= link_to 'Editar Informações desta Reserva', edit_reservation_path(@reservation), class:"btn-small btn-normal"%>
 
 <hr>
 
@@ -14,5 +14,3 @@
   <dt>Setor Responsável:</dt> <dd><% @reservation.sectors.each do |sector| %><%= link_to sector.name, sector_path(sector) %><%end%></dd>
   <dt>Motivo:</dt> <dd><%= @reservation.reason %></dd>
 </dl>
-
-<%= render 'shared/back'%>

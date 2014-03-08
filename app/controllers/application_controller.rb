@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
+  before_filter :authenticate_user!, :except => [:about]
+
   before_filter do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
