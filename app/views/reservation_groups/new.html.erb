@@ -28,7 +28,7 @@
   <div class="clear">
 
   <%= f.button :submit,"SALVAR RESERVA", class:"btn btn-success" %>
-
+  </div>
   <script id="repetitions_fields" type="text/x-handlebars-template">
     <div class="multi-field panel">
 
@@ -48,7 +48,7 @@
 
       <div class= "panel panel-info">
         <p class= "panel-heading">Dias</p>
-        <%= f.collection_check_boxes "repetitions[{{number}}][weekly_repeat]", [[0, 'Domingo'], [1, 'Segunda'], [2, 'Terça'],  [3, 'Quarta'], [4, 'Quinta'], [5, 'Sexta'], [6, 'Sábado']], :first, :last, :item_wrapper_class => 'inline_label' %>
+        <%= f.collection_check_boxes "repetitions[{{number}}][weekly_repeat]", [[0, 'DOM'], [1, 'SEG'], [2, 'TER'],  [3, 'QUA'], [4, 'QUI'], [5, 'SEX'], [6, 'SAB']], :first, :last, :item_wrapper_class => 'inline_label' %>
         <br>
         <br>
         <br>
