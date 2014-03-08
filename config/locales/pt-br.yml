@@ -214,7 +214,6 @@ pt-BR:
       sector: Setor
       reservation: Reserva
       user: Usuário
-      reservation_group: Reserva Múltipla
     attributes:
       room_type:
         name: Nome
@@ -255,5 +254,3 @@ pt-BR:
         password: Senha
         old_password: Senha Antiga
         password_confirmation: Confirme a senha
-      reservation_group:
-        name: nome

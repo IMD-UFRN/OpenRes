@@ -59,11 +59,27 @@ img{
 }
 
 .multi-field-wrapper {
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-left: -15px;
 
+  .multi-field{
+    margin-left: -28px;
+  }
+
+  .add-field{
+    margin-left: -28px;
+
+  }
 }
+
 
 .session{
   color: black;
+}
+
+.clear{
+  clear:both;
 }
 
 .myBrand{

@@ -1,12 +1,21 @@
 <h2>Nova Reserva Múltipla</h2>
 
 <%= simple_form_for(:reservation_group_form, url: reservation_groups_path ) do |f| %>
-  <%= f.input :name %>
+  <div class= "well">
+    <p>Cada bloco de reservas possui um começo, fim e horário comum para todos os dias marcados.</p>
+    <p>Caso deseje marcar em múltiplas reservas horários distintos, crie um outro bloco com o novo horário.</p>
+  </div>
+
+  <%= f.input :name, label: "Título da Reserva" %>
 
   <%= f.input :place_id, as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'} %>
+  <!--<%= f.input :place_id, label: "Sala" , as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'} %>
+  -->
+  <br>
+  <%= f.input :reason, as: :text, label: "Motivo" %>
+  <br>
 
-  <%= f.input :reason, as: :text %>
-  <%= f.input :notes, as: :text %>
+  <%= f.input :notes, as: :text, label: "Observações" %>
 
   <div class="multi-field-wrapper span6">
     <div class="multi-fields">
@@ -15,6 +24,8 @@
     <button type="button" class="add-field btn btn-small btn-primary">Adicionar Bloco de Reserva</button>
 
   </div>
+
+  <div class="clear">
 
   <%= f.button :submit,"SALVAR RESERVA", class:"btn btn-success" %>
 
