@@ -44,6 +44,20 @@ img{
   margin-right:auto;
 }
 
+.inline_label{
+
+  float: left;
+  text-align: right;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding-right:8px;
+
+  div.input {
+    margin-bottom: 8px;
+    margin-left: 2px;
+  }
+}
+
 
 .session{
   color: black;

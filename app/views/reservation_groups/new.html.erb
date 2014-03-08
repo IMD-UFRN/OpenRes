@@ -1,4 +1,6 @@
-<%= simple_form_for(:reservation_group_form, url: reservation_groups_path) do |f| %>
+<h2>Nova Reserva Múltipla</h2>
+
+<%= simple_form_for(:reservation_group_form, url: reservation_groups_path ) do |f| %>
   <%= f.input :name %>
 
   <%= f.input :place_id, as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'} %>
@@ -10,25 +12,38 @@
     <div class="multi-fields">
     </div>
 
-    <button type="button" class="add-field">Add field</button>
-  </div>
+    <button type="button" class="add-field btn btn-small btn-primary">Adicionar Bloco de Reserva</button>
 
-  <%= f.submit %>
+  </div>
+  <hr>
+
+  <%= f.button :submit,"SALVAR RESERVA", class:"btn btn-success" %>
 
   <script id="repetitions_fields" type="text/x-handlebars-template">
     <div class="multi-field panel">
-      <h2>Data</h2>
-      <%= f.input "repetitions[{{number}}][begin_date]", as: :date_picker, label: "De" %>
-      <%= f.input "repetitions[{{number}}][end_date]", as: :date_picker, label: "Até" %>
 
-      <h2>Horário</h2>
-      <%= f.input "repetitions[{{number}}][begin_time]", as: :time_picker, label: "De" %>
-      <%= f.input "repetitions[{{number}}][end_time]", as: :time_picker, label: "Até" %>
+      <div class= "panel panel-info">
+        <p class= "panel-heading">Data</p>
+        <p class= "inline_form">
+          <%= f.input "repetitions[{{number}}][begin_date]", as: :date_picker, label: "De", label_html: { class: 'inline_label' } %>
+        </p>
+        <%= f.input "repetitions[{{number}}][end_date]", as: :date_picker, label: "Até", label_html: { class: 'inline_label' } %>
+      </div>
 
-      <h2>Dias</h2>
-      <%= f.collection_check_boxes "repetitions[{{number}}][weekly_repeat]", [[0, 'Domingo'], [1, 'Segunda'], [2, 'Terça'],  [3, 'Quarta'], [4, 'Quinta'], [5, 'Sexta'], [6, 'Sábado']], :first, :last, :item_wrapper_class => 'inline' %>
+      <div class= "panel panel-info">
+        <p class= "panel-heading">Horário</p>
+        <%= f.input "repetitions[{{number}}][begin_time]", as: :time_picker, label: "Início", label_html: { class: 'inline_label' } %>
+        <%= f.input "repetitions[{{number}}][end_time]", as: :time_picker, label: "Fim", label_html: { class: 'inline_label' } %>
+      </div>
 
-      <button type="button" class="remove-field">Remove</button>
+      <div class= "panel panel-info">
+        <p class= "panel-heading">Dias</p>
+        <%= f.collection_check_boxes "repetitions[{{number}}][weekly_repeat]", [[0, 'Domingo'], [1, 'Segunda'], [2, 'Terça'],  [3, 'Quarta'], [4, 'Quinta'], [5, 'Sexta'], [6, 'Sábado']], :first, :last, :item_wrapper_class => 'inline_label' %>
+        <br>
+        <br>
+        <br>
+      </div>
+      <button class="remove-field btn btn-small btn-danger">Remover Bloco</button>
       <br>
     </div>
   </script>
@@ -78,7 +93,7 @@
 
     var template = Handlebars.compile(source);
     var html = template({number: number});
-    
+
     $wrapper.append(html);
     bindEvents();
   }

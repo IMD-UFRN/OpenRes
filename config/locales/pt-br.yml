@@ -211,31 +211,32 @@ pt-BR:
       room_type: Tipo de Local
       object_resource:  Objeto
       place: Local
-      sector: Setor 
-      reservation: Reserva 
+      sector: Setor
+      reservation: Reserva
       user: Usuário
+      reservation_group: Reserva Múltipla
     attributes:
       room_type:
         name: Nome
         description: Descrição
-      object_resource: 
+      object_resource:
         name: Nome
-        description: Descrição 
+        description: Descrição
         sector: Setor
         serial_number: Tombamento
-      place: 
+      place:
         code: Código
         name: Nome
         description: Descrição
-        room_type: Tipo de sala 
+        room_type: Tipo de sala
         sectors: Setores
         capacity: Capacidade
         reservable: Reservável?
         object_resources: Objetos desta sala
-      sector: 
+      sector:
         name: Nome
         description: Descrição
-      reservation:  
+      reservation:
         user: Solicitante
         date: Data
         begin_time: Início
@@ -247,10 +248,12 @@ pt-BR:
         reason: Motivo
       user:
         name: Nome
-        cpf: CPF 
+        cpf: CPF
         email: E-mail
         sector: Setor
         role: Função no Sistema
         password: Senha
         old_password: Senha Antiga
         password_confirmation: Confirme a senha
+      reservation_group:
+        name: nome
