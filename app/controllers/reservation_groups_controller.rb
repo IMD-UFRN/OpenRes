@@ -53,6 +53,7 @@ class ReservationGroupsController < ApplicationController
   end
 
   def index
+    @reservation_groups = ReservationGroup.all
   end
 
   def show
