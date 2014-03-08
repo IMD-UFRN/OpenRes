@@ -46,8 +46,18 @@ var PlacePreviewView = Backbone.View.extend({
       date = moment();
 
     if (!time.isValid()) {
-      $('#reservation_begin_time').val(moment().format("HH:mm"));
-      $('#reservation_end_time').val(moment().add('minutes', 60).format("HH:mm"));
+      if (moment().get('minutes') < 30){
+        $('#reservation_begin_time').val(moment().add('minutes', 30 - moment().get('minutes')).format("HH:mm"));
+        $('#reservation_end_time').val(moment().add('minutes', 30 - moment().get('minutes')+ 60).format("HH:mm"));
+
+      }
+      else{
+        $('#reservation_begin_time').val(moment().add('minutes', 60 - moment().get('minutes')).format("HH:mm"));
+        $('#reservation_end_time').val(moment().add('minutes', 120 - moment().get('minutes')).format("HH:mm"));
+
+      }
+      //$('#reservation_begin_time').val(moment().format("HH:mm"));
+      //$('#reservation_end_time').val(moment().add('minutes', 60).format("HH:mm"));
     }
     else {
       $('#reservation_end_time').val(time.format("HH:mm"));
