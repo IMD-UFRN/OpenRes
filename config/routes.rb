@@ -3,9 +3,10 @@ OpenRes::Application.routes.draw do
   resources :room_types
 
   devise_scope :user do
-  root to: "devise/sessions#new"
-end
+    root to: "devise/sessions#new"
+  end
 
+  get '/sobre', to: 'home#about', as: :about
 
   get "reservations/all", to: "reservations#all", as: :all
   get "reservations/finished", to: "reservations#finished", as: :finished
