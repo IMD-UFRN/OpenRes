@@ -27,6 +27,11 @@ class ReservationDecorator < Draper::Decorator
     object.date.strftime("%d/%m/%Y")
   end
 
+  def week_day
+    days = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
+    days[object.date.wday]
+  end
+
   def user
     link_to(object.user.name, object.user)
   end
