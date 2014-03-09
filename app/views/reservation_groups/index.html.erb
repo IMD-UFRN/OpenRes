@@ -31,26 +31,7 @@
           <th>Ações</th>
           <td><%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %></td>
         </tr>
-<!--         <tr>
-          <th>Data</th>
-          <th>Dia</th>
-          <th>Início</th>
-          <th>Fim</th>
-          <th>Local</th>
-          <th>Situação</th>
-          <th>Ações</th>
-        </tr>
-        <% ReservationDecorator.decorate_collection(reservation_group.reservations).each do |reservation|%>
-          <tr>
-            <td><%= reservation.date %></td>
-            <td><%= reservation.week_day %></td>
-            <td><%= reservation.begin_time %></td>
-            <td><%= reservation.end_time %></td>
-            <td><%= reservation.place %></td>
-            <td><%= reservation.status %></td>
-            <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
-          </tr>
-        <% end %> -->
+
       </tbody>
     </table>
   </div>
@@ -63,3 +44,5 @@
 <div class="clear">
 
 <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
+
+<%= render "shared/back"%>
