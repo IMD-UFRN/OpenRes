@@ -1,8 +1,10 @@
 class ReservationGroupProcessor
   def initialize(hash)
     @hash = hash
-    @group = ReservationGroup.new(name: hash[:name],
+    @group = ReservationGroup.new(name: hash[:name], user_id: hash[:user_id],
       notes: hash[:notes])
+
+
   end
 
   def process
@@ -53,7 +55,7 @@ class ReservationGroupsController < ApplicationController
   end
 
   def index
-    @reservation_groups = ReservationGroup.all
+    @reservation_groups = ReservationGroup.where(user_id: current_user.id)
   end
 
   def show

@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140228210308) do
   create_table "reservation_groups", force: true do |t|
     t.string   "name"
     t.text     "notes"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
