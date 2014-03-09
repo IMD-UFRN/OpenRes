@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ReservationGroupProcessor
   def initialize(hash)
     @hash = hash
@@ -55,11 +56,11 @@ class ReservationGroupsController < ApplicationController
   end
 
   def index
-    @reservation_groups = ReservationGroup.where(user_id: current_user.id)
+    @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.where(user_id: current_user.id))
   end
 
   def show
-    @reservation_group = ReservationGroup.find(params[:id])
+    @reservation_group =  ReservationGroupDecorator.decorate(ReservationGroup.find(params[:id]))
   end
 
   def create

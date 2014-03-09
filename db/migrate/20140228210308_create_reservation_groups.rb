@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateReservationGroups < ActiveRecord::Migration
   def change
     create_table :reservation_groups do |t|

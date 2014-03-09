@@ -3,14 +3,35 @@
 <% unless @reservation_groups.length ==0 %>
   <% @reservation_groups.each do |reservation_group| %>
 
+  <div class= "reservations span7" >
     <table class = "table table-striped table-bordered table-hover">
       <thead>
-        <tr colspan="4">
-          <th><big>Título: <%=link_to reservation_group.name, reservation_group%></big></th>
+        <tr>
+          <th class ="table-title" colspan="4">
+            Título: <%=link_to reservation_group.name, reservation_group%>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <th>Local:</th>
+          <td colspan="3"><%=reservation_group.place%></td>
+        </tr>
+        </tr>
+          <th>Início:</th>
+          <td><%=reservation_group.begin_date%></td>
+          <th>Fim:</th>
+          <td><%=reservation_group.end_date%></td>
+        <tr>
+          <th>Dias da semana:</th>
+          <td colspan="3"><%=reservation_group.days%></td>
+        </tr>
+        <tr>
+          <th>Situção:</th><td><%=reservation_group.status%></td>
+          <th>Ações</th>
+          <td><%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %></td>
+        </tr>
+<!--         <tr>
           <th>Data</th>
           <th>Dia</th>
           <th>Início</th>
@@ -29,14 +50,16 @@
             <td><%= reservation.status %></td>
             <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
           </tr>
-        <% end %>
+        <% end %> -->
       </tbody>
     </table>
-
+  </div>
 
   <% end %>
+
 <%else%>
   <p>Não existem reservas deste tipo</p>
 <% end %>
+<div class="clear">
 
 <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
