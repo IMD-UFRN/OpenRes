@@ -21,6 +21,11 @@ class ReservationGroup < ActiveRecord::Base
   def place
     reservations.first.place
   end
+
+  def user
+    reservations.first.user
+  end
+
   def begin_date
     reservations.first.date
   end

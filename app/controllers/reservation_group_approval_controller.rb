@@ -19,21 +19,21 @@ class ReservationGroupApprovalController < ApplicationController
   end
 
   def approve
-    #ReservationPolicy.approve(Reservation.find(params[:reservation_id]))
-    redirect_to check_reservations_group_path
+    ReservationPolicy.approve_all(ReservationGroup.find(params[:reservation_group_id]))
+    redirect_to check_group_reservations_path
   end
 
   def reject
     @justification = Justification.new(justification_params)
 
-    #ReservationPolicy.reject(Reservation.find(params[:reservation_id]), @justification)
+    ReservationPolicy.reject_all(ReservationGroup.find(params[:reservation_group_id]), @justification)
     redirect_to check_reservations_group_path
   end
 
   def suspend
     @justification = Justification.new(justification_params)
 
-    #ReservationPolicy.suspend(Reservation.find(params[:reservation_id]), @justification)
+    ReservationPolicy.suspend_all(ReservationGroup.find(params[:reservation_group_id]), @justification)
     redirect_to check_reservations_group_path
   end
 

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ReservationGroupDecorator < Draper::Decorator
   include Draper::LazyHelpers
-  
+
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through
@@ -46,5 +46,32 @@ class ReservationGroupDecorator < Draper::Decorator
 
     return my_status[object.status]
   end
+
+
+  def approve_link
+    return if object.status == 'approved'
+
+    link_to 'Aprovar', reservation_group_approve_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva múltipla?' }, class:"btn-small btn-normal"
+
+  end
+
+  def reject_link
+    return if object.status == 'rejected'
+
+
+    link_to 'Rejeitar', justify_reject_group_path(reservation),
+      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
+
+  end
+
+  def suspend_link
+    return if object.status == 'pending'
+
+
+    link_to 'Suspender', justify_suspend_path(reservation),
+     {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
+
+  end
+
 
 end

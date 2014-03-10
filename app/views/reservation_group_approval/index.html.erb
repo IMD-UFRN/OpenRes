@@ -39,9 +39,12 @@
           <td colspan="3"><%=reservation_group.days%></td>
         </tr>
         <tr>
-          <th>Situção:</th><td><%=reservation_group.status%></td>
           <th>Ações</th>
-          <td><%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %></td>
+          <td colspan="3">
+            <%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %>
+            <%=reservation_group.approve_link %>
+
+          </td>
         </tr>
 
       </tbody>
