@@ -56,7 +56,14 @@ class ReservationGroupsController < ApplicationController
   end
 
   def index
-    @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.where(user_id: current_user.id))
+
+    # if params[:filter_by] == "future"
+    #   @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.where(user_id: current_user.id).from_future)
+    # elsif params[:filter_by] == "finished"
+    #   @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.where(user_id: current_user.id).from_past)
+    # else
+      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.where(user_id: current_user.id))
+    # end
   end
 
   def show

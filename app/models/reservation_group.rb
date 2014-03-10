@@ -3,6 +3,10 @@ class ReservationGroup < ActiveRecord::Base
   has_many :reservations
 
 
+  scope :from_user, lambda{ |user|
+    ReservationGroup.where(user_id: user.id)
+  }
+
   def place
     reservations.first.place
   end

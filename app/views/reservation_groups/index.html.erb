@@ -1,4 +1,18 @@
-<h2>Listando Reservas Múltiplas</h2>
+<%if params[:filter_by] == "future" %>
+  <h1>Minhas Reservas Múltiplas Futuras</h1>
+<% elsif params[:filter_by] == "finished" %>
+  <h1>Minhas Reservas Múltiplas Finalizadas</h1>
+<%else%>
+  <h1>Minhas Reservas Múltiplas</h1>
+<%end%>
+
+<!-- <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+  <li><%= link_to 'Reservas Futuras', reservation_groups_path(filter_by: "future") %></li>
+  <li><%= link_to 'Reservas Finalizadas', reservation_groups_path(filter_by: "finished") %></li>
+  <li><%= link_to 'Todas as Reservas', reservation_groups_path %></li>
+</ul> -->
+
+
 
 <% unless @reservation_groups.length ==0 %>
   <% @reservation_groups.each do |reservation_group| %>
