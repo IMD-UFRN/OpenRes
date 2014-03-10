@@ -7,6 +7,17 @@ class ReservationGroup < ActiveRecord::Base
     ReservationGroup.where(user_id: user.id)
   }
 
+  scope :from_sector, lambda { |sector|
+    places = sector.places.map(&:id)
+    return ReservationGroup.where('place_id IN (?)', places)
+  }
+
+  scope :can_decide_over, lambda { |user|
+    return ReservationGroup.none if user.nil? || user.role == "basic"
+    return ReservationGroup.all if user.role == "admin"
+    return ReservationGroup.from_sector(user.sector) # if user.role == 'secretary' or 'sector_admin'
+  }
+
   def place
     reservations.first.place
   end

@@ -1,0 +1,63 @@
+<%if params[:filter_by] == "future" %>
+  <h1>Checando Reservas Múltiplas Futuras</h1>
+<% elsif params[:filter_by] == "finished" %>
+  <h1>Checando Reservas Múltiplas Finalizadas</h1>
+<%else%>
+  <h1>Checando Reservas Múltiplas</h1>
+<%end%>
+
+<!-- <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+  <li><%= link_to 'Reservas Futuras', check_group_reservations_path(filter_by: "future") %></li>
+  <li><%= link_to 'Reservas Finalizadas', check_group_reservations_path(filter_by: "finished") %></li>
+  <li><%= link_to 'Todas as Reservas', check_group_reservations_path %></li>
+</ul> -->
+
+<% unless @reservation_groups.length ==0 %>
+  <% @reservation_groups.each do |reservation_group| %>
+
+  <div class= "reservations span7" >
+    <table class = "table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class ="table-title" colspan="4">
+            Título: <%=link_to reservation_group.name, reservation_group%>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Local:</th>
+          <td colspan="3"><%=reservation_group.place%></td>
+        </tr>
+        </tr>
+          <th>Início:</th>
+          <td><%=reservation_group.begin_date%></td>
+          <th>Fim:</th>
+          <td><%=reservation_group.end_date%></td>
+        <tr>
+          <th>Dias da semana:</th>
+          <td colspan="3"><%=reservation_group.days%></td>
+        </tr>
+        <tr>
+          <th>Situção:</th><td><%=reservation_group.status%></td>
+          <th>Ações</th>
+          <td><%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <% end %>
+
+<%else%>
+  <p>Não existem reservas deste tipo</p>
+<% end %>
+<div class="clear">
+
+<%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
+
+<%= render "shared/back"%>
+
+
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

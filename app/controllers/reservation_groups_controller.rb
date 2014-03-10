@@ -62,7 +62,7 @@ class ReservationGroupsController < ApplicationController
     # elsif params[:filter_by] == "finished"
     #   @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.where(user_id: current_user.id).from_past)
     # else
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.where(user_id: current_user.id))
+      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user))
     # end
   end
 
