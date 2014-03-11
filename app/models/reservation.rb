@@ -10,6 +10,10 @@ class Reservation < ActiveRecord::Base
     return Reservation.where('place_id IN (?)', places)
   }
 
+  scope :not_grouped, lambda{
+    Reservation.where(reservation_group_id: nil)
+  }
+
   scope :can_decide_over, lambda { |user|
     return Reservation.none if user.nil? || user.role == "basic"
     return Reservation.all if user.role == "admin"

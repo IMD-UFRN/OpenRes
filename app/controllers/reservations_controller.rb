@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ReservationsController < ApplicationController
   load_and_authorize_resource
-  
+
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   # GET /reservations
@@ -9,19 +9,19 @@ class ReservationsController < ApplicationController
   def index
 
     if params[:filter_by] == "future"
-      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_future)
-      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_future)
-      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_future)
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_future.not_grouped)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_future.not_grouped)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_future.not_grouped)
     elsif params[:filter_by] == "finished"
-      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_past)
-      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_past)
-      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_past)
-    else      
-      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending)
-      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved)
-      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected)
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.from_past.not_grouped)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.from_past.not_grouped)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.from_past.not_grouped)
+    else
+      @pending_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).pending.not_grouped)
+      @approved_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).approved.not_grouped)
+      @rejected_reservations = ReservationDecorator.decorate_collection(Reservation.from_user(current_user).rejected.not_grouped)
     end
-    
+
   end
 
   # GET /reservations/1
