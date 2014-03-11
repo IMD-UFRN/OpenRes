@@ -44,10 +44,7 @@ class ReservationPolicy
   def self.suspend_all(reservation_group, justification)
 
     reservation_group.reservations.each do |reservation|
-
-      ReservationPolicy.suspend(reservation, {silent: true})
-
-
+      ReservationPolicy.suspend(reservation, justification, {silent: true})
     end
 
     ReservationApprovalMailer.suspended_group_mail(reservation_group, justification).deliver
@@ -56,7 +53,7 @@ class ReservationPolicy
   def self.reject_all(reservation_group, justification)
 
     reservation_group.reservations.each do |reservation|
-      ReservationPolicy.reject(reservation, {silent: true})
+      ReservationPolicy.reject(reservation, justification, {silent: true})
     end
 
     ReservationApprovalMailer.rejected_group_mail(reservation_group, justification).deliver

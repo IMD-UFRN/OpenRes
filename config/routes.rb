@@ -34,8 +34,6 @@ OpenRes::Application.routes.draw do
   get "reservations_group/:reservation_id/reject" => 'reservation_group_approval#justify_status', as: :justify_reject_group
   get "reservations_group/:reservation_id/suspend" => 'reservation_group_approval#justify_status', as: :justify_suspend_group
 
-
-
   post "reservations/:reservation_id/approve", to: "reservation_approval#approve", as: :reservation_approve
   post "check_reservations/:reservation_id/reject", to: "reservation_approval#reject", as: :reservation_reject
   post "check_reservations/:reservation_id/suspend", to: "reservation_approval#suspend", as: :reservation_suspend

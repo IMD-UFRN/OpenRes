@@ -68,7 +68,7 @@ class ReservationGroupDecorator < Draper::Decorator
     return if object.status == 'pending'
 
 
-    link_to 'Suspender', justify_suspend_path(reservation_group),
+    link_to 'Suspender', justify_suspend_group_path(reservation_group),
      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
 
   end
