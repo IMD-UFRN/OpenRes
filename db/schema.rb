@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -17,10 +17,12 @@ ActiveRecord::Schema.define(version: 20140228210308) do
     t.text     "reason"
     t.integer  "reservation_id"
     t.integer  "user_id"
+    t.integer  "reservation_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "justifications", ["reservation_group_id"], name: "index_justifications_on_reservation_group_id"
   add_index "justifications", ["reservation_id"], name: "index_justifications_on_reservation_id"
   add_index "justifications", ["user_id"], name: "index_justifications_on_user_id"
 

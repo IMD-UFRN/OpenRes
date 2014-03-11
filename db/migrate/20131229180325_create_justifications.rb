@@ -5,6 +5,7 @@ class CreateJustifications < ActiveRecord::Migration
       t.text :reason
       t.references :reservation, index: true
       t.references :user, index: true
+      t.references :reservation_group, index: true
 
       t.timestamps
     end

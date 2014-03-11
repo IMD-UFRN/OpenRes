@@ -27,14 +27,14 @@ class ReservationGroupApprovalController < ApplicationController
     @justification = Justification.new(justification_params)
 
     ReservationPolicy.reject_all(ReservationGroup.find(params[:reservation_group_id]), @justification)
-    redirect_to check_reservations_group_path
+    redirect_to check_group_reservations_path
   end
 
   def suspend
     @justification = Justification.new(justification_params)
 
     ReservationPolicy.suspend_all(ReservationGroup.find(params[:reservation_group_id]), @justification)
-    redirect_to check_reservations_group_path
+    redirect_to check_group_reservations_path
   end
 
   def justify_status
@@ -48,6 +48,6 @@ class ReservationGroupApprovalController < ApplicationController
 
   def justification_params
     params.require(:justification).permit(:reason).
-      merge(user_id: current_user.id, reservation_id: params[:reservation_id])
+      merge(user_id: current_user.id, reservation_group_id: params[:reservation_group_id])
   end
 end

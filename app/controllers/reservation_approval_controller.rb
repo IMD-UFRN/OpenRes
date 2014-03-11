@@ -10,7 +10,7 @@ class ReservationApprovalController < ApplicationController
       @pending_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending.from_past)
       @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved.from_past)
       @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected.from_past)
-    else      
+    else
       @pending_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending)
       @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved)
       @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected)
