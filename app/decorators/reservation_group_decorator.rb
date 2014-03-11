@@ -59,7 +59,7 @@ class ReservationGroupDecorator < Draper::Decorator
     return if object.status == 'rejected'
 
 
-    link_to 'Rejeitar', justify_reject_group_path(reservation),
+    link_to 'Rejeitar', justify_reject_group_path(reservation_group),
       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
 
   end
@@ -68,7 +68,7 @@ class ReservationGroupDecorator < Draper::Decorator
     return if object.status == 'pending'
 
 
-    link_to 'Suspender', justify_suspend_path(reservation),
+    link_to 'Suspender', justify_suspend_path(reservation_group),
      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
 
   end
