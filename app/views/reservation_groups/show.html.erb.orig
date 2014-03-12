@@ -1,5 +1,6 @@
-<h2>Detalhes de Reserva Múltipla</h2>
+<h2>Detalhes de Reserva Múltipla <%=link_to @reservation_group.name, @reservation_group%></h2>
 
+<<<<<<< Updated upstream
 
 <table class = "table">
   <thead>
@@ -55,3 +56,11 @@
 </table>
 
 <%= render "shared/back"%>
+=======
+<% @reservation_group.reservations.each do |reservation| %>
+<%end%>
+
+<%= debug @reservation_group %>
+<%= debug @reservation_group.reservations %>
+
+>>>>>>> Stashed changes
