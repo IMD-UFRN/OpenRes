@@ -58,7 +58,8 @@ var PlacePreviewView = Backbone.View.extend({
       //$('#reservation_end_time').val(moment().add('minutes', 60).format("HH:mm"));
     }
     else {
-      $('#reservation_end_time').val(time.format("HH:mm"));
+      if (!moment($('#reservation_end_time').val(), "HH:mm").isValid())
+        $('#reservation_end_time').val(time.format("HH:mm"));
     }
 
     $('#reservation_date').val(date.format('DD/MM/YYYY'));
