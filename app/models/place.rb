@@ -3,8 +3,6 @@ class Place < ActiveRecord::Base
 
   validates_presence_of :name, :code, :sector_ids
 
-  belongs_to :sector
-
   has_many :place_sectors
   has_many :sectors, through: :place_sectors
   has_many :place_objects
@@ -24,5 +22,13 @@ class Place < ActiveRecord::Base
   def full_name
     code + " - " + name
   end
+
+  def sectors_ids
+    ids =[]
+    sectors.each do |sector|
+      ids << sector.id
+    end
+
+    ids
+  end
 end
-  

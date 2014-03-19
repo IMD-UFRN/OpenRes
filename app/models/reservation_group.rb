@@ -8,8 +8,17 @@ class ReservationGroup < ActiveRecord::Base
   }
 
   scope :from_sector, lambda { |sector|
-    places = sector.places.map(&:id)
-    return ReservationGroup.where('place_id IN (?)', places)
+
+    reservations = []
+
+    ReservationGroup.all.each do |reservation|
+
+      if reservation.place.sectors_ids.include? sector.id
+        reservations << reservation
+      end
+    end
+
+    return reservations
   }
 
   scope :can_decide_over, lambda { |user|
