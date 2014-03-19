@@ -13,7 +13,7 @@ class ReservationGroup < ActiveRecord::Base
 
     ReservationGroup.all.each do |reservation|
 
-      if reservation.place.sectors_ids.include? sector.id
+      if reservation.sectors_ids.include? sector.id
         reservations << reservation
       end
     end
@@ -26,6 +26,11 @@ class ReservationGroup < ActiveRecord::Base
     return ReservationGroup.all if user.role == "admin"
     return ReservationGroup.from_sector(user.sector) # if user.role == 'secretary' or 'sector_admin'
   }
+
+
+  def sectors_ids
+    place.sector_ids
+  end
 
   def place
     reservations.first.place

@@ -23,6 +23,13 @@ class Ability
         end
       end
 
+      can :manage, ReservationGroup do |reservation_group|
+        unless reservation_group.place.nil?
+          reservation_group.sector_ids.include?(user.sector.id)
+        end
+      end
+
+
       can :manage , Place do |place|
         unless place.sector_ids.nil?
           place.sector_ids.include?(user.sector.id)
@@ -35,6 +42,12 @@ class Ability
       can :manage, Reservation do |reservation|
         unless reservation.place.nil?
           reservation.sector_ids.include?(user.sector.id)
+        end
+      end
+
+      can :manage, ReservationGroup do |reservation_group|
+        unless reservation_group.place.nil?
+          reservation_group.sector_ids.include?(user.sector.id)
         end
       end
 
