@@ -7,7 +7,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = UserDecorator.decorate_collection(User.all)
+    if current_user.role == "admin"
+      @users = UserDecorator.decorate_collection(User.all)
+    elsif current_user.role == "secretary" || current_user.role == "sector_admin"
+      @users = UserDecorator.decorate_collection(User.where(sector_id: current_user.sector))
+    else
+      @users = []
+    end
+
   end
 
   # GET /users/1
