@@ -26,7 +26,7 @@ class ReservationPolicy
   end
 
   def self.approve(reservation, opts={})
-    conflicts = Reservation.conflicting(reservation)
+    conflicts = Reservation.approved.conflicting(reservation)
 
     if conflicts.empty?
       reservation.status = "approved"

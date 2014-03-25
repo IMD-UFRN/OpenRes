@@ -5,6 +5,10 @@ class Reservation < ActiveRecord::Base
     obj.status = 'pending'
   end
 
+  def time_interval
+    begin_time..end_time
+  end
+
   scope :from_sector, lambda { |sector|
     places = sector.places.map(&:id)
     return Reservation.where('place_id IN (?)', places)
@@ -45,8 +49,9 @@ class Reservation < ActiveRecord::Base
   }
 
   scope :conflicting, lambda { |reservation|
-    Reservation.where("place_id = ? and date = ? and status = ? and begin_time <= ? and end_time >= ? and id <> ?",
-     reservation.place_id, reservation.date, 'approved', reservation.end_time, reservation.begin_time, reservation.id)
+    reservations = Reservation.where("place_id = ? and date = ? and id <> ?",
+     reservation.place_id, reservation.date, reservation.id)
+    return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
   }
 
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time

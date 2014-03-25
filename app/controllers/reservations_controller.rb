@@ -27,8 +27,9 @@ class ReservationsController < ApplicationController
   # GET /reservations/1
   # GET /reservations/1.json
   def show
-    @reservation = ReservationDecorator.decorate(Reservation.find(params[:id]))
-    @conflicts = ReservationDecorator.decorate_collection(Reservation.conflicting(@reservation))
+    model = Reservation.find(params[:id])
+    @reservation = ReservationDecorator.decorate(model)
+    @conflicts = ReservationDecorator.decorate_collection(Reservation.conflicting(model))
   end
 
   # GET /reservations/new
