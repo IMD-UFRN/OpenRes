@@ -5,6 +5,7 @@
     <tr>
       <th>Nome</th>
       <th>Email</th>
+      <th>Função</th>
       <th>Setor</th>
       <th>Ações</th>
     </tr>
@@ -15,6 +16,7 @@
       <tr>
         <td><%= link_to user.name, user %></td>
         <td><%= user.email %></td>
+        <td><%= user.pt_role %></td>
         <td><%= link_to user.sector.name, user %></td>
         <td>
           <%= link_to 'Detalhes', user, class: "btn-small btn-normal" %>

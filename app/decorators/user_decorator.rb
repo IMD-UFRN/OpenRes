@@ -11,4 +11,15 @@ class UserDecorator < Draper::Decorator
   def menu
     render "menu/#{object.role}"
   end
+
+  def pt_role
+    functions= {"sector_admin" => "Adminitração de Setor",
+                "secretary"=> "Secretaria",
+                "admin"=> "Administrador do Sistema",
+                "basic" => "Básica"}
+
+    functions[object.role]
+  end
+
+
 end

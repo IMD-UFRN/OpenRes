@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = UserDecorator.decorate_collection(User.all)
   end
 
   # GET /users/1
