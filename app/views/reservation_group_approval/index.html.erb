@@ -19,8 +19,11 @@
     <table class = "table table-striped table-bordered table-hover">
       <thead>
         <tr>
-          <th class ="table-title" colspan="4">
+          <th class ="table-title" colspan="3">
             Título: <%=link_to reservation_group.name, reservation_group%>
+          </th>
+          <th>
+            Situação: <%=reservation_group.status%>
           </th>
         </tr>
       </thead>
