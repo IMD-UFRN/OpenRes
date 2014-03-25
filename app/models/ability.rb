@@ -7,7 +7,7 @@ class Ability
 
     alias_action :create, :read, :update, :destroy, :to => :crud
 
-    can :manage, :all if Rails.env.development?
+    #can :manage, :all if Rails.env.development?
 
     #all permissions
     can :crud, Reservation, { user_id: user.id }

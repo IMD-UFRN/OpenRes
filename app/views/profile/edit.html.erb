@@ -10,10 +10,6 @@
     <%= f.input :old_password, :required => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
-    <%= f.input :role, collection: @functions,  label_method: :first, value_method: :last, input_html: { class: 'chosen-select',  data: { placeholder: "Selecione uma função" } }, required: true %>
-    <br>
-    <%= f.association :sector, input_html: { class: 'chosen-select' }, :required => true %>
-    <br>
   </div>
 
   <%= f.button :submit, "OK", class:"btn btn-success" %>

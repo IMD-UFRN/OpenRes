@@ -15,7 +15,7 @@
   <div class="form-inputs">
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :name, :required => true %>
-    <%= f.input :cpf, :required => true %>
+    <%= f.input :cpf, :required => true, id: "cpf" %>
     <%= f.input :role, collection: @functions,  label_method: :first, value_method: :last, input_html: { class: 'chosen-select',  data: { placeholder: "Selecione uma função" } }, required: true %>
     <br>
     <%= f.association :sector, input_html: { class: 'chosen-select', data: { placeholder: "Selecione um setor" } }, :required => true %>

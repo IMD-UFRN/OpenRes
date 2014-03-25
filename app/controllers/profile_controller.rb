@@ -2,7 +2,7 @@
 class ProfileController < ApplicationController
   #authorize_resource :class => false
   before_action :authenticate_user!
-  
+
   def profile
     @user = current_user
     @reservations= ReservationDecorator.decorate_collection(@user.reservations)
@@ -18,9 +18,11 @@ class ProfileController < ApplicationController
        @functions = [["Secretaria", "secretary"]]
     elsif @user.role == "basic"
        @functions = [["Básica", "basic"]]
-    else 
+    else
        @functions =[["Adminitração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
     end
+
+    @sectors = [[@user.sector.name, @user.sector.id]]
   end
 
   def update
@@ -40,7 +42,7 @@ class ProfileController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:id, :email, :name, :cpf, :role, :sector_id,
+      params.require(:user).permit(:id, :email, :name, :cpf, :role,
        :old_password, :password, :password_confirmation)
     end
 end
