@@ -4,6 +4,7 @@
 <hr>
 
 <dl>
+  <dt>Situação:</dt> <dd><%= @reservation.status %></dd>
   <dt>Data:</dt> <dd><%= @reservation.date %></dd>
   <dt>Solicitante:</dt> <dd><%= @reservation.user %></dd>
   <dt>Início:</dt> <dd><%= @reservation.begin_time %></dd>
@@ -32,7 +33,7 @@
   </thead>
 
   <tbody>
-    <% if @conflicts %>
+    <% unless @conflicts.length == 0 %>
       <% @conflicts.each do |reservation| %>
         <tr>
           <td><%= reservation.date %></td>
