@@ -1,5 +1,5 @@
 <h1>Detalhes da Sala</h1>
-<%= link_to 'Editar Informações desta Sala', edit_place_path(@place), class:"btn-small btn-normal"%> 
+<%= link_to 'Editar Informações desta Sala', edit_place_path(@place), class:"btn-small btn-normal"%>
 
 
 <hr>
@@ -10,14 +10,14 @@
   <dt>Nome:</dt> <dd><%= @place.name %></dd>
   <dt>Tipo de Sala:</dt> <dd><%= link_to @place.room_type.name, @place.room_type %></dd>
   <dt>Capacidade:</dt> <dd><%= @place.capacity %></dd>
-  <dt>Aceita reservas:</dt> 
+  <dt>Aceita reservas:</dt>
     <dd><% if @place.reservable? %> Sim <% else %> Não <%end%>
     </dd>
-  <dt>Setor Responsável:</dt> 
+  <dt>Setor Responsável:</dt>
     <dd>
       <% @place.sectors.each do |sector| %>
         <%= link_to sector.name, sector%> </br>
-      <% end %> 
+      <% end %>
     </dd>
 </dl>
 
@@ -62,6 +62,7 @@
         <th>Início</th>
         <th>Fim</th>
         <th>Solicitante</th>
+        <th>Conflita?</th>
         <th>Situação</th>
         <th>Ações</th>
       </tr>
@@ -75,10 +76,11 @@
             <td><%= reservation.begin_time %></td>
             <td><%= reservation.end_time %></td>
             <td><%= reservation.user %></td>
+            <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.status %></td>
             <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
-          </tr>   
-      <%end%>  
+          </tr>
+      <%end%>
       <% else %>
         <tr>
           <th colspan="6">Esta sala não possui nenhuma reserva.</th>

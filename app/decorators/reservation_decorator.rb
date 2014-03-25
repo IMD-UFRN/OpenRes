@@ -11,6 +11,11 @@ class ReservationDecorator < Draper::Decorator
     return 'Pendente' if object.status == 'pending'
   end
 
+  def has_conflicts?
+    return "Sim" if object.has_conflicts?
+    return "Não" 
+  end
+
   def begin_time
     object.begin_time.strftime("%H:%M")
   end

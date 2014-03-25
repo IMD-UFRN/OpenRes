@@ -4,7 +4,7 @@
     <table class = "table table-striped table-bordered table-hover">
       <thead>
         <tr colspan="4">
-          <th class ="table-title" colspan="6"> Reservas Pendentes</th>
+          <th class ="table-title" colspan="8"> Reservas Pendentes</th>
         </tr>
         <%= render 'reservations/reservations_secretary_header' %>
       </thead>
@@ -17,6 +17,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.created_at %></td>
             <td><%= reservation.place %></td>
+            <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.user %></td>
             <td>
               <%= reservation.details_link  %>
@@ -46,6 +47,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.created_at %></td>
             <td><%= reservation.place %></td>
+            <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.user %></td>
             <td>
               <%= reservation.details_link  %>
@@ -62,8 +64,8 @@
   <% if @rejected_sector_reservations.length > 0 %>
     <table class = "table table-striped table-bordered table-hover">
       <thead>
-        <tr colspan="7">
-          <th class ="table-title" colspan= "7">Reservas Rejeitadas</th>
+        <tr colspan="8">
+          <th class ="table-title" colspan= "8">Reservas Rejeitadas</th>
         </tr>
          <tr>
           <th>Data</th>
@@ -71,6 +73,7 @@
           <th>Fim</th>
           <th>Solicitada em</th>
           <th>Local</th>
+          <th>Conflita?</th>
           <th>Solicitante</th>
           <th>Motivo da Rejeição</th>
           <th colspan="3">Ações</th>
@@ -84,6 +87,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.created_at %></td>
             <td style= "max-width:25%; width:15%; word-wrap:break-word"><%= reservation.place %></td>
+            <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.user %></td>
             <td style= "max-width:15%; width:15%; word-wrap:break-word"><%= reservation.justification.reason %></td>
             <td>

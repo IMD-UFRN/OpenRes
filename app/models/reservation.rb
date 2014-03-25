@@ -64,6 +64,14 @@ class Reservation < ActiveRecord::Base
 
   delegate :sectors, to: :place
 
+  def has_conflicts?
+    if not Reservation.conflicting(self).empty?
+      return true
+    else
+      return false
+    end
+  end
+
   def sector_ids
     place.sector_ids
   end
