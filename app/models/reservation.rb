@@ -54,7 +54,7 @@ class Reservation < ActiveRecord::Base
     return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
   }
 
-  validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time
+  validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
 
   belongs_to :user
   belongs_to :place

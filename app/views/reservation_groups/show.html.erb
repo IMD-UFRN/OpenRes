@@ -36,6 +36,7 @@
       <th>Início</th>
       <th>Fim</th>
       <th>Local</th>
+      <th>Conflita?</th>
       <th>Situação</th>
       <th>Ações</th>
     </tr>
@@ -47,6 +48,7 @@
         <td><%= reservation.begin_time %></td>
         <td><%= reservation.end_time %></td>
         <td><%= reservation.place %></td>
+        <td><%= reservation.has_conflicts? %></td>
         <td><%= reservation.status %></td>
         <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
       </tr>
