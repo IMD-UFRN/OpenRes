@@ -13,7 +13,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def pt_role
-    functions= {"sector_admin" => "Adminitração de Setor",
+    functions= {"sector_admin" => "Administração de Setor",
                 "secretary"=> "Secretaria",
                 "admin"=> "Administrador do Sistema",
                 "basic" => "Básica"}

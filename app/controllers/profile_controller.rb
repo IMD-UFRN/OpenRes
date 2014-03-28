@@ -6,20 +6,20 @@ class ProfileController < ApplicationController
   def profile
     @user = current_user
     @reservations= ReservationDecorator.decorate_collection(@user.reservations)
-    @functions_hash ={"admin"=> "Administrador do Sistema", "sector_admin"=> "Adminitração de Setor", "secretary"=>"Secretaria", "basic"=> "Básica"}
+    @functions_hash ={"admin"=> "Administrador do Sistema", "sector_admin"=> "Administração de Setor", "secretary"=>"Secretaria", "basic"=> "Básica"}
   end
 
   def edit
     @user = current_user
 
     if @user.role == "sector_admin"
-      @functions = [["Adminitração de Setor", "sector_admin"]]
+      @functions = [["Administração de Setor", "sector_admin"]]
     elsif @user.role == "secretary"
        @functions = [["Secretaria", "secretary"]]
     elsif @user.role == "basic"
        @functions = [["Básica", "basic"]]
     else
-       @functions =[["Adminitração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
+       @functions =[["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
     end
 
     @sectors = [[@user.sector.name, @user.sector.id]]

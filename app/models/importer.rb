@@ -6,8 +6,8 @@ class Importer
     File.open("users.csv").read.split("\n").each_with_index do |line, index|
       next if index == 0
 
-      #function = {"admin"=> "Administrador do Sistema", "sector_admin"=> "Adminitração de Setor", "secretary"=>"Secretaria", "basic"=> "Básica"}
-      roles ={"Adminitração de Setor"=> "sector_admin", "Secretaria"=> "secretary", "Básica"=> "basic"}
+      #function = {"admin"=> "Administrador do Sistema", "sector_admin"=> "Administração de Setor", "secretary"=>"Secretaria", "basic"=> "Básica"}
+      roles ={"Administração de Setor"=> "sector_admin", "Secretaria"=> "secretary", "Básica"=> "basic"}
       sectors = {
         "BTI"                                     => 1,
         "Técnigo em TI"                           => 2,
