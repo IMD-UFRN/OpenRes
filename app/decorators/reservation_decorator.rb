@@ -13,7 +13,7 @@ class ReservationDecorator < Draper::Decorator
 
   def has_conflicts?
     return "Sim" if object.has_conflicts?
-    return "Não" 
+    return "Não"
   end
 
   def begin_time
@@ -88,6 +88,12 @@ class ReservationDecorator < Draper::Decorator
     link_to 'Suspender', justify_suspend_path(reservation),
      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
 
+  end
+
+  def approver_links
+    unless current_user.role == "basic"
+      approve_link + " " + suspend_link + " " + reject_link
+    end
   end
 
 end
