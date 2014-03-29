@@ -75,4 +75,11 @@ class Reservation < ActiveRecord::Base
   def sector_ids
     place.sector_ids
   end
+
+  def can_be_decided_over?(ap_user)
+    return true if ap_user.role == "admin"
+    return false if (ap_user.role == "basic" || !sector_ids.include?(ap_user.sector.id))
+    return true
+  end
+
 end

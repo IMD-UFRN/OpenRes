@@ -66,14 +66,14 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def approve_link
-    return if object.status == 'approved'
+    return if object.status == 'approved' || !object.can_be_decided_over?(current_user)
 
-      link_to 'Aprovar', reservation_approve_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?' }, class:"btn-small btn-normal"
+    link_to 'Aprovar', reservation_approve_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?' }, class:"btn-small btn-normal"
 
   end
 
   def reject_link
-    return if object.status == 'rejected'
+    return if object.status == 'rejected' || !object.can_be_decided_over?(current_user)
 
 
     link_to 'Rejeitar', justify_reject_path(reservation),
@@ -82,7 +82,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def suspend_link
-    return if object.status == 'pending'
+    return if object.status == 'pending' || !object.can_be_decided_over?(current_user)
 
 
     link_to 'Suspender', justify_suspend_path(reservation),
@@ -91,9 +91,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def approver_links
-    unless current_user.role == "basic"
       approve_link + " " + suspend_link + " " + reject_link
-    end
   end
 
 end
