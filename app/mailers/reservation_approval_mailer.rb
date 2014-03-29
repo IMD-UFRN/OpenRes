@@ -42,22 +42,22 @@ class ReservationApprovalMailer < ActionMailer::Base
 
   def approved_group_mail(reservation_group)
     @greeting = "Hi"
-    @reservation_group = reservation_group
+    @reservation_group = ReservationGroupDecorator.decorate(reservation_group)
 
-    mail to: @reservation_group.user.email, subject: "[IMD- UFRN] Situação de reserva múltipla para sala #{@reservation_group.place.name}"
+    mail to: @reservation_group.user.email, subject: "[IMD- UFRN] Situação de reserva múltipla para sala #{@reservation_group.place_name}"
   end
 
   def rejected_group_mail(reservation_group, justification)
-    @reservation_group = reservation_group
+    @reservation_group = ReservationGroupDecorator.decorate(reservation_group)
     @justification = justification
 
-    mail to: @reservation_group.user.email, subject: "[IMD- UFRN] Situação de reserva múltipla para sala #{@reservation_group.place.name}"
+    mail to: @reservation_group.user.email, subject: "[IMD- UFRN] Situação de reserva múltipla para sala #{@reservation_group.place_name}"
   end
 
   def suspended_group_mail(reservation_group, justification)
-    @reservation_group = reservation_group
+    @reservation_group = ReservationGroupDecorator.decorate(reservation_group)
     @justification = justification
 
-    mail to: @reservation_group.user.email, subject: "[IMD- UFRN] Situação de reserva múltipla para sala #{@reservation_group.place.name}"
+    mail to: @reservation_group.user.email, subject: "[IMD- UFRN] Situação de reserva múltipla para sala #{@reservation_group.place_name}"
   end
 end

@@ -32,6 +32,10 @@ class ReservationGroup < ActiveRecord::Base
     place.sector_ids
   end
 
+  def place_name
+    reservations.first.place.name
+  end
+
   def place
     reservations.first.place
   end
