@@ -48,7 +48,7 @@
     </tr>
   </thead>
     <% ReservationDecorator.decorate_collection(@reservation_group.reservations).each do |reservation|%>
-      <tr>
+      <tr class="<%= reservation.conflict_class %>">
         <td><%= reservation.date %></td>
         <td><%= reservation.week_day %></td>
         <td><%= reservation.begin_time %></td>

@@ -12,7 +12,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def has_conflicts?
-    return link_to "Sim", reservation_path(object, anchor: "conflicts"), class:"btn btn-small btn-danger" if object.has_conflicts?
+    return "Sim" if object.has_conflicts?
     return "Não"
   end
 
@@ -92,6 +92,10 @@ class ReservationDecorator < Draper::Decorator
 
   def approver_links
       approve_link + " " + suspend_link + " " + reject_link
+  end
+
+  def conflict_class
+    "conflicted_reservation" if  object.has_conflicts?
   end
 
 end
