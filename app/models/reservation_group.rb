@@ -21,6 +21,32 @@ class ReservationGroup < ActiveRecord::Base
     return reservations
   }
 
+  scope :from_future, lambda{
+    reservations = []
+
+    ReservationGroup.all.each do |reservation|
+
+      if reservation.begin_date >= DateTime.now.to_date
+        reservations << reservation
+      end
+    end
+
+    return reservations
+  }
+
+  scope :from_past, lambda{
+    reservations = []
+
+    ReservationGroup.all.each do |reservation|
+
+      if reservation.begin_date < DateTime.now.to_date
+        reservations << reservation
+      end
+    end
+
+    return reservations
+  }
+
   scope :can_decide_over, lambda { |user|
     return ReservationGroup.none if user.nil? || user.role == "basic"
     return ReservationGroup.all if user.role == "admin"
