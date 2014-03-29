@@ -6,11 +6,11 @@
   <h1>Checando Reservas Múltiplas</h1>
 <%end%>
 
-<!-- <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+<ul class="nav nav-tabs" style="margin-bottom: 20px;">
   <li><%= link_to 'Reservas Futuras', check_group_reservations_path(filter_by: "future") %></li>
   <li><%= link_to 'Reservas Finalizadas', check_group_reservations_path(filter_by: "finished") %></li>
   <li><%= link_to 'Todas as Reservas', check_group_reservations_path %></li>
-</ul> -->
+</ul>
 
 <% unless @reservation_groups.length ==0 %>
   <% @reservation_groups.each do |reservation_group| %>
