@@ -1,5 +1,11 @@
 <h2>Detalhes de Reserva Múltipla</h2>
 
+<%= @reservation_group.approve_link %>
+<%= @reservation_group.suspend_link %>
+<%= @reservation_group.reject_link %>
+
+
+<hr>
 
 <table class = "table">
   <thead>
@@ -50,7 +56,11 @@
         <td><%= reservation.place %></td>
         <td><%= reservation.has_conflicts? %></td>
         <td><%= reservation.status %></td>
-        <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %> <%=reservation.approver_links%></td>
+        <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %>
+          <%= reservation.approve_link %>
+          <%= reservation.suspend_link %>
+          <%= reservation.reject_link %>
+        </td>
       </tr>
     <% end %>
   </tbody>

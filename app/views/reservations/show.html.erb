@@ -1,7 +1,9 @@
 <h1>Detalhes da Reserva</h1>
 <%= link_to 'Editar Informações desta Reserva', edit_reservation_path(@reservation), class:"btn-small btn-normal"%>
 
-<%= @reservation.approver_links %>
+<%= @reservation.approve_link %>
+<%= @reservation.suspend_link %>
+<%= @reservation.reject_link %>
 
 <hr>
 
