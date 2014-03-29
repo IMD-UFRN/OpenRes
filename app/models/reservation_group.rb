@@ -7,7 +7,7 @@ class ReservationGroup < ActiveRecord::Base
     ReservationGroup.where(user_id: user.id)
   }
 
-  scope :from_sector, lambda { |sector|
+  scope :from_sector, lambda { |sector| 
 
     reservations = []
 
@@ -20,6 +20,7 @@ class ReservationGroup < ActiveRecord::Base
 
     return reservations
   }
+
 
   scope :from_future, lambda{
     reservations = []

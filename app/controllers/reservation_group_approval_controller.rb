@@ -2,20 +2,27 @@
 class ReservationGroupApprovalController < ApplicationController
   def index
     if params[:filter_by] == "future"
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.can_decide_over(current_user).from_future)
-      # @pending_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending.from_future)
-      # @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved.from_future)
-      # @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected.from_future)
+
+      reservations = []
+
+      ReservationGroup.can_decide_over(current_user).each do |reservation|
+        reservations << reservation if reservation.begin_date >= DateTime.now.to_date
+      end
+
+      @reservation_groups = ReservationGroupDecorator.decorate_collection(reservations)
+
     elsif params[:filter_by] == "finished"
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.can_decide_over(current_user).from_past)
-      # @pending_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending.from_past)
-      # @approved_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved.from_past)
-      # @rejected_sector_reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user).rejected.from_past)
+
+      reservations = []
+
+      ReservationGroup.can_decide_over(current_user).each do |reservation|
+        reservations << reservation if reservation.begin_date < DateTime.now.to_date
+      end
+
+      @reservation_groups = ReservationGroupDecorator.decorate_collection(reservations)
+      
     else
       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.can_decide_over(current_user))
-      # @pending_sector_reservations = ReservationGroupDecorator.decorate_collection(Reservation.can_decide_over(current_user).pending)
-      # @approved_sector_reservations = ReservationGroupDecorator.decorate_collection(Reservation.can_decide_over(current_user).approved)
-      # @rejected_sector_reservations = ReservationDecorReservationGroupDecoratorator.decorate_collection(Reservation.can_decide_over(current_user).rejected)
     end
 
   end
