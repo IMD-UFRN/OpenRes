@@ -13,6 +13,7 @@ class Ability
     can :crud, Reservation, { user_id: user.id }
     can :read, :all
     can :get_reservations, Place
+    can :new_select_reservation
 
     if user.role == "admin"
       can :manage, :all
@@ -54,6 +55,8 @@ class Ability
       can :read, User
 
     elsif user.role == "basic"
+
+      can :select_reservation, Reservation
     end
 
     # Define abilities for the passed in user here. For example:

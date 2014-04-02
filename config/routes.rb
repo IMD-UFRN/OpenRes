@@ -8,7 +8,7 @@ OpenRes::Application.routes.draw do
 
   get '/sobre', to: 'home#about', as: :about
 
-  get '/new_reservation', to: 'reservations#select_reservation', as: :new_reservation
+  get '/new_reservation', to: 'reservations#select_reservation', as: :new_select_reservation
 
   get "reservations/all", to: "reservations#all", as: :all
   get "reservations/finished", to: "reservations#finished", as: :finished

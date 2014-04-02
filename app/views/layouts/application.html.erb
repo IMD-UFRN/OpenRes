@@ -40,8 +40,10 @@
         <div class="span2">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
+
               <%= current_user.menu %>
             </ul>
+            <%= link_to 'Nova Reserva', new_select_reservation_path, class: "btn btn-success btn-nav" %>
           </div>
         </div>
 
