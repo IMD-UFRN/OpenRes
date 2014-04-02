@@ -1,0 +1,18 @@
+<h2>Selecione o tipo de Reserva que deseja efetuar</h2>
+<hr>
+
+<div class="well span5">
+  <p class= "table-title">Reserva Simples</p>
+  <hr>
+  <p>São marcadas para apenas um horário de um só dia. Ideal para reuniões ou palestras.</p>
+  <hr>
+  <%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
+</div>
+
+<div class="well span5">
+  <p class= "table-title">Reserva Múltipla</p>
+  <hr>
+  <p>São marcadas com repetição em vários dias e horários distintos. Ideal para congressos ou mini-cursos.</p>
+  <hr>
+  <%= link_to 'Nova Reserva Múltipla', new_reservation_group_path, class:"btn btn-success" %>
+</div>

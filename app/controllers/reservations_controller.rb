@@ -6,6 +6,10 @@ class ReservationsController < ApplicationController
 
   # GET /reservations
   # GET /reservations.json
+
+  def select_reservation
+  end
+  
   def index
 
     if params[:filter_by] == "future"
