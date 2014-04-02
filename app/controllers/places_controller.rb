@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class PlacesController < ApplicationController
   load_and_authorize_resource
-  
+
   before_action :set_place, only: [:show, :edit, :update, :destroy, :get_reservations]
 
   # GET /places
@@ -79,6 +79,8 @@ class PlacesController < ApplicationController
     @reservations.order!(:date)
 
     @responsibles = User.where(sector_id: @place.sectors, role: ["secretary"])
+
+    @objects = @place.object_resources
 
     #render json: @place.attributes.merge(reservations: reservations).merge(users: users)
   end
