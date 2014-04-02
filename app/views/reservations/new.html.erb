@@ -38,6 +38,14 @@
         <p class="muted">Nenhum responsável</p>
       {{/each}}
     </div>
+    <div class= "panel panel-info">
+      <p class= "panel-heading">Equipamento desta sala:</p>
+      {{#each this.objects}}
+          <p> {{name}}</p>
+      {{else}}
+        <p class="muted">Nenhum equipamento</p>
+      {{/each}}
+    </div>
 
     <div class= "panel panel-info">
 

@@ -7,3 +7,4 @@ end
 
 json.place @place.name
 json.responsibles @responsibles, :email, :name
+json.objects @objects, :name
