@@ -78,6 +78,8 @@ class ReservationGroupsController < ApplicationController
     group_processor.process
     group_processor.save
 
+    NotifyUserMailer.send_reservation_made(@reservation_group).deliver
+
     redirect_to @reservation_group
   end
 

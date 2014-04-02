@@ -62,14 +62,14 @@ class ReservationPolicy
 
   def self.approve_all(reservation_group)
 
-    conflicts =[]
-    reservation_group.reservations.each do |reservation|
+    conflicts = []
 
-        ReservationPolicy.approve(reservation, {silent: true})
+    reservation_group.reservations.each do |reservation|
+      ReservationPolicy.approve(reservation, {silent: true})
     end
 
     ReservationApprovalMailer.approved_group_mail(reservation_group).deliver
-
+    
     return conflicts
 
   end

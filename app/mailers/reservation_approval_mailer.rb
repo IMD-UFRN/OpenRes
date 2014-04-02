@@ -60,4 +60,5 @@ class ReservationApprovalMailer < ActionMailer::Base
 
     mail to: @reservation_group.user.email, subject: "[IMD- UFRN] Situação de reserva múltipla para sala #{@reservation_group.place_name}"
   end
+
 end
