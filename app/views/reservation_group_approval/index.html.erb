@@ -42,8 +42,10 @@
           <td colspan="3"><%=reservation_group.days%></td>
         </tr>
         <tr>
+          <th>Conflita?</th>
+          <td><%=reservation_group.has_conflicts?%></td>
           <th>Ações</th>
-          <td colspan="3">
+          <td colspan="2">
             <%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %>
             <%=reservation_group.approve_link %>
             <%=reservation_group.suspend_link %>

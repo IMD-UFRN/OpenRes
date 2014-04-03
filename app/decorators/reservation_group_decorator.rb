@@ -50,7 +50,7 @@ class ReservationGroupDecorator < Draper::Decorator
 
   def approve_link
     return " " if (object.status == 'approved')
-    
+
     btn_class = "btn-small btn-normal"
 
     btn_class += " muted" if object.has_conflicts?
@@ -77,6 +77,11 @@ class ReservationGroupDecorator < Draper::Decorator
 
   def approver_links
     approve_link + " " + reject_link + " " +suspend_link
+  end
+
+  def has_conflicts?
+    return "Sim" if object.has_conflicts?
+    "Não"
   end
 
 

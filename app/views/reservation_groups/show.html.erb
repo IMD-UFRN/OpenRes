@@ -27,6 +27,8 @@
       <th>Fim:</th>
       <td><%=@reservation_group.end_date%></td>
     <tr>
+      <th>Conflita?</th>
+      <td><%=@reservation_group.has_conflicts?%></td>
       <th>Dias da semana:</th>
       <td colspan="3"><%=@reservation_group.days%></td>
     </tr>
