@@ -115,4 +115,11 @@ class ReservationGroup < ActiveRecord::Base
     reservations.first.can_be_decided_over?(ap_user)
   end
 
+  def has_conflicts?
+    reservations.each do |r|
+      return true if r.has_conflicts?
+    end
+
+    false
+  end
 end

@@ -49,15 +49,17 @@ class ReservationGroupDecorator < Draper::Decorator
 
 
   def approve_link
-    return " " if object.status == 'approved'
+    return " " if (object.status == 'approved')
+    
+    btn_class = "btn-small btn-normal"
 
-    link_to 'Aprovar', reservation_group_approve_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva múltipla?' }, class:"btn-small btn-normal"
+    btn_class += " muted" if object.has_conflicts?
 
+    link_to 'Aprovar', reservation_group_approve_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva múltipla?' }, class: btn_class, disabled: object.has_conflicts?
   end
 
   def reject_link
     return if object.status == 'rejected'
-
 
     link_to 'Rejeitar', justify_reject_group_path(reservation_group),
       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}

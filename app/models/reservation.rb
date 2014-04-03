@@ -49,8 +49,8 @@ class Reservation < ActiveRecord::Base
   }
 
   scope :conflicting, lambda { |reservation|
-    reservations = Reservation.where("place_id = ? and date = ? and id <> ?",
-     reservation.place_id, reservation.date, reservation.id)
+    reservations = Reservation.where("place_id = ? and date = ? and id <> ? and status <> ?",
+     reservation.place_id, reservation.date, reservation.id, "rejected")
     return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
   }
 
@@ -65,11 +65,7 @@ class Reservation < ActiveRecord::Base
   delegate :sectors, to: :place
 
   def has_conflicts?
-    if not Reservation.conflicting(self).empty?
-      return true
-    else
-      return false
-    end
+    return !Reservation.conflicting(self).empty?
   end
 
   def sector_ids

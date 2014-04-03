@@ -124,10 +124,17 @@ img{
 .btn-normal{
   background:#9E9E9E;
   color: white;
+
   &:hover {
     background: #AAB3AA !important;
     color: white;
   }
+}
+
+.btn-normal.muted {
+  pointer-events: none;
+  cursor: default;
+  background: yellow;
 }
 
 .big {
