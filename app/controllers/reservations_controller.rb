@@ -59,7 +59,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @conflicts.empty? and @reservation.save
-        NotifyUserMailer.send_reservation_made(@reservation).deliver
+        NotifyUserMailer.send_reservation_made(@reservation)
         
         format.html { redirect_to @reservation, notice: 'Reserva criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @reservation }

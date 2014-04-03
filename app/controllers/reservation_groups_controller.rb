@@ -4,8 +4,6 @@ class ReservationGroupProcessor
     @hash = hash
     @group = ReservationGroup.new(name: hash[:name], user_id: hash[:user_id],
       notes: hash[:notes])
-
-
   end
 
   def process
@@ -25,6 +23,8 @@ class ReservationGroupProcessor
   end
 
   def save
+    return nil if @reservations.empty?
+
     ActiveRecord::Base.transaction do
       reservations = []
 
@@ -36,6 +36,8 @@ class ReservationGroupProcessor
 
       @group.save
     end
+
+    return @group
   end
 
   private
@@ -43,9 +45,9 @@ class ReservationGroupProcessor
   def select_days(repetition)
     begin_date = Date.parse(repetition[:begin_date])
     end_date = Date.parse(repetition[:end_date])
-    weekly_repeat = repetition[:weekly_repeat].map(&:to_i)
+    weekly_repeat = repetition[:weekly_repeat].delete_if(&:blank?).map(&:to_i)
 
-    result = (begin_date..end_date).to_enum.select {|k| weekly_repeat.include?(k.wday)}
+    result = (begin_date..end_date).to_enum.select { |k| weekly_repeat.include?(k.wday) }
   end
 end
 
@@ -76,9 +78,10 @@ class ReservationGroupsController < ApplicationController
 
     group_processor = ReservationGroupProcessor.new(reservation_group_params)
     group_processor.process
-    group_processor.save
+    
+    @reservation_group = group_processor.save
 
-    NotifyUserMailer.send_reservation_made(@reservation_group).deliver
+    NotifyUserMailer.send_reservation_made(@reservation_group) if @reservation_group
 
     redirect_to @reservation_group
   end

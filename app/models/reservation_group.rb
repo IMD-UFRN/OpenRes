@@ -111,4 +111,8 @@ class ReservationGroup < ActiveRecord::Base
 
   end
 
+  def can_be_decided_over?(ap_user)
+    reservations.first.can_be_decided_over?(ap_user)
+  end
+
 end
