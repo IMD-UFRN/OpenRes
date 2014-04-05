@@ -16,7 +16,7 @@ class NotifyUserMailer < ActionMailer::Base
 
   end
 
-  private 
+  private
 
   def reservation_made(reservation, user)
     @reservation = reservation

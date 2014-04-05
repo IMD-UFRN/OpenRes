@@ -8,10 +8,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-dep_ti = Sector.create(name: "BTI", description: "Departamento de Bacharelado em Tecnologia da Informação") 
-tec_ti = Sector.create(name: "Técnico em TI", description: "Departamento de Técnico em Tecnologia da Informação")
+dep_ti = Sector.create(name: "BTI", description: "Departamento de Bacharelado em Tecnologia da Informação")
+tec_ti = Sector.create(name: "Cursos Técnicos", description: "Departamento dos Cursos Técnicos do IMD")
 dep_es = Sector.create(name: "BES", description: "Departamento de Bacharelado em Engenharia de Software")
-imd_ad = Sector.create(name: "IMD Administrativo", description: "Departamento do Instituto Metrópole Digital")
+imd_ad = Sector.create(name: "Administração Central", description: "Departamento do Instituto Metrópole Digital")
 data_c = Sector.create(name: "IMD Datacenter e Suporte Técnico", description: "Departamento do Instituto Metrópole Digital")
 imd_ug = Sector.create(name: "IMD Uso Geral", description: "Departamento sem vínculo com a instituição")
 incuba = Sector.create(name: "Incubação", description: "Departamento das empresas incubadas ou âncoras")

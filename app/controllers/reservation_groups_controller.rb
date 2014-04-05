@@ -78,12 +78,17 @@ class ReservationGroupsController < ApplicationController
 
     group_processor = ReservationGroupProcessor.new(reservation_group_params)
     group_processor.process
-    
+
     @reservation_group = group_processor.save
 
-    NotifyUserMailer.send_reservation_made(@reservation_group) if @reservation_group
+    if @reservation_group
+      NotifyUserMailer.send_reservation_made(@reservation_group)
+      redirect_to @reservation_group
+    else
+      render :new, notice: "Nenhuma reserva criada. Verifique o período especificado contém os dias selecionados."
+    end
 
-    redirect_to @reservation_group
+
   end
 
   def reservation_group_params
