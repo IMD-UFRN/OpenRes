@@ -7,13 +7,27 @@ class ReservationGroup < ActiveRecord::Base
     ReservationGroup.where(user_id: user.id)
   }
 
-  scope :from_sector, lambda { |sector| 
+  scope :from_sector, lambda { |sector|
 
     reservations = []
 
     ReservationGroup.all.each do |reservation|
 
       if reservation.sectors_ids.include? sector.id
+        reservations << reservation
+      end
+    end
+
+    return reservations
+  }
+
+  scope :from_place, lambda { |place|
+
+    reservations = []
+
+    ReservationGroup.all.each do |reservation|
+
+      if reservation.place.id == place.id
         reservations << reservation
       end
     end

@@ -1,10 +1,10 @@
 <h2>Detalhes de Reserva Múltipla</h2>
 
-<%if @reservation_group.can_be_decided_over?(current_user) %>
-  <%= @reservation_group.approve_link %>
-  <%= @reservation_group.suspend_link %>
-  <%= @reservation_group.reject_link %>
-<%end%>
+
+<%= @reservation_group.approve_link %>
+<%= @reservation_group.suspend_link %>
+<%= @reservation_group.reject_link %>
+
 
 
 <hr>
