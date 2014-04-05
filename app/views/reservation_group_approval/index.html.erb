@@ -12,16 +12,9 @@
   <li><%= link_to 'Todas as Reservas', check_group_reservations_path %></li>
 </ul>
 
-<% unless @reservation_groups.length ==0 %>
-  <% @reservation_groups.each do |reservation_group| %>
 
-      <%= render reservation_group %>
+<%= render @reservation_groups %>
 
-  <% end %>
-
-<%else%>
-  <p>Não existem reservas deste tipo</p>
-<% end %>
 <div class="clear">
 
 <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>

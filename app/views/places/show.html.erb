@@ -91,19 +91,10 @@
 
   <h2>Reservas Múltiplas desta Sala</h2>
 
-  <% unless @reservation_groups.length ==0 %>
-    <% @reservation_groups.each do |reservation_group| %>
+  <%= render @reservation_groups %>
 
-        <%= render reservation_group %>
-
-    <% end %>
-
-  <%else%>
-    <p>Não existem reservas deste tipo</p>
-  <% end %>
+  <div class="clear">
 
 <%end%>
 
-<div class="clear">
-  
 <%= render 'shared/back'%>
