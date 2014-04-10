@@ -64,6 +64,7 @@
         <th>Solicitante</th>
         <th>Conflita?</th>
         <th>Situação</th>
+        <th>Autorizado</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -78,6 +79,7 @@
             <td><%= reservation.user %></td>
             <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.status %></td>
+            <td><%= reservation.responsible %></td>
             <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
           </tr>
       <%end%>
@@ -91,7 +93,14 @@
 
   <h2>Reservas Múltiplas desta Sala</h2>
 
-  <%= render @reservation_groups %>
+  <% unless @reservation_groups.length ==0 %>
+
+
+    <%= render @reservation_groups %>
+  <%else%>
+    <p>Não existem reservas deste tipo</p>
+  <% end %>
+
 
   <div class="clear">
 
