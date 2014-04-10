@@ -243,6 +243,7 @@ pt-BR:
         status: Status
         reason: Motivo
         place: Sala
+        responsible: Autorizado
       justification:
         reason: Motivo
       user:

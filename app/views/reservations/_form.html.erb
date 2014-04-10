@@ -19,6 +19,10 @@
     <%= f.association :place, as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'} %>
     <br>
     <%= f.input :reason %>
+    <br>
+    <%= f.input :responsible, label:"Autorizado a pegar a chave da sala"%>
+    (Deixe em branco caso seja você mesmo)
+
   </div>
   </br>
   <%= f.button :submit, "OK", class:"btn btn-success" %>

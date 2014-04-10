@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
 
   def select_reservation
   end
-  
+
   def index
 
     if params[:filter_by] == "future"
@@ -60,7 +60,7 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @conflicts.empty? and @reservation.save
         NotifyUserMailer.send_reservation_made(@reservation)
-        
+
         format.html { redirect_to @reservation, notice: 'Reserva criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @reservation }
       else
@@ -112,7 +112,7 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :place_id)
+      params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id)
        .merge(user_id: current_user.id, status: "pending")
     end
 end

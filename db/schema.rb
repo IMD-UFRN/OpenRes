@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20140228210308) do
     t.time     "begin_time"
     t.time     "end_time"
     t.string   "status"
+    t.string   "responsible"
     t.text     "reason"
     t.integer  "reservation_group_id"
     t.integer  "user_id"

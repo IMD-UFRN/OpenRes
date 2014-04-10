@@ -98,4 +98,9 @@ class ReservationDecorator < Draper::Decorator
     "conflicted_reservation" if  object.has_conflicts?
   end
 
+  def responsible
+    return object.responsible unless object.responsible.nil? || object.responsible == ""
+    user
+  end
+
 end
