@@ -1,11 +1,12 @@
 <%= simple_form_for(@reservation) do |f| %>
   <% if @reservation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reservation.errors.count, "error") %> impediu o salvamento desta reserva:</h2>
+    <div class="error_explanation alert alert-dismissable alert-danger">
+
+      <p>Algo impediu o salvamento desta reserva:</p>
 
       <ul>
       <% @reservation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li><strong><%= msg %></strong></li>
       <% end %>
       </ul>
     </div>

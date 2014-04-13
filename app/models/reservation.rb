@@ -2,7 +2,14 @@
 class Reservation < ActiveRecord::Base
 
   before_create do |obj|
+
+    if obj.begin_time > obj.end_time
+      obj.errors.add(:horário, "de fim especificado não pode ser anterior que o horário de início")
+      return false
+    end
+
     obj.status = 'pending'
+
   end
 
   def time_interval
