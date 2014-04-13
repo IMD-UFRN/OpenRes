@@ -73,6 +73,10 @@ class ReservationGroup < ActiveRecord::Base
     place.sector_ids
   end
 
+  def responsible
+    return reservations.first.responsible
+  end
+
   def place_name
     reservations.first.place.name
   end

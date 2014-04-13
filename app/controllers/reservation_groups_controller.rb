@@ -15,7 +15,7 @@ class ReservationGroupProcessor
       days.each do |day|
         reservations << Reservation.new(date: day, begin_time: repetition[:begin_time],
           end_time: repetition[:end_time], status: 'pending', reason: @hash[:reason],
-          user_id: @hash[:user_id], place_id: @hash[:place_id])
+          user_id: @hash[:user_id], place_id: @hash[:place_id], responsible: @hash[:responsible])
       end
     end
 
