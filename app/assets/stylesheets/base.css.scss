@@ -228,3 +228,14 @@ img{
 .conflicted_reservation{
   color: red;
 }
+
+
+.place-checkin {
+  display: block;
+  line-height: 20px;
+
+  .fa {
+    line-height: 20px;
+    color: #555;
+  }
+}

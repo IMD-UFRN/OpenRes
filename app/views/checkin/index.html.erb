@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th colspan="10">
+        Salas
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @places.find_in_batches(batch_size: 10) do |places| %>
+      <tr>
+        <% places.each do |place| %>
+            <td>
+              <%= link_to checkin_details_path(place), class: 'place-checkin' do %>
+                <%= place.code %>
+                <%= content_tag (:span), class: [true, false].sample ? "fa fa-lock pull-right" : "fa fa-unlock-alt pull-right" do %>
+                <% end %>
+              <% end %>
+            </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
