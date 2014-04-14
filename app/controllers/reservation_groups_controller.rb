@@ -12,6 +12,10 @@ class ReservationGroupProcessor
     @hash[:repetitions].each do |key, repetition|
       days = select_days(repetition)
 
+      if repetition[:begin_time] > repetition[:end_time]
+        return false
+      end
+
       days.each do |day|
         reservations << Reservation.new(date: day, begin_time: repetition[:begin_time],
           end_time: repetition[:end_time], status: 'pending', reason: @hash[:reason],
@@ -20,9 +24,12 @@ class ReservationGroupProcessor
     end
 
     @reservations = reservations
+
+    return true
   end
 
   def save
+    return nil if @reservations.nil?
     return nil if @reservations.empty?
 
     ActiveRecord::Base.transaction do
@@ -77,6 +84,7 @@ class ReservationGroupsController < ApplicationController
      notes: reservation_group_params[:notes])
 
     group_processor = ReservationGroupProcessor.new(reservation_group_params)
+
     group_processor.process
 
     @reservation_group = group_processor.save
