@@ -86,8 +86,9 @@ class ReservationGroupsController < ApplicationController
     group_processor = ReservationGroupProcessor.new(reservation_group_params)
 
     unless group_processor.process?
-      redirect_to new_reservation_group_path, notice: "Nenhuma reserva criada. O horário de fim de um dos blocos é menor que o de início."
-      return false
+      flash[:error] ="Nenhuma reserva criada. O horário de fim de um dos blocos é menor que o de início."
+      redirect_to new_reservation_group_path
+      return
     end
 
     @reservation_group = group_processor.save
@@ -96,8 +97,9 @@ class ReservationGroupsController < ApplicationController
       NotifyUserMailer.send_reservation_made(@reservation_group)
       redirect_to @reservation_group
     else
-      redirect_to new_reservation_group_path, notice: "Nenhuma reserva criada. Verifique se o período especificado contém os dias selecionados."
-      return false
+      flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado contém os dias selecionados."
+      redirect_to new_reservation_group_path
+      return
     end
 
 
