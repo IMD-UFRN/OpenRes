@@ -31,4 +31,12 @@ class Place < ActiveRecord::Base
 
     ids
   end
+
+  def active_checkin
+    Checkin.active.from_place(self).last
+  end
+
+  def past_checkins
+    Checkin.finished.from_place(self)
+  end
 end

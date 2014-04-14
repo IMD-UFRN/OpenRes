@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228210308) do
+ActiveRecord::Schema.define(version: 20140413030131) do
+
+  create_table "checkins", force: true do |t|
+    t.integer  "reservation_id"
+    t.time     "begin_time"
+    t.time     "end_time"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "checkins", ["reservation_id"], name: "index_checkins_on_reservation_id"
 
   create_table "justifications", force: true do |t|
     t.text     "reason"

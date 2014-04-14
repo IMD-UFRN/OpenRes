@@ -61,6 +61,18 @@ class Reservation < ActiveRecord::Base
     return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
   }
 
+  scope :undone, lambda {
+    result = []
+
+    Reservation.each do |r|
+      unless r.done?
+        result << r
+      end
+    end
+
+    return result
+  }
+
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
 
   belongs_to :user
@@ -68,6 +80,8 @@ class Reservation < ActiveRecord::Base
   belongs_to :reservation_group
 
   has_one :justification
+
+  has_many :checkins
 
   delegate :sectors, to: :place
 
@@ -83,6 +97,10 @@ class Reservation < ActiveRecord::Base
     return true if ap_user.role == "admin"
     return false if (ap_user.role == "basic" || !sector_ids.include?(ap_user.sector.id))
     return true
+  end
+
+  def done?
+    !Checkin.finished.where(reservation_id: self.id).empty?
   end
 
 end

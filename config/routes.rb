@@ -60,4 +60,10 @@ OpenRes::Application.routes.draw do
     patch '/profile/edit', to: 'profile#update'
   end
 
+  controller :checkin do
+    get '/checkin', to: :index, as: :checkin_list
+    get "checkin/:place_id", to: :checkin_details, as: :checkin_details
+    post "checkin/:reservation_id", to: :checkin, as: :checkin
+    post "checkout/:checkin_id", to: :checkout, as: :checkout
+  end
 end
