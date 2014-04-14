@@ -21,17 +21,21 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @reservations= ReservationDecorator.decorate_collection(@user.reservations)
-    @functions_hash ={"admin"=> "Administrador do Sistema", "sector_admin"=> "Administração de Setor", "secretary"=>"Secretaria", "basic"=> "Básica"}
+    @functions_hash ={"admin"        => "Administrador do Sistema",
+                      "sector_admin" => "Administração de Setor",
+                      "secretary"    => "Secretaria",
+                      "basic"        => "Básica",
+                      "receptionist" => "Recepção"}
   end
 
   def edit
-    @functions =[["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
+    @functions =[["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"], ["Recepção", "receptionist"]]
   end
 
   # GET /users/new
   def new
     @user = User.new
-    @functions =[["Administrador do Sistema", "admin"],["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"]]
+    @functions =[["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"], ["Recepção", "receptionist"]]
   end
 
   # POST /users

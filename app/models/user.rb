@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  POSSIBLE_ROLES = %w(admin sector_admin secretary basic)
+  POSSIBLE_ROLES = %w(admin sector_admin secretary basic receptionist)
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
