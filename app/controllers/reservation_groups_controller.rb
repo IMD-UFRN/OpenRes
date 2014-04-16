@@ -6,11 +6,15 @@ class ReservationGroupProcessor
       notes: hash[:notes])
   end
 
-  def process
+  def process?
     reservations = []
 
     @hash[:repetitions].each do |key, repetition|
       days = select_days(repetition)
+
+      if repetition[:begin_time] > repetition[:end_time]
+        return false
+      end
 
       days.each do |day|
         reservations << Reservation.new(date: day, begin_time: repetition[:begin_time],
@@ -20,9 +24,12 @@ class ReservationGroupProcessor
     end
 
     @reservations = reservations
+
+    return true
   end
 
   def save
+    return nil if @reservations.nil?
     return nil if @reservations.empty?
 
     ActiveRecord::Base.transaction do
@@ -77,7 +84,12 @@ class ReservationGroupsController < ApplicationController
      notes: reservation_group_params[:notes])
 
     group_processor = ReservationGroupProcessor.new(reservation_group_params)
-    group_processor.process
+
+    unless group_processor.process?
+      flash[:error] ="Nenhuma reserva criada. O horário de fim de um dos blocos é menor que o de início."
+      redirect_to new_reservation_group_path
+      return
+    end
 
     @reservation_group = group_processor.save
 
@@ -85,7 +97,9 @@ class ReservationGroupsController < ApplicationController
       NotifyUserMailer.send_reservation_made(@reservation_group)
       redirect_to @reservation_group
     else
-      render :new, notice: "Nenhuma reserva criada. Verifique o período especificado contém os dias selecionados."
+      flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é vállido e contém os dias selecionados."
+      redirect_to new_reservation_group_path
+      return
     end
 
 

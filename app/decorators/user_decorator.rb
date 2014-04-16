@@ -16,6 +16,7 @@ class UserDecorator < Draper::Decorator
     functions= {"sector_admin" => "Administração de Setor",
                 "secretary"=> "Secretaria",
                 "admin"=> "Administrador do Sistema",
+                "receptionist" => "Recepção",
                 "basic" => "Básica"}
 
     functions[object.role]
