@@ -236,6 +236,13 @@ img{
 
   .fa {
     line-height: 20px;
-    color: #555;
+
+    &.occupied {
+      color: #FF0039;
+    }
+
+    &.free {
+      color: #4E9F15;
+    }
   }
 }

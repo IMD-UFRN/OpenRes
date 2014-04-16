@@ -8,16 +8,17 @@
   </thead>
 
   <tbody>
-    <% @places.find_in_batches(batch_size: 10) do |places| %>
+    <% @places.each do |places| %>
       <tr>
         <% places.each do |place| %>
-            <td>
+          <td>
+            <% if place.not_nil? %>
               <%= link_to checkin_details_path(place), class: 'place-checkin' do %>
                 <%= place.code %>
-                <%= content_tag (:span), class: [true, false].sample ? "fa fa-lock pull-right" : "fa fa-unlock-alt pull-right" do %>
-                <% end %>
+                <%= place.status_icon %>
               <% end %>
-            </td>
+            <% end %>
+          </td>
         <% end %>
       </tr>
     <% end %>

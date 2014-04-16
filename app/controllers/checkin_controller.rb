@@ -1,6 +1,10 @@
 class CheckinController < ApplicationController
   def index
-    @places = Place.where(reservable: true)
+    @places = Place.where(reservable: true).in_groups_of(10)
+
+    0.upto(@places.length - 1) do |i|
+      @places[i] = PlaceDecorator.decorate_collection(@places[i])
+    end
   end
 
   def checkin_details
