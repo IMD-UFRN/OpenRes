@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     if @user.role == "basic"
       redirect_to reservations_path
     elsif @user.role == "receptionist"
-      redirect_to reservations_path
+      redirect_to checkin_list_path
     else
       redirect_to check_reservations_path
     end
