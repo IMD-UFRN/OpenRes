@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @functions =[["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"], ["Recepção", "receptionist"]]
+    @functions =[["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"], ["Recepção", "receptionist"], ["Administrador do Sistema", "admin"]]
   end
 
   # POST /users
