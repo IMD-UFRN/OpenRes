@@ -11,6 +11,6 @@ class UserMailer < ActionMailer::Base
     @user = user
     @password = password
 
-    mail to: user.email, subject: "[IMD- UFRN] Nova Conta no Gerênciador de Espaço Físico"
+    mail to: user.email, subject: "[IMD- UFRN] Nova Conta no Gerenciador de Espaço Físico"
   end
 end
