@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CheckinController < ApplicationController
   def index
     @places = Place.where(reservable: true).in_groups_of(10)

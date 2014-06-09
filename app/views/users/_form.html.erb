@@ -18,7 +18,7 @@
     <%= f.input :cpf, :required => true, id: "cpf" %>
     <%= f.input :role, collection: @functions,  label_method: :first, value_method: :last, input_html: { class: 'chosen-select',  data: { placeholder: "Selecione uma função" } }, required: true %>
     <br>
-    <%= f.association :sector, input_html: { class: 'chosen-select', data: { placeholder: "Selecione um setor" } }, :required => true %>
+    <%= f.association :sectors, :include_blank => false, input_html: { class: 'chosen-select', data: { placeholder: "Selecione os setores" } }, :required => true %>
     <br>
   </div>
 

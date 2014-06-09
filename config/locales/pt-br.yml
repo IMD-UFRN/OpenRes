@@ -250,7 +250,7 @@ pt-BR:
         name: Nome
         cpf: CPF
         email: E-mail
-        sector: Setor
+        sectors: Setores
         role: Função no Sistema
         password: Senha
         old_password: Senha Antiga

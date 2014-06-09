@@ -1,5 +1,5 @@
 <h1>Meu Perfil</h1>
-<%= link_to 'Editar Minhas Informações', edit_profile_path(@user), class:"btn-small btn-normal"%> 
+<%= link_to 'Editar Minhas Informações', edit_profile_path(@user), class:"btn-small btn-normal"%>
 
 <hr>
 
@@ -8,7 +8,12 @@
   <dt>E-mail:</dt> <dd><%= @user.email %></dd>
   <dt>Função:</dt> <dd><%= @functions_hash[@user.role]%></dd>
   <dt>CPF:</dt> <dd><%= @user.cpf %></dd>
-  <dt>Setor:</dt> <dd><%= link_to @user.sector.name, @user.sector%></dd>
+  <dt>Setor(es):</dt>
+    <ul>
+      <%  @user.sectors.each do |sector|%>
+        <li><%= link_to sector.name, sector%></li>
+      <%end %>
+    </ul>
 </dl>
 
 <hr>
@@ -37,8 +42,8 @@
           <td><%= reservation.place %></td>
           <td><%= reservation.status %></td>
           <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
-        </tr>   
-    <%end%>  
+        </tr>
+    <%end%>
     <% else %>
       <tr>
         <th colspan="6">Você ainda não fez reservas!</th>
@@ -49,5 +54,3 @@
 
 <%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
 <%= link_to 'Reservas Categorizadas', reservations_path, class:"btn btn-normal" %>
-
-

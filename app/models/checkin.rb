@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Checkin < ActiveRecord::Base
   belongs_to :reservation
 

@@ -21,6 +21,16 @@ class Reservation < ActiveRecord::Base
     return Reservation.where('place_id IN (?)', places)
   }
 
+  scope :from_sectors, lambda { |sectors| #<-------- AQUI
+
+    places = []
+    sectors.each do |sector|
+      places += sector.places.map(&:id)
+    end
+
+    return Reservation.where('place_id IN (?)', places)
+  }
+
   scope :not_grouped, lambda{
     Reservation.where(reservation_group_id: nil)
   }
@@ -28,7 +38,7 @@ class Reservation < ActiveRecord::Base
   scope :can_decide_over, lambda { |user|
     return Reservation.none if user.nil? || user.role == "basic"
     return Reservation.all if user.role == "admin"
-    return Reservation.from_sector(user.sector) # if user.role == 'secretary' or 'sector_admin'
+    return Reservation.from_sectors(user.sectors) # if user.role == 'secretary' or 'sector_admin'  #<-------- AQUI
   }
 
   scope :from_user, lambda{ |user|
@@ -95,12 +105,20 @@ class Reservation < ActiveRecord::Base
 
   def can_be_decided_over?(ap_user)
     return true if ap_user.role == "admin"
-    return false if (ap_user.role == "basic" || !sector_ids.include?(ap_user.sector.id))
+    return false if (ap_user.role == "basic" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))
     return true
   end
 
   def done?
     !Checkin.finished.where(reservation_id: self.id).empty?
+  end
+
+  def sectors_names
+    names = ""
+    self.sectors.each do |sector|
+      names+=sector.name
+    end
+    names
   end
 
 end

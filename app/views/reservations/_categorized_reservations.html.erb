@@ -17,6 +17,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.created_at %></td>
             <td><%= reservation.place %></td>
+            <td><%= reservation.sectors_names %></td>
             <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.user %></td>
             <td>
@@ -47,6 +48,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.created_at %></td>
             <td><%= reservation.place %></td>
+            <td><%= reservation.sectors_names %></td>
             <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.user %></td>
             <td>
@@ -73,6 +75,7 @@
           <th>Fim</th>
           <th>Solicitada em</th>
           <th>Local</th>
+          <th>Setor</th>
           <th>Conflita?</th>
           <th>Solicitante</th>
           <th>Motivo da Rejeição</th>
@@ -87,6 +90,7 @@
             <td><%= reservation.end_time %></td>
             <td><%= reservation.created_at %></td>
             <td style= "max-width:25%; width:15%; word-wrap:break-word"><%= reservation.place %></td>
+            <td><%= reservation.sectors_names %></td>
             <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.user %></td>
             <td style= "max-width:15%; width:15%; word-wrap:break-word"><%= reservation.justification.reason %></td>

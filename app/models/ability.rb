@@ -20,20 +20,23 @@ class Ability
     elsif user.role == "sector_admin"
       can :manage, Reservation do |reservation|
         unless reservation.place.nil?
-          reservation.sector_ids.include?(user.sector.id)
+          #reservation.sector_ids.include?(user.sector.id)
+          reservation.can_be_decided_over?(user)
         end
       end
 
       can :manage, ReservationGroup do |reservation_group|
         unless reservation_group.place.nil?
-          reservation_group.sector_ids.include?(user.sector.id)
+          #reservation_group.sector_ids.include?(user.sector.id)
+          (reservation_group.sector_ids - user.sector_ids).length < reservation_group.sector_ids.length
         end
       end
 
 
       can :manage , Place do |place|
         unless place.sector_ids.nil?
-          place.sector_ids.include?(user.sector.id)
+          #place.sector_ids.include?(user.sector.id)
+          (place.sector_ids - user.sector_ids).length < place.sector_ids.length
         end
       end
 
@@ -42,13 +45,16 @@ class Ability
     elsif user.role == "secretary"
       can :manage, Reservation do |reservation|
         unless reservation.place.nil?
-          reservation.sector_ids.include?(user.sector.id)
+          #reservation.sector_ids.include?(user.sector.id)
+          reservation.can_be_decided_over?(user)
+          #(reservation.sector_ids - user.sector_ids).length < reservation.sector_ids.length
         end
       end
 
       can :manage, ReservationGroup do |reservation_group|
         unless reservation_group.place.nil?
-          reservation_group.sector_ids.include?(user.sector.id)
+          #reservation_group.sector_ids.include?(user.sector.id)
+          (reservation_group.sector_ids - user.sector_ids).length < reservation_group.sector_ids.length
         end
       end
 

@@ -6,7 +6,7 @@
       <th>Nome</th>
       <th>Email</th>
       <th>Função</th>
-      <th>Setor</th>
+      <th>Setor(es)</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -17,7 +17,13 @@
         <td><%= link_to user.name, user %></td>
         <td><%= user.email %></td>
         <td><%= user.pt_role %></td>
-        <td><%= link_to user.sector.name, user %></td>
+        <td>
+          <ul>
+            <%  user.sectors.each do |sector|%>
+              <li><%= link_to sector.name, sector%></li>
+            <%end %>
+          </ul>
+        </td>
         <td>
           <%= link_to 'Detalhes', user, class: "btn-small btn-normal" %>
           <%= link_to 'Editar', edit_user_path(user), class: "btn-small btn-normal" %>

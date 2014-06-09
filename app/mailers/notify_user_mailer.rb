@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class NotifyUserMailer < ActionMailer::Base
   default from: "naoresponder@imd.ufrn.br"
 

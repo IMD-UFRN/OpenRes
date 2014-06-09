@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CheckinDecorator < Draper::Decorator
   delegate_all
 

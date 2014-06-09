@@ -22,5 +22,4 @@ class UserDecorator < Draper::Decorator
     functions[object.role]
   end
 
-
 end

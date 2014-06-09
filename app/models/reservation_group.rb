@@ -14,6 +14,22 @@ class ReservationGroup < ActiveRecord::Base
     ReservationGroup.all.each do |reservation|
 
       if reservation.sectors_ids.include? sector.id
+
+        reservations << reservation
+      end
+    end
+
+    return reservations
+  }
+
+  scope :from_sectors, lambda { |sector_ids|
+
+    reservations = []
+
+    ReservationGroup.all.each do |reservation|
+
+      if (reservation.sectors_ids - sector_ids).length < reservation.sectors_ids.length 
+
         reservations << reservation
       end
     end
@@ -65,7 +81,7 @@ class ReservationGroup < ActiveRecord::Base
   scope :can_decide_over, lambda { |user|
     return ReservationGroup.none if user.nil? || user.role == "basic"
     return ReservationGroup.all if user.role == "admin"
-    return ReservationGroup.from_sector(user.sector) # if user.role == 'secretary' or 'sector_admin'
+    return ReservationGroup.from_sectors(user.sector_ids) # if user.role == 'secretary' or 'sector_admin'
   }
 
 

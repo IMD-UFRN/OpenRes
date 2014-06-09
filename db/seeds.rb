@@ -201,19 +201,19 @@ Place.create(code: "B435" , name: "Incubada"                              , capa
 Place.create(code: "B436" , name: "Incubada"                              , capacity: 00, sector_ids: incuba.id, reservable: false, room_type_id: incubada.id)
 
 
-User.create(role: "admin", email: "admin@example.com", password: "rootadmin", name: "Admin", cpf: "092.092.092-92", sector_id: 1)
+User.create(role: "admin", email: "admin@example.com", password: "rootadmin", name: "Admin", cpf: "092.092.092-92", sector_ids: 1)
 
-bes_user = User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel BES", cpf: "096.092.092-96", sector_id: dep_es.id)
-bti_user = User.create(role: "basic", email: "jose@example.com", password: "rootadmin", name: "José BTI", cpf: "097.092.092-97", sector_id: dep_ti.id)
-tec_user = User.create(role: "basic", email: "mariana@example.com", password: "rootadmin", name: "Mariana Técnico TI", cpf: "087.092.092-97", sector_id: tec_ti.id)
+bes_user = User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel BES", cpf: "096.092.092-96", sector_ids: dep_es.id)
+bti_user = User.create(role: "basic", email: "jose@example.com", password: "rootadmin", name: "José BTI", cpf: "097.092.092-97", sector_ids: dep_ti.id)
+tec_user = User.create(role: "basic", email: "mariana@example.com", password: "rootadmin", name: "Mariana Técnico TI", cpf: "087.092.092-97", sector_ids: tec_ti.id)
 
-User.create(role: "sector_admin", email: "sector_admin_dep_ti@example.com", password: "rootadmin", name: "Admin do Setor BTI", cpf: "093.092.092-93", sector_id: dep_ti.id)
-User.create(role: "sector_admin", email: "sector_admin_tec_ti@example.com", password: "rootadmin", name: "Admin do Setor Tec TI", cpf: "093.091.092-93", sector_id: tec_ti.id)
-User.create(role: "sector_admin", email: "sector_admin_dep_es@example.com", password: "rootadmin", name: "Admin do Setor BES", cpf: "093.091.082-93", sector_id: dep_es.id)
+User.create(role: "sector_admin", email: "sector_admin_dep_ti@example.com", password: "rootadmin", name: "Admin do Setor BTI", cpf: "093.092.092-93", sector_ids: dep_ti.id)
+User.create(role: "sector_admin", email: "sector_admin_tec_ti@example.com", password: "rootadmin", name: "Admin do Setor Tec TI", cpf: "093.091.092-93", sector_ids: tec_ti.id)
+User.create(role: "sector_admin", email: "sector_admin_dep_es@example.com", password: "rootadmin", name: "Admin do Setor BES", cpf: "093.091.082-93", sector_ids: dep_es.id)
 
-User.create(role: "secretary", email: "secretary_dep_ti@example.com", password: "rootadmin", name: "Secretário BTI", cpf: "11111111111111", sector_id: dep_ti.id)
-User.create(role: "secretary", email: "secretary_tec_ti@example.com", password: "rootadmin", name: "Secretário Tec TI", cpf: "22222222222222", sector_id: tec_ti.id)
-User.create(role: "secretary", email: "secretary_dep_es@example.com", password: "rootadmin", name: "Secretário BES", cpf: "33333333333333", sector_id: dep_es.id)
+User.create(role: "secretary", email: "secretary_dep_ti@example.com", password: "rootadmin", name: "Secretário BTI", cpf: "11111111111111", sector_ids: dep_ti.id)
+User.create(role: "secretary", email: "secretary_tec_ti@example.com", password: "rootadmin", name: "Secretário Tec TI", cpf: "22222222222222", sector_ids: tec_ti.id)
+User.create(role: "secretary", email: "secretary_dep_es@example.com", password: "rootadmin", name: "Secretário BES", cpf: "33333333333333", sector_ids: dep_es.id)
 
 Reservation.create(user_id: bes_user.id, reason: "Palestra." , date: Date.today - 1.day, begin_time: Time.now, end_time: Time.now + 1.hour, place_id:bes_place.id)
 Reservation.create(user_id: bes_user.id, reason: "Minicurso.", date: Date.today + 2.day, begin_time: Time.now, end_time: Time.now + 2.hour, place_id:tec_place.id)

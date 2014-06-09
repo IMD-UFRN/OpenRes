@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413030131) do
+ActiveRecord::Schema.define(version: 20140608031206) do
 
   create_table "checkins", force: true do |t|
     t.integer  "reservation_id"
@@ -104,6 +104,11 @@ ActiveRecord::Schema.define(version: 20140413030131) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "user_sectors", force: true do |t|
+    t.integer "sector_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|
