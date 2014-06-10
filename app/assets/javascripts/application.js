@@ -17,6 +17,7 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/open_res
+//= require bootstrap
 //= require bootstrap-modal
 //= require bootstrap-datetimepicker
 //= require chosen-jquery

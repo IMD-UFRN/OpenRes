@@ -97,7 +97,7 @@ class ReservationGroupsController < ApplicationController
       NotifyUserMailer.send_reservation_made(@reservation_group)
       redirect_to @reservation_group
     else
-      flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é vállido e contém os dias selecionados."
+      flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é válido e contém os dias selecionados."
       redirect_to new_reservation_group_path
       return
     end
