@@ -17,6 +17,15 @@ class NotifyUserMailer < ActionMailer::Base
 
   end
 
+  def send_canceled_mail(reservation)
+    @reservation = reservation
+
+    User.select { |u| @reservation.can_be_decided_over?(u) }.each do |user|
+      reservation_canceled(@reservation, user).deliver
+    end
+
+  end
+
   private
 
   def reservation_made(reservation, user)
@@ -24,4 +33,11 @@ class NotifyUserMailer < ActionMailer::Base
 
     mail to: user.email, subject: "[IMD- UFRN] Nova reserva"
   end
+
+  def reservation_canceled(reservation, user)
+    @reservation = reservation
+    
+    mail to: user.email, subject: "[IMD- UFRN] Reserva cancelada"
+  end
+
 end

@@ -20,7 +20,7 @@ class ReservationGroupApprovalController < ApplicationController
       end
 
       @reservation_groups = ReservationGroupDecorator.decorate_collection(reservations)
-      
+
     else
       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.can_decide_over(current_user))
     end

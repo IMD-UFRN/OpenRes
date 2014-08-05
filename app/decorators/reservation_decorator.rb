@@ -91,7 +91,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def approver_links
-      approve_link + " " + suspend_link + " " + reject_link
+      approve_link + " " + suspend_link + " " + reject_link + " " + cancel_link
   end
 
   def conflict_class
@@ -103,4 +103,10 @@ class ReservationDecorator < Draper::Decorator
     user
   end
 
+  def cancel_link
+    return if object.status == 'canceled' || !object.user == current_user
+
+
+    link_to 'Cancelar', reservation_cancel_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
+  end
 end

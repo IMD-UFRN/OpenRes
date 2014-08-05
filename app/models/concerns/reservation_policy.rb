@@ -41,6 +41,16 @@ class ReservationPolicy
     return conflicts
   end
 
+  def self.cancel(reservation, opts={})
+    reservation.status = "canceled"
+    reservation.save
+
+    unless opts[:silent]
+      NotifyUserMailer.send_canceled_mail(reservation)
+    end
+
+  end
+
   def self.suspend_all(reservation_group, justification)
 
     reservation_group.reservations.each do |reservation|
@@ -69,8 +79,9 @@ class ReservationPolicy
     end
 
     ReservationApprovalMailer.approved_group_mail(reservation_group).deliver
-    
+
     return conflicts
 
   end
+
 end

@@ -1,6 +1,20 @@
 # -*- encoding : utf-8 -*-
 class Reservation < ActiveRecord::Base
 
+  validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
+
+  validates :status, inclusion: { in: %w(pending approved rejected canceled) }
+
+  belongs_to :user
+  belongs_to :place
+  belongs_to :reservation_group
+
+  has_one :justification
+
+  has_many :checkins
+
+  delegate :sectors, to: :place
+
   before_create do |obj|
 
     if obj.begin_time > obj.end_time
@@ -83,17 +97,6 @@ class Reservation < ActiveRecord::Base
     return result
   }
 
-  validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
-
-  belongs_to :user
-  belongs_to :place
-  belongs_to :reservation_group
-
-  has_one :justification
-
-  has_many :checkins
-
-  delegate :sectors, to: :place
 
   def has_conflicts?
     return !Reservation.conflicting(self).empty?
@@ -105,7 +108,7 @@ class Reservation < ActiveRecord::Base
 
   def can_be_decided_over?(ap_user)
     return true if ap_user.role == "admin"
-    return false if (ap_user.role == "basic" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))
+    return false if (ap_user.role == "basic" || ap_user.role == "receptionist" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))
     return true
   end
 

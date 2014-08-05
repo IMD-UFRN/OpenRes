@@ -45,6 +45,11 @@ class ReservationApprovalController < ApplicationController
     end
   end
 
+  def cancel
+    ReservationPolicy.cancel(Reservation.find(params[:reservation_id]))
+    redirect_to reservations_path(filter_by: "future", notice: "Reserva cancelada com sucesso.")
+  end
+
   def justification_params
     params.require(:justification).permit(:reason).
       merge(user_id: current_user.id, reservation_id: params[:reservation_id])
