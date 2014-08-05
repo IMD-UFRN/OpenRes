@@ -84,4 +84,13 @@ class ReservationPolicy
 
   end
 
+  def self.cancel_all(reservation_group, opts={})
+
+    reservation_group.reservations.each do |reservation|
+      ReservationPolicy.cancel(reservation, {silent: true})
+    end
+
+    NotifyUserMailer.send_canceled_group_mail(reservation_group).deliver
+  end
+
 end

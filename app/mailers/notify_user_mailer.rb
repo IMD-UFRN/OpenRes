@@ -26,6 +26,15 @@ class NotifyUserMailer < ActionMailer::Base
 
   end
 
+  def send_canceled_group_mail(reservation_group)
+    @reservation_group = reservation_group
+
+    User.select { |u| @reservation_group.can_be_decided_over?(u) }.each do |user|
+      reservation_group_canceled(@reservation_group, user).deliver
+    end
+
+  end
+
   private
 
   def reservation_made(reservation, user)
@@ -36,7 +45,13 @@ class NotifyUserMailer < ActionMailer::Base
 
   def reservation_canceled(reservation, user)
     @reservation = reservation
-    
+
+    mail to: user.email, subject: "[IMD- UFRN] Reserva cancelada"
+  end
+
+  def reservation_group_canceled(reservation_group, user)
+    @reservation_group = reservation_group
+
     mail to: user.email, subject: "[IMD- UFRN] Reserva cancelada"
   end
 

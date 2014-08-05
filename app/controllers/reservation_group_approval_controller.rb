@@ -46,6 +46,11 @@ class ReservationGroupApprovalController < ApplicationController
     redirect_to check_group_reservations_path
   end
 
+  def cancel
+    ReservationPolicy.cancel_all(ReservationGroup.find(params[:reservation_group_id]))
+    redirect_to reservation_groups_path(filter_by: "future"), notice: "Reserva cancelada com sucesso."
+  end
+
   def justify_status
     @justification = Justification.new
 

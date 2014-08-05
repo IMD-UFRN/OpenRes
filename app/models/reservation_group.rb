@@ -28,7 +28,7 @@ class ReservationGroup < ActiveRecord::Base
 
     ReservationGroup.all.each do |reservation|
 
-      if (reservation.sectors_ids - sector_ids).length < reservation.sectors_ids.length 
+      if (reservation.sectors_ids - sector_ids).length < reservation.sectors_ids.length
 
         reservations << reservation
       end
@@ -134,13 +134,17 @@ class ReservationGroup < ActiveRecord::Base
         return "approved"
       elsif status[0] =="pending"
         return "pending"
-      else
+      elsif status[0] == "rejected"
         return "rejected"
+      else
+        return "canceled"
       end
     elsif status.include? "approved"
       return "partially approved"
-    else status.include? "pending"
+    elsif status.include? "pending"
       return "partially pending"
+    elsif status.include? "canceled"
+      return "partially canceled"
     end
 
   end

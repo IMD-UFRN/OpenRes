@@ -40,6 +40,7 @@ class ReservationGroupDecorator < Draper::Decorator
       "pending"=>"Pendente",
       "rejected"=>"Rejeitada",
       "approved"=>"Aprovada",
+      "canceled"=>"Cancelada",
       "partially approved" => "Aprovada Parcialmente",
       "partially pending" => "Pendente Parcialmente",
     }
@@ -78,6 +79,14 @@ class ReservationGroupDecorator < Draper::Decorator
   def approver_links
     approve_link + " " + reject_link + " " +suspend_link
   end
+
+  def cancel_link
+    return if object.status == 'canceled' || !(object.user == current_user)
+
+
+    link_to 'Cancelar', reservation_group_cancel_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
+  end
+
 
   def has_conflicts?
     return "Sim" if object.has_conflicts?

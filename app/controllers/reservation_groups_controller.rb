@@ -67,11 +67,17 @@ class ReservationGroupsController < ApplicationController
   def index
 
      if params[:filter_by] == "future"
-       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_future)
+       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_future.select{ |r|
+         r.status != "canceled"
+         })
      elsif params[:filter_by] == "finished"
-       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_past)
+       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_past.select{ |r|
+         r.status != "canceled"
+         })
      else
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user))
+      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).select{ |r|
+        r.status != "canceled"
+        })
      end
   end
 
