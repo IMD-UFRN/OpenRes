@@ -4,4 +4,7 @@
 <td><%= reservation.place %></td>
 <td><%= reservation.has_conflicts? %></td>
 <td><%= reservation.responsible %></td>
-<td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
+<td>
+  <%= reservation.details_link%>
+  <%= reservation.cancel_link %>
+</td>

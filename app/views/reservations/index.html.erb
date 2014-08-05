@@ -76,7 +76,10 @@
             <td><%= reservation.place %></td>
             <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.justification.reason %></td>
-            <td><%= reservation.details_link%></td>
+            <td>
+              <%= reservation.details_link %>
+              <%= reservation.cancel_link %>
+            </td>
           </tr>
         <% end %>
       </tbody>
