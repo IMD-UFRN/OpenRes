@@ -106,11 +106,11 @@ class ReservationGroup < ActiveRecord::Base
   end
 
   def begin_date
-    reservations.first.date
+    reservations.order(:date).first.date
   end
 
   def end_date
-    reservations.last.date
+    reservations.order(:date).last.date
   end
 
   def days
