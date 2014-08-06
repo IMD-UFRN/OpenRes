@@ -43,3 +43,17 @@ Handlebars.registerHelper("prettyStatus", function(status) {
 
   return "?";
 });
+
+var ready;
+ready = function() {
+
+  $('.accordion .head').click(function() {
+
+    $(this).next(".slide-hidden").toggle('fast');
+    return false;
+  }).next(".slide-hidden").hide();
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

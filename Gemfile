@@ -57,7 +57,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :assets do 
+group :assets do
   gem 'therubyracer', platform: :ruby
 end
 
