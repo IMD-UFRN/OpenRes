@@ -160,4 +160,8 @@ class ReservationGroup < ActiveRecord::Base
 
     false
   end
+
+  def past?
+    begin_date < DateTime.now.to_date
+  end
 end

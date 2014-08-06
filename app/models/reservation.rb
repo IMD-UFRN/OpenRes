@@ -124,4 +124,9 @@ class Reservation < ActiveRecord::Base
     names
   end
 
+  def past?
+    puts "\n\n\n\n\n\n\n\n\n\n\n\n\\n\n\n #{date} ---- #{DateTime.now}\n\n\n\n\n\n\n\n\n\n\n\n\\n\n\n"
+    date < DateTime.now.to_date
+  end
+
 end
