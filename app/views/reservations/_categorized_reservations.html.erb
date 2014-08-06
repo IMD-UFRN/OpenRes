@@ -1,109 +1,115 @@
 <% if  @pending_sector_reservations.length > 0 ||  @approved_sector_reservations.length > 0 || @rejected_sector_reservations.length > 0 %>
 
   <% if @pending_sector_reservations.length > 0 %>
-    <table class = "table table-striped table-bordered table-hover">
-      <thead>
-        <tr colspan="4">
-          <th class ="table-title" colspan="8"> Reservas Pendentes</th>
-        </tr>
-        <%= render 'reservations/reservations_secretary_header' %>
-      </thead>
-
-      <tbody>
-        <% @pending_sector_reservations.each do |reservation| %>
-          <tr>
-            <td><%= reservation.date %></td>
-            <td><%= reservation.begin_time %></td>
-            <td><%= reservation.end_time %></td>
-            <td><%= reservation.created_at %></td>
-            <td><%= reservation.place %></td>
-            <td><%= reservation.sectors_names %></td>
-            <td><%= reservation.has_conflicts? %></td>
-            <td><%= reservation.user %></td>
-            <td>
-              <%= reservation.details_link  %>
-              <%= reservation.approve_link %>
-              <%= reservation.reject_link %>
-              <%= reservation.suspend_link %>
-            </td>
+    <div class="accordion">
+      <table class = "table table-striped table-bordered table-hover">
+        <thead class="head">
+          <tr colspan="4">
+            <th class ="table-title"colspan="8"> Reservas Pendentes<i class="fa fa-angle-down strong toggleIcon"></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody class= "slide-hidden">
+          <%= render 'reservations/reservations_secretary_header' %>
+          <% @pending_sector_reservations.each do |reservation| %>
+            <tr>
+              <td><%= reservation.date %></td>
+              <td><%= reservation.begin_time %></td>
+              <td><%= reservation.end_time %></td>
+              <td><%= reservation.created_at %></td>
+              <td><%= reservation.place %></td>
+              <td><%= reservation.sectors_names %></td>
+              <td><%= reservation.has_conflicts? %></td>
+              <td><%= reservation.user %></td>
+              <td>
+                <%= reservation.details_link  %>
+                <%= reservation.approve_link %>
+                <%= reservation.reject_link %>
+                <%= reservation.suspend_link %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <%end%>
 
   <% if @approved_sector_reservations.length > 0 %>
-    <table class = "table table-striped table-bordered table-hover">
-      <thead>
-        <tr>
-          <th class ="table-title" colspan="6">Reservas Aprovadas</th>
-        </tr>
-        <%= render 'reservations/reservations_secretary_header' %>
-      </thead>
-      <tbody>
-        <% @approved_sector_reservations.each do |reservation| %>
+    <div class="accordion">
+      <table class = "table table-striped table-bordered table-hover">
+        <thead class="head">
           <tr>
-            <td><%= reservation.date %></td>
-            <td><%= reservation.begin_time %></td>
-            <td><%= reservation.end_time %></td>
-            <td><%= reservation.created_at %></td>
-            <td><%= reservation.place %></td>
-            <td><%= reservation.sectors_names %></td>
-            <td><%= reservation.has_conflicts? %></td>
-            <td><%= reservation.user %></td>
-            <td>
-              <%= reservation.details_link  %>
-              <%= reservation.approve_link %>
-              <%= reservation.reject_link %>
-              <%= reservation.suspend_link %>
-            </td>
+            <th class ="table-title" colspan="6">Reservas Aprovadas<i class="fa fa-angle-down strong toggleIcon"></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody class= "slide-hidden">
+          <%= render 'reservations/reservations_secretary_header' %>
+          <% @approved_sector_reservations.each do |reservation| %>
+            <tr>
+              <td><%= reservation.date %></td>
+              <td><%= reservation.begin_time %></td>
+              <td><%= reservation.end_time %></td>
+              <td><%= reservation.created_at %></td>
+              <td><%= reservation.place %></td>
+              <td><%= reservation.sectors_names %></td>
+              <td><%= reservation.has_conflicts? %></td>
+              <td><%= reservation.user %></td>
+              <td>
+                <%= reservation.details_link  %>
+                <%= reservation.approve_link %>
+                <%= reservation.reject_link %>
+                <%= reservation.suspend_link %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <%end%>
 
   <% if @rejected_sector_reservations.length > 0 %>
-    <table class = "table table-striped table-bordered table-hover">
-      <thead>
-        <tr colspan="8">
-          <th class ="table-title" colspan= "8">Reservas Rejeitadas</th>
+    <div class="accordion">
+      <table class = "table table-striped table-bordered table-hover">
+        <thead class="head">
+          <tr colspan="8">
+            <th class ="table-title" colspan= "8">Reservas Rejeitadas<i class="fa fa-angle-down strong toggleIcon"></th>
+        </thead>
+        <tbody class= "slide-hidden">
         </tr>
-         <tr>
-          <th>Data</th>
-          <th>Início</th>
-          <th>Fim</th>
-          <th>Solicitada em</th>
-          <th>Local</th>
-          <th>Setor</th>
-          <th>Conflita?</th>
-          <th>Solicitante</th>
-          <th>Motivo da Rejeição</th>
-          <th colspan="3">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @rejected_sector_reservations.each do |reservation| %>
-          <tr>
-            <td><%= reservation.date %></td>
-            <td><%= reservation.begin_time %></td>
-            <td><%= reservation.end_time %></td>
-            <td><%= reservation.created_at %></td>
-            <td style= "max-width:25%; width:15%; word-wrap:break-word"><%= reservation.place %></td>
-            <td><%= reservation.sectors_names %></td>
-            <td><%= reservation.has_conflicts? %></td>
-            <td><%= reservation.user %></td>
-            <td style= "max-width:15%; width:15%; word-wrap:break-word"><%= reservation.justification.reason %></td>
-            <td>
-              <%= reservation.details_link %>
-              <%= reservation.approve_link   %>
-              <%= reservation.reject_link %>
-              <%= reservation.suspend_link %>
-            </td>
+           <tr>
+            <th>Data</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Solicitada em</th>
+            <th>Local</th>
+            <th>Setor</th>
+            <th>Conflita?</th>
+            <th>Solicitante</th>
+            <th>Motivo da Rejeição</th>
+            <th colspan="3">Ações</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+          <% @rejected_sector_reservations.each do |reservation| %>
+            <tr>
+              <td><%= reservation.date %></td>
+              <td><%= reservation.begin_time %></td>
+              <td><%= reservation.end_time %></td>
+              <td><%= reservation.created_at %></td>
+              <td style= "max-width:25%; width:15%; word-wrap:break-word"><%= reservation.place %></td>
+              <td><%= reservation.sectors_names %></td>
+              <td><%= reservation.has_conflicts? %></td>
+              <td><%= reservation.user %></td>
+              <td style= "max-width:15%; width:15%; word-wrap:break-word"><%= reservation.justification.reason %></td>
+              <td>
+                <%= reservation.details_link %>
+                <%= reservation.approve_link   %>
+                <%= reservation.reject_link %>
+                <%= reservation.suspend_link %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <%end %>
 
 <%else%>
