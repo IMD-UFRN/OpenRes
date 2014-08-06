@@ -125,8 +125,15 @@ class Reservation < ActiveRecord::Base
   end
 
   def past?
-    puts "\n\n\n\n\n\n\n\n\n\n\n\n\\n\n\n #{date} ---- #{DateTime.now}\n\n\n\n\n\n\n\n\n\n\n\n\\n\n\n"
-    date < DateTime.now.to_date
+
+    return true if date <= Date.today
+
+    h= end_time.hour
+    m= end_time.min
+    s= end_time.sec
+
+    return true if h < Time.now.hour and m < Time.now.min and s < Time.now.sec
+
   end
 
 end
