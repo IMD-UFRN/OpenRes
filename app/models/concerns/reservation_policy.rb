@@ -90,7 +90,8 @@ class ReservationPolicy
       ReservationPolicy.cancel(reservation, {silent: true})
     end
 
-    NotifyUserMailer.send_canceled_group_mail(reservation_group).deliver
+    reservation_group.save
+    NotifyUserMailer.send_canceled_group_mail(reservation_group)
   end
 
 end

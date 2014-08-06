@@ -84,7 +84,7 @@ class ReservationGroupDecorator < Draper::Decorator
     return if object.status == 'canceled' || !(object.user == current_user)
 
 
-    link_to 'Cancelar', reservation_group_cancel_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
+    link_to 'Cancelar Reserva', reservation_group_cancel_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
   end
 
 

@@ -1,6 +1,6 @@
 <p>
   Olá, <br>
-  A reserva para a sala <%=@reservation_group.place.name %> sob sua jurisdição entre os dias <%=@reservation_group.begin_date %> e <%=@reservation_group.end_date %> foi CANCELADA.
+  A reserva para a sala <%=@reservation_group.place.name %> sob sua jurisdição entre os dias <%=@reservation_group.begin_date.strftime("%d/%m/%Y") %> e <%=@reservation_group.end_date.strftime("%d/%m/%Y") %> foi CANCELADA.
 </p>
 
 <p>
