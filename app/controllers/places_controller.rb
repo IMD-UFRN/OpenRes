@@ -83,6 +83,8 @@ class PlacesController < ApplicationController
 
 
     @objects = @place.object_resources
+    
+    @similar_places = @place.similar_places
 
     #render json: @place.attributes.merge(reservations: reservations).merge(users: users)
   end

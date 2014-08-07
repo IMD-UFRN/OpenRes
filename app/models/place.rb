@@ -13,14 +13,18 @@ class Place < ActiveRecord::Base
 
   scope :reservable, where(reservable: true)
 
+  def similar_places
+    Place.reservable.where(room_type_id: room_type_id).where.not(id: id)
+  end
+  
   def self.grouped_by_type
     groups = []
     RoomType.all.each_with_index do |room_type, index|
-      groups << [room_type.name, Place.where(room_type_id: room_type, reservable: true)]
+      groups << [room_type.name, Place.reservable.where(room_type_id: room_type)]
     end
     return groups
   end
-
+  
   def full_name
     code + " - " + name
   end
