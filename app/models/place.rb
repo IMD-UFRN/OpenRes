@@ -39,4 +39,18 @@ class Place < ActiveRecord::Base
   def past_checkins
     Checkin.finished.from_place(self)
   end
+  
+  def can_be_decided_over?(ap_user)
+    return true if ap_user.role == "admin"
+    return false if (ap_user.role == "basic" || ap_user.role == "receptionist" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))
+    return true
+  end
+
+  def can_be_decided_by
+    users = []
+    User.select { |u| self.can_be_decided_over?(u) }.each do |user|
+      users << user
+    end
+    users
+  end
 end

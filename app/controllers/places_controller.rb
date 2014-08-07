@@ -79,7 +79,8 @@ class PlacesController < ApplicationController
 
     @reservations.order!(:date)
 
-    @responsibles = User.where(sector_id: @place.sectors, role: ["secretary"])
+    @responsibles = @place.can_be_decided_by
+
 
     @objects = @place.object_resources
 

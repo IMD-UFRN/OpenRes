@@ -6,5 +6,6 @@ json.reservations @reservations do |r|
 end
 
 json.place @place.name
+json.capacity @place.capacity
 json.responsibles @responsibles, :email, :name
 json.objects @objects, :name
