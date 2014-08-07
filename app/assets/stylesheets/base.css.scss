@@ -1,5 +1,5 @@
 body{
-  margin-top:-64px;
+  margin-top:1em;
 }
 
 footer{
@@ -259,4 +259,14 @@ h3{
 
 .panel-slots{
   margin-bottom: 2px;
+}
+
+.fixed{
+  position: fixed;
+  width:inherit;
+  font-weight:inherit;
+}
+
+.preview-panel{
+
 }
