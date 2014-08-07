@@ -33,6 +33,10 @@ Handlebars.registerHelper("prettifyDate", function(timestamp) {
   return moment(timestamp).format("HH:mm");
 });
 
+Handlebars.registerHelper("placeLink", function(id) {
+  return "/places/" + id;
+});
+
 Handlebars.registerHelper("prettyStatus", function(status) {
   if (status == "approved")
     return "Aprovada";

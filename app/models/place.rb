@@ -11,6 +11,8 @@ class Place < ActiveRecord::Base
   belongs_to :room_type
   has_many :reservations
 
+  scope :reservable, where(reservable: true)
+
   def self.grouped_by_type
     groups = []
     RoomType.all.each_with_index do |room_type, index|
@@ -39,7 +41,7 @@ class Place < ActiveRecord::Base
   def past_checkins
     Checkin.finished.from_place(self)
   end
-  
+
   def can_be_decided_over?(ap_user)
     return true if ap_user.role == "admin"
     return false if (ap_user.role == "basic" || ap_user.role == "receptionist" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))

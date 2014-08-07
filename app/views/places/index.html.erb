@@ -10,6 +10,9 @@
             Setor: <%= link_to sector.name, sector %> <i class="fa fa-angle-down strong toggleIcon"></i>
           </th>
         </tr>
+      </thead>
+
+      <tbody class= "slide-hidden">
         <tr>
           <th>Código</th>
           <th>Nome</th>
@@ -17,9 +20,6 @@
           <th>Capacidade</th>
           <th>Ações</th>
         </tr>
-      </thead>
-
-      <tbody class= "slide-hidden">
         <% sector.places.each do |place| %>
           <tr>
             <td><%= link_to place.code, place %></td>

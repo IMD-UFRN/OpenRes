@@ -1,18 +1,89 @@
 <h2>Selecione o tipo de Reserva que deseja efetuar</h2>
 <hr>
 
-<div class="well span5">
-  <p class= "table-title">Reserva Simples</p>
-  <hr>
-  <p>São marcadas para apenas um horário de um só dia. Ideal para reuniões ou palestras.</p>
-  <hr>
-  <%= link_to 'Nova Reserva Simples', new_reservation_path, class:"btn btn-success" %>
+
+
+    <div class="well span5">
+      <p class= "table-title">Reserva Simples</p>
+      <hr>
+      <p>São marcadas para apenas um horário de um só dia. Ideal para reuniões ou palestras.</p>
+      <hr>
+      <%= link_to 'Nova Reserva Simples', new_reservation_path, class:"btn btn-success" %>
+    </div>
+
+    <div class="well span5">
+      <p class= "table-title">Reserva Múltipla</p>
+      <hr>
+      <p>São marcadas com repetição em vários dias e horários distintos. Ideal para congressos ou mini-cursos.</p>
+      <hr>
+      <%= link_to 'Nova Reserva Múltipla', new_reservation_group_path, class:"btn btn-success" %>
+    </div>
+
+
+
+<div style="clear: both"></div>
+
+<hr>
+
+<div class="search-box span4">
+  <h3>Buscar salas disponíveis</h3>
+
+  <%= simple_form_for :slot_search, url: slot_search_path, method: :get do |f| %>
+
+    <div class="form-inputs">
+      <%= f.input :date, as: :date_picker, input_html: {id: "date"}, label: "Data"  %>
+      <%= f.input :begin_time, as: :time_picker, input_html: {id: "begin_time"}, label: "Início" %>
+      <%= f.input :end_time, as: :time_picker, input_html: {id: "end_time"}, label: "Fim" %>
+    </div>
+    </br>
+    <%= f.button :submit, "OK", class:"btn btn-success", id: "submitButton" %>
+
+    <hr>
+  <% end %>
+
 </div>
 
-<div class="well span5">
-  <p class= "table-title">Reserva Múltipla</p>
-  <hr>
-  <p>São marcadas com repetição em vários dias e horários distintos. Ideal para congressos ou mini-cursos.</p>
-  <hr>
-  <%= link_to 'Nova Reserva Múltipla', new_reservation_group_path, class:"btn btn-success" %>
+<div class= "span6">
+  <h3>Salas disponíveis encontradas:</h3>
+  <div id="slots">
+    Informe os dados necessários no formulário ao lado.
+  </div>
 </div>
+
+<script id="slot_search_template" type="text/x-handlebars-template">
+
+  {{#each this.places}}
+  <div class= "panel panel-slots">
+    {{full_name}} <a href={{placeLink id}} class="btn btn-small btn-normal pull-right">Detalhes da Sala</a>
+  </div>
+  {{else}}
+    Nenhuma sala encontrada
+  {{/each}}
+
+</script>
+
+<script>
+  $('#submitButton').click(function(e){
+    e.preventDefault();
+    var begin_time= $('#begin_time').val();
+    var end_time= $('#end_time').val();
+    var date= $('#date').val();
+
+    $.ajax({
+      type: "GET",
+      url: encodeURI('/places/slot_search?begin_time='+begin_time + '&end_time='+end_time + '&date='+date),
+      success: function(data){
+
+        var source = $('#slot_search_template').html();
+
+        if (!source)
+          return;
+
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $('#slots').html(html);
+
+      }
+    })
+  })
+</script>

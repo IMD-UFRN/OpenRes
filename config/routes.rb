@@ -20,7 +20,6 @@ OpenRes::Application.routes.draw do
 
   devise_for :users
 
-  resources :places
   resources :sectors
   resources :reservations
   resources :user_places
@@ -55,8 +54,14 @@ OpenRes::Application.routes.draw do
 
   get '/places/:id/get_reservations', to: 'places#get_reservations', as: :get_place_reservations
 
+  get '/places/slot_search', to: 'places#slot_search', as: :slot_search
+
+  resources :places
+
+
   resources :users, path: 'accounts'
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
+
 
   resources :reservation_groups, only: [:show, :index, :create, :new]
 

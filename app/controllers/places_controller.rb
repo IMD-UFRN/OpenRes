@@ -87,6 +87,19 @@ class PlacesController < ApplicationController
     #render json: @place.attributes.merge(reservations: reservations).merge(users: users)
   end
 
+  def slot_search
+
+    @places = []
+
+    Place.reservable.each do |place|
+      mockup_reservation = Reservation.new(date: params[:date], begin_time: params[:begin_time], end_time: params[:end_time], place_id: place.id)
+
+      @places << place if Reservation.conflicting(mockup_reservation).empty?
+
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_place
