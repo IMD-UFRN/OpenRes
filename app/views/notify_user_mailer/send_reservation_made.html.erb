@@ -1,3 +1,27 @@
-Olá, foi realizada uma reserva sob sua jurisdição.
+Olá,
 
-Acesse o OpenRes para verificá-la.
+o usuário <%= @reservation.user.name %> realizou uma reserva sob sua jurisdição.
+
+<br/><br/>
+<strong>Detalhes da Reserva:</strong>
+
+    <% if defined? @reservation.name %>
+
+        <br><strong>Tipo da reserva:</strong> Reserva Múltipla
+        <br><strong>Título:</strong> <%= @reservation.name %>
+        <br><strong>Local:</strong> <%= @reservation.place.name %>
+        <br><strong>Período:</strong> <%=@reservation.begin_date.strftime("%d/%m/%Y") %> a <%=@reservation.end_date.strftime("%d/%m/%Y") %>
+        <br><strong>Solicitada em:</strong> <%=@reservation.created_at.strftime("%d/%m/%Y - %H:%M")%>
+
+    <% else %>
+
+        <br><strong>Tipo da reserva:</strong> Reserva Simples
+        <br><strong>Local:</strong> <%= @reservation.place.name %>
+        <br><strong>Dia:</strong> <%= @reservation.date.strftime("%d/%m/%Y") %>
+        <br><strong>Horário:</strong> <%=@reservation.begin_time.strftime("%H:%M") %> às <%=@reservation.end_time.strftime("%H:%M") %>
+        <br><strong>Solicitada em:</strong> <%=@reservation.created_at.strftime("%d/%m/%Y - %H:%M")%>
+
+    <% end %>
+
+<br><br>
+Acesse o OpenRes para verificá-la <%= @url %>.

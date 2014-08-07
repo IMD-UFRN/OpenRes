@@ -39,6 +39,7 @@ class NotifyUserMailer < ActionMailer::Base
 
   def reservation_made(reservation, user)
     @reservation = reservation
+    @url  = 'http://espacos.imd.ufrn.br'
 
     mail to: user.email, subject: "[IMD- UFRN] Nova reserva"
   end
