@@ -1,5 +1,40 @@
 <h1>Editando Reserva</h1>
 
-<%= render 'form' %>
+<div class="well span4 no-padding">
+  Caso deseje alterar a data, hora ou local da reserva, cancele-a e crie outra.
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<%= simple_form_for(@reservation) do |f| %>
+  <% if @reservation.errors.any? %>
+    <div class="error_explanation alert alert-dismissable alert-danger">
+
+      <p>Algo impediu o salvamento desta reserva:</p>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><strong><%= msg %></strong></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :reason %>
+    <br>
+    <%= f.input :responsible, label:"Autorizado a pegar a chave da sala"%>
+    (Deixe em branco caso seja você mesmo)
+
+  </div>
+  </br>
+  <%= f.button :submit, "OK", class:"btn btn-success" %>
+
+
+<% end %>
 
 <%= render 'back_link'%>
