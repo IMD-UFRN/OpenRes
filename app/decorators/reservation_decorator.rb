@@ -103,6 +103,11 @@ class ReservationDecorator < Draper::Decorator
     user
   end
 
+  def edit_link
+    return if !(object.user == current_user) || object.past?
+    link_to 'Editar Informações desta Reserva', edit_reservation_path(object), class: "btn-small btn-normal"
+  end
+
   def cancel_link
     return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user) || object.past?
 
