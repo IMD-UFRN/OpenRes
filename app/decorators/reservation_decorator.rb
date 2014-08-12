@@ -95,7 +95,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def conflict_class
-    "conflicted_reservation" if  object.has_conflicts?
+    "conflicted_reservation" if  object.has_conflicts? and not object.status.in? %w(canceled rejected)
   end
 
   def responsible
