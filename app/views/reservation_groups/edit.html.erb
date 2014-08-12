@@ -1,0 +1,35 @@
+<h2>Editando Reserva Múltipla</h2>
+
+<%= simple_form_for(:reservation_group_form, url: reservation_group_path(@reservation_group), method: :patch ) do |f| %>
+
+  <div class= "well span4 no-padding">
+    <p>Caso deseje alterar a data, hora ou local da reserva, cancele-a e crie outra.</p>
+  </div>
+  <div class="clear">
+
+  </div>
+
+  <%= f.input :name, label: "Título da Reserva", value: @reservation_group_form.name %>
+
+
+  <br>
+  <%= f.input :responsible, label: "Autorizado a pegar a chave da sala", :required => false %>
+  (Deixe em branco caso seja você mesmo)
+  <br>
+  <br>
+  <%= f.input :reason, as: :text, label: "Motivo" %>
+  <br>
+
+  <%= f.input :notes, as: :text, label: "Observações",:required => false %>
+
+  <br>
+
+  <div class="clear">
+
+  <%= f.button :submit,"SALVAR RESERVA", class:"btn btn-success" %>
+  </div>
+
+
+<% end %>
+
+<%= render "shared/back"%>

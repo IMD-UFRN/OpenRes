@@ -63,7 +63,7 @@ OpenRes::Application.routes.draw do
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
 
 
-  resources :reservation_groups, only: [:show, :index, :create, :new]
+  resources :reservation_groups, except: :destroy
 
   controller :profile do
     get '/profile/edit', to: 'profile#edit', as: :edit_profile

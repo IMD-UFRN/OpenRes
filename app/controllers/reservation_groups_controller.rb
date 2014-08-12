@@ -64,6 +64,34 @@ class ReservationGroupsController < ApplicationController
   def new
   end
 
+  def edit
+    @reservation_group = ReservationGroup.find(params[:id])
+    reservation = @reservation_group.reservations.first
+    reservation_group_struct = Struct.new(:reason, :responsible, :name, :notes)
+
+    @reservation_group_form = reservation_group_struct.new(reservation.reason, reservation.responsible, @reservation_group.name, @reservation_group.notes )
+  end
+
+  def update
+
+    reservation_group_params = params[:reservation_group_form]
+
+    @reservation_group = ReservationGroup.find(params[:id])
+
+    @reservation_group.name = reservation_group_params[:name]
+    @reservation_group.notes = reservation_group_params[:notes]
+
+    @reservation_group.reservations.each do |r|
+      r.responsible = reservation_group_params[:responsible]
+      r.reason = reservation_group_params[:reason]
+      r.save
+    end
+
+    @reservation_group.save
+
+    redirect_to reservation_groups_path, notice: "Reserva atualizada com sucesso"
+  end
+
   def index
 
      if params[:filter_by] == "future"
