@@ -28,7 +28,6 @@ class ProfileController < ApplicationController
        @functions =[["Administração de Setor", "sector_admin"], ["Secretaria", "secretary"], ["Básica", "basic"], ["Recepção", "receptionist"]]
     end
 
-    @sectors = [[@user.sector.name, @user.sector.id]]
   end
 
   def update
