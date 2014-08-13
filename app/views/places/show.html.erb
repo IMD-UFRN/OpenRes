@@ -80,7 +80,12 @@
             <td><%= reservation.has_conflicts? %></td>
             <td><%= reservation.status %></td>
             <td><%= reservation.responsible %></td>
-            <td><%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %></td>
+            <td>
+              <%= link_to 'Detalhes', reservation,  class: "btn-small btn-normal" %>
+              <%= reservation.approve_link%>
+              <%= reservation.suspend_link%>
+              <%= reservation.reject_link%>
+            </td>
           </tr>
       <%end%>
       <% else %>
@@ -106,3 +111,5 @@
 <%end%>
 
 <%= render 'shared/back'%>
+
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

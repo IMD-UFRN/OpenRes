@@ -9,6 +9,7 @@ class ReservationDecorator < Draper::Decorator
     return 'Aprovada' if object.status == 'approved'
     return 'Rejeitada' if object.status == 'rejected'
     return 'Pendente' if object.status == 'pending'
+    return 'Cancelada' if object.status == 'canceled'
   end
 
   def has_conflicts?
