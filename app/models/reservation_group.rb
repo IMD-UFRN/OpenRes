@@ -164,4 +164,8 @@ class ReservationGroup < ActiveRecord::Base
   def past?
     return true if begin_date < DateTime.now.to_date
   end
+
+  def reason
+    reservations.first.reason
+  end
 end
