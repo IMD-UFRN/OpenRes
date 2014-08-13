@@ -1,0 +1,25 @@
+<div class="accordion panel">
+  <div class= "panel-heading search-title head">
+    <h3>Buscar reservas <i class="fa fa-angle-down strong toggleIcon"></i></h3>
+  </div>
+  <div class= "panel-body slide-hidden">
+    <%= simple_form_for :reservation_search, url: check_reservations_path, method: :get do |f| %>
+
+      <div class="form-inputs">
+        <div class="span3">
+          <%= f.input :begin_date, as: :date_picker, input_html: {id: "begin_date"}, label: "Entre"  %>
+          <%= f.input :end_date, as: :date_picker, input_html: {id: "end_date"}, label: "e"  %>
+        </div>
+
+        <div class="span3">
+          <%= f.input :begin_time, as: :time_picker, input_html: {id: "begin_time"}, label: "Horário de início" %>
+          <%= f.input :end_time, as: :time_picker, input_html: {id: "end_time"}, label: "Horário de fim" %>
+        </div>
+      </div>
+      <div class= "clear"></div>
+      </br>
+      <%= f.button :submit, "OK", class:"btn btn-success", id: "submitButton" %>
+
+    <% end %>
+  </div>
+</div>

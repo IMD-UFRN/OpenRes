@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/radar/by_star
+  revision: 8c22f5108b9379adc7fc80d7c5b8b163027eee10
+  specs:
+    by_star (2.2.1)
+      activesupport
+
+GIT
   remote: https://github.com/solnic/virtus.git
   revision: 920b63472670c586f98ae0e28661784de6808100
   specs:
@@ -309,6 +316,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 2.3.2)
   bootswatch-rails
+  by_star!
   cancan
   capistrano (~> 2.15.4)
   capybara

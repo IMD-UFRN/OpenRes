@@ -88,6 +88,8 @@ gem 'coveralls', require: false
 
 gem 'guard-rspec', require: false
 
+gem 'by_star', :git => "git://github.com/radar/by_star"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

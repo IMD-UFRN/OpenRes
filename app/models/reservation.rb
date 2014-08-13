@@ -136,4 +136,28 @@ class Reservation < ActiveRecord::Base
 
   end
 
+  #alidates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
+
+  #reservations = Reservation.where("place_id = ? and date = ? and id <> ? and status <> ?",
+  # reservation.place_id, reservation.date, reservation.id, "rejected")
+  #return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
+  def self.filter(reservations, params)
+
+    begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y")
+    end_date = Date.strptime(params[:end_date], "%d/%m/%Y")
+
+
+    begin_hour, begin_min = params[:begin_time].split(":").map(&:to_i)
+    end_hour, end_min = params[:end_time].split(":").map(&:to_i)
+
+    begin_time = Time.new(2000, 01, 01, begin_hour, begin_min)
+    end_time = Time.new(2000, 01, 01, end_hour, end_min)
+
+
+    reservations.between_times(begin_date, end_date, field: "date").select do |r|
+      r.time_interval.overlaps? begin_time..end_time
+    end
+
+  end
+
 end
