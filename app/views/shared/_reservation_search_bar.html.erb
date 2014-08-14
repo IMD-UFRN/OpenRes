@@ -7,19 +7,45 @@
 
       <div class="form-inputs">
         <div class="span3">
-          <%= f.input :begin_date, as: :date_picker, input_html: {id: "begin_date"}, label: "Entre"  %>
-          <%= f.input :end_date, as: :date_picker, input_html: {id: "end_date"}, label: "e"  %>
+          <%= f.input :begin_date, as: :date_picker,
+              input_html: {id: "begin_date",
+                           value: @params.begin_date},
+              required: false, label: "Entre"  %>
+
+          <%= f.input :end_date, as: :date_picker,
+              input_html: {id: "end_date",
+                           value: @params.end_date},
+              required: false, label: "e"  %>
+          <br>
+          <%= f.button :submit, "OK", class:"btn btn-success", id: "submitButton" %>
         </div>
 
         <div class="span3">
-          <%= f.input :begin_time, as: :time_picker, input_html: {id: "begin_time"}, label: "Horário de início" %>
-          <%= f.input :end_time, as: :time_picker, input_html: {id: "end_time"}, label: "Horário de fim" %>
-        </div>
-      </div>
-      <div class= "clear"></div>
-      </br>
-      <%= f.button :submit, "OK", class:"btn btn-success", id: "submitButton" %>
+          <%= f.input :begin_time, as: :time_picker,
+              input_html: {id: "begin_time",
+                          value: @params.begin_time},
+              required: false, label: "Horário de início" %>
 
-    <% end %>
+          <%= f.input :end_time, as: :time_picker,
+              input_html: {id: "end_time",
+                          value: @params.end_time},
+              required: false, label: "Horário de fim" %>
+
+
+        </div>
+      <% end %>
+    </div>
+    <div class= "span6">
+      <h3>Observações:</h3>
+      <p>
+        <ul>
+          <li>Data de início em branco retornará todas as reservas até a data de fim</li>
+          <li>Data de fim em branco retornará todas as reservas a partir da data de início</li>
+          <li>Horário de início em branco retornará todas as reservas desde o início do dia</li>
+          <li>Horário de fim em branco retornará todas as reservas até o fim do dia</li>
+        </ul>
+      </p>
+    </div>
+    <div class= "clear"></div>
   </div>
 </div>

@@ -24,6 +24,8 @@ class ReservationApprovalController < ApplicationController
     @pending_sector_reservations  = ReservationDecorator.decorate_collection(pending_sector_reservations)
     @approved_sector_reservations = ReservationDecorator.decorate_collection(approved_sector_reservations)
     @rejected_sector_reservations = ReservationDecorator.decorate_collection(rejected_sector_reservations)
+
+    @params = ReservationSearchDecorator.decorate(params[:reservation_search])
   end
 
   def approve
