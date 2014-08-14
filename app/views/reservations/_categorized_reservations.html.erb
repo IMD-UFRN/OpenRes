@@ -5,7 +5,9 @@
       <table class = "table table-striped table-bordered table-hover">
         <thead class="head">
           <tr colspan="4">
-            <th class ="table-title"colspan="8"> Reservas Pendentes<i class="fa fa-angle-down strong toggleIcon"></th>
+            <th class ="table-title"colspan="8"> Reservas Pendentes <div class= "subtitle inline">
+              (<%=@pending_sector_reservations.length%>)
+            </div> <i class="fa fa-angle-down strong toggleIcon"></th>
           </tr>
         </thead>
 
@@ -39,7 +41,8 @@
       <table class = "table table-striped table-bordered table-hover">
         <thead class="head">
           <tr>
-            <th class ="table-title" colspan="6">Reservas Aprovadas<i class="fa fa-angle-down strong toggleIcon"></th>
+            <th class ="table-title" colspan="6">Reservas Aprovadas <div class= "subtitle inline">
+              (<%=@approved_sector_reservations.length%>)</div><i class="fa fa-angle-down strong toggleIcon"></th>
           </tr>
         </thead>
         <tbody class= "slide-hidden">
@@ -72,7 +75,8 @@
       <table class = "table table-striped table-bordered table-hover">
         <thead class="head">
           <tr colspan="8">
-            <th class ="table-title" colspan= "8">Reservas Rejeitadas<i class="fa fa-angle-down strong toggleIcon"></th>
+            <th class ="table-title" colspan= "8">Reservas Rejeitadas <div class= "subtitle inline">
+              (<%=@rejected_sector_reservations.length%>)</div><i class="fa fa-angle-down strong toggleIcon"></th>
         </thead>
         <tbody class= "slide-hidden">
         </tr>
@@ -114,7 +118,14 @@
   <p>Não existe nenhuma reserva nestas condições.</p>
 <%end%>
 
-<br>
+<hr>
+
+<h3 class="inline"><strong>Total:</strong></h3>
+<p>
+  <%=@pending_sector_reservations.length+ @approved_sector_reservations.length + @rejected_sector_reservations.length %> reservas
+</p>
+
+
 
 <%= link_to 'Nova Reserva', new_reservation_path, class:"btn btn-success" %>
 
