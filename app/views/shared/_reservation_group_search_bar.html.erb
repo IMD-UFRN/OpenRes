@@ -1,0 +1,35 @@
+<div class="accordion panel">
+  <div class= "panel-heading search-title head">
+    <h3>Buscar reservas Múltiplas <i class="fa fa-angle-down strong toggleIcon"></i></h3>
+  </div>
+  <div class= "panel-body slide-hidden">
+    <%= simple_form_for :reservation_search, url: check_group_reservations_path, method: :get do |f| %>
+
+      <div class="form-inputs">
+        <div class="span3">
+          <%= f.input :begin_date, as: :date_picker,
+              input_html: {id: "begin_date",
+                           value: @params.begin_date},
+              required: false, label: "Entre"  %>
+
+          <%= f.input :end_date, as: :date_picker,
+              input_html: {id: "end_date",
+                           value: @params.end_date},
+              required: false, label: "e"  %>
+          <br>
+          <%= f.button :submit, "OK", class:"btn btn-success", id: "submitButton" %>
+        </div>
+      <% end %>
+    </div>
+    <div class= "span8 offset1">
+      <h3>Observações:</h3>
+      <p>
+        <ul>
+          <li>Data de início em branco retornará todas as reservas até a data de fim</li>
+          <li>Data de fim em branco retornará todas as reservas a partir da data de início</li>
+        </ul>
+      </p>
+    </div>
+    <div class= "clear"></div>
+  </div>
+</div>

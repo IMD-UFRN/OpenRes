@@ -3,27 +3,30 @@ class ReservationGroupApprovalController < ApplicationController
   def index
     if params[:filter_by] == "future"
 
-      reservations = []
+      reservation_groups = []
 
       ReservationGroup.can_decide_over(current_user).each do |reservation|
         reservations << reservation if reservation.begin_date >= DateTime.now.to_date
       end
 
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(reservations)
-
     elsif params[:filter_by] == "finished"
 
-      reservations = []
+      reservation_groups = []
 
       ReservationGroup.can_decide_over(current_user).each do |reservation|
         reservations << reservation if reservation.begin_date < DateTime.now.to_date
       end
 
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(reservations)
-
     else
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.can_decide_over(current_user))
+      reservation_groups = ReservationGroup.can_decide_over(current_user)
+
+      if params[:reservation_search]
+        reservation_groups = ReservationGroup.filter(reservation_groups, params[:reservation_search])
+      end
     end
+    @reservation_groups = ReservationGroupDecorator.decorate_collection(reservation_groups)
+
+    @params = ReservationSearchDecorator.decorate(params[:reservation_search])
 
   end
 

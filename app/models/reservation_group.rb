@@ -168,4 +168,22 @@ class ReservationGroup < ActiveRecord::Base
   def reason
     reservations.first.reason
   end
+
+  def date_interval
+    begin_date..end_date
+  end
+
+  def self.filter(reservation_groups, params)
+
+    begin_date = Date.new(2000,1,1)
+    end_date = Date.new(3000,1,1)
+
+    begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y") - 1.day if not params[:begin_date] == ""
+    end_date = Date.strptime(params[:end_date], "%d/%m/%Y") if not params[:end_date] == ""
+
+    ReservationGroup.select do |r|
+      r.date_interval.overlaps? begin_date..end_date
+    end
+
+  end
 end
