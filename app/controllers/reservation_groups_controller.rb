@@ -89,7 +89,7 @@ class ReservationGroupsController < ApplicationController
 
     @reservation_group.save
 
-    redirect_to reservation_groups_path, notice: "Reserva atualizada com sucesso"
+    redirect_to @reservation_group, notice: "Reserva atualizada com sucesso"
   end
 
   def index
@@ -140,6 +140,7 @@ class ReservationGroupsController < ApplicationController
   end
 
   def reservation_group_params
-    params.require(:reservation_group_form).merge(user_id: current_user.id)
+    return params.require(:reservation_group_form).merge(user_id: current_user.id) if current_user.role != "admin" || params[:reservation_group_form][:user_id].blank?
+    params.require(:reservation_group_form).permit!
   end
 end

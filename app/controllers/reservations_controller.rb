@@ -103,7 +103,7 @@ class ReservationsController < ApplicationController
 
     render :partial => 'place_preview', :content_type => 'text/html'
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
@@ -112,7 +112,10 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id)
-       .merge(user_id: current_user.id, status: "pending")
+      return params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id)
+       .merge(user_id: current_user.id, status: "pending") if current_user.role != "admin" || params[:reservation][:user_id].blank?
+
+      params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id, :user_id)
+        .merge(status: "pending")
     end
 end

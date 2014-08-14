@@ -11,6 +11,14 @@
 
   <%= f.input :place_id, label: "Sala" , as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'} %>
 
+  <% if current_user.role == "admin" %>
+    <br>
+    <%= f.input :user_id, collection: User.all, label: "Solicitante", required: false, input_html: { class: 'chosen-select', data: { placeholder: "Selecione um usuário" } ,id: 'user_selector'} %>
+    (Você pode deixar em branco caso seja você mesmo)
+    <br>
+
+  <%end%>
+
   <br>
   <%= f.input :responsible, label: "Autorizado a pegar a chave da sala", :required => false %>
   (Deixe em branco caso seja você mesmo)

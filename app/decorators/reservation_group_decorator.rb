@@ -90,8 +90,12 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def responsible
-    return object.responsible unless object.responsible.nil? || object.responsible == ""
-    link_to user.name, user
+    return object.responsible unless object.responsible.blank?
+    link_to object.user.name, object.user
+  end
+
+  def user
+    link_to object.user.name, object.user
   end
 
 end
