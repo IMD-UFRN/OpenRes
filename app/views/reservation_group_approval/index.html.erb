@@ -6,6 +6,8 @@
   <h1>Checando Reservas Múltiplas</h1>
 <%end%>
 
+<%= render "shared/reservation_search_bar" %>
+
 <ul class="nav nav-tabs" style="margin-bottom: 20px;">
   <li><%= link_to 'Reservas Futuras', check_group_reservations_path(filter_by: "future") %></li>
   <li><%= link_to 'Reservas Finalizadas', check_group_reservations_path(filter_by: "finished") %></li>

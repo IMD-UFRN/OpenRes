@@ -143,7 +143,7 @@ class Reservation < ActiveRecord::Base
   #return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
   def self.filter(reservations, params)
 
-    begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y")
+    begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y") - 1.day
     end_date = Date.strptime(params[:end_date], "%d/%m/%Y")
 
 
