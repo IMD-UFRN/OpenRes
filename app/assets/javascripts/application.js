@@ -26,6 +26,7 @@
 //= require moment/pt-br.js
 //= require handlebars
 //= require jquery_nested_form
+//= require jvectormap
 //= require_tree .
 
 Handlebars.registerHelper("prettifyDate", function(timestamp) {

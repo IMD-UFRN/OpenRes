@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 OpenRes::Application.routes.draw do
+  get "map/show"
   resources :room_types
 
   devise_scope :user do
