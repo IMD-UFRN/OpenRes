@@ -56,7 +56,7 @@ OpenRes::Application.routes.draw do
   get '/places/:id/get_reservations', to: 'places#get_reservations', as: :get_place_reservations
 
   get '/places/slot_search', to: 'places#slot_search', as: :slot_search
-
+  
   resources :places
 
 
