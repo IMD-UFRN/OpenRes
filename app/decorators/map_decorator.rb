@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MapDecorator < Draper::Decorator
   delegate_all
 
