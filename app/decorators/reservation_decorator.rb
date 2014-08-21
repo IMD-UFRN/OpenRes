@@ -116,4 +116,12 @@ class ReservationDecorator < Draper::Decorator
 
     link_to 'Cancelar Reserva', reservation_cancel_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
   end
+
+
+  def delete_link
+
+    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user) || object.past?
+
+    link_to 'Excluir', object, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta reserva?' }, class:"btn-small btn-normal"
+  end
 end

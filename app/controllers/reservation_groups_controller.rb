@@ -145,7 +145,7 @@ class ReservationGroupsController < ApplicationController
 
     @reservation_group.save
 
-     redirect_to @reservation_group
+    redirect_to @reservation_group
   end
 
   def reservation_group_params
