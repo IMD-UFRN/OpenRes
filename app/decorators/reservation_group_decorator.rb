@@ -98,4 +98,7 @@ class ReservationGroupDecorator < Draper::Decorator
     link_to object.user.name, object.user
   end
 
+  def save_button
+    link_to "Salvar Reserva", reservation_group_confirm_path(reservation_group), method: :post, class:"btn btn-success" if object.confirmed_at.nil?
+  end
 end

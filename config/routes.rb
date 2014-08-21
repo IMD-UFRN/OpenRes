@@ -36,6 +36,8 @@ OpenRes::Application.routes.draw do
   post "check_group_reservations/:reservation_group_id/suspend", to: "reservation_group_approval#suspend", as: :reservation_group_suspend
   post "reservation_groups/:reservation_group_id/cancel", to: "reservation_group_approval#cancel", as: :reservation_group_cancel
 
+  post "reservation_groups/:reservation_group_id/confirm", to: "reservation_groups#confirm", as: :reservation_group_confirm
+
 
   get "reservations_group/:reservation_group_id/reject" => 'reservation_group_approval#justify_status', as: :justify_reject_group
   get "reservations_group/:reservation_group_id/suspend" => 'reservation_group_approval#justify_status', as: :justify_suspend_group
@@ -56,7 +58,7 @@ OpenRes::Application.routes.draw do
   get '/places/:id/get_reservations', to: 'places#get_reservations', as: :get_place_reservations
 
   get '/places/slot_search', to: 'places#slot_search', as: :slot_search
-  
+
   resources :places
 
 

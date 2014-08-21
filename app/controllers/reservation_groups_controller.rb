@@ -136,7 +136,16 @@ class ReservationGroupsController < ApplicationController
       return
     end
 
+  end
 
+  def confirm
+    @reservation_group = ReservationGroup.find(params[:reservation_group_id])
+
+    @reservation_group.confirmed_at = DateTime.now
+
+    @reservation_group.save
+
+     redirect_to @reservation_group
   end
 
   def reservation_group_params
