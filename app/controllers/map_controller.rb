@@ -5,7 +5,7 @@ class MapController < ApplicationController
     @floor = params[:floor] || 1
 
     if params[:place]
-      places = Place.where(code: params[:place][:code].capitalize)
+      places = Place.where("code LIKE ?" , "%#{params[:place][:code].capitalize}%")
     else
       places = Place.none
     end

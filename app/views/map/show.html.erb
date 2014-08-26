@@ -1,6 +1,8 @@
 <h2>Mapa do Prédio</h2>
 <hr>
 
+<h1><%= @map.grouped_by_floor%></h1>
+
 <div class= "container">
   <div class= "row-fluid">
     <div class="map-navigation span8">
@@ -10,10 +12,10 @@
 
     <div class="span1 no-margin-left">
       <ul class="my-pagination no-margin-left">
-        <li><a href="#" class= "active">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
+        <li><a href="?floor=1" class= "active">1</a></li>
+        <li><a href="?floor=2">2</a></li>
+        <li><a href="?floor=3">3</a></li>
+        <li><a href="?floor=4">4</a></li>
       </ul>
     </div>
 
@@ -75,7 +77,7 @@
 
     $('#IMD-2nd-Floor').vectorMap(
       {
-        map:"IMD-piso-1",
+        map:<%=raw("\"IMD-piso-#{@floor}\"")%>,
         series: {
           regions: [{
             values: <%= raw(@map.color_hash) %>,
