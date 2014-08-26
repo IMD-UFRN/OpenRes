@@ -1,16 +1,20 @@
 # -*- encoding : utf-8 -*-
 class MapController < ApplicationController
   def show
-    @hash ={"background" => "#696969"}
+
+    @floor = params[:floor] || 1
+
     if params[:place]
-      Place.where(code: params[:place][:code].capitalize).pluck(:code).each do |x|
-        @hash[x]= "#729ae3"
-      end
-      if @hash.length == 1
-        flash[:error] = "Sala não encontrada"
-      end
+      places = Place.where(code: params[:place][:code].capitalize)
+    else
+      places = Place.none
     end
 
-    @result= @hash.to_json
+    @map= MapDecorator.decorate(places)
+
+      #Place.where(code: params[:place][:code].capitalize).pluck(:code).
+      # if @hash.length == 1
+      #   flash[:error] = "Sala não encontrada"
+
   end
 end

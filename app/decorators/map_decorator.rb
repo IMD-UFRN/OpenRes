@@ -1,14 +1,17 @@
 # -*- encoding : utf-8 -*-
 class MapDecorator < Draper::Decorator
+  decorates :place
+
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def color_hash
+    hash ={"background" => "#696969"}
 
+    object.each do |p|
+      hash[p.code] = "#729ae3"
+    end
+
+    hash.to_json
+  end
+  
 end
