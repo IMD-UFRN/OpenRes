@@ -16,7 +16,13 @@ class MapDecorator < Draper::Decorator
   end
 
   def grouped_by_floor
-    object.inspect
+    @grouped_by_floor ||= object.group_by {|p| p.code[1]}
+  end
+
+  def get_places_count(floor)
+    return 0 unless grouped_by_floor[floor.to_s]
+
+    grouped_by_floor[floor.to_s].length
   end
 
 end
