@@ -145,7 +145,7 @@ class ReservationGroupsController < ApplicationController
 
     @reservation_group.save
 
-    redirect_to @reservation_group
+    redirect_to @reservation_group, notice: "Reserva salva com sucesso"
   end
 
   def reservation_group_params

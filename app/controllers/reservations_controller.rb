@@ -89,7 +89,11 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     respond_to do |format|
-      format.html { redirect_to reservations_url }
+      format.html {
+        flash[:notice] = 'Reserva excluída com sucesso.' 
+        return redirect_to reservations_url unless @reservation.reservation_group
+        redirect_to @reservation.reservation_group
+      }
       format.json { head :no_content }
     end
   end
@@ -103,7 +107,7 @@ class ReservationsController < ApplicationController
 
     render :partial => 'place_preview', :content_type => 'text/html'
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation

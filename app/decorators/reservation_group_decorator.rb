@@ -101,4 +101,9 @@ class ReservationGroupDecorator < Draper::Decorator
   def save_button
     link_to "Salvar Reserva", reservation_group_confirm_path(reservation_group), method: :post, class:"btn btn-success" if object.confirmed_at.nil?
   end
+
+  def message
+
+    return "Sua reserva ainda não foi cadastrada. Confirme as informações abaixo, remova os conflitos e então salve a reserva!"
+  end
 end

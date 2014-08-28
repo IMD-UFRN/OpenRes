@@ -124,4 +124,5 @@ class ReservationDecorator < Draper::Decorator
 
     link_to 'Excluir', object, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta reserva?' }, class:"btn-small btn-normal"
   end
+
 end

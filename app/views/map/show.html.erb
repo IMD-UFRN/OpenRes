@@ -23,7 +23,8 @@
 
 
         <div class="form-inputs">
-          <%= f.input :code, label: "Código" %>
+          <%= f.input :code, label: "Código", input_html: {
+                       value: params[:place][:code]} %>
 
         </div>
 
