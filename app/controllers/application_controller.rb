@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!, :except => [:about]
 
+  before_filter :reservation_counter
+  before_filter :reservation_group_counter
+
   before_filter do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
@@ -37,6 +40,20 @@ class ApplicationController < ActionController::Base
 
   def current_user
     UserDecorator.decorate(super) unless super.nil?
+  end
+
+  def reservation_counter
+    @pending_counter = Reservation.can_decide_over(current_user).pending.from_future.not_grouped.length
+  end
+
+  def reservation_group_counter
+
+    @pending_group_counter = 0
+
+    ReservationGroup.confirmed.can_decide_over(current_user).each do |reservation|
+      @pending_group_counter += 1 if reservation.begin_date >= DateTime.now.to_date
+    end
+
   end
 
 end
