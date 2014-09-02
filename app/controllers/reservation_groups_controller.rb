@@ -129,7 +129,6 @@ class ReservationGroupsController < ApplicationController
     @reservation_group = group_processor.save
 
     if @reservation_group
-      NotifyUserMailer.send_reservation_made(@reservation_group)
       redirect_to @reservation_group
     else
       flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é válido e contém os dias selecionados."
@@ -150,6 +149,8 @@ class ReservationGroupsController < ApplicationController
     @reservation_group.confirmed_at = DateTime.now
 
     @reservation_group.save
+
+    NotifyUserMailer.send_reservation_made(@reservation_group)
 
     redirect_to @reservation_group, notice: "Reserva salva com sucesso"
   end
