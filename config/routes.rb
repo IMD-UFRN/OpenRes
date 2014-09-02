@@ -68,6 +68,12 @@ OpenRes::Application.routes.draw do
 
   resources :reservation_groups, except: :destroy
 
+  controller :reservation_groups do
+
+    get '/reservation_groups/:id/new_reservation', to: :new_reservation, as: :add_reservation
+
+  end
+
   controller :profile do
     get '/profile/edit', to: 'profile#edit', as: :edit_profile
     get '/profile', to: 'profile#profile', as: :profile
