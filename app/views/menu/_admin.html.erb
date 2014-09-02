@@ -1,5 +1,14 @@
 <li><%= link_to 'Inicio', dashboard_path %></li>
-<li><%= link_to 'Checar Reservas', check_reservations_path(filter_by: "future")  %></li>
+<li>
+  <%= link_to check_reservations_path(filter_by: "future") do  %>
+  Checar Reservas  <span class="badge">12</span>
+  <% end %>
+</li>
+<li>
+  <%= link_to check_group_reservations_path do  %>
+  Checar Reservas Múltiplas  <span class="badge">12</span>
+  <% end %>
+</li>
 <li><%= link_to 'Checar Reservas Múltiplas', check_group_reservations_path %></li>
 <li><%= link_to 'Mapa de Salas', map_show_path %></li>
 <li><%= link_to 'Reservas Simples', reservations_path(filter_by: "future")  %></li>
