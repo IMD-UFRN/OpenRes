@@ -109,11 +109,12 @@ class ReservationGroupDecorator < Draper::Decorator
   def message
 
     hint_message= <<-msg
-    <br>
-    <br>
 
-    <div class= "well">
-      Sua reserva ainda não foi cadastrada. Confirme as informações abaixo, remova os conflitos e então salve a reserva!
+    <div class= "alert alert-warning">
+      Sua reserva ainda não foi cadastrada. <br>
+      Caso sua reserva apresente conflitos, clique em "Adicionar Reserva Simples" para adicionar uma reserva que resolva o conflito. Em seguida, exclua sua reserva conflitante.
+      <br>
+      Satisfeito com suas reservas, clique em "Salvar Reserva"
     </div>
 msg
     return hint_message.html_safe if object.confirmed_at.nil?
