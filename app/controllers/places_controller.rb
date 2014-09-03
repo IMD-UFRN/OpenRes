@@ -83,22 +83,18 @@ class PlacesController < ApplicationController
 
 
     @objects = @place.object_resources
-    
-    @similar_places = @place.similar_places
+
+    # raise Exception.new Place.get_empty_places(date, params[:begin_time], params[:end_time])
+
+    @similar_places = @place.similar_places & Place.get_empty_places(date, params[:begin_time], params[:end_time])
+
 
     #render json: @place.attributes.merge(reservations: reservations).merge(users: users)
   end
 
   def slot_search
 
-    @places = []
-
-    Place.reservable.each do |place|
-      mockup_reservation = Reservation.new(date: params[:date], begin_time: params[:begin_time], end_time: params[:end_time], place_id: place.id)
-
-      @places << place if Reservation.conflicting(mockup_reservation).empty?
-
-    end
+    @places = Place.get_empty_places(params[:date], params[:begin_time], params[:end_time])
 
   end
 

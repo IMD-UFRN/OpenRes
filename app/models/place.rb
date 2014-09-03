@@ -13,10 +13,24 @@ class Place < ActiveRecord::Base
 
   scope :reservable, where(reservable: true)
 
+  def self.get_empty_places(date, begin_time, end_time)
+
+    @places = []
+
+    Place.reservable.each do |place|
+      mockup_reservation = Reservation.new(date: date, begin_time: :begin_time, end_time: :end_time, place_id: place.id)
+
+      @places << place if Reservation.conflicting(mockup_reservation).empty?
+
+    end
+
+    @places
+  end
+
   def similar_places
     Place.reservable.where(room_type_id: room_type_id).where.not(id: id)
   end
-  
+
   def self.grouped_by_type
     groups = []
     RoomType.all.each_with_index do |room_type, index|
@@ -24,7 +38,7 @@ class Place < ActiveRecord::Base
     end
     return groups
   end
-  
+
   def full_name
     code + " - " + name
   end

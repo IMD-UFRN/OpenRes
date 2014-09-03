@@ -40,12 +40,12 @@ var PlacePreviewView = Backbone.View.extend({
     var day = parseInt(split[0]);
 
     var date = moment([year, month, day]);
-    var time = moment($('#reservation_begin_time').val(), "HH:mm").add('minutes', 60)
+    var beginTime = moment($('#reservation_begin_time').val(), "HH:mm").add('minutes', 60)
 
     if (!date.isValid())
       date = moment();
 
-    if (!time.isValid()) {
+    if (!beginTime.isValid()) {
       if (moment().get('minutes') < 30){
         $('#reservation_begin_time').val(moment().add('minutes', 30 - moment().get('minutes')).format("HH:mm"));
         $('#reservation_end_time').val(moment().add('minutes', 30 - moment().get('minutes')+ 60).format("HH:mm"));
@@ -59,12 +59,12 @@ var PlacePreviewView = Backbone.View.extend({
     }
     else {
       if (!moment($('#reservation_end_time').val(), "HH:mm").isValid())
-        $('#reservation_end_time').val(time.format("HH:mm"));
+        $('#reservation_end_time').val(beginTime.format("HH:mm"));
     }
 
     $('#reservation_date').val(date.format('DD/MM/YYYY'));
 
-    this.model.set({id: selected, date: date.format('DD/MM/YYYY')});
+    this.model.set({id: selected, date: date.format('DD/MM/YYYY'), begin_time: beginTime.format("HH:mm"), end_time: moment($('#reservation_end_time').val(), "HH:mm")});
 
     this.model.fetch({
       success: function (collection, response) {
