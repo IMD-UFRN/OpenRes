@@ -15,16 +15,25 @@ class Place < ActiveRecord::Base
 
   def self.get_empty_places(date, begin_time, end_time)
 
-    @places = []
+    places = []
+    reservations = Reservation.where(date: date, status: ["pending", "approved"])
+
+
 
     Place.reservable.each do |place|
-      mockup_reservation = Reservation.new(date: date, begin_time: :begin_time, end_time: :end_time, place_id: place.id)
 
-      @places << place if Reservation.conflicting(mockup_reservation).empty?
+      x = true
 
+      reservations.each do |r|
+
+        x = x && !(r.time_interval.overlaps?(begin_time..end_time)) if r.place == place
+
+      end
+
+      places << place if x
     end
 
-    @places
+    places
   end
 
   def similar_places

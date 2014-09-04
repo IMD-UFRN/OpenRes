@@ -64,7 +64,7 @@ var PlacePreviewView = Backbone.View.extend({
 
     $('#reservation_date').val(date.format('DD/MM/YYYY'));
 
-    this.model.set({id: selected, date: date.format('DD/MM/YYYY'), begin_time: beginTime.format("HH:mm"), end_time: moment($('#reservation_end_time').val(), "HH:mm")});
+    this.model.set({id: selected, date: date.format('DD/MM/YYYY'), begin_time: beginTime.format("HH:mm"), end_time: $('#reservation_end_time').val()});
 
     this.model.fetch({
       success: function (collection, response) {
