@@ -13,10 +13,33 @@ class Place < ActiveRecord::Base
 
   scope :reservable, where(reservable: true)
 
+  def self.get_empty_places(date, begin_time, end_time)
+
+    places = []
+    reservations = Reservation.where(date: date, status: ["pending", "approved"])
+
+
+
+    Place.reservable.each do |place|
+
+      x = true
+
+      reservations.each do |r|
+
+        x = x && !(r.time_interval.overlaps?(begin_time..end_time)) if r.place == place
+
+      end
+
+      places << place if x
+    end
+
+    places
+  end
+
   def similar_places
     Place.reservable.where(room_type_id: room_type_id).where.not(id: id)
   end
-  
+
   def self.grouped_by_type
     groups = []
     RoomType.all.each_with_index do |room_type, index|
@@ -24,7 +47,7 @@ class Place < ActiveRecord::Base
     end
     return groups
   end
-  
+
   def full_name
     code + " - " + name
   end

@@ -59,10 +59,17 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @conflicts.empty? and @reservation.save
-        NotifyUserMailer.send_reservation_made(@reservation)
 
-        format.html { redirect_to @reservation, notice: 'Reserva criada com sucesso.' }
-        format.json { render action: 'show', status: :created, location: @reservation }
+        if @reservation.reservation_group
+          format.html { redirect_to @reservation.reservation_group, notice: 'Reserva adicionada com sucesso.' }
+          format.json { render action: 'show', status: :created, location: @reservation }
+
+        else
+          NotifyUserMailer.send_reservation_made(@reservation)
+
+          format.html { redirect_to @reservation, notice: 'Reserva criada com sucesso.' }
+          format.json { render action: 'show', status: :created, location: @reservation }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: [@conflicts, @reservation.errors], status: :unprocessable_entity }
@@ -90,7 +97,7 @@ class ReservationsController < ApplicationController
     @reservation.destroy
     respond_to do |format|
       format.html {
-        flash[:notice] = 'Reserva excluída com sucesso.' 
+        flash[:notice] = 'Reserva excluída com sucesso.'
         return redirect_to reservations_url unless @reservation.reservation_group
         redirect_to @reservation.reservation_group
       }
@@ -116,10 +123,10 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      return params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id)
+      return params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id, :reservation_group_id)
        .merge(user_id: current_user.id, status: "pending") if current_user.role != "admin" || params[:reservation][:user_id].blank?
 
-      params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id, :user_id)
+      params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id, :user_id, :reservation_group_id)
         .merge(status: "pending")
     end
 end

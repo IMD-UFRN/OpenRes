@@ -71,34 +71,50 @@ class PlacesController < ApplicationController
 
     begin
       date = Date.strptime(params[:date], "%d/%m/%Y")
+      begin_time = Time.parse("2000-01-01 "+params[:begin_time]+":00 UTC")
+      end_time = Time.parse("2000-01-01 "+params[:end_time]+":00 UTC")
     rescue
       date = nil
+      begin_time = nil
+      end_time = nil
     end
 
     @reservations = @reservations.where(date: date) if date
 
-    @reservations.order!(:date)
+    @reservations.order!(:begin_time)
 
     @responsibles = @place.can_be_decided_by
 
+    puts "\n\n\n\n\\n\n\n\n\n\n\n\n\\n\n\n\n\n" + date.to_s
+    puts "\n\n\n\n\\n\n\n\n\n\n\n\n\\n\n\n\n\n" + begin_time.to_s
+    puts "\n\n\n\n\\n\n\n\n\n\n\n\n\\n\n\n\n\n" + end_time.to_s
 
     @objects = @place.object_resources
-    
-    @similar_places = @place.similar_places
+
+    puts Place.get_empty_places(date, begin_time, end_time).map(&:code)
+    puts "-----------------------"
+    puts @place.similar_places.map(&:code)
+
+    @similar_places = @place.similar_places & Place.get_empty_places(date, begin_time, end_time)
+
 
     #render json: @place.attributes.merge(reservations: reservations).merge(users: users)
   end
 
   def slot_search
 
-    @places = []
-
-    Place.reservable.each do |place|
-      mockup_reservation = Reservation.new(date: params[:date], begin_time: params[:begin_time], end_time: params[:end_time], place_id: place.id)
-
-      @places << place if Reservation.conflicting(mockup_reservation).empty?
-
+    begin
+      date = Date.strptime(params[:date], "%d/%m/%Y")
+      begin_time = Time.parse("2000-01-01 "+params[:begin_time]+":00 UTC")
+      end_time = Time.parse("2000-01-01 "+params[:end_time]+":00 UTC")
+    rescue
+      date = nil
+      begin_time = nil
+      end_time = nil
     end
+
+
+    @places = Place.get_empty_places(date, begin_time, end_time)
 
   end
 

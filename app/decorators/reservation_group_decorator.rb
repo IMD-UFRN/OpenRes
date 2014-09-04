@@ -102,14 +102,19 @@ class ReservationGroupDecorator < Draper::Decorator
     link_to "Salvar Reserva", reservation_group_confirm_path(reservation_group), method: :post, class:"btn btn-success" if object.confirmed_at.nil?
   end
 
+  def new_reservation_button
+    link_to "Adicionar Reserva Simples", add_reservation_path(reservation_group), class:"btn btn-success" if object.confirmed_at.nil?
+  end
+
   def message
 
     hint_message= <<-msg
-    <br>
-    <br>
 
-    <div class= "well">
-      Sua reserva ainda não foi cadastrada. Confirme as informações abaixo, remova os conflitos e então salve a reserva!
+    <div class= "alert alert-warning">
+      Sua reserva ainda não foi cadastrada. <br>
+      Caso sua reserva apresente conflitos, clique em "Adicionar Reserva Simples" para adicionar uma reserva que resolva o conflito. Em seguida, exclua sua reserva conflitante.
+      <br>
+      Satisfeito com suas reservas, clique em "Salvar Reserva"
     </div>
 msg
     return hint_message.html_safe if object.confirmed_at.nil?

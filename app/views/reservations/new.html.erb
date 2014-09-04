@@ -2,9 +2,17 @@
   <div class="row-fluid">
     <div class="span5">
       <div class="fixed">
-      <h1>Nova Reserva</h1>
-        <%= render 'form' %>
-<%= render 'shared/back'%>
+      <h1>
+
+        <% if @reservation.reservation_group %>
+          <%= "Adicionando Reserva a \"#{@reservation.reservation_group.name}\"" %>
+        <% else %>
+          <%= "Nova Reserva" %>
+        <% end %>
+
+      </h1>
+        <%= render 'reservations/form' %>
+        <%= render 'shared/back'%>
       </div>
     </div>
 
@@ -76,7 +84,7 @@
       </div>
 
       <div class= "panel panel-info">
-        <p class= "panel-heading">Salas semelhantes</p>
+        <p class= "panel-heading">Salas semelhantes disponíveis</p>
 
         <table class="table table-striped table-bordered table-hover">
           <thead>

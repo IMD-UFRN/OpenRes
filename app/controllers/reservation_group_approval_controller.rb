@@ -6,7 +6,7 @@ class ReservationGroupApprovalController < ApplicationController
       reservation_groups = []
 
       ReservationGroup.confirmed.can_decide_over(current_user).each do |reservation|
-        reservations << reservation if reservation.begin_date >= DateTime.now.to_date
+        reservation_groups << reservation if reservation.begin_date >= DateTime.now.to_date
       end
 
     elsif params[:filter_by] == "finished"
@@ -14,7 +14,7 @@ class ReservationGroupApprovalController < ApplicationController
       reservation_groups = []
 
       ReservationGroup.confirmed.can_decide_over(current_user).each do |reservation|
-        reservations << reservation if reservation.begin_date < DateTime.now.to_date
+        reservation_groups << reservation if reservation.begin_date < DateTime.now.to_date
       end
 
     else

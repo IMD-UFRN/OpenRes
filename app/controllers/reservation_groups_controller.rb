@@ -60,6 +60,7 @@ end
 
 class ReservationGroupsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :return_if_confirmed, only: [:new_reservation]
 
   def new
   end
@@ -128,7 +129,6 @@ class ReservationGroupsController < ApplicationController
     @reservation_group = group_processor.save
 
     if @reservation_group
-      NotifyUserMailer.send_reservation_made(@reservation_group)
       redirect_to @reservation_group
     else
       flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é válido e contém os dias selecionados."
@@ -138,6 +138,11 @@ class ReservationGroupsController < ApplicationController
 
   end
 
+  def new_reservation
+    @reservation = Reservation.new
+    @reservation.reservation_group = @reservation_group
+  end
+
   def confirm
     @reservation_group = ReservationGroup.find(params[:reservation_group_id])
 
@@ -145,11 +150,24 @@ class ReservationGroupsController < ApplicationController
 
     @reservation_group.save
 
+    NotifyUserMailer.send_reservation_made(@reservation_group)
+
     redirect_to @reservation_group, notice: "Reserva salva com sucesso"
   end
 
   def reservation_group_params
     return params.require(:reservation_group_form).merge(user_id: current_user.id) if current_user.role != "admin" || params[:reservation_group_form][:user_id].blank?
     params.require(:reservation_group_form).permit!
+  end
+
+  def return_if_confirmed
+    @reservation_group = ReservationGroup.find(params[:id])
+
+    if @reservation_group.confirmed_at
+      flash[:error] = "Você não pode criar reservas para uma reserva múltipla já confirmada!"
+
+      redirect_to @reservation_group
+    end
+
   end
 end

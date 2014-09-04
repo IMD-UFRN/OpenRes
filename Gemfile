@@ -38,8 +38,6 @@ gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'https:/
 
 gem 'chosen-rails'
 
-gem 'unicorn'
-
 gem "rails-backbone"
 
 gem 'handlebars_assets'
