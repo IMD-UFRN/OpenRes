@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821114717) do
+ActiveRecord::Schema.define(version: 20140909125314) do
 
   create_table "checkins", force: true do |t|
     t.integer  "reservation_id"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20140821114717) do
   end
 
   add_index "checkins", ["reservation_id"], name: "index_checkins_on_reservation_id"
+
+  create_table "class_monitors", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "place_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "class_monitors", ["place_id"], name: "index_class_monitors_on_place_id"
 
   create_table "justifications", force: true do |t|
     t.text     "reason"

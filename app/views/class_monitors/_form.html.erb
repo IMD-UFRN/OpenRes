@@ -1,0 +1,32 @@
+<%= simple_form_for(@class_monitor) do |f| %>
+  <% if @class_monitor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@class_monitor.errors.count, "error") %> impediu o salvamento deste Monitor:</h2>
+
+      <ul>
+      <% @class_monitor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <hr>
+    <div class="form-inputs">
+      <%= f.input :email %>
+      <%= f.input :name %>
+
+      <br>
+      <%= f.association :place,  label_method: :full_name, input_html: { class: 'chosen-select', data: { placeholder: "Selecione a sala" }} %></br>
+
+    </div>
+    </br>
+    <%= f.button :submit, "OK", class:"btn btn-success" %>
+
+  </div>
+
+
+  <hr>
+
+<% end %>

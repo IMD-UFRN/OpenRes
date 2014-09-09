@@ -214,6 +214,7 @@ pt-BR:
       sector: Setor
       reservation: Reserva
       user: Usuário
+      class_monitor: Monitor de Sala
     attributes:
       room_type:
         name: Nome
@@ -255,3 +256,7 @@ pt-BR:
         password: Senha
         old_password: Senha Antiga
         password_confirmation: Confirme a senha
+      class_monitor:
+        name: Nome
+        email: E-mail
+        place: Sala

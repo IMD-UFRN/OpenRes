@@ -1,0 +1,25 @@
+<h1>Listing class_monitors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @class_monitors.each do |class_monitor| %>
+      <tr>
+        <td><%= link_to 'Show', class_monitor %></td>
+        <td><%= link_to 'Edit', edit_class_monitor_path(class_monitor) %></td>
+        <td><%= link_to 'Destroy', class_monitor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Class monitor', new_class_monitor_path %>

@@ -1,0 +1,2 @@
+module ClassMonitorsHelper
+end

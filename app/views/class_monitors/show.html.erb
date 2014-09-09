@@ -1,0 +1,18 @@
+<h2>Perfil do Monitor de Sala</h2>
+
+<%= link_to 'Editar Informações deste Monitor', edit_class_monitor_path(@class_monitor), class:"btn-small btn-normal"%>
+
+
+<hr>
+
+
+<dl>
+
+  <dt>Nome:</dt> <dd><%= @class_monitor.name %></dd>
+  <dt>E-mail:</dt> <dd><%= @class_monitor.email %></dd>
+
+</dl>
+
+<hr>
+
+<%= render "shared/back" %>

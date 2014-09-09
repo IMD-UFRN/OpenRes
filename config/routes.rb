@@ -25,6 +25,7 @@ OpenRes::Application.routes.draw do
   resources :reservations
   resources :user_places
   resources :object_resources
+  resources :class_monitors
 
   get "check_reservations/", to: "reservation_approval#index", as: :check_reservations
   get "check_group_reservations/", to: "reservation_group_approval#index", as: :check_group_reservations

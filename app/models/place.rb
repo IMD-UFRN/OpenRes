@@ -9,7 +9,9 @@ class Place < ActiveRecord::Base
   has_many :object_resources, through: :place_objects
 
   belongs_to :room_type
+
   has_many :reservations
+  has_many :class_monitors
 
   scope :reservable, where(reservable: true)
 
