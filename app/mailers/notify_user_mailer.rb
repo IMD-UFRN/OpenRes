@@ -17,6 +17,15 @@ class NotifyUserMailer < ActionMailer::Base
 
   end
 
+  def send_reservation_to_class_monitor(reservation)
+    @reservation = reservation
+
+    @reservation.place.class_monitors.each do |monitor|
+      reservation_made_to_class_monitor(@reservation, monitor).deliver
+    end
+
+  end
+
   def send_canceled_mail(reservation)
     @reservation = reservation
 
@@ -43,6 +52,14 @@ class NotifyUserMailer < ActionMailer::Base
 
     mail to: user.email, subject: "[IMD- UFRN] Nova reserva"
   end
+
+  def reservation_made_to_class_monitor(reservation, user)
+    @reservation = reservation
+    @url  = 'http://espacos.imd.ufrn.br'
+
+    mail to: user.email, subject: "[IMD- UFRN] Reserva em Sala de Monitoria"
+  end
+
 
   def reservation_canceled(reservation, user)
     @reservation = reservation

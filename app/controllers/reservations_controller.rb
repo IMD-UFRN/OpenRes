@@ -66,6 +66,7 @@ class ReservationsController < ApplicationController
 
         else
           NotifyUserMailer.send_reservation_made(@reservation)
+          NotifyUserMailer.send_reservation_to_class_monitor(@reservation)
 
           format.html { redirect_to @reservation, notice: 'Reserva criada com sucesso.' }
           format.json { render action: 'show', status: :created, location: @reservation }

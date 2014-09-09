@@ -1,8 +1,29 @@
 Olá,
 
-o usuário <%= @reservation.user.name %> realizou uma reserva em uma sala sob sua jurisdição.
+o usuário <%= @reservation.user.name %> fez uma alteração em uma reserva na sua sala de monitoria.
 
-<br/><br/>
+<br>
+<br>
+
+<strong>
+
+<% if @reservation.status == "approved" %>
+
+Esta reserva está aprovada.
+
+<% elsif @reservation.status == "rejected" || @reservation.status == "canceled"%>
+
+Esta reserva foi cancelada
+
+<% elsif @reservation.status == "pending" %>
+
+Esta reserva ainda está pendente.
+
+<% end %>
+
+</strong>
+
+<br><br>
 <strong>Detalhes da Reserva:</strong>
 
     <% if defined? @reservation.name %>
@@ -24,4 +45,4 @@ o usuário <%= @reservation.user.name %> realizou uma reserva em uma sala sob su
     <% end %>
 
 <br><br>
-Acesse o OpenRes para verificá-la <%= @url %>.
+Em caso de dúvidas, entre em contato com seu orientador.

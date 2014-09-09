@@ -10,6 +10,7 @@ class ReservationPolicy
     end
     unless opts[:silent]
       ReservationApprovalMailer.suspended_mail(reservation, justification).deliver
+      NotifyUserMailer.send_reservation_to_class_monitor(reservation)
     end
   end
 
@@ -22,6 +23,7 @@ class ReservationPolicy
     end
     unless opts[:silent]
       ReservationApprovalMailer.rejected_mail(reservation, justification).deliver
+      NotifyUserMailer.send_reservation_to_class_monitor(reservation)
     end
   end
 
@@ -33,6 +35,7 @@ class ReservationPolicy
 
       unless opts[:silent]
         ReservationApprovalMailer.approved_mail(reservation).deliver
+        NotifyUserMailer.send_reservation_to_class_monitor(reservation)
       end
 
       reservation.save
@@ -46,7 +49,8 @@ class ReservationPolicy
     reservation.save
 
     unless opts[:silent]
-      NotifyUserMailer.send_canceled_mail(reservation)
+      NotifyUserMailer.send_canceled_mail(reservation).deliver
+      NotifyUserMailer.send_reservation_to_class_monitor(reservation)
     end
 
   end
@@ -58,6 +62,7 @@ class ReservationPolicy
     end
 
     ReservationApprovalMailer.suspended_group_mail(reservation_group, justification).deliver
+    NotifyUserMailer.send_reservation_to_class_monitor(reservation_group)
   end
 
   def self.reject_all(reservation_group, justification)
@@ -67,6 +72,7 @@ class ReservationPolicy
     end
 
     ReservationApprovalMailer.rejected_group_mail(reservation_group, justification).deliver
+    NotifyUserMailer.send_reservation_to_class_monitor(reservation_group)
 
   end
 
@@ -79,6 +85,7 @@ class ReservationPolicy
     end
 
     ReservationApprovalMailer.approved_group_mail(reservation_group).deliver
+    NotifyUserMailer.send_reservation_to_class_monitor(reservation_group)
 
     return conflicts
 
@@ -92,6 +99,7 @@ class ReservationPolicy
 
     reservation_group.save
     NotifyUserMailer.send_canceled_group_mail(reservation_group)
+    NotifyUserMailer.send_reservation_to_class_monitor(reservation_group)
   end
 
 end
