@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ReservationGroup < ActiveRecord::Base
+
+  has_paper_trail
+  
   has_many :reservations
 
 

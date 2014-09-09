@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Reservation < ActiveRecord::Base
 
+  has_paper_trail
+
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
 
   validates :status, inclusion: { in: %w(pending approved rejected canceled) }
