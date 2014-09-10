@@ -53,10 +53,34 @@
       <% end %>
     <%else%>
       <tr>
-        <td colspan="4">Não existem reservam que conflitam horários com esta.</td>
+        <td colspan="5">Não existem reservam que conflitam horários com esta.</td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<hr>
+
+<h2>Histórico da Reserva</h2>
+<!--ADICIONAR COLUNA DE MUDANÇAS NA MIGRATION ANTIGA CONFORME: https://github.com/airblade/paper_trail#diffing-versions-->
+<div class="panel">
+  <div class="panel-heading">
+    Data de Modificação
+  </div>
+  <div class="panel-body">
+    <% unless @reservation.versions.length == 0 %>
+      <% @reservation.versions.each do |v| %>
+        <%= v.reify.updated_at.strftime("%d/%m/%Y - %H:%M") %>
+        <%= v.changeset.inspect %> <br>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+
+
+
+
+<%= @reservation.versions[0].inspect %>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
