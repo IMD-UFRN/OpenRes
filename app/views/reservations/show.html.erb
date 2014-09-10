@@ -63,24 +63,34 @@
 
 <h2>Histórico da Reserva</h2>
 <!--ADICIONAR COLUNA DE MUDANÇAS NA MIGRATION ANTIGA CONFORME: https://github.com/airblade/paper_trail#diffing-versions-->
-<div class="panel">
-  <div class="panel-heading">
-    Data de Modificação
-  </div>
-  <div class="panel-body">
-    <% unless @reservation.versions.length == 0 %>
-      <% @reservation.versions.each do |v| %>
-        <%= v.reify.updated_at.strftime("%d/%m/%Y - %H:%M") %>
-        <%= v.changeset.inspect %> <br>
-      <% end %>
-    <% end %>
-  </div>
+<% unless @reservation.versions.length == 0 %>
+  <% @reservation.versions.order(:created_at).reverse.each do |v| %>
+    <% user = User.find(v.whodunnit) %>
+    <% attributes = {"status" => "Situação", "requester" => "Solicitante", "reason" => "Motivo", "responsible"=>"Autorizado a pegar a chave"} %>
+    <% values = {""=> (link_to user.name, user), "pending" => "Pendente", "approved" => "Aprovada", "canceled" => "Cancelada", "rejected"=>"Rejeitada"} %>
 
-</div>
+    <div class="container">
+      <div class="row no-padding">
+        <div class="panel span5">
+          <div class="panel-heading">
+            Alteração em <%= v.reify.updated_at.strftime("%d/%m/%Y - %H:%M") %> por <%= link_to user.name, user%>
+          </div>
+          <div class="panel-body">
+            <% v.changeset.each do |change| %>
+              <% if  change[0] != "updated_at" %>
+                <%= attributes[change[0]] %> mudou de "<%= values[change[1][0]] || change[1][0]%>" para "<%= values[change[1][1]] || change[1][1]%>" <br>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% else %>
+  <h4>Não foram feitas alterações na reserva desde sua criação.</h4>
+<% end %>
 
 
-
-
-<%= @reservation.versions[0].inspect %>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
