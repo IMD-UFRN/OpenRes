@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ClassMonitorsController < ApplicationController
   before_action :set_class_monitor, only: [:show, :edit, :update, :destroy]
 

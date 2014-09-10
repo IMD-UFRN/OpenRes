@@ -152,6 +152,9 @@ ActiveRecord::Schema.define(version: 20140909141135) do
     t.text     "object"
     t.text     "object_changes"
     t.datetime "created_at"
+    t.string   "responsible"
+    t.string   "reason"
+    t.string   "status"
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"

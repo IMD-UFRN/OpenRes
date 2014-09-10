@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateClassMonitors < ActiveRecord::Migration
   def change
     create_table :class_monitors do |t|

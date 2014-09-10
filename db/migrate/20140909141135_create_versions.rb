@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateVersions < ActiveRecord::Migration
   def change
     create_table :versions do |t|
@@ -8,6 +9,9 @@ class CreateVersions < ActiveRecord::Migration
       t.text     :object
       t.text     :object_changes
       t.datetime :created_at
+      t.string   :responsible
+      t.string   :reason
+      t.string   :status
     end
     add_index :versions, [:item_type, :item_id]
   end

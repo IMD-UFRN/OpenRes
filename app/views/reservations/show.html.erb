@@ -62,7 +62,7 @@
 <hr>
 
 <h2>Histórico da Reserva</h2>
-<!--ADICIONAR COLUNA DE MUDANÇAS NA MIGRATION ANTIGA CONFORME: https://github.com/airblade/paper_trail#diffing-versions-->
+
 <% unless @reservation.versions.length == 0 %>
   <% @reservation.versions.order(:created_at).reverse.each do |v| %>
     <% user = User.find(v.whodunnit) %>

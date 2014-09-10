@@ -1,8 +1,13 @@
 # -*- encoding : utf-8 -*-
+
 class ReservationGroup < ActiveRecord::Base
 
-  has_paper_trail
-  
+  has_paper_trail :meta => { :responsible  => :responsible,
+                             :reason => :reason,
+                             :status => :status
+                      }
+
+
   has_many :reservations
 
 
