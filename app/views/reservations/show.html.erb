@@ -78,7 +78,7 @@
           <div class="panel-body">
             <% v.changeset.each do |change| %>
               <% if  change[0] != "updated_at" %>
-                <%= attributes[change[0]] %> mudou de "<%= values[change[1][0]] || change[1][0]%>" para "<%= values[change[1][1]] || change[1][1]%>" <br>
+                <strong><%= attributes[change[0]] %></strong> mudou de "<%= values[change[1][0]] || change[1][0]%>" para "<%= values[change[1][1]] || change[1][1]%>" <br>
               <% end %>
             <% end %>
           </div>

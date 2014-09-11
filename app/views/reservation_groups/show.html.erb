@@ -93,7 +93,7 @@
 
     <% user = User.find(v.whodunnit) %>
     <% attributes = {"name" => "Título", "status" => "Situação", "requester" => "Solicitante", "reason" => "Motivo", "responsible"=>"Autorizado a pegar a chave", "notes" => "Observações"} %>
-    <% values = {""=> (link_to user.name, user), "pending" => "Pendente", "approved" => "Aprovada", "canceled" => "Cancelada", "rejected"=>"Rejeitada"} %>
+    <% values = {""=> "--", "pending" => "Pendente", "approved" => "Aprovada", "canceled" => "Cancelada", "rejected"=>"Rejeitada"} %>
 
     <div class="container">
       <div class="row no-padding">
@@ -104,7 +104,7 @@
           <div class="panel-body">
             <% v.changeset.each do |change| %>
               <% if  change[0] != "updated_at" %>
-                <%= attributes[change[0]] %> mudou de "<%= values[change[1][0]] || change[1][0]%>" para "<%= values[change[1][1]] || change[1][1]%>" <br>
+                <strong><%= attributes[change[0]] %></strong> mudou de "<%= values[change[1][0]] || change[1][0]%>" para "<%= values[change[1][1]] || change[1][1]%>" <br>
                 <!-- <%= change.inspect %> -->
               <% end %>
             <% end %>
