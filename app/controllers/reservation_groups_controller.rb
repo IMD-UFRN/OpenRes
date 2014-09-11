@@ -79,6 +79,7 @@ class ReservationGroupsController < ApplicationController
 
     @reservation_group = ReservationGroup.find(params[:id])
 
+
     last_responsible = @reservation_group.responsible
     last_reason = @reservation_group.reason
 
@@ -86,32 +87,27 @@ class ReservationGroupsController < ApplicationController
     @reservation_group.notes = reservation_group_params[:notes]
 
     # ActiveRecord::Base.transaction do
-      @reservation_group.reservations.each do |r|
-        r.responsible = reservation_group_params[:responsible]
-        r.reason = reservation_group_params[:reason]
-        r.save
-      end
 
+    @reservation_group.reservations.each do |r|
+      r.responsible = reservation_group_params[:responsible]
+      r.reason = reservation_group_params[:reason]
+      r.save
+    end
 
-      @reservation_group.save
+    @reservation_group.touch_with_version
+    
+    @reservation_group.save
 
-      pt = PaperTrail::Version.last
+    pt = PaperTrail::Version.last
 
-      puts "\n\n\n\n\n\n\n\n"
-      puts pt.changeset.to_yaml
-      puts "\n\n\n\n\n\n\n\n"
+    cs = pt.changeset
 
-      cs = pt.changeset
+    cs["responsible"] = [last_responsible,@reservation_group.responsible] unless last_responsible == @reservation_group.responsible
+    cs["reason"] = [last_reason,@reservation_group.reason] unless last_reason == @reservation_group.reason
 
-      cs["responsible"] = [last_responsible,@reservation_group.responsible] unless last_responsible == @reservation_group.responsible
-      cs["reason"] = [last_reason,@reservation_group.reason] unless last_reason == @reservation_group.reason 
+    pt.object_changes = cs.to_yaml
 
-      pt.object_changes = cs.to_yaml
-      # puts pt.changeset
-
-      pt.save
-
-    # end
+    pt.save
 
     redirect_to @reservation_group, notice: "Reserva atualizada com sucesso"
   end

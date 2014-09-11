@@ -31,26 +31,95 @@ class ReservationGroupApprovalController < ApplicationController
   end
 
   def approve
-    ReservationPolicy.approve_all(ReservationGroup.find(params[:reservation_group_id]))
-    redirect_to check_group_reservations_path
+
+    reservation_group= ReservationGroup.find(params[:reservation_group_id])
+
+    last_status =  reservation_group.status
+
+    ReservationPolicy.approve_all(reservation_group)
+
+    reservation_group.touch_with_version
+
+    pt = PaperTrail::Version.last
+
+    cs = pt.changeset
+
+    cs["status"] = [last_status, reservation_group.status] unless last_status == reservation_group.status
+
+    pt.object_changes = cs.to_yaml
+
+    pt.save
+
+    redirect_to check_group_reservations_path(filter_by: "future"), notice: "Reserva aprovada com sucesso."
   end
 
   def reject
     @justification = Justification.new(justification_params)
 
-    ReservationPolicy.reject_all(ReservationGroup.find(params[:reservation_group_id]), @justification)
-    redirect_to check_group_reservations_path
+    reservation_group= ReservationGroup.find(params[:reservation_group_id])
+
+    last_status =  reservation_group.status
+
+    ReservationPolicy.reject_all(reservation_group, @justification)
+
+    reservation_group.touch_with_version
+
+    pt = PaperTrail::Version.last
+
+    cs = pt.changeset
+
+    cs["status"] = [last_status, reservation_group.status] unless last_status == reservation_group.status
+
+    pt.object_changes = cs.to_yaml
+
+    pt.save
+
+    redirect_to check_group_reservations_path(filter_by: "future"), notice: "Reserva rejeitada com sucesso."
   end
 
   def suspend
     @justification = Justification.new(justification_params)
 
-    ReservationPolicy.suspend_all(ReservationGroup.find(params[:reservation_group_id]), @justification)
-    redirect_to check_group_reservations_path
+    reservation_group= ReservationGroup.find(params[:reservation_group_id])
+
+    last_status =  reservation_group.status
+
+    ReservationPolicy.suspend_all(reservation_group, @justification)
+
+    reservation_group.touch_with_version
+
+    pt = PaperTrail::Version.last
+
+    cs = pt.changeset
+
+    cs["status"] = [last_status, reservation_group.status] unless last_status == reservation_group.status
+
+    pt.object_changes = cs.to_yaml
+
+    pt.save
+
+    redirect_to check_group_reservations_path(filter_by: "future"), notice: "Reserva suspensa com sucesso."
   end
 
   def cancel
-    ReservationPolicy.cancel_all(ReservationGroup.find(params[:reservation_group_id]))
+    reservation_group= ReservationGroup.find(params[:reservation_group_id])
+
+    last_status =  reservation_group.status
+
+    ReservationPolicy.cancel_all(reservation_group)
+
+    reservation_group.touch_with_version
+
+    pt = PaperTrail::Version.last
+
+    cs = pt.changeset
+
+    cs["status"] = [last_status, reservation_group.status] unless last_status == reservation_group.status
+
+    pt.object_changes = cs.to_yaml
+
+    pt.save
+
     redirect_to reservation_groups_path(filter_by: "future"), notice: "Reserva cancelada com sucesso."
   end
 

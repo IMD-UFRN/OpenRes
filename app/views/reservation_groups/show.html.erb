@@ -93,7 +93,7 @@
 
     <% user = User.find(v.whodunnit) %>
     <% attributes = {"name" => "Título", "status" => "Situação", "requester" => "Solicitante", "reason" => "Motivo", "responsible"=>"Autorizado a pegar a chave", "notes" => "Observações"} %>
-    <% values = {""=> "--", "pending" => "Pendente", "approved" => "Aprovada", "canceled" => "Cancelada", "rejected"=>"Rejeitada"} %>
+    <% values = {""=> "--", "pending" => "Pendente", "approved" => "Aprovada", "canceled" => "Cancelada", "rejected"=>"Rejeitada", "partially approved"=> "Parcialmente Aprovada", "partially rejected"=> "Parcialmente Rejeitada"} %>
 
     <div class="container">
       <div class="row no-padding">
