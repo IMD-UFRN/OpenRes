@@ -41,7 +41,7 @@ class ReservationGroupDecorator < Draper::Decorator
 
 
   def approve_link
-    return " " if (object.status == 'approved') || !object.can_be_decided_over?(current_user)
+    return " " if (object.status == 'approved') || !object.can_be_decided_over?(current_user) || object.confirmed_at.nil?
 
     btn_class = "btn-small btn-normal"
 
@@ -51,7 +51,7 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def reject_link
-    return if object.status == 'rejected' || !object.can_be_decided_over?(current_user)
+    return if object.status == 'rejected' || !object.can_be_decided_over?(current_user) || object.confirmed_at.nil?
 
     link_to 'Rejeitar', justify_reject_group_path(reservation_group),
       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
@@ -59,7 +59,7 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def suspend_link
-    return if object.status == 'pending' || !object.can_be_decided_over?(current_user)
+    return if object.status == 'pending' || !object.can_be_decided_over?(current_user) || object.confirmed_at.nil?
 
 
     link_to 'Suspender', justify_suspend_group_path(reservation_group),
@@ -79,7 +79,7 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def edit_link
-    return if object.status == 'canceled' || object.status == 'approved' || object.status == "rejected" || !(object.user == current_user) || object.past?
+    return if object.status == 'canceled' || object.status == 'approved' || object.status == "rejected" || !(object.user == current_user) || object.past? || object.confirmed_at.nil?
 
     link_to "Editar Reserva", edit_reservation_group_path, class: "btn-small btn-normal"
   end

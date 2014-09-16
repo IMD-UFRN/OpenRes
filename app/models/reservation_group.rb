@@ -2,11 +2,7 @@
 
 class ReservationGroup < ActiveRecord::Base
 
-  has_paper_trail :meta => { :responsible  => :responsible,
-                             :reason => :reason,
-                             :status => :status
-                      }
-
+  has_paper_trail on: [:update, :destroy]
 
   has_many :reservations
 

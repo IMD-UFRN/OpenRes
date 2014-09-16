@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Reservation < ActiveRecord::Base
 
-  has_paper_trail
+  has_paper_trail on: [:update, :destroy]
 
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
 
