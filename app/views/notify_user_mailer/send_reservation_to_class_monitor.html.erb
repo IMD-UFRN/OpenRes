@@ -30,14 +30,14 @@ Esta reserva ainda está pendente.
 
         <br><strong>Tipo da reserva:</strong> Reserva Múltipla
         <br><strong>Título:</strong> <%= @reservation.name %>
-        <br><strong>Local:</strong> <%= @reservation.place.name %>
+        <br><strong>Local:</strong> <%= @reservation.place.full_name %>
         <br><strong>Período:</strong> <%=@reservation.begin_date.strftime("%d/%m/%Y") %> a <%=@reservation.end_date.strftime("%d/%m/%Y") %>
         <br><strong>Solicitada em:</strong> <%=@reservation.created_at.strftime("%d/%m/%Y - %H:%M")%>
 
     <% else %>
 
         <br><strong>Tipo da reserva:</strong> Reserva Simples
-        <br><strong>Local:</strong> <%= @reservation.place.name %>
+        <br><strong>Local:</strong> <%= @reservation.place.full_name %>
         <br><strong>Dia:</strong> <%= @reservation.date.strftime("%d/%m/%Y") %>
         <br><strong>Horário:</strong> <%=@reservation.begin_time.strftime("%H:%M") %> às <%=@reservation.end_time.strftime("%H:%M") %>
         <br><strong>Solicitada em:</strong> <%=@reservation.created_at.strftime("%d/%m/%Y - %H:%M")%>
