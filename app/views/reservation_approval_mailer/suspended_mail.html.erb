@@ -1,5 +1,17 @@
 <p>
-  Olá <%= @reservation.user.name %>, sua reserva para a sala <%=@reservation.place.name %> entre as <%=@reservation.begin_time.strftime("%H:%M") %> e <%=@reservation.end_time.strftime("%H:%M") %> foi SUSPENSA.
+  Olá <%= @reservation.user.name %>,
+
+  <br>
+  <br>
+
+  A reserva de código <%= @reservation.id %> foi <strong>SUSPENSA</strong>.
+
+  <br>
+  <br>
+
+  <strong>Dia</strong>: <%= @reservation.date.strftime("%d/%m/%Y") %> <br>
+  <strong>Hora</strong>: das <%= @reservation.begin_time.strftime("%H:%M") %> às e <%=@reservation.end_time.strftime("%H:%M") %> <br>
+  <strong>Sala</strong>: <%= @reservation.place.full_name %> <br>
 </p>
 
 <p> Motivo: <%= @justification.reason %> </p>
