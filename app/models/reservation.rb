@@ -154,14 +154,7 @@ class Reservation < ActiveRecord::Base
     end_min    = 59
 
     begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y") if not params[:begin_date].blank?
-    end_date = Date.strptime(params[:end_date], "%d/%m/%Y") if not params[:end_date].blank?
-
-puts "\n\n\n\n\n"
-    puts begin_date
-    puts end_date
-puts "\n\n\n\n\n"
-
-    
+    end_date = Date.strptime(params[:end_date], "%d/%m/%Y") if not params[:end_date].blank?    
     
     begin_hour, begin_min = params[:begin_time].split(":").map(&:to_i) if not params[:begin_time].blank?
     end_hour, end_min = params[:end_time].split(":").map(&:to_i) if not params[:end_time].blank?
