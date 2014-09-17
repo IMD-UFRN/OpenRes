@@ -8,6 +8,10 @@ class ReservationGroupDecorator < Draper::Decorator
     link_to(object.place.full_name, object.place)
   end
 
+  def place_name
+    object.place.full_name
+  end
+
   def begin_date
     object.begin_date.strftime("%d/%m/%Y")
   end

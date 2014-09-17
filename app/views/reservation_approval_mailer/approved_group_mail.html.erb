@@ -1,5 +1,16 @@
 <p>
-  Olá <%= @user.name %>, sua reserva múltipla para a sala <%=@reservation_group.place_name %> no período de <%=@reservation_group.begin_date %> a <%=@reservation_group.end_date%> foi APROVADA!
+  Olá <%= @user.name  %>,
+
+  <br>
+  <br>
+
+  A reserva <strong>múltipla</strong> de código <%= @reservation_group.id %> foi <strong>APROVADA</strong>.
+
+  <br>
+  <br>
+
+  <strong>Dias</strong>: de <%=@reservation_group.begin_date %> a <%=@reservation_group.end_date %><br>
+  <strong>Sala</strong>: <%= @reservation_group.place_name %> <br>
 </p>
 
 <p>
