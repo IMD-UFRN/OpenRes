@@ -13,15 +13,21 @@ class PlacesController < ApplicationController
   # GET /places/1
   # GET /places/1.json
   def show
-    @reservation_groups= ReservationGroupDecorator.decorate_collection(ReservationGroup.from_place(@place))
+
+    reservations = @place.reservations.not_grouped
+    reservation_groups = ReservationGroup.from_place(@place)
 
     if params[:filter_by] == "future"
-      @reservations= ReservationDecorator.decorate_collection(@place.reservations.not_grouped.from_future)
+      reservations= reservations.from_future
+      reservation_groups= reservation_groups && ReservationGroup.from_future
+
     elsif params[:filter_by] == "finished"
-      @reservations= ReservationDecorator.decorate_collection(@place.reservations.not_grouped.from_past)
-    else
-      @reservations= ReservationDecorator.decorate_collection(@place.reservations.not_grouped)
+      reservations= reservations.from_past
+      reservation_groups= reservation_groups && ReservationGroup.from_past
     end
+
+    @reservations= ReservationDecorator.decorate_collection(reservations)
+    @reservation_groups= ReservationGroupDecorator.decorate_collection(reservation_groups)
 
   end
 
