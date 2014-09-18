@@ -81,7 +81,10 @@ class Reservation < ActiveRecord::Base
   }
 
   scope :from_past, lambda{
-    return Reservation.where("date < ?",  DateTime.now.to_date)
+
+    now_time = Time.new(2000, 1, 1, Time.now.hour, Time.now.min, 0, "+00:00")
+
+    return Reservation.where("date < ? OR ( date == ? AND end_time < ? )",  DateTime.now.to_date, DateTime.now.to_date, now_time)
   }
 
   scope :conflicting, lambda { |reservation|
