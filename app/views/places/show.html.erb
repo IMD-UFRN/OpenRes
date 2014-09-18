@@ -82,7 +82,14 @@
 
 <% if @place.reservable? %>
 
-  <h2>Reservas Simples desta Sala</h2>
+  <h2 id="placeReservations">Reservas Simples desta Sala</h2>
+
+  <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+    <li><%= link_to 'Reservas Futuras', place_path(@place, filter_by: "future") + "#placeReservations" %></li>
+    <li><%= link_to 'Reservas Finalizadas', place_path(@place, filter_by: "finished") + "#placeReservations"  %></li>
+    <li><%= link_to 'Todas as Reservas', place_path(@place) + "#placeReservations"  %></li>
+  </ul>
+
 
   <table class="table table-striped table-bordered table-hover">
     <thead>
