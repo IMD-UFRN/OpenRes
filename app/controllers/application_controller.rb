@@ -51,9 +51,8 @@ class ApplicationController < ActionController::Base
     @pending_group_counter = 0
 
     ReservationGroup.confirmed.can_decide_over(current_user).each do |reservation|
-      @pending_group_counter += 1 if reservation.begin_date >= DateTime.now.to_date
+      @pending_group_counter += 1 if reservation.begin_date >= DateTime.now.to_date && reservation.status =="pending"
     end
-
   end
 
 end
