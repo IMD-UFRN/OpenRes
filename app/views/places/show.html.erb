@@ -82,7 +82,20 @@
 
 <% if @place.reservable? %>
 
-  <h2>Reservas Simples desta Sala</h2>
+  <% if params[:filter_by] == "future" %>
+    <h2 id="placeReservations">Reservas Simples Futuras desta Sala</h2>
+  <% elsif params[:filter_by] == "finished" %>
+    <h2 id="placeReservations">Reservas Simples Finalizadas desta Sala</h2>
+  <% else %>
+    <h2 id="placeReservations">Reservas Simples desta Sala</h2>
+  <% end %>
+
+  <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+    <li><%= link_to 'Reservas Futuras', place_path(@place, filter_by: "future") + "#placeReservations" %></li>
+    <li><%= link_to 'Reservas Finalizadas', place_path(@place, filter_by: "finished") + "#placeReservations"  %></li>
+    <li><%= link_to 'Todas as Reservas', place_path(@place) + "#placeReservations"  %></li>
+  </ul>
+
 
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -125,7 +138,19 @@
     </tbody>
   </table>
 
-  <h2>Reservas Múltiplas desta Sala</h2>
+  <% if params[:filter_by] == "future" %>
+    <h2 id="placeGroupReservations">Reservas Múltiplas Futuras desta Sala</h2>
+  <% elsif params[:filter_by] == "finished" %>
+    <h2 id="placeGroupReservations">Reservas Múltiplas Finalizadas desta Sala</h2>
+  <% else %>
+    <h2 id="placeGroupReservations">Reservas Múltiplas desta Sala</h2>
+  <% end %>
+
+  <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+    <li><%= link_to 'Reservas Futuras', place_path(@place, filter_by: "future") + "#placeGroupReservations" %></li>
+    <li><%= link_to 'Reservas Finalizadas', place_path(@place, filter_by: "finished") + "#placeGroupReservations"  %></li>
+    <li><%= link_to 'Todas as Reservas', place_path(@place) + "#placeGroupReservations"  %></li>
+  </ul>
 
   <% unless @reservation_groups.length ==0 %>
 

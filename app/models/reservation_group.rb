@@ -65,7 +65,7 @@ class ReservationGroup < ActiveRecord::Base
 
     ReservationGroup.all.each do |reservation|
 
-      if reservation.begin_date >= DateTime.now.to_date
+      if reservation.end_date >= DateTime.now.to_date
         reservations << reservation
       end
     end
@@ -78,7 +78,7 @@ class ReservationGroup < ActiveRecord::Base
 
     ReservationGroup.all.each do |reservation|
 
-      if reservation.begin_date < DateTime.now.to_date
+      if reservation.end_date < DateTime.now.to_date
         reservations << reservation
       end
     end

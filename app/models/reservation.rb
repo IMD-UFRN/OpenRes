@@ -74,11 +74,17 @@ class Reservation < ActiveRecord::Base
   }
 
   scope :from_future, lambda{
-    return Reservation.where("date >= ?",  DateTime.now.to_date)
+
+    now_time = Time.new(2000, 1, 1, Time.now.hour, Time.now.min, 0, "+00:00")
+
+    return Reservation.where("date > ? OR ( date == ? AND end_time >= ? )", DateTime.now.to_date, DateTime.now.to_date, now_time)
   }
 
   scope :from_past, lambda{
-    return Reservation.where("date < ?",  DateTime.now.to_date)
+
+    now_time = Time.new(2000, 1, 1, Time.now.hour, Time.now.min, 0, "+00:00")
+
+    return Reservation.where("date < ? OR ( date == ? AND end_time < ? )",  DateTime.now.to_date, DateTime.now.to_date, now_time)
   }
 
   scope :conflicting, lambda { |reservation|
@@ -153,18 +159,17 @@ class Reservation < ActiveRecord::Base
     end_hour   = 23
     end_min    = 59
 
-    begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y") - 1.day if not params[:begin_date] == ""
-    end_date = Date.strptime(params[:end_date], "%d/%m/%Y") if not params[:end_date] == ""
+    begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y") if not params[:begin_date].blank?
+    end_date = Date.strptime(params[:end_date], "%d/%m/%Y") if not params[:end_date].blank?
+
+    begin_hour, begin_min = params[:begin_time].split(":").map(&:to_i) if not params[:begin_time].blank?
+    end_hour, end_min = params[:end_time].split(":").map(&:to_i) if not params[:end_time].blank?
+
+    begin_time = Time.new(2000, 1, 1, begin_hour, begin_min, 0)
+    end_time = Time.new(2000, 1, 1, end_hour, end_min, 0)
 
 
-    begin_hour, begin_min = params[:begin_time].split(":").map(&:to_i) if not params[:begin_time] == ""
-    end_hour, end_min = params[:end_time].split(":").map(&:to_i) if not params[:end_time] == ""
-
-    begin_time = Time.new(2000, 01, 01, begin_hour, begin_min)
-    end_time = Time.new(2000, 01, 01, end_hour, end_min)
-
-
-    reservations.between_times(begin_date, end_date, field: "date").select do |r|
+    reservations.where(date: begin_date..end_date).select do |r|
       r.time_interval.overlaps? begin_time..end_time
     end
 
