@@ -181,6 +181,10 @@ class ReservationGroup < ActiveRecord::Base
     begin_date..end_date
   end
 
+  def created_by
+    reservations.first.created_by
+  end
+
   def self.filter(reservation_groups, params)
 
     begin_date = Date.new(2000,1,1)

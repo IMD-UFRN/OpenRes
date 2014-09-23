@@ -126,9 +126,9 @@ class ReservationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
       return params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id, :reservation_group_id)
-       .merge(user_id: current_user.id, status: "pending") if current_user.role != "admin" || params[:reservation][:user_id].blank?
+       .merge(user_id: current_user.id, status: "pending", created_by_id: current_user.id) if current_user.role != "admin" || params[:reservation][:user_id].blank?
 
       params.require(:reservation).permit(:date, :begin_time, :end_time, :reason, :responsible, :place_id, :user_id, :reservation_group_id)
-        .merge(status: "pending")
+        .merge(status: "pending", created_by_id: current_user.id)
     end
 end

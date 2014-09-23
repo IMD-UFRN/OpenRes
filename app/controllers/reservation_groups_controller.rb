@@ -19,7 +19,7 @@ class ReservationGroupProcessor
       days.each do |day|
         reservations << Reservation.new(date: day, begin_time: repetition[:begin_time],
           end_time: repetition[:end_time], status: 'pending', reason: @hash[:reason],
-          user_id: @hash[:user_id], place_id: @hash[:place_id], responsible: @hash[:responsible])
+          user_id: @hash[:user_id], place_id: @hash[:place_id], responsible: @hash[:responsible], created_by_id: @hash[:created_by_id])
       end
     end
 
@@ -95,7 +95,7 @@ class ReservationGroupsController < ApplicationController
     end
 
     @reservation_group.touch_with_version
-    
+
     @reservation_group.save
 
     pt = PaperTrail::Version.last
@@ -134,6 +134,7 @@ class ReservationGroupsController < ApplicationController
   end
 
   def create
+
     @reservation_group = ReservationGroup.new(name: reservation_group_params[:name],
      notes: reservation_group_params[:notes])
 
@@ -175,8 +176,9 @@ class ReservationGroupsController < ApplicationController
   end
 
   def reservation_group_params
-    return params.require(:reservation_group_form).merge(user_id: current_user.id) if current_user.role != "admin" || params[:reservation_group_form][:user_id].blank?
-    params.require(:reservation_group_form).permit!
+
+    return params.require(:reservation_group_form).merge(user_id: current_user.id, created_by_id: current_user.id) if current_user.role != "admin" || params[:reservation_group_form][:user_id].blank?
+    params.require(:reservation_group_form).merge(created_by_id: current_user.id).permit!
   end
 
   def return_if_confirmed

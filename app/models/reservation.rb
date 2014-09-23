@@ -8,6 +8,7 @@ class Reservation < ActiveRecord::Base
   validates :status, inclusion: { in: %w(pending approved rejected canceled) }
 
   belongs_to :user
+  belongs_to :created_by, class_name: "User"
   belongs_to :place
   belongs_to :reservation_group
 
