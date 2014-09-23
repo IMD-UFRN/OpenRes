@@ -119,6 +119,10 @@ class ReservationGroupDecorator < Draper::Decorator
       Caso sua reserva apresente conflitos, clique em "Adicionar Reserva Simples" para adicionar uma reserva que resolva o conflito. Em seguida, exclua sua reserva conflitante.
       <br>
       Satisfeito com suas reservas, clique em "Salvar Reserva"
+      <br>
+      Caso não deseje confirmar esta reserva, clique em "Cancelar Reserva"
+      <br>
+      Esta reserva continuará acessível na sua tela de reservas caso você deixe esta tela.
     </div>
 msg
     return hint_message.html_safe if object.confirmed_at.nil?
