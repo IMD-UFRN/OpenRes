@@ -110,7 +110,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def cancel_link
-    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user) || object.past?
+    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user || object.created_by == current_user)  || object.past?
 
 
 
@@ -120,7 +120,7 @@ class ReservationDecorator < Draper::Decorator
 
   def delete_link
 
-    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user) || object.past?
+    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user || object.created_by == current_user) || object.past? 
 
     link_to 'Excluir', object, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta reserva?' }, class:"btn-small btn-normal"
   end

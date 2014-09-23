@@ -135,13 +135,13 @@ class Reservation < ActiveRecord::Base
 
   def past?
 
-    return true if date <= Date.today
+    return true if date < Date.today
 
     h= end_time.hour
     m= end_time.min
     s= end_time.sec
 
-    return true if h < Time.now.hour and m < Time.now.min and s < Time.now.sec
+    return true if h < Time.now.hour && m < Time.now.min && s < Time.now.sec
 
   end
 
