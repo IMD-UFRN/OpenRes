@@ -83,7 +83,7 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def edit_link
-    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user || object.created_by == current_user)  || object.past? || object.confirmed_at.nil?
+    return if object.status == 'canceled' || object.status == "rejected" ||  !(object.user == current_user || object.created_by == current_user) || object.past? 
 
     link_to "Editar Reserva", edit_reservation_group_path, class: "btn-small btn-normal"
   end
