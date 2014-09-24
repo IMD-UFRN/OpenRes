@@ -18,9 +18,7 @@ class Place < ActiveRecord::Base
   def self.get_empty_places(date, begin_time, end_time)
 
     places = []
-    reservations = Reservation.where(date: date, status: ["pending", "approved"])
-
-
+    reservations = Reservation.where(date: date, status: ["pending", "approved"]).reject { |r| r.reservation_group && !r.reservation_group.confirmed_at}
 
     Place.reservable.each do |place|
 
