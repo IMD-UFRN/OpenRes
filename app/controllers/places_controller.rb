@@ -4,6 +4,8 @@ class PlacesController < ApplicationController
 
   before_action :set_place, only: [:show, :edit, :update, :destroy, :get_reservations]
 
+  before_action :load_dates, only: [:get_reservations, :slot_search]
+
   # GET /places
   # GET /places.json
   def index
@@ -83,17 +85,7 @@ class PlacesController < ApplicationController
   def get_reservations
     @reservations = @place.reservations.where("status = ? or status = ?", "approved", "pending" )
 
-    begin
-      date = Date.strptime(params[:date], "%d/%m/%Y")
-      begin_time = Time.parse("2000-01-01 "+params[:begin_time]+":00 UTC")
-      end_time = Time.parse("2000-01-01 "+params[:end_time]+":00 UTC")
-    rescue
-      date = nil
-      begin_time = nil
-      end_time = nil
-    end
-
-    @reservations = @reservations.where(date: date) if date
+    @reservations = @reservations.where(date: @date) if @date
 
     @reservations.order!(:begin_time)
 
@@ -103,26 +95,12 @@ class PlacesController < ApplicationController
 
     @objects = @place.object_resources
 
-    @similar_places = @place.similar_places & Place.get_empty_places(date, begin_time, end_time)
-
-
-    #render json: @place.attributes.merge(reservations: reservations).merge(users: users)
+    @similar_places = @place.similar_places & Place.get_empty_places(@date, @begin_time, @end_time)
   end
 
   def slot_search
 
-    begin
-      date = Date.strptime(params[:date], "%d/%m/%Y")
-      begin_time = Time.parse("2000-01-01 "+params[:begin_time]+":00 UTC")
-      end_time = Time.parse("2000-01-01 "+params[:end_time]+":00 UTC")
-    rescue
-      date = nil
-      begin_time = nil
-      end_time = nil
-    end
-
-
-    @places = Place.get_empty_places(date, begin_time, end_time)
+    @places = Place.get_empty_places(@date, @begin_time, @end_time)
 
   end
 
@@ -135,5 +113,17 @@ class PlacesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
       params.require(:place).permit(:name, :code, :capacity, :reservable, :room_type_id, :sector_ids => [], :object_resource_ids => [])
+    end
+
+    def load_dates
+      begin
+        @date = Date.strptime(params[:date], "%d/%m/%Y")
+        @begin_time = Time.parse("2000-01-01 "+params[:begin_time]+":00 UTC")
+        @end_time = Time.parse("2000-01-01 "+params[:end_time]+":00 UTC")
+      rescue
+        @date = nil
+        @begin_time = nil
+        @end_time = nil
+      end
     end
 end
