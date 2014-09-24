@@ -153,8 +153,8 @@ class Reservation < ActiveRecord::Base
     begin_date = read_date(params[:begin_date], Date.new(2000,1,1))
     end_date = read_date(params[:end_date], Date.new(3000,1,1))
 
-    begin_hour, begin_min = params[:begin_time].split(":").map(&:to_i) if not params[:begin_time].blank?
-    end_hour, end_min = params[:end_time].split(":").map(&:to_i) if not params[:end_time].blank?
+    begin_hour, begin_min = read_time(params[:begin_time])
+    end_hour, end_min = read_time(params[:end_time], [23, 59])
 
     begin_time = Time.new(2000, 1, 1, begin_hour, begin_min, 0)
     end_time = Time.new(2000, 1, 1, end_hour, end_min, 0)
@@ -170,6 +170,11 @@ class Reservation < ActiveRecord::Base
 
   def self.read_date(date_string, default = Date.today)
     return Date.strptime(date_string, "%d/%m/%Y") if !date_string.blank?
+    return default
+  end
+
+  def self.read_time(time_string, default = [0, 0])
+    return time_string.split(":").map(&:to_i) if not time_string.blank?
     return default
   end
 
