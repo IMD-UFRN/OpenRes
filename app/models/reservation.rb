@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Reservation < ActiveRecord::Base
 
+  include OpenRes::CanDecideQuery
+  
   has_paper_trail on: [:update, :destroy], ignore: [:created_by]
 
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
@@ -115,12 +117,6 @@ class Reservation < ActiveRecord::Base
 
   def sector_ids
     place.sector_ids
-  end
-
-  def can_be_decided_over?(ap_user)
-    return true if ap_user.role == "admin"
-    return false if (ap_user.role == "basic" || ap_user.role == "receptionist" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))
-    return true
   end
 
   def done?
