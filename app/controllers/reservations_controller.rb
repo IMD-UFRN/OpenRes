@@ -113,7 +113,6 @@ class ReservationsController < ApplicationController
 
     @reservations = ReservationDecorator.decorate_collection(
       Reservation.where(date: @date, place_id: params[:place_id]))
-
     render :partial => 'place_preview', :content_type => 'text/html'
   end
 

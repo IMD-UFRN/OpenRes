@@ -97,17 +97,11 @@ class PlacesController < ApplicationController
 
     @reservations.order!(:begin_time)
 
+    @reservations = @reservations.reject { |r| r.reservation_group && !r.reservation_group.confirmed_at }
+
     @responsibles = @place.can_be_decided_by
 
-    puts "\n\n\n\n\\n\n\n\n\n\n\n\n\\n\n\n\n\n" + date.to_s
-    puts "\n\n\n\n\\n\n\n\n\n\n\n\n\\n\n\n\n\n" + begin_time.to_s
-    puts "\n\n\n\n\\n\n\n\n\n\n\n\n\\n\n\n\n\n" + end_time.to_s
-
     @objects = @place.object_resources
-
-    puts Place.get_empty_places(date, begin_time, end_time).map(&:code)
-    puts "-----------------------"
-    puts @place.similar_places.map(&:code)
 
     @similar_places = @place.similar_places & Place.get_empty_places(date, begin_time, end_time)
 
