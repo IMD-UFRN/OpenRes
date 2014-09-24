@@ -89,8 +89,8 @@ class Reservation < ActiveRecord::Base
   }
 
   scope :conflicting, lambda { |reservation|
-    reservations = Reservation.where("place_id = ? and date = ? and id <> ? and status <> ?",
-     reservation.place_id, reservation.date, reservation.id, "rejected")
+    reservations = Reservation.where("place_id = ? and date = ? and id <> ? and status <> ? and status <> ?",
+     reservation.place_id, reservation.date, reservation.id, "rejected", "canceled")
     return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
   }
 
