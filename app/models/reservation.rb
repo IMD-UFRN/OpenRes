@@ -145,11 +145,6 @@ class Reservation < ActiveRecord::Base
 
   def self.filter(reservations, params)
 
-    begin_hour = 0
-    begin_min  = 0
-    end_hour   = 23
-    end_min    = 59
-
     begin_date = read_date(params[:begin_date], Date.new(2000,1,1))
     end_date = read_date(params[:end_date], Date.new(3000,1,1))
 
@@ -158,7 +153,6 @@ class Reservation < ActiveRecord::Base
 
     begin_time = Time.new(2000, 1, 1, begin_hour, begin_min, 0)
     end_time = Time.new(2000, 1, 1, end_hour, end_min, 0)
-
 
     reservations.where(date: begin_date..end_date).select do |r|
       r.time_interval.overlaps? begin_time..end_time
