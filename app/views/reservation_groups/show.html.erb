@@ -14,9 +14,10 @@
 <table class = "table">
   <thead>
     <tr>
-      <th class ="table-title" colspan="3">
+      <th class ="table-title" colspan="2">
         Título: <%=link_to @reservation_group.name, @reservation_group%>
       </th>
+      <th>Código:</th><td><%=@reservation_group.id%></td>
     </tr>
     <tr>
       <th>Solicitante:</th><td><%=@reservation_group.user%></td>
