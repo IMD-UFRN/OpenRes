@@ -4,6 +4,7 @@ var PlacePreviewView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.model.on('change', this.render, this);
+    this.updatePreview();
   },
 
   events: {
@@ -27,11 +28,24 @@ var PlacePreviewView = Backbone.View.extend({
     //dont fire events on reservation_end_time, only way to it works
     //if u remove the changeDate to only reservation_begin_time, the event isnt fired
     //if u remove this line, it will fire in the reservation_end_time timepicker
-    if ($(evt.currentTarget).hasClass("reservation_end_time"))
+
+    var source = $('#place_preview_template').html();
+
+    if (!source)
       return;
+      
+    var selected;
+
+    if (evt){
+      if ($(evt.currentTarget).hasClass("reservation_end_time"))
+        return;
+      selected = $('#place_selector').val();
+    }
+    else{
+      selected = $("#reservation_place_id").val();
+    }
 
     var that = this;
-    var selected = $('#place_selector').val();
 
     var split = $('#reservation_date').val().split('/');
 
@@ -66,9 +80,10 @@ var PlacePreviewView = Backbone.View.extend({
 
     this.model.set({id: selected, date: date.format('DD/MM/YYYY'), begin_time: beginTime.format("HH:mm"), end_time: $('#reservation_end_time').val()});
 
+    console.log(selected);
+
     this.model.fetch({
       success: function (collection, response) {
-        console.log(response);
 
         that.model.set(response);
         that.render();
