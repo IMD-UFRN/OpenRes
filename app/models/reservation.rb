@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Reservation < ActiveRecord::Base
 
-  include OpenRes::CanDecideQuery
+  include CanDecideQuery
 
   has_paper_trail on: [:update, :destroy], ignore: [:created_by]
 

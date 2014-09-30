@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Place < ActiveRecord::Base
 
-  include OpenRes::CanDecideQuery
-  
+  include CanDecideQuery
+
   validates_presence_of :name, :code, :sector_ids
 
   has_many :place_sectors
