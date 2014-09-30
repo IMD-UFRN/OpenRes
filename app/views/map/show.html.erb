@@ -65,6 +65,11 @@
             </a>
           </li>
         </ul>
+
+        <% if @map.length  == 1%>
+          <hr>
+          <%= link_to "Nova Reserva na " + @map.first.code, new_reservation_path, class:"btn btn-success" %>
+        <% end %>
       </div>
 
     </div>
