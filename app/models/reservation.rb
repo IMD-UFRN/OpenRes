@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Reservation < ActiveRecord::Base
 
+  include CanDecideQuery
+
   has_paper_trail on: [:update, :destroy], ignore: [:created_by]
 
   validates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
@@ -117,12 +119,6 @@ class Reservation < ActiveRecord::Base
     place.sector_ids
   end
 
-  def can_be_decided_over?(ap_user)
-    return true if ap_user.role == "admin"
-    return false if (ap_user.role == "basic" || ap_user.role == "receptionist" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))
-    return true
-  end
-
   def done?
     !Checkin.finished.where(reservation_id: self.id).empty?
   end
@@ -147,35 +143,33 @@ class Reservation < ActiveRecord::Base
 
   end
 
-  #alidates_presence_of :place_id, :user_id, :date, :begin_time, :end_time, :reason
-
-  #reservations = Reservation.where("place_id = ? and date = ? and id <> ? and status <> ?",
-  # reservation.place_id, reservation.date, reservation.id, "rejected")
-  #return reservations.select { |r| r.time_interval.overlaps? reservation.time_interval }
   def self.filter(reservations, params)
 
-    begin_date = Date.new(2000,1,1)
-    end_date = Date.new(3000,1,1)
+    begin_date = read_date(params[:begin_date], Date.new(2000,1,1))
+    end_date = read_date(params[:end_date], Date.new(3000,1,1))
 
-    begin_hour = 0
-    begin_min  = 0
-    end_hour   = 23
-    end_min    = 59
-
-    begin_date = Date.strptime(params[:begin_date], "%d/%m/%Y") if not params[:begin_date].blank?
-    end_date = Date.strptime(params[:end_date], "%d/%m/%Y") if not params[:end_date].blank?
-
-    begin_hour, begin_min = params[:begin_time].split(":").map(&:to_i) if not params[:begin_time].blank?
-    end_hour, end_min = params[:end_time].split(":").map(&:to_i) if not params[:end_time].blank?
+    begin_hour, begin_min = read_time(params[:begin_time])
+    end_hour, end_min = read_time(params[:end_time], [23, 59])
 
     begin_time = Time.new(2000, 1, 1, begin_hour, begin_min, 0)
     end_time = Time.new(2000, 1, 1, end_hour, end_min, 0)
-
 
     reservations.where(date: begin_date..end_date).select do |r|
       r.time_interval.overlaps? begin_time..end_time
     end
 
+  end
+
+  private
+
+  def self.read_date(date_string, default = Date.today)
+    return Date.strptime(date_string, "%d/%m/%Y") if !date_string.blank?
+    return default
+  end
+
+  def self.read_time(time_string, default = [0, 0])
+    return time_string.split(":").map(&:to_i) if not time_string.blank?
+    return default
   end
 
 end

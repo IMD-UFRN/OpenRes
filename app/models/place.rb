@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Place < ActiveRecord::Base
 
+  include CanDecideQuery
+
   validates_presence_of :name, :code, :sector_ids
 
   has_many :place_sectors
@@ -67,12 +69,6 @@ class Place < ActiveRecord::Base
 
   def past_checkins
     Checkin.finished.from_place(self)
-  end
-
-  def can_be_decided_over?(ap_user)
-    return true if ap_user.role == "admin"
-    return false if (ap_user.role == "basic" || ap_user.role == "receptionist" || ! ( (sector_ids - ap_user.sector_ids).length <  sector_ids.length))
-    return true
   end
 
   def can_be_decided_by
