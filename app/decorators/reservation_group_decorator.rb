@@ -4,8 +4,10 @@ class ReservationGroupDecorator < Draper::Decorator
 
   delegate_all
 
-  def place
-    link_to(object.place.full_name, object.place)
+  def places
+    object.places.map do |place|
+      link_to(place.code, place)
+    end.join(", ").html_safe
   end
 
   def place_name
@@ -83,7 +85,7 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def edit_link
-    return if object.status == 'canceled' || object.status == "rejected" ||  !(object.user == current_user || object.created_by == current_user) || object.past? 
+    return if object.status == 'canceled' || object.status == "rejected" ||  !(object.user == current_user || object.created_by == current_user) || object.past?
 
     link_to "Editar Reserva", edit_reservation_group_path, class: "btn-small btn-normal"
   end
