@@ -40,7 +40,7 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
 
-    @place = Place.find(params[:place_id]) if params[:place_id]
+    @place = Place.reservable.find(params[:place_id]) if params[:place_id]
 
     respond_to do |format|
       format.html

@@ -6,9 +6,13 @@ class MapController < ApplicationController
 
     if params[:place]
       places = Place.where("code LIKE ?" , "%#{params[:place][:code].capitalize}%")
+
+      @place = places.first if places.length == 1
     else
       places = Place.none
     end
+
+
 
     @map= MapDecorator.decorate(places)
 

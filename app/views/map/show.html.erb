@@ -19,10 +19,31 @@
 
     <div class="panel span3">
       <h3>Informações de Sala</h3>
+      <hr>
 
-      <p>
-        Nenhuma sala selecionada
-      </p>
+      <% if @place %>
+        <dl>
+          <dt>Código:</dt> <dd><%= @place.code %></dd>
+          <dt>Nome:</dt> <dd><%= @place.name %></dd>
+          <dt>Tipo de Sala:</dt> <dd><%= link_to @place.room_type.name, @place.room_type %></dd>
+          <dt>Capacidade:</dt> <dd><%= @place.capacity %></dd>
+          <dt>Aceita reservas:</dt>
+            <dd><% if @place.reservable? %> Sim <% else %> Não <%end%>
+            </dd>
+          <dt>Setor Responsável:</dt>
+            <dd>
+              <% @place.sectors.each do |sector| %>
+                <%= link_to sector.name, sector%> </br>
+              <% end %>
+            </dd>
+        </dl>
+
+        <%= @map.new_place_reservation %>
+      <% else %>
+        <p>
+          Nenhuma ou múltiplas salas selecionadas.
+        </p>
+      <% end %>
 
     </div>
 
@@ -73,11 +94,6 @@
           </li>
         </ul>
       </div>
-      <div class= "span4">
-
-        <%= @map.new_place_reservation %>
-
-      </div>
     </div>
 
   </div>
@@ -103,16 +119,22 @@
 
     function changeMap(floor){
       $('#IMD-2nd-Floor').html("");
-      $('#IMD-2nd-Floor').vectorMap(
+      var map;
+      map = $('#IMD-2nd-Floor').vectorMap(
         {
           map: "IMD-piso-"+ floor,
+          regionsSelectable: true,
           series: {
             regions: [{
               values: <%= raw(@map.color_hash) %>,
               attribute : 'fill'
             }]
-           }
-         }
+          },
+          onRegionSelected: function(event, code){
+
+            window.location = "/map/show?&place%5Bcode%5D=" + code;
+          },
+        }
       );
     }
 
