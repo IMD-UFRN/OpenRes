@@ -29,6 +29,9 @@ class MapDecorator < Draper::Decorator
   end
 
   def new_place_reservation
+
+    return unless object.length == 1
+
     place = object.first
 
     link_to "Nova Reserva na " + place.code, new_reservation_path(place_id: place.id), class:"btn btn-success"

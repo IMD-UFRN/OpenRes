@@ -1,9 +1,9 @@
 <h2>Mapa do Prédio</h2>
-<hr>
 
 <div class= "container">
   <div class= "row-fluid">
-    <div class="map-navigation span8">
+
+      <div class="map-navigation span8">
 
       <div id="IMD-2nd-Floor"style="height: 450px;"></div>
     </div>
@@ -18,25 +18,32 @@
     </div>
 
     <div class="panel span3">
-      <h3>Localizar Sala</h3>
-      <%= simple_form_for(:place, method: :get, url: "/map/show") do |f| %>
+      <h3>Informações de Sala</h3>
 
+      <p>
+        Nenhuma sala selecionada
+      </p>
 
-        <div class="form-inputs">
+    </div>
+
+  </div>
+  <br>
+  <div class="row-fluid">
+    <div class= "panel span12">
+
+      <div class="span4">
+        <h3>Localizar Sala</h3>
+
+        <%= simple_form_for(:place, method: :get, url: "/map/show", class: "form-inline") do |f| %>
+
           <%= f.input :code, label: "Código", input_html: {
-                       value: params.try(:[], :place).try(:[], :code)} %>
+                      value: params.try(:[], :place).try(:[], :code)} %>
 
-        </div>
+          <%= f.button :submit, "OK", class:"btn btn-success" %>
 
-        <%= f.button :submit, "OK", class:"btn btn-success" %>
-
-
-      <% end %>
-
-      <div class="floor-result">
-
-        <hr>
-
+        <% end %>
+      </div>
+      <div class="span4">
         <h3>Resultados</h3>
 
         <ul class="my-list-group">
@@ -65,17 +72,19 @@
             </a>
           </li>
         </ul>
-
-        <% if @map.length  == 1%>
-          <hr>
-          <%= @map.new_place_reservation %>
-        <% end %>
       </div>
+      <div class= "span4">
 
+        <%= @map.new_place_reservation %>
+
+      </div>
     </div>
 
   </div>
+
+  </div>
 </div>
+
 
 
 
