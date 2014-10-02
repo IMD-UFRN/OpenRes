@@ -57,7 +57,7 @@
 
         <%= simple_form_for(:place, method: :get, url: "/map/show", class: "form-inline") do |f| %>
 
-          <%= f.input :code, label: "Código", input_html: {
+          <%= f.input :code, label: "Código", required: false, input_html: {
                       value: params.try(:[], :place).try(:[], :code)} %>
 
           <%= f.button :submit, "OK", class:"btn btn-success" %>

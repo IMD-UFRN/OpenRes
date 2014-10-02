@@ -5,8 +5,13 @@ class MapController < ApplicationController
     @floor = params[:floor] || 1
 
     if params[:place]
-      places = Place.where("code LIKE ?" , "%#{params[:place][:code].capitalize}%")
 
+      code = params[:place][:code]
+
+      places = Place.where("code LIKE ?" , "%#{code.capitalize}%")
+
+      places = [] if code.empty?
+      
       @place = places.first if places.length == 1
     else
       places = Place.none
