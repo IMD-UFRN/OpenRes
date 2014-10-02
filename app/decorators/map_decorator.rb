@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 class MapDecorator < Draper::Decorator
 
+  include Rails.application.routes.url_helpers
+  include Draper::LazyHelpers
+
   decorates :place
 
   delegate_all
@@ -25,4 +28,14 @@ class MapDecorator < Draper::Decorator
     grouped_by_floor[floor.to_s].length
   end
 
+  def new_place_reservation
+
+    return unless object.length == 1
+
+    place = object.first
+
+    return unless place.reservable?
+
+    link_to "Nova Reserva na " + place.code, new_reservation_path(place_id: place.id), class:"btn btn-success"
+  end
 end

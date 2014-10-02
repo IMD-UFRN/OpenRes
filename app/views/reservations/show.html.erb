@@ -10,16 +10,17 @@
 
 <dl>
   <dt>Situação:</dt> <dd><%= @reservation.status %></dd>
+  <dt>Código:</dt> <dd><%= @reservation.id %></dd>
+  <dt>Sala:</dt> <dd><%= link_to @reservation.place %></dd>
+  <dt>Tipo de Sala:</dt> <dd><%= link_to @reservation.room_type%></dd>
   <dt>Data:</dt> <dd><%= @reservation.date %></dd>
+  <dt>Motivo:</dt> <dd><%= @reservation.reason %></dd>
   <dt>Solicitante:</dt> <dd><%= @reservation.user %></dd>
   <dt>Criada por:</dt> <dd><%= @reservation.created_by %></dd>
   <dt>Início:</dt> <dd><%= @reservation.begin_time %></dd>
   <dt>Término:</dt> <dd><%= @reservation.end_time %></dd>
   <dt>Solicitada em:</dt> <dd><%= @reservation.created_at %></dd>
-  <dt>Sala:</dt> <dd><%= link_to @reservation.place %></dd>
-  <dt>Tipo de Sala:</dt> <dd><%= link_to @reservation.room_type%></dd>
   <dt>Setor Responsável:</dt> <dd><% @reservation.sectors.each do |sector| %><%= link_to sector.name, sector_path(sector) %><%end%></dd>
-  <dt>Motivo:</dt> <dd><%= @reservation.reason %></dd>
   <dt>Autorizado:</dt> <dd><%= @reservation.responsible %></dd>
 </dl>
 

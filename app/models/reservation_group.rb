@@ -101,6 +101,10 @@ class ReservationGroup < ActiveRecord::Base
     return reservations.first.responsible
   end
 
+  def places
+    reservations.map(&:place).uniq
+  end
+
   def place_name
     reservations.first.place.name
   end
