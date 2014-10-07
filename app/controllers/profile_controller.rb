@@ -38,7 +38,7 @@ class ProfileController < ApplicationController
         format.html { render 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       else
-        format.html { redirect_to profile_path, notice: 'User atualizado com sucesso.' }
+        format.html { redirect_to profile_path, notice: 'Usuário atualizado com sucesso.' }
         format.json { head :no_content }
       end
     end
