@@ -1,0 +1,129 @@
+<h2>Editando Período da Reserva</h2>
+
+<%= simple_form_for(:reservation_group_form, url: reservation_groups_path ) do |f| %>
+
+  <%= f.input :name, label: "Título da Reserva", input_html: {value: @reservation_group.name} %>
+
+  <%= f.input :place_id, label: "Sala" , as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, selected: @reservation_group.places.first.id, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'}%>
+
+  <% if current_user.role == "admin" %>
+    <br>
+    <%= f.input :user_id, collection: User.all, label: "Solicitante", required: false, input_html: { class: 'chosen-select', selected: @reservation_group.user, data: { placeholder: "Selecione um usuário" } ,id: 'user_selector'} %>
+    (Você pode deixar em branco caso seja você mesmo)
+    <br>
+
+  <%end%>
+
+  <br>
+  <%= f.input :responsible, label: "Autorizado a pegar a chave da sala", :required => false, input_html: {value: @reservation_group.responsible} %>
+  (Deixe em branco caso seja você mesmo)
+  <br>
+  <br>
+  <%= f.input :reason, as: :text, label: "Motivo", input_html: {value: @reservation_group.reason} %>
+  <br>
+
+  <%= f.input :notes, as: :text, label: "Observações", input_html: {value: @reservation_group.notes}, :required => false %>
+
+
+
+  <div class="multi-field-wrapper span6">
+    <div class="multi-fields">
+    </div>
+
+    <button type="button" class="add-field btn btn-small btn-primary">Adicionar Bloco de Reserva</button>
+
+  </div>
+
+  <div class="clear">
+
+  <h3>Próximo passo:</h3>
+
+  <%= f.button :submit,"VERIFICAR RESERVA", class:"btn btn-success" %>
+  </div>
+  <script id="repetitions_fields" type="text/x-handlebars-template">
+    <div class="multi-field panel">
+
+      <div class= "panel panel-info">
+        <p class= "panel-heading">Data</p>
+        <p class= "inline_form">
+          <%= f.input "repetitions[{{number}}][begin_date]", as: :date_picker, label: "De", label_html: { class: 'inline_label' } %>
+        </p>
+        <%= f.input "repetitions[{{number}}][end_date]", as: :date_picker, label: "Até", label_html: { class: 'inline_label' } %>
+      </div>
+
+      <div class= "panel panel-info">
+        <p class= "panel-heading">Horário</p>
+        <%= f.input "repetitions[{{number}}][begin_time]", as: :time_picker, label: "Início", label_html: { class: 'inline_label' } %>
+        <%= f.input "repetitions[{{number}}][end_time]", as: :time_picker, label: "Fim", label_html: { class: 'inline_label' } %>
+      </div>
+
+      <div class= "panel panel-info">
+        <p class= "panel-heading">Dias</p>
+        <%= f.collection_check_boxes "repetitions[{{number}}][weekly_repeat]", [[0, 'DOM'], [1, 'SEG'], [2, 'TER'],  [3, 'QUA'], [4, 'QUI'], [5, 'SEX'], [6, 'SAB']], :first, :last, :item_wrapper_class => 'inline_label' %>
+        <br>
+        <br>
+        <br>
+      </div>
+      <button class="remove-field btn btn-small btn-danger">Remover Bloco</button>
+      <br>
+    </div>
+  </script>
+
+<% end %>
+
+<%= render "shared/back"%>
+
+<script type="text/javascript">
+var number = 0;
+var $wrapper = $('.multi-field-wrapper .multi-fields');
+
+var ready = function() {
+  addField();
+
+  $(".add-field", $(this)).click(function(e) {
+    number += 1;
+    addField($wrapper);
+  });
+};
+
+$(document).ready(ready);
+//$(document).on('page:load', ready);
+
+function bindEvents() {
+  $('.datetimepicker').datetimepicker({
+    pickSeconds: false
+  });
+
+  $('.timepicker').datetimepicker({
+    pickDate: false,
+    pickSeconds: false
+  });
+
+  $('.datepicker').datetimepicker({
+    pickTime: false
+  });
+
+  $('.multi-field .remove-field', $wrapper).click(function() {
+    removeField($wrapper, this);
+  });
+}
+
+function addField(wrapper) {
+  var source = $('#repetitions_fields').html();
+
+  if (!source)
+    return;
+
+  var template = Handlebars.compile(source);
+  var html = template({number: number});
+
+  $wrapper.append(html);
+  bindEvents();
+}
+
+function removeField(wrapper, button) {
+  if ($('.multi-field', wrapper).length > 1)
+    $(button).parent('.multi-field').remove();
+}
+
+</script>

@@ -87,7 +87,13 @@ class ReservationGroupDecorator < Draper::Decorator
   def edit_link
     return if object.status == 'canceled' || object.status == "rejected" ||  !(object.user == current_user || object.created_by == current_user) || object.past?
 
-    link_to "Editar Reserva", edit_reservation_group_path, class: "btn-small btn-normal"
+    link_to "Editar Informações Gerais", edit_reservation_group_path, class: "btn-small btn-normal"
+  end
+
+  def edit_period_link
+    return if object.confirmed_at
+
+    link_to "Editar Período", edit_period_reservation_group_path, class: "btn-small btn-normal"
   end
 
   def has_conflicts?
@@ -119,6 +125,8 @@ class ReservationGroupDecorator < Draper::Decorator
     <div class= "alert alert-warning">
       Sua reserva ainda não foi cadastrada. <br>
       Caso sua reserva apresente conflitos, clique em "Adicionar Reserva Simples" para adicionar uma reserva que resolva o conflito. Em seguida, exclua sua reserva conflitante.
+      <br>
+      Caso deseje alterar o período da reserva, clique em "Editar Período"
       <br>
       Satisfeito com suas reservas, clique em "Salvar Reserva".
       <br>

@@ -69,6 +69,8 @@ OpenRes::Application.routes.draw do
 
 
   resources :reservation_groups, except: :destroy
+  get 'reservation_groups/:id/edit_period', to: 'reservation_groups#edit_period', as: :edit_period_reservation_group
+  patch 'reservation_groups/:id/update_period', to: 'reservation_groups#update_period', as: :update_period_reservation_group
 
   controller :reservation_groups do
 

@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class ReservationGroupProcessor
+
+  attr_reader :reservations
+
   def initialize(hash)
     @hash = hash
     @group = ReservationGroup.new(name: hash[:name], user_id: hash[:user_id],
@@ -110,6 +113,36 @@ class ReservationGroupsController < ApplicationController
     pt.save
 
     redirect_to @reservation_group, notice: "Reserva atualizada com sucesso"
+  end
+
+  def edit_period
+    @reservation_group = ReservationGroup.find(params[:id])
+  end
+
+  def update_period
+
+    @reservation_group = ReservationGroup.find(params[:id])
+
+    group_processor = ReservationGroupProcessor.new(@reservation_group)
+
+    unless group_processor.process?
+      flash[:error] ="Nenhuma reserva criada. O horário de fim de um dos blocos é menor que o de início."
+      redirect_to update_period_reservation_group_path
+      return
+    end
+
+    @reservation_group.reservations.destroy_all
+    @reservation_group.reservations = group_processor.reservations
+
+    if @reservation_group.save
+      redirect_to @reservation_group
+    else
+      flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é válido e contém os dias selecionados."
+      redirect_to update_period_reservation_group_path
+      return
+    end
+
+
   end
 
   def index
