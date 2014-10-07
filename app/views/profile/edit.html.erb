@@ -7,7 +7,11 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :name, :required => true %>
     <%= f.input :cpf, :required => true %>
-    <%= f.input :old_password, :required => true %>
+    <%= f.input :old_password, :required => true, label: "Senha" %>
+
+    <%= f.input :password, :label => "Nova Senha" %>
+    <%= f.input :password_confirmation, :label => "Confirme sua Nova Senha"%>
+
   </div>
 
   <%= f.button :submit, "OK", class:"btn btn-success" %>

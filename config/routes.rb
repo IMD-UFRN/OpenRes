@@ -79,6 +79,7 @@ OpenRes::Application.routes.draw do
   controller :profile do
     get '/profile/edit', to: 'profile#edit', as: :edit_profile
     get '/profile', to: 'profile#profile', as: :profile
+    get '/profile/edit/password', to: 'profile#edit_password', as: :edit_password
     patch '/profile/edit', to: 'profile#update'
   end
 

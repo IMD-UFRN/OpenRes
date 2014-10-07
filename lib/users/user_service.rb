@@ -15,6 +15,11 @@ class Users::UserService
   end
 
   def self.update(user, user_params)
+    if user_params[:password].blank?
+      user_params.delete(:password)
+      user_params.delete(:password_confirmation)
+    end
+
     if user.valid_password?(user_params[:old_password])
       user.update(user_params.except(:old_password))
     else
