@@ -8,7 +8,7 @@
 
   <% if current_user.role == "admin" %>
     <br>
-    <%= f.input :user_id, collection: User.all, label: "Solicitante", required: false, input_html: { class: 'chosen-select', selected: @reservation_group.user, data: { placeholder: "Selecione um usuário" } ,id: 'user_selector'} %>
+    <%= f.input :user_id, collection: User.all, label: "Solicitante", required: false, selected: @reservation_group.user.id,  input_html: { class: 'chosen-select', data: { placeholder: "Selecione um usuário" } ,id: 'user_selector'} %>
     (Você pode deixar em branco caso seja você mesmo)
     <br>
 
