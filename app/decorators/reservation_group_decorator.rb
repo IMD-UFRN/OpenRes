@@ -93,7 +93,7 @@ class ReservationGroupDecorator < Draper::Decorator
   def edit_period_link
     return if object.confirmed_at
 
-    link_to "Editar Informações Avançadas", edit_period_reservation_group_path, class: "btn-small btn-normal"
+    link_to "Editar Sala e Período", edit_period_reservation_group_path, class: "btn-small btn-normal"
   end
 
   def has_conflicts?
@@ -123,17 +123,14 @@ class ReservationGroupDecorator < Draper::Decorator
     hint_message= <<-msg
 
     <div class= "alert alert-warning">
-      Sua reserva ainda não foi cadastrada. <br>
-      Caso sua reserva apresente conflitos, clique em "Adicionar Reserva Simples" para adicionar uma reserva que resolva o conflito. Em seguida, exclua sua reserva conflitante.
-      <br>
-      Caso deseje alterar o período da reserva, clique em "Editar Informações Avançadas"
-      <br>
-      Satisfeito com suas reservas, clique em "Salvar Reserva".
-      <br>
-      Caso não deseje confirmar esta reserva, clique em "Cancelar Reserva"
-      <br>
-      Esta reserva continuará acessível na sua tela de reservas caso você deixe esta tela.
-      <br>
+      Sua reserva ainda não foi cadastrada. Atente às seguintes observações: <br>
+      <ul>
+        <li>Caso sua reserva apresente conflitos, clique em "Adicionar Reserva Simples" para adicionar uma reserva que resolva o conflito. Em seguida, exclua sua reserva conflitante. </li>
+        <li>Caso deseje alterar o período da reserva, clique em "Editar Sala e Período"</li>
+        <li>Satisfeito com suas reservas, clique em "Salvar Reserva".</li>
+        <li>Caso não deseje confirmar esta reserva, clique em "Cancelar Reserva"</li>
+        <li>Esta reserva continuará acessível na sua tela de reservas caso você deixe esta tela.</li>
+      </ul>
       Somente após clicar em "Salvar Reserva" sua reserva estará visível para os Administradores do sistema.
     </div>
 msg
