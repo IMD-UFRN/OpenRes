@@ -71,9 +71,9 @@ class ReservationGroupsController < ApplicationController
   def edit
     @reservation_group = ReservationGroup.find(params[:id])
     reservation = @reservation_group.reservations.first
-    reservation_group_struct = Struct.new(:reason, :responsible, :name, :notes)
+    reservation_group_struct = Struct.new(:reason, :responsible, :name, :notes, :user_id)
 
-    @reservation_group_form = reservation_group_struct.new(reservation.reason, reservation.responsible, @reservation_group.name, @reservation_group.notes )
+    @reservation_group_form = reservation_group_struct.new(reservation.reason, reservation.responsible, @reservation_group.name, @reservation_group.notes, reservation.user_id )
   end
 
   def update
@@ -85,6 +85,7 @@ class ReservationGroupsController < ApplicationController
 
     last_responsible = @reservation_group.responsible
     last_reason = @reservation_group.reason
+    last_user_id = @reservation_group.reservations.first.user_id
 
     @reservation_group.name = reservation_group_params[:name]
     @reservation_group.notes = reservation_group_params[:notes]
@@ -94,6 +95,7 @@ class ReservationGroupsController < ApplicationController
     @reservation_group.reservations.each do |r|
       r.responsible = reservation_group_params[:responsible]
       r.reason = reservation_group_params[:reason]
+      r.user_id = reservation_group_params[:user_id]
       r.save
     end
 
@@ -107,6 +109,7 @@ class ReservationGroupsController < ApplicationController
 
     cs["responsible"] = [last_responsible,@reservation_group.responsible] unless last_responsible == @reservation_group.responsible
     cs["reason"] = [last_reason,@reservation_group.reason] unless last_reason == @reservation_group.reason
+    cs["user_id"] = [last_user_id,@reservation_group.reservations.first.user_id] unless last_user_id == @reservation_group.reservations.first.user_id
 
     pt.object_changes = cs.to_yaml
 

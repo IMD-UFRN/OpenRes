@@ -2,28 +2,20 @@
 
 <%= simple_form_for(:reservation_group_form, url: reservation_groups_path ) do |f| %>
 
-  <%= f.input :name, label: "Título da Reserva", input_html: {value: @reservation_group.name} %>
+  <%= f.input :name, as: :hidden, input_html: {value: @reservation_group.name} %>
 
   <%= f.input :place_id, label: "Sala" , as: :grouped_select, collection: Place.grouped_by_type, group_method: :last, option_key_method: :name, label_method: :full_name, option_value_method: :id, group_label_method: :first, selected: @reservation_group.places.first.id, input_html: { class: 'chosen-select', data: { placeholder: "Selecione uma sala" } ,id: 'place_selector'}%>
 
   <% if current_user.role == "admin" %>
-    <br>
-    <%= f.input :user_id, collection: User.all, label: "Solicitante", required: false, selected: @reservation_group.user.id,  input_html: { class: 'chosen-select', data: { placeholder: "Selecione um usuário" } ,id: 'user_selector'} %>
-    (Você pode deixar em branco caso seja você mesmo)
-    <br>
-
+    <%= f.input :user_id,  as: :hidden %>
   <%end%>
 
   <br>
-  <%= f.input :responsible, label: "Autorizado a pegar a chave da sala", :required => false, input_html: {value: @reservation_group.responsible} %>
-  (Deixe em branco caso seja você mesmo)
-  <br>
-  <br>
-  <%= f.input :reason, as: :text, label: "Motivo", input_html: {value: @reservation_group.reason} %>
-  <br>
+  <%= f.input :responsible, as: :hidden, input_html: {value: @reservation_group.responsible} %>
 
-  <%= f.input :notes, as: :text, label: "Observações", input_html: {value: @reservation_group.notes}, :required => false %>
+  <%= f.input :reason, as: :hidden, input_html: {value: @reservation_group.reason} %>
 
+  <%= f.input :notes, as: :hidden, input_html: {value: @reservation_group.notes} %>
 
 
   <div class="multi-field-wrapper span6">
@@ -36,9 +28,7 @@
 
   <div class="clear">
 
-  <h3>Próximo passo:</h3>
-
-  <%= f.button :submit,"VERIFICAR RESERVA", class:"btn btn-success" %>
+  <%= f.button :submit,"CONFIRMAR ALTERAÇÕES", class:"btn btn-success" %>
   </div>
   <script id="repetitions_fields" type="text/x-handlebars-template">
     <div class="multi-field panel">

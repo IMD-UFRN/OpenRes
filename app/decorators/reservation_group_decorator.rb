@@ -93,7 +93,7 @@ class ReservationGroupDecorator < Draper::Decorator
   def edit_period_link
     return if object.confirmed_at
 
-    link_to "Editar Período", edit_period_reservation_group_path, class: "btn-small btn-normal"
+    link_to "Editar Informações Avançadas", edit_period_reservation_group_path, class: "btn-small btn-normal"
   end
 
   def has_conflicts?
@@ -126,7 +126,7 @@ class ReservationGroupDecorator < Draper::Decorator
       Sua reserva ainda não foi cadastrada. <br>
       Caso sua reserva apresente conflitos, clique em "Adicionar Reserva Simples" para adicionar uma reserva que resolva o conflito. Em seguida, exclua sua reserva conflitante.
       <br>
-      Caso deseje alterar o período da reserva, clique em "Editar Período"
+      Caso deseje alterar o período da reserva, clique em "Editar Informações Avançadas"
       <br>
       Satisfeito com suas reservas, clique em "Salvar Reserva".
       <br>

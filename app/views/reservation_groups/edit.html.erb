@@ -2,20 +2,22 @@
 
 <%= simple_form_for(:reservation_group_form, url: reservation_group_path(@reservation_group), method: :patch ) do |f| %>
 
-  <div class= "well span4 no-padding">
-    <p>Caso deseje alterar a data, hora ou local da reserva, cancele-a e crie outra.</p>
-  </div>
-  <div class="clear">
-
-  </div>
 
   <%= f.input :name, label: "Título da Reserva", value: @reservation_group_form.name %>
 
+  <% if current_user.role == "admin" %>
+    <br>
+    <%= f.input :user_id, collection: User.all, label: "Solicitante", required: false, selected: @reservation_group_form.user_id, input_html: { class: 'chosen-select', data: { placeholder: "Selecione um usuário" }, id: 'user_selector'} %>
+    (Você pode deixar em branco caso seja você mesmo)
+    <br>
+
+  <%end%>
 
   <br>
   <%= f.input :responsible, label: "Autorizado a pegar a chave da sala", :required => false %>
   (Deixe em branco caso seja você mesmo)
   <br>
+
   <br>
   <%= f.input :reason, as: :text, label: "Motivo" %>
   <br>

@@ -93,7 +93,7 @@
   <% @reservation_group.versions.order(:created_at).reverse.each do |v| %>
 
     <% user = User.find(v.whodunnit) %>
-    <% attributes = {"name" => "Título", "status" => "Situação", "requester" => "Solicitante", "reason" => "Motivo", "responsible"=>"Autorizado a pegar a chave", "notes" => "Observações"} %>
+    <% attributes = {"name" => "Título", "status" => "Situação", "requester" => "Solicitante", "reason" => "Motivo", "responsible"=>"Autorizado a pegar a chave", "notes" => "Observações", "user_id" => "Solicitante"} %>
     <% values = {""=> "--", "pending" => "Pendente", "approved" => "Aprovada", "canceled" => "Cancelada", "rejected"=>"Rejeitada", "partially approved"=> "Parcialmente Aprovada", "partially rejected"=> "Parcialmente Rejeitada", "partially pending"=> "Parcialmente Pendente"} %>
 
     <div class="container">
@@ -105,10 +105,13 @@
           <div class="panel-body">
             <% v.changeset.each do |change| %>
               <% if  change[0] == "confirmed_at"%>
-              <strong>Reserva salva</strong><br>
+                <strong>Reserva salva</strong><br>
+              <% elsif  change[0] == "user_id"%>
+                <% last_user = User.find(values[change[1][0]] || change[1][0]) %>
+                <% new_user = User.find(values[change[1][1]] || change[1][1]) %>
+                <strong><%= attributes[change[0]] %></strong> mudou de <%= link_to last_user.name, last_user %> para <%= link_to new_user.name, new_user %> <br>
               <% elsif  change[0] != "updated_at"%>
                 <strong><%= attributes[change[0]] %></strong> mudou de "<%= values[change[1][0]] || change[1][0]%>" para "<%= values[change[1][1]] || change[1][1]%>" <br>
-                <!-- <%= change.inspect %> -->
               <% end %>
             <% end %>
           </div>
