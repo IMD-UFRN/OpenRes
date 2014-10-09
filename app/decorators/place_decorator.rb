@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class PlaceDecorator < Draper::Decorator
+  include Draper::LazyHelpers
+  
   delegate_all
 
   def status_icon
@@ -9,6 +11,12 @@ class PlaceDecorator < Draper::Decorator
 
   def not_nil?
     !object.nil?
+  end
+
+  def sectors
+    object.sectors.map do |sector|
+      link_to(sector.name, sector)
+    end.join(", ").html_safe
   end
 
 end

@@ -18,32 +18,32 @@
   </div>
 </div>
 
- <% @sectors.each do |sector| %>
+<% unless params[:place][:code].blank? %>
 
-  <div class="accordion">
+  <% if @places.empty? %>
+    <p>
+      Não foram achadas salas
+    </p>
+  <% else %>
     <table class="table table-striped table-bordered table-hover places_table">
       <thead class="head">
-        <tr>
-          <th class ="table-title" colspan="5">
-            Setor: <%= link_to sector.name, sector %> <i class="fa fa-angle-down strong toggleIcon"></i>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody class= "slide-hidden">
         <tr>
           <th>Código</th>
           <th>Nome</th>
           <th>Tipo de Sala</th>
           <th>Capacidade</th>
+          <th>Setor(es)</th>
           <th>Ações</th>
         </tr>
-        <% sector.places.each do |place| %>
+      </thead>
+      <tbody>
+        <% @places.each do |place| %>
           <tr>
             <td><%= link_to place.code, place %></td>
             <td class= "fix-colum"><%= place.name %></td>
             <td><%= link_to place.room_type.name, place.room_type %></td>
             <td><%= place.capacity %></td>
+            <td><%= place.sectors %></td>
             <td>
               <%= link_to 'Detalhes', place, class: 'btn btn-normal btn-small' %>
               <%= link_to 'Editar', edit_place_path(place), class: 'btn btn-normal btn-small'  %>
@@ -53,12 +53,52 @@
         <% end %>
       </tbody>
     </table>
-  </div>
+  <% end %>
 
-  <br>
+<% else %>
 
+
+ <% @sectors.each do |sector| %>
+
+    <div class="accordion">
+      <table class="table table-striped table-bordered table-hover places_table">
+        <thead class="head">
+          <tr>
+            <th class ="table-title" colspan="5">
+              Setor: <%= link_to sector.name, sector %> <i class="fa fa-angle-down strong toggleIcon"></i>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody class= "slide-hidden">
+          <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Tipo de Sala</th>
+            <th>Capacidade</th>
+            <th>Ações</th>
+          </tr>
+          <% sector.places.each do |place| %>
+            <tr>
+              <td><%= link_to place.code, place %></td>
+              <td class= "fix-colum"><%= place.name %></td>
+              <td><%= link_to place.room_type.name, place.room_type %></td>
+              <td><%= place.capacity %></td>
+              <td>
+                <%= link_to 'Detalhes', place, class: 'btn btn-normal btn-small' %>
+                <%= link_to 'Editar', edit_place_path(place), class: 'btn btn-normal btn-small'  %>
+                <%= link_to 'Excluir', place, method: :delete, data: { confirm: 'Você tem certeza que deseja deletar esse Tipo de Sala?' }, class: 'btn btn-normal btn-small'  %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+
+  <% end %>
 <% end %>
-
 
 
 <%= link_to 'Nova Sala', new_place_path, class:"btn btn-success" %>

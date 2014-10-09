@@ -10,6 +10,15 @@ class PlacesController < ApplicationController
   # GET /places.json
   def index
     @sectors = Sector.all
+
+    if params[:place] && !params[:place][:code].blank?
+
+      code = params[:place][:code]
+      @places = Place.where('code LIKE ?', "%#{code.capitalize}%") + Place.where('name LIKE ?', "%#{code}%")
+
+      @places = PlaceDecorator.decorate_collection(@places)
+    end
+
   end
 
   # GET /places/1
