@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<% unless params[:place][:code].blank? %>
+<% if params[:place] && !params[:place][:code].blank? %>
 
   <% if @places.empty? %>
     <p>
