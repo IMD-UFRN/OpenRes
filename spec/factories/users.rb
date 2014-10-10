@@ -10,8 +10,9 @@ FactoryGirl.define do
     name "User"
     role "basic"
 
-
-    sector_ids [1]
+    after(:build) do |user|
+      user.sectors << build(:sector)
+    end
 
 
     factory :admin do
