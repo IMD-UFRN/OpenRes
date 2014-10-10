@@ -1,5 +1,7 @@
 ##Resumo
 
+[![Build Status](https://travis-ci.org/IMD-UFRN/OpenRes.svg?branch=master)](https://travis-ci.org/IMD-UFRN/OpenRes)
+
 O sistema será responsável pelo gerenciamento de recursos (salas e equipamentos) bem como suas reservas a servidores e colaboradores do Instituto Metrópole Digital.
 
 ##Funcionalidades
