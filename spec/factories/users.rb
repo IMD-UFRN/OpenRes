@@ -9,7 +9,10 @@ FactoryGirl.define do
     password "12345678"
     name "User"
     role "basic"
-    sector
+
+
+    sector_ids [1]
+
 
     factory :admin do
       email "admin@imd.ufrn.br"

@@ -12,33 +12,33 @@ feature 'Redirect to correct dashboard' do
   scenario 'login as admin' do
     sign_in(@admin)
 
-    expect(page).to have_content("Admin panel")
+    expect(page).to have_content("Autenticado com sucesso.")
   end
 
   scenario 'login as sector_admin' do
     sign_in(@sector_admin)
 
-    expect(page).to have_content("Sector Admin panel")
+    expect(page).to have_content("Autenticado com sucesso.")
   end
 
   scenario 'login as secretary' do
     sign_in(@secretary)
-    
-    expect(page).to have_content("Secretary panel")
+
+    expect(page).to have_content("Autenticado com sucesso.")
   end
 
   scenario 'login as basic user' do
     sign_in(@basic)
-    
-    expect(page).to have_content("Basic User panel")
+
+    expect(page).to have_content("Autenticado com sucesso.")
   end
 
   #temporary
   def sign_in(user)
     visit new_user_session_path
-      
+
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: user.password
-    click_button 'Sign in'
+    click_button 'Entrar'
   end
 end

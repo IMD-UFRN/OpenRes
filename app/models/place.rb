@@ -15,7 +15,7 @@ class Place < ActiveRecord::Base
   has_many :reservations
   has_many :class_monitors
 
-  scope :reservable, where(reservable: true)
+  scope :reservable, -> { where(reservable: true) }
 
   def self.get_empty_places(date, begin_time, end_time)
 
