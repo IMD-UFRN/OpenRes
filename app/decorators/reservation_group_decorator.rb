@@ -137,4 +137,6 @@ msg
     return hint_message.html_safe if object.confirmed_at.nil?
 
   end
+
+
 end
