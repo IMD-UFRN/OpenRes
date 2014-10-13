@@ -4,17 +4,24 @@
     <div class="accordion">
       <table class = "table table-striped table-bordered table-hover">
         <thead class="head">
-          <tr colspan="4">
-            <th class ="table-title"colspan="8"> Reservas Pendentes <div class= "subtitle inline">
+          <tr>
+            <th class ="table-title" colspan="10"> Reservas Pendentes <div class= "subtitle inline">
               (<%=@pending_sector_reservations.length%>)
             </div> <i class="fa fa-angle-down strong toggleIcon"></th>
+
           </tr>
         </thead>
 
         <tbody class= "slide-hidden">
+          <tr>
+            <td colspan="10" class="mass-action-bar">
+              <strong>Ações em massa: </strong><%= @pending_list.mass_actions%>
+            </td>
+          </tr>
           <%= render 'reservations/reservations_secretary_header' %>
           <% @pending_sector_reservations.each do |reservation| %>
             <tr>
+              <td><input type="checkbox" onchange="toggleReservation(this, <%=reservation.id%>)"></td>
               <td><%= reservation.date %></td>
               <td><%= reservation.begin_time %></td>
               <td><%= reservation.end_time %></td>
@@ -41,14 +48,20 @@
       <table class = "table table-striped table-bordered table-hover">
         <thead class="head">
           <tr>
-            <th class ="table-title" colspan="6">Reservas Aprovadas <div class= "subtitle inline">
+            <th class ="table-title" colspan="10">Reservas Aprovadas <div class= "subtitle inline">
               (<%=@approved_sector_reservations.length%>)</div><i class="fa fa-angle-down strong toggleIcon"></th>
           </tr>
         </thead>
         <tbody class= "slide-hidden">
+          <tr>
+            <td colspan="10" class="mass-action-bar">
+              <strong>Ações em massa: </strong><%= @approved_list.mass_actions%>
+            </td>
+          </tr>
           <%= render 'reservations/reservations_secretary_header' %>
           <% @approved_sector_reservations.each do |reservation| %>
             <tr>
+              <td><input type="checkbox" onchange="toggleReservation(this, <%=reservation.id%>)"></td>
               <td><%= reservation.date %></td>
               <td><%= reservation.begin_time %></td>
               <td><%= reservation.end_time %></td>
@@ -75,12 +88,17 @@
       <table class = "table table-striped table-bordered table-hover">
         <thead class="head">
           <tr colspan="8">
-            <th class ="table-title" colspan= "8">Reservas Rejeitadas <div class= "subtitle inline">
+            <th class ="table-title" colspan= "9">Reservas Rejeitadas <div class= "subtitle inline">
               (<%=@rejected_sector_reservations.length%>)</div><i class="fa fa-angle-down strong toggleIcon"></th>
         </thead>
         <tbody class= "slide-hidden">
-        </tr>
-           <tr>
+          <tr>
+            <td colspan="10" class="mass-action-bar">
+              <strong>Ações em massa: </strong><%= @rejected_list.mass_actions%>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
             <th>Data</th>
             <th>Início</th>
             <th>Fim</th>
@@ -93,6 +111,8 @@
           </tr>
           <% @rejected_sector_reservations.each do |reservation| %>
             <tr>
+
+              <td><input type="checkbox" onchange="toggleReservation(this, <%=reservation.id%>)"></td>
               <td><%= reservation.date %></td>
               <td><%= reservation.begin_time %></td>
               <td><%= reservation.end_time %></td>

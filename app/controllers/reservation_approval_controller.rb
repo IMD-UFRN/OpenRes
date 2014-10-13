@@ -25,6 +25,10 @@ class ReservationApprovalController < ApplicationController
     @approved_sector_reservations = ReservationDecorator.decorate_collection(approved_sector_reservations)
     @rejected_sector_reservations = ReservationDecorator.decorate_collection(rejected_sector_reservations)
 
+    @pending_list = ReservationListDecorator.initialize_decorator(@pending_sector_reservations, "approve", "reject")
+    @approved_list = ReservationListDecorator.initialize_decorator(@approved_sector_reservations, "suspend", "reject")
+    @rejected_list = ReservationListDecorator.initialize_decorator(@rejected_sector_reservations, "approve", "suspend")
+
     @params = ReservationSearchDecorator.decorate(params[:reservation_search])
   end
 

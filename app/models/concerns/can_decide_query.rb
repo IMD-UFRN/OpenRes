@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module CanDecideQuery
 
   def can_be_decided_over?(ap_user)
