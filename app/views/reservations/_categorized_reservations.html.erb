@@ -21,7 +21,7 @@
           <%= render 'reservations/reservations_secretary_header' %>
           <% @pending_sector_reservations.each do |reservation| %>
             <tr>
-              <td><input type="checkbox" onchange="toggleReservation(this, <%=reservation.id%>)"></td>
+              <td><input type="checkbox"  data-id="<%=reservation.id%>"></td>
               <td><%= reservation.date %></td>
               <td><%= reservation.begin_time %></td>
               <td><%= reservation.end_time %></td>
@@ -61,7 +61,7 @@
           <%= render 'reservations/reservations_secretary_header' %>
           <% @approved_sector_reservations.each do |reservation| %>
             <tr>
-              <td><input type="checkbox" onchange="toggleReservation(this, <%=reservation.id%>)"></td>
+              <td><input type="checkbox" data-id="<%=reservation.id%>"></td>
               <td><%= reservation.date %></td>
               <td><%= reservation.begin_time %></td>
               <td><%= reservation.end_time %></td>
@@ -98,7 +98,7 @@
             </td>
           </tr>
           <tr>
-            <th></th>
+            <th><input type="checkbox" onchange="toggleSelectAll(this)"></th>
             <th>Data</th>
             <th>Início</th>
             <th>Fim</th>
@@ -112,7 +112,7 @@
           <% @rejected_sector_reservations.each do |reservation| %>
             <tr>
 
-              <td><input type="checkbox" onchange="toggleReservation(this, <%=reservation.id%>)"></td>
+              <td><input type="checkbox" data-id="<%=reservation.id%>"></td>
               <td><%= reservation.date %></td>
               <td><%= reservation.begin_time %></td>
               <td><%= reservation.end_time %></td>

@@ -18,6 +18,35 @@ var ready = function() {
     pickTime: false
   });
 
+  $(".mass-action-btn").click(function(e){
+    e.preventDefault();
+
+    var list = [];
+
+    var el = $(e.currentTarget);
+
+    var checkboxes = $(el).parent().parent().parent().find("input");
+
+    for(var i = 0; i < checkboxes.length; i++){
+
+      var check = $(checkboxes[i]);
+
+      if(check.prop("checked")){
+
+        list.push(check.data("id"));
+
+      }
+    }
+
+    $.ajax({
+      type: "POST",
+      url: el.attr("href"),
+      data: {reservations: list.join()},
+      datatype: 'script',
+    });
+
+  });
+
   var placeModel = new PlacePreviewModel({});
   var placeView = new PlacePreviewView({ model: placeModel });
 };
@@ -26,21 +55,33 @@ $(document).ready(ready);
 $(document).on('page:load', ready);
 
 function toggleReservation(el, id){
+
   var btns = $(el).parent().parent().parent().find(".mass-action-btn");
 
   var list =  btns.data("reservations").split(",");
 
   var reservation_id = list.indexOf(id.toString());
 
-  console.log(list);
+  if (list[0] == ''){
+    list = [];
+  }
 
   if (reservation_id == -1){
-     list.push(id);
+     list.push(id.toString());
   }
   else{
     list.splice(reservation_id, 1);
   }
 
   btns.data("reservations", list.join());
-  btns.text(list.join());
+
+  btns.attr("href", btns.attr("href").split("/")[0] + "/" + list.join())
+}
+
+function toggleSelectAll(el){
+
+  var checkboxes = $(el).parent().parent().parent().find("input").prop('checked', true);
+
+
+
 }

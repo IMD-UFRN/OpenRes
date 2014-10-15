@@ -14,7 +14,7 @@ class ReservationListDecorator < Draper::CollectionDecorator
 
 
   def approve_link
-    return link_to 'Aprovar', "#", method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?', reservations: ""}, class:"btn-small btn-normal mass-action-btn" if @actions.include? "approve"
+    return link_to 'Aprovar', mass_approve_path,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?', reservations: ""}, class:"btn-small btn-normal mass-action-btn" if @actions.include? "approve"
     return ""
   end
 

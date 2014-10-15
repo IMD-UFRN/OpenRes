@@ -168,7 +168,7 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.read_time(time_string, default = [0, 0])
-    return time_string.split(":").map(&:to_i) if not time_string.blank?
+    return time_string.split(":").map(&:to_i) if !time_string.blank?
     return default
   end
 

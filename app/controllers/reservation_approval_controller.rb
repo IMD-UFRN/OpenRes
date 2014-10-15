@@ -33,8 +33,14 @@ class ReservationApprovalController < ApplicationController
   end
 
   def approve
-    ReservationPolicy.approve(Reservation.find(params[:reservation_id]))
-    redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva aprovada com sucesso."
+    conflicts = ReservationPolicy.approve(Reservation.find(params[:reservation_id]))
+    if (conflicts.empty?)
+      redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva aprovada com sucesso."
+    else
+      flash[:error] = "Esta reserva possui conflitos e não pode ser aprovada até que estejam resolvidos."
+      redirect_to check_reservations_path(filter_by: "future")
+    end
+
   end
 
   def reject

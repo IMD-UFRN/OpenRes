@@ -1,0 +1,2 @@
+module MassReservationActionsHelper
+end
