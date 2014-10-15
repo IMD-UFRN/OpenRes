@@ -51,10 +51,16 @@ OpenRes::Application.routes.draw do
   post "reservations/:reservation_id/cancel", to: "reservation_approval#cancel", as: :reservation_cancel
 
   post "mass_action/approve/", to: "mass_reservation_actions#approve", as: :mass_approve
+  post "mass_action/reject/", to: "mass_reservation_actions#reject", as: :mass_reject
+  post "mass_action/suspend/", to: "mass_reservation_actions#suspend", as: :mass_suspend
 
 
   get "reservations/:reservation_id/reject" => 'reservation_approval#justify_status', as: :justify_reject
   get "reservations/:reservation_id/suspend" => 'reservation_approval#justify_status', as: :justify_suspend
+
+  # ERA PRA MANDAR UM POST
+  get "mass_action/reject" => 'mass_reservation_actions#justify_mass_status', as: :justify_mass_reject
+  get "mass_action/suspend" => 'mass_reservation_actions#justify_mass_status', as: :justify_mass_suspend
 
   get '/dashboard', to: 'dashboard#dashboard', as: :dashboard
 

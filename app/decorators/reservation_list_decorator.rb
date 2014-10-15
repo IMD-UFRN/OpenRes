@@ -19,7 +19,7 @@ class ReservationListDecorator < Draper::CollectionDecorator
   end
 
   def reject_link
-    return link_to 'Rejeitar', "#",
+    return link_to 'Rejeitar', justify_mass_reject_path,
       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal mass-action-btn", "data-reservations" => "" } if @actions.include? "reject"
     return ""
   end

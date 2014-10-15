@@ -22,7 +22,18 @@ class MassReservationActionsController < ApplicationController
   end
 
   def suspend
+  end
 
+  def reject
+  end
+
+  def justify_mass_status
+    @justification = Justification.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
 end
