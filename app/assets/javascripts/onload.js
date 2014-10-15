@@ -78,9 +78,13 @@ function toggleReservation(el, id){
   btns.attr("href", btns.attr("href").split("/")[0] + "/" + list.join())
 }
 
+var selected = false;
+
 function toggleSelectAll(el){
 
-  var checkboxes = $(el).parent().parent().parent().find("input").prop('checked', true);
+  selected = !selected;
+
+  var checkboxes = $(el).parent().parent().parent().find("input").prop('checked', selected);
 
 
 

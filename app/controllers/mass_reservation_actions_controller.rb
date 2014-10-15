@@ -21,4 +21,8 @@ class MassReservationActionsController < ApplicationController
 
   end
 
+  def suspend
+
+  end
+
 end
