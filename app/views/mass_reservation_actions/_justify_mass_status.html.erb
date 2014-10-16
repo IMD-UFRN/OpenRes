@@ -2,6 +2,8 @@
 
 <%= simple_form_for(:justification, url: url) do |f| %>
 
+  <%= f.hidden_field :reservations, value: @reservations.join(',')%>
+
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Escreva um motivo em comum para todas as reservas</h3>
@@ -10,7 +12,7 @@
     <%= f.input :reason, as: :text, label: "Motivo" %>
   </div>
   <div class="modal-footer">
-    <%= f.submit (request.original_url.include?("reject") ? "Rejeitar" : "Suspender"), class: "btn btn-normal" %>
+    <%= f.submit (request.original_url.include?("reject") ? "Rejeitar" : "Suspender"), class: "btn btn-normal mass-action-btn" %>
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
   </div>
 

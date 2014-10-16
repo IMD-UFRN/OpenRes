@@ -14,29 +14,29 @@ class ReservationListDecorator < Draper::CollectionDecorator
 
 
   def approve_link
-    return link_to 'Aprovar', mass_approve_path,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?', reservations: ""}, class:"btn-small btn-normal mass-action-btn" if @actions.include? "approve"
+    return link_to 'Aprovar Selecionadas', mass_approve_path,  data: { confirm: 'Você tem certeza que deseja aprovar as reservas selecionadas?', reservations: ""}, class:"btn-small btn-normal mass-action-btn" if @actions.include? "approve"
     return ""
   end
 
   def reject_link
-    return link_to 'Rejeitar', justify_mass_reject_path,
-      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal mass-action-btn", "data-reservations" => "" } if @actions.include? "reject"
+    return link_to 'Rejeitar Selecionadas', justify_mass_reject_path,
+      {'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal mass-action-btn", "data-reservations" => "" } if @actions.include? "reject"
     return ""
   end
 
   def suspend_link
-    return link_to 'Suspender', "#",
-     {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal mass-action-btn", "data-reservations" => "" } if @actions.include? "suspend"
+    return link_to 'Suspender Selecionadas', justify_mass_suspend_path,
+     {'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal mass-action-btn", "data-reservations" => "" } if @actions.include? "suspend"
     return ""
   end
 
   def cancel_link
-    return link_to 'Cancelar Reserva', "#", method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "cancel"
+    return link_to 'Cancelar Reserva', "#", method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar as reservas selecionadas?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "cancel"
     return ""
   end
 
   def delete_link
-    return link_to 'Excluir', "#", method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta reserva?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "delete"
+    return link_to 'Excluir', "#", method: :delete, data: { confirm: 'Você tem certeza que deseja excluir as reservas selecionadas?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "delete"
     return ""
   end
 

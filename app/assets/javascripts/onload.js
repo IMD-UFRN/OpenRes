@@ -18,8 +18,10 @@ var ready = function() {
     pickTime: false
   });
 
-  $(".mass-action-btn").click(function(e){
+  $(".mass-action-btn").on('click', function(e){
     e.preventDefault();
+
+
 
     var list = [];
 
@@ -38,12 +40,29 @@ var ready = function() {
       }
     }
 
-    $.ajax({
-      type: "POST",
-      url: el.attr("href"),
-      data: {reservations: list.join()},
-      datatype: 'script',
-    });
+    if (el.text() == "Aprovar Selecionadas"){
+      $.ajax({
+        type: "POST",
+        url: el.attr("href"),
+        data: {reservations: list.join()},
+        datatype: 'script',
+        error: function(xhr, error){
+          console.debug(xhr); console.debug(error);
+        },
+      });
+    }
+    else{
+      console.log(list.join());
+      $.ajax({
+        type: "GET",
+        url: el.attr("href"),
+        data: {reservations: list.join()},
+        datatype: 'script',
+        error: function(xhr, error){
+          console.debug(xhr); console.debug(error);
+        },
+      });
+    }
 
   });
 

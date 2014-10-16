@@ -58,7 +58,6 @@ OpenRes::Application.routes.draw do
   get "reservations/:reservation_id/reject" => 'reservation_approval#justify_status', as: :justify_reject
   get "reservations/:reservation_id/suspend" => 'reservation_approval#justify_status', as: :justify_suspend
 
-  # ERA PRA MANDAR UM POST
   get "mass_action/reject" => 'mass_reservation_actions#justify_mass_status', as: :justify_mass_reject
   get "mass_action/suspend" => 'mass_reservation_actions#justify_mass_status', as: :justify_mass_suspend
 
