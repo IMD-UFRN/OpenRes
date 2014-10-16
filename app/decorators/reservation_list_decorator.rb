@@ -14,7 +14,7 @@ class ReservationListDecorator < Draper::CollectionDecorator
 
 
   def approve_link
-    return link_to 'Aprovar Selecionadas', mass_approve_path,  data: { confirm: 'Você tem certeza que deseja aprovar as reservas selecionadas?', reservations: ""}, class:"btn-small btn-normal mass-action-btn" if @actions.include? "approve"
+    return link_to 'Aprovar Selecionadas', mass_approve_path,  data: { confirm: 'Você tem certeza que deseja aprovar as reservas selecionadas?', reservations: ""}, class:"btn-small btn-normal mass-action-btn" if @actions.include? "approve" 
     return ""
   end
 
@@ -36,7 +36,7 @@ class ReservationListDecorator < Draper::CollectionDecorator
   end
 
   def delete_link
-    return link_to 'Excluir', "#", method: :delete, data: { confirm: 'Você tem certeza que deseja excluir as reservas selecionadas?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "delete"
+    return link_to 'Excluir Selecionadas', mass_delete_path, data: { confirm: 'Você tem certeza que deseja excluir as reservas selecionadas?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "delete"
     return ""
   end
 

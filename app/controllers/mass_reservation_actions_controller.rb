@@ -19,8 +19,8 @@ class MassReservationActionsController < ApplicationController
 
     end
 
-    flash[:notice] = "#{s} reserva(s) aprovadas com sucesso."
-    flash[:error] = "#{f} reserva(s) não puderam ser aprovadas." if (f > 0)
+    flash[:notice] = "#{s} reserva(s) aprovada(s) com sucesso."
+    flash[:error] = "#{f} reserva(s) não puderam ser aprovada(s)." if (f > 0)
 
     render :js => 'window.location.reload()'
 
@@ -38,7 +38,7 @@ class MassReservationActionsController < ApplicationController
 
     end
 
-    flash[:notice] = "#{s} reserva(s) suspensas com sucesso."
+    flash[:notice] = "#{s} reserva(s) suspensa(s) com sucesso."
 
     redirect_to check_reservations_path(filter_by: "future")
   end
@@ -55,7 +55,7 @@ class MassReservationActionsController < ApplicationController
 
     end
 
-    flash[:notice] = "#{s} reserva(s) rejeitadas com sucesso."
+    flash[:notice] = "#{s} reserva(s) rejeitada(s) com sucesso."
 
     redirect_to check_reservations_path(filter_by: "future")
   end
@@ -71,7 +71,22 @@ class MassReservationActionsController < ApplicationController
 
     end
 
-    flash[:notice] = "#{s} reserva(s) canceladas com sucesso."
+    flash[:notice] = "#{s} reserva(s) cancelada(s) com sucesso."
+
+    render :js => 'window.location.reload()'
+
+  end
+
+  def delete
+    s = 0
+
+    @reservations.each do |reservation|
+
+      s = s + 1 if (Reservation.find(reservation).destroy)
+
+    end
+
+    flash[:notice] = "#{s} reserva(s) excluída(s) com sucesso."
 
     render :js => 'window.location.reload()'
 
