@@ -21,8 +21,6 @@ var ready = function() {
   $(".mass-action-btn").on('click', function(e){
     e.preventDefault();
 
-
-
     var list = [];
 
     var el = $(e.currentTarget);

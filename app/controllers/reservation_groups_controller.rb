@@ -167,6 +167,9 @@ class ReservationGroupsController < ApplicationController
 
   def show
     @reservation_group =  ReservationGroupDecorator.decorate(ReservationGroup.find(params[:id]))
+
+    @reservation_list =  ReservationListDecorator.initialize_decorator(@reservation_group.reservations.order(:date), "approve", "suspend", "reject", "cancel")
+
   end
 
   def create
