@@ -31,7 +31,7 @@ class ReservationListDecorator < Draper::CollectionDecorator
   end
 
   def cancel_link
-    return link_to 'Cancelar Reserva', "#", method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar as reservas selecionadas?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "cancel"
+    return link_to 'Cancelar Selecionadas', mass_cancel_path,  data: { confirm: 'Você tem certeza que deseja cancelar as reservas selecionadas?', reservations: "" }, class:"btn-small btn-normal mass-action-btn" if @actions.include? "cancel"
     return ""
   end
 

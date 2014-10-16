@@ -38,7 +38,7 @@ var ready = function() {
       }
     }
 
-    if (el.text() == "Aprovar Selecionadas"){
+    if (el.text() == "Aprovar Selecionadas" || el.text() == "Cancelar Selecionadas"){
       $.ajax({
         type: "POST",
         url: el.attr("href"),

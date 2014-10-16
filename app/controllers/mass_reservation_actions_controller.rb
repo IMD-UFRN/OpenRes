@@ -60,6 +60,23 @@ class MassReservationActionsController < ApplicationController
     redirect_to check_reservations_path(filter_by: "future")
   end
 
+  def cancel
+    s = 0
+
+    @reservations.each do |reservation|
+
+      ReservationPolicy.cancel(Reservation.find(reservation))
+
+       s = s + 1
+
+    end
+
+    flash[:notice] = "#{s} reserva(s) canceladas com sucesso."
+
+    render :js => 'window.location.reload()'
+
+  end
+
   def justify_mass_status
     @justification = Justification.new
 
