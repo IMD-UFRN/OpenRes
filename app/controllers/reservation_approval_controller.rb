@@ -1,5 +1,10 @@
 # -*- encoding : utf-8 -*-
 class ReservationApprovalController < ApplicationController
+
+  before_action do
+    authorize! :check_reservation, Reservation
+  end
+
   def index
     #@reservations = ReservationDecorator.decorate_collection(Reservation.can_decide_over(current_user))
     if params[:filter_by] == "future"

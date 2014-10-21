@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to :back, :alert => "Você não possui acesso a esta página"
+    redirect_to dashboard_path, :alert => "Você não possui acesso a página solicitada"
   end
 
   def after_sign_in_path_for(resource)

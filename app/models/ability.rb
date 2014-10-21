@@ -5,6 +5,14 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
+    can :read, :all
+
+    can :manage, :all if user.role == "admin"
+
+    can :check_reservation do
+      user.role != "basic" && user.role != "receptionist"
+    end
+
     can :approve, Reservation do |reservation|
       reservation.status != 'approved' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user)
     end
@@ -27,7 +35,6 @@ class Ability
 
     can :reject, ReservationGroup do |reservation|
       reservation.status != 'rejected' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user) && reservation.confirmed_at
-
     end
 
     can :edit, Reservation do |reservation|
