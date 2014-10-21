@@ -36,7 +36,7 @@ class ReservationGroupApprovalController < ApplicationController
 
     last_status =  reservation_group.status
 
-    ReservationPolicy.approve_all(reservation_group)
+    ReservationPolicy.approve_all(current_user, reservation_group)
 
     reservation_group.touch_with_version
 
@@ -60,7 +60,7 @@ class ReservationGroupApprovalController < ApplicationController
 
     last_status =  reservation_group.status
 
-    ReservationPolicy.reject_all(reservation_group, @justification)
+    ReservationPolicy.reject_all(current_user, reservation_group, @justification)
 
     reservation_group.touch_with_version
 
@@ -84,7 +84,7 @@ class ReservationGroupApprovalController < ApplicationController
 
     last_status =  reservation_group.status
 
-    ReservationPolicy.suspend_all(reservation_group, @justification)
+    ReservationPolicy.suspend_all(current_user, reservation_group, @justification)
 
     reservation_group.touch_with_version
 
@@ -106,7 +106,7 @@ class ReservationGroupApprovalController < ApplicationController
 
     last_status =  reservation_group.status
 
-    ReservationPolicy.cancel_all(reservation_group)
+    ReservationPolicy.cancel_all(current_user, reservation_group)
 
     reservation_group.touch_with_version
 

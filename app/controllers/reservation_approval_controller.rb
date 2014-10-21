@@ -33,7 +33,7 @@ class ReservationApprovalController < ApplicationController
   end
 
   def approve
-    conflicts = ReservationPolicy.approve(Reservation.find(params[:reservation_id]))
+    conflicts = ReservationPolicy.approve(current_user, Reservation.find(params[:reservation_id]))
     if (conflicts.empty?)
       redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva aprovada com sucesso."
     else
@@ -46,19 +46,19 @@ class ReservationApprovalController < ApplicationController
   def reject
     @justification = Justification.new(justification_params)
 
-    ReservationPolicy.reject(Reservation.find(params[:reservation_id]), @justification)
+    ReservationPolicy.reject(current_user, Reservation.find(params[:reservation_id]), @justification)
     redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva rejeitada com sucesso."
   end
 
   def suspend
     @justification = Justification.new(justification_params)
 
-    ReservationPolicy.suspend(Reservation.find(params[:reservation_id]), @justification)
+    ReservationPolicy.suspend(current_user, Reservation.find(params[:reservation_id]), @justification)
     redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva suspensa com sucesso."
   end
 
   def cancel
-    ReservationPolicy.cancel(Reservation.find(params[:reservation_id]))
+    ReservationPolicy.cancel(current_user, Reservation.find(params[:reservation_id]))
     redirect_to reservations_path(filter_by: "future"), notice: "Reserva cancelada com sucesso."
   end
 

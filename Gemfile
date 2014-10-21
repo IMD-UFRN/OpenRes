@@ -30,7 +30,7 @@ gem 'simple_form'
 
 gem 'puma'
 
-gem 'cancan'
+gem 'cancancan'
 
 gem 'draper'
 

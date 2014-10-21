@@ -15,7 +15,7 @@ class MassReservationActionsController < ApplicationController
 
     @reservations.each do |reservation|
 
-      ReservationPolicy.approve(Reservation.find(reservation)).empty? ? s = s + 1 : f = f + 1
+      ReservationPolicy.approve(current_user, Reservation.find(reservation)).empty? ? s = s + 1 : f = f + 1
 
     end
 
@@ -33,7 +33,7 @@ class MassReservationActionsController < ApplicationController
 
     @reservations.each do |reservation|
 
-      ReservationPolicy.suspend(Reservation.find(reservation), justification)
+      ReservationPolicy.suspend(current_user, Reservation.find(reservation), justification)
       s = s + 1
 
     end
@@ -50,7 +50,7 @@ class MassReservationActionsController < ApplicationController
 
     @reservations.each do |reservation|
 
-      ReservationPolicy.reject(Reservation.find(reservation), justification)
+      ReservationPolicy.reject(current_user, Reservation.find(reservation), justification)
       s = s + 1
 
     end
@@ -65,7 +65,7 @@ class MassReservationActionsController < ApplicationController
 
     @reservations.each do |reservation|
 
-      ReservationPolicy.cancel(Reservation.find(reservation))
+      ReservationPolicy.cancel(current_user, Reservation.find(reservation))
 
        s = s + 1
 
@@ -79,6 +79,20 @@ class MassReservationActionsController < ApplicationController
 
   def delete
     s = 0
+
+    reservation_group = Reservation.find(@reservations.first).reservation_group
+
+    if reservation_group
+
+      if @reservations.length == reservation_group.reservations.length
+        flash[:error] = "Você não pode excluir todas as reservas de uma reserva em grupo. Caso deseje fazer isso, cancele esta reserva múltipla."
+
+        render :js => 'window.location.reload()'
+
+        return
+      end
+
+    end
 
     @reservations.each do |reservation|
 

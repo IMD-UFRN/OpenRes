@@ -47,7 +47,7 @@ class ReservationGroupDecorator < Draper::Decorator
 
 
   def approve_link
-    return " " if (object.status == 'approved') || !object.can_be_decided_over?(current_user) || object.confirmed_at.nil?
+    return if cannot? :approve, object
 
     btn_class = "btn-small btn-normal"
 
@@ -56,20 +56,19 @@ class ReservationGroupDecorator < Draper::Decorator
     link_to 'Aprovar', reservation_group_approve_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva múltipla?' }, class: btn_class, disabled: object.has_conflicts?
   end
 
-  def reject_link
-    return if object.status == 'rejected' || !object.can_be_decided_over?(current_user) || object.confirmed_at.nil?
-
-    link_to 'Rejeitar', justify_reject_group_path(reservation_group),
-      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
-
-  end
-
   def suspend_link
-    return if object.status == 'pending' || !object.can_be_decided_over?(current_user) || object.confirmed_at.nil?
-
+    return if cannot? :suspend, object
 
     link_to 'Suspender', justify_suspend_group_path(reservation_group),
      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
+
+  end
+
+  def reject_link
+    return if cannot? :reject, object
+
+    link_to 'Rejeitar', justify_reject_group_path(reservation_group),
+      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
 
   end
 
@@ -78,15 +77,14 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def cancel_link
-    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user || object.created_by == current_user) || object.past?
-
+    return if cannot? :cancel, object
 
     link_to 'Cancelar Reserva', reservation_group_cancel_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
   end
 
   def edit_link
-    return if object.status == 'canceled' || object.status == "rejected" ||  !(object.user == current_user || object.created_by == current_user) || object.past?
-
+    return if cannot? :edit, object
+    
     link_to "Editar Informações Gerais", edit_reservation_group_path, class: "btn-small btn-normal"
   end
 

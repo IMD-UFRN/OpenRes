@@ -1,7 +1,10 @@
 # -*- encoding : utf-8 -*-
 class ReservationPolicy
 
-  def self.suspend(reservation, justification, opts={})
+  def self.suspend(current_user, reservation, justification, opts={})
+
+    return unless reservation.can_be_decided_over? current_user
+
     reservation.status = "pending"
 
     ActiveRecord::Base.transaction do
@@ -14,7 +17,7 @@ class ReservationPolicy
     end
   end
 
-  def self.reject(reservation, justification, opts={})
+  def self.reject(current_user, reservation, justification, opts={})
     reservation.status = "rejected"
 
     ActiveRecord::Base.transaction do
@@ -27,7 +30,8 @@ class ReservationPolicy
     end
   end
 
-  def self.approve(reservation, opts={})
+  def self.approve(current_user, reservation, opts={})
+
     conflicts = Reservation.approved.conflicting(reservation)
 
     if conflicts.empty?
@@ -44,7 +48,7 @@ class ReservationPolicy
     return conflicts
   end
 
-  def self.cancel(reservation, opts={})
+  def self.cancel(current_user, reservation, opts={})
     reservation.status = "canceled"
     reservation.save
 
@@ -55,20 +59,24 @@ class ReservationPolicy
 
   end
 
-  def self.suspend_all(reservation_group, justification)
+  def self.delete(current_user, reservation, opts={})
+    reservation.destroy
+  end
+
+  def self.suspend_all(current_user, reservation_group, justification)
 
     reservation_group.reservations.each do |reservation|
-      ReservationPolicy.suspend(reservation, justification, {silent: true})
+      ReservationPolicy.suspend(current_user, reservation, justification, {silent: true})
     end
 
     ReservationApprovalMailer.suspended_group_mail(reservation_group, justification).deliver
     NotifyUserMailer.send_reservation_to_class_monitor(reservation_group)
   end
 
-  def self.reject_all(reservation_group, justification)
+  def self.reject_all(current_user, reservation_group, justification)
 
     reservation_group.reservations.each do |reservation|
-      ReservationPolicy.reject(reservation, justification, {silent: true})
+      ReservationPolicy.reject(current_user, reservation, justification, {silent: true})
     end
 
     ReservationApprovalMailer.rejected_group_mail(reservation_group, justification).deliver
@@ -76,12 +84,12 @@ class ReservationPolicy
 
   end
 
-  def self.approve_all(reservation_group)
+  def self.approve_all(current_user, reservation_group)
 
     conflicts = []
 
     reservation_group.reservations.each do |reservation|
-      ReservationPolicy.approve(reservation, {silent: true})
+      ReservationPolicy.approve(current_user, reservation, {silent: true})
     end
 
     ReservationApprovalMailer.approved_group_mail(reservation_group).deliver
@@ -91,10 +99,10 @@ class ReservationPolicy
 
   end
 
-  def self.cancel_all(reservation_group, opts={})
+  def self.cancel_all(current_user, reservation_group, opts={})
 
     reservation_group.reservations.each do |reservation|
-      ReservationPolicy.cancel(reservation, {silent: true})
+      ReservationPolicy.cancel(current_user, reservation, {silent: true})
     end
 
     reservation_group.save

@@ -43,27 +43,15 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def created_by
-    link_to(object.created_by.name, object.created_by) 
+    link_to(object.created_by.name, object.created_by)
   end
 
   def place
     link_to(object.place.full_name, object.place)
   end
 
-  def top_rect
-    @top_rect ||= (object.begin_time.hour * 60 + object.begin_time.min) * 0.5
-  end
-
   def room_type
     link_to(object.place.room_type.name, object.place.room_type)
-  end
-
-  def rect_height
-    ((object.end_time.hour * 60 + object.end_time.min) * 0.5) - top_rect
-  end
-
-  def random_color
-    "%06x" % (rand * 0xffffff)
   end
 
   def details_link
@@ -71,15 +59,14 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def approve_link
-    return if object.status == 'approved' || object.status == 'canceled' || !object.can_be_decided_over?(current_user)
+    return if cannot? :approve, object
 
     link_to 'Aprovar', reservation_approve_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?' }, class:"btn-small btn-normal"
 
   end
 
   def reject_link
-    return if object.status == 'rejected' || object.status == 'canceled' || !object.can_be_decided_over?(current_user)
-
+    return if cannot? :reject, object
 
     link_to 'Rejeitar', justify_reject_path(reservation),
       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
@@ -87,12 +74,29 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def suspend_link
-    return if object.status == 'pending' || object.status == 'canceled' || !object.can_be_decided_over?(current_user)
-
+    return if cannot? :suspend, object
 
     link_to 'Suspender', justify_suspend_path(reservation),
      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
 
+  end
+
+  def edit_link
+    return if cannot? :edit, object
+
+    link_to 'Editar Informações desta Reserva', edit_reservation_path(object), class: "btn-small btn-normal"
+  end
+
+  def cancel_link
+    return if cannot? :cancel, object
+
+    link_to 'Cancelar Reserva', reservation_cancel_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
+  end
+
+  def delete_link
+    return if cannot? :delete, object
+
+    link_to 'Excluir', object, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta reserva?' }, class:"btn-small btn-normal"
   end
 
   def approver_links
@@ -107,27 +111,5 @@ class ReservationDecorator < Draper::Decorator
     return object.responsible unless object.responsible.nil? || object.responsible == ""
     user
   end
-
-  def edit_link
-    return if !(object.user == current_user) || object.past?
-    link_to 'Editar Informações desta Reserva', edit_reservation_path(object), class: "btn-small btn-normal"
-  end
-
-  def cancel_link
-    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user || object.created_by == current_user)  || object.past?
-
-
-
-    link_to 'Cancelar Reserva', reservation_cancel_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
-  end
-
-
-  def delete_link
-
-    return if object.status == 'canceled' || object.status == "rejected" || !(object.user == current_user || object.created_by == current_user) || object.past?
-
-    link_to 'Excluir', object, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta reserva?' }, class:"btn-small btn-normal"
-  end
-
 
 end
