@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ObjectResourcesController < ApplicationController
   load_and_authorize_resource
-  
+
   before_action :set_object_resource, only: [:show, :edit, :update, :destroy]
 
   # GET /object_resources

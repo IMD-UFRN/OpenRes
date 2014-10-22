@@ -59,14 +59,14 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def approve_link
-    return if cannot? :approve, object
+    return unless ReservationAuth.can_approve?(current_user, reservation)
 
     link_to 'Aprovar', reservation_approve_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja aprovar esta reserva?' }, class:"btn-small btn-normal"
 
   end
 
   def reject_link
-    return if cannot? :reject, object
+    return unless ReservationAuth.can_reject?(current_user, reservation)
 
     link_to 'Rejeitar', justify_reject_path(reservation),
       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
@@ -74,7 +74,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def suspend_link
-    return if cannot? :suspend, object
+    return unless ReservationAuth.can_suspend?(current_user, reservation)
 
     link_to 'Suspender', justify_suspend_path(reservation),
      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
@@ -82,25 +82,21 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def edit_link
-    return if cannot? :edit, object
+    return unless ReservationAuth.can_edit?(current_user, reservation)
 
     link_to 'Editar Informações desta Reserva', edit_reservation_path(object), class: "btn-small btn-normal"
   end
 
   def cancel_link
-    return if cannot? :cancel, object
+    return unless ReservationAuth.can_cancel?(current_user, reservation)
 
     link_to 'Cancelar Reserva', reservation_cancel_path(reservation), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
   end
 
   def delete_link
-    return if cannot? :delete, object
+   return unless ReservationAuth.can_delete?(current_user, reservation)
 
     link_to 'Excluir', object, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir esta reserva?' }, class:"btn-small btn-normal"
-  end
-
-  def approver_links
-      approve_link + " " + suspend_link + " " + reject_link + " " + cancel_link
   end
 
   def conflict_class
@@ -110,6 +106,10 @@ class ReservationDecorator < Draper::Decorator
   def responsible
     return object.responsible unless object.responsible.nil? || object.responsible == ""
     user
+  end
+
+  def cancel_or_suspend_reason
+    return object.justification.try(:reason) || "--"
   end
 
 end

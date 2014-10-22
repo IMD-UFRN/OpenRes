@@ -46,9 +46,11 @@ class MassReservationActionsController < ApplicationController
   def reject
     s = 0
 
-    justification = Justification.new(justification_params)
-
     @reservations.each do |reservation|
+
+      justification = Justification.new(justification_params)
+
+      justification.reservation_id = reservation
 
       ReservationPolicy.reject(current_user, Reservation.find(reservation), justification)
       s = s + 1

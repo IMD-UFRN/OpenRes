@@ -5,56 +5,64 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
+    #can :manage, :all if Rails.env.development?
+
+    #all permissions
+    can :crud, Reservation, { user_id: user.id }
     can :read, :all
+    can :get_reservations, Place
+    can :new_select_reservation
 
-    can :manage, :all if user.role == "admin"
+    if user.role == "admin"
+      can :manage, :all
+    elsif user.role == "sector_admin"
+      can :manage, Reservation do |reservation|
+        unless reservation.place.nil?
+          #reservation.sector_ids.include?(user.sector.id)
+          reservation.can_be_decided_over?(user)
+        end
+      end
 
-    can :check_reservation do
-      user.role != "basic" && user.role != "receptionist"
-    end
+      can :manage, ReservationGroup do |reservation_group|
+        unless reservation_group.place.nil?
+          #reservation_group.sector_ids.include?(user.sector.id)
+          (reservation_group.sector_ids - user.sector_ids).length < reservation_group.sector_ids.length
+        end
+      end
 
-    can :approve, Reservation do |reservation|
-      reservation.status != 'approved' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user)
-    end
 
-    can :approve, ReservationGroup do |reservation|
-      reservation.status != 'approved' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user) && reservation.confirmed_at
-    end
+      can :manage , Place do |place|
+        unless place.sector_ids.nil?
+          #place.sector_ids.include?(user.sector.id)
+          (place.sector_ids - user.sector_ids).length < place.sector_ids.length
+        end
+      end
 
-    can :suspend, Reservation do |reservation|
-      reservation.status != 'pending' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user)
-    end
+      can :read, User
 
-    can :suspend, ReservationGroup do |reservation|
-      reservation.status != 'pending' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user) && reservation.confirmed_at
-    end
+    elsif user.role == "secretary"
+      can :manage, Reservation do |reservation|
+        unless reservation.place.nil?
+          #reservation.sector_ids.include?(user.sector.id)
+          reservation.can_be_decided_over?(user)
+          #(reservation.sector_ids - user.sector_ids).length < reservation.sector_ids.length
+        end
+      end
 
-    can :reject, Reservation do |reservation|
-      reservation.status != 'rejected' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user)
-    end
+      can :manage, ReservationGroup do |reservation_group|
+        unless reservation_group.place.nil?
+          #reservation_group.sector_ids.include?(user.sector.id)
+          (reservation_group.sector_ids - user.sector_ids).length < reservation_group.sector_ids.length
+        end
+      end
 
-    can :reject, ReservationGroup do |reservation|
-      reservation.status != 'rejected' && reservation.status != 'canceled' && reservation.can_be_decided_over?(user) && reservation.confirmed_at
-    end
+      can :read, User
 
-    can :edit, Reservation do |reservation|
-      reservation.user == user && !reservation.past? && reservation.status != "rejected" && reservation.status != 'canceled'
-    end
+    elsif user.role == "basic"
 
-    can :edit, ReservationGroup do |reservation|
-      reservation.user == user && !reservation.past? && reservation.status != "rejected" && reservation.status != 'canceled'
-    end
-
-    can :cancel, Reservation do |reservation|
-      reservation.status != 'canceled' && reservation.status != "rejected" && (reservation.user == user || reservation.created_by == user)  && !reservation.past?
-    end
-
-    can :cancel, ReservationGroup do |reservation|
-      reservation.status != 'canceled' && reservation.status != "rejected" && (reservation.user == user || reservation.created_by == user)  && !reservation.past?
-    end
-
-    can :delete, Reservation do |reservation|
-      reservation.status != 'canceled' && reservation.status != "rejected" && (reservation.user == user || reservation.created_by == user) && !reservation.past? && reservation.reservation_group && reservation.reservation_group.confirmed_at.nil?
+      can :select_reservation, Reservation
     end
 
     # Define abilities for the passed in user here. For example:

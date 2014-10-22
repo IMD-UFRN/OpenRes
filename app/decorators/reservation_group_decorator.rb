@@ -47,7 +47,7 @@ class ReservationGroupDecorator < Draper::Decorator
 
 
   def approve_link
-    return if cannot? :approve, object
+    return unless ReservationAuth.can_approve_group?(current_user, reservation_group)
 
     btn_class = "btn-small btn-normal"
 
@@ -57,7 +57,7 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def suspend_link
-    return if cannot? :suspend, object
+    return unless ReservationAuth.can_suspend_group?(current_user, reservation_group)
 
     link_to 'Suspender', justify_suspend_group_path(reservation_group),
      {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class:"btn-small btn-normal"}
@@ -65,26 +65,22 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def reject_link
-    return if cannot? :reject, object
+    return unless ReservationAuth.can_reject_group?(current_user, reservation_group)
 
     link_to 'Rejeitar', justify_reject_group_path(reservation_group),
       {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"btn-small btn-normal"}
 
   end
 
-  def approver_links
-    approve_link + " " + reject_link + " " +suspend_link
-  end
-
   def cancel_link
-    return if cannot? :cancel, object
+    return unless ReservationAuth.can_cancel_group?(current_user, reservation_group)
 
     link_to 'Cancelar Reserva', reservation_group_cancel_path(reservation_group), method: :post,  data: { confirm: 'Você tem certeza que deseja cancelar esta reserva?' }, class:"btn-small btn-normal"
   end
 
   def edit_link
-    return if cannot? :edit, object
-    
+    return unless ReservationAuth.can_edit_group?(current_user, reservation_group)
+
     link_to "Editar Informações Gerais", edit_reservation_group_path, class: "btn-small btn-normal"
   end
 
