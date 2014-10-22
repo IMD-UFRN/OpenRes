@@ -59,13 +59,11 @@
     </tr>
   </thead>
   <tbody>
-    <% if @reservation_group.can_be_decided_over?(current_user) %>
-      <tr>
-        <td colspan="10" class="mass-action-bar">
-          <strong>Ações em massa: </strong><%= @reservation_list.mass_actions%>
-        </td>
-      </tr>
-    <% end %>
+    <tr>
+      <td colspan="10" class="mass-action-bar">
+        <strong>Ações em massa: </strong><%= @reservation_list.mass_actions%>
+      </td>
+    </tr>
     <tr>
       <th><input type="checkbox" onchange="toggleSelectAll(this)"></th>
       <th>Data</th>
