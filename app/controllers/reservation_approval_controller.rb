@@ -38,33 +38,52 @@ class ReservationApprovalController < ApplicationController
   end
 
   def approve
-    conflicts = ReservationPolicy.approve(current_user, Reservation.find(params[:reservation_id]))
+    reservation = Reservation.find(params[:reservation_id])
+    conflicts = ReservationPolicy.approve(current_user, reservation)
+
     if (conflicts.empty?)
-      redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva aprovada com sucesso."
+      flash[:notice] = "Reserva aprovada com sucesso."
     else
       flash[:error] = "Esta reserva possui conflitos e não pode ser aprovada até que estejam resolvidos."
-      redirect_to check_reservations_path(filter_by: "future")
     end
 
+    redirect_after_action(reservation)
   end
 
   def reject
+
     @justification = Justification.new(justification_params)
 
-    ReservationPolicy.reject(current_user, Reservation.find(params[:reservation_id]), @justification)
-    redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva rejeitada com sucesso."
+    reservation = Reservation.find(params[:reservation_id])
+
+    ReservationPolicy.reject(current_user, reservation, @justification)
+
+    flash[:notice] = "Reserva rejeitada com sucesso."
+
+    redirect_after_action(reservation)
+
   end
 
   def suspend
     @justification = Justification.new(justification_params)
 
-    ReservationPolicy.suspend(current_user, Reservation.find(params[:reservation_id]), @justification)
-    redirect_to check_reservations_path(filter_by: "future"), notice: "Reserva suspensa com sucesso."
+    reservation = Reservation.find(params[:reservation_id])
+
+    ReservationPolicy.suspend(current_user, reservation, @justification)
+
+    flash[:notice] = "Reserva suspensa com sucesso."
+
+    redirect_after_action(reservation)
   end
 
   def cancel
-    ReservationPolicy.cancel(current_user, Reservation.find(params[:reservation_id]))
-    redirect_to reservations_path(filter_by: "future"), notice: "Reserva cancelada com sucesso."
+    reservation = Reservation.find(params[:reservation_id])
+
+    ReservationPolicy.cancel(current_user, reservation)
+
+    flash[:notice] = "Reserva cancelada com sucesso."
+
+    redirect_after_action(reservation)
   end
 
   def justify_status

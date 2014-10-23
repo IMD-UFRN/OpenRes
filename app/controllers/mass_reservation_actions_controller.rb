@@ -40,7 +40,7 @@ class MassReservationActionsController < ApplicationController
 
     flash[:notice] = "#{s} reserva(s) suspensa(s) com sucesso."
 
-    redirect_to check_reservations_path(filter_by: "future")
+    redirect_after_action(Reservation.find(@reservations.first))
   end
 
   def reject
@@ -59,7 +59,7 @@ class MassReservationActionsController < ApplicationController
 
     flash[:notice] = "#{s} reserva(s) rejeitada(s) com sucesso."
 
-    redirect_to check_reservations_path(filter_by: "future")
+    redirect_after_action(Reservation.find(@reservations.first))
   end
 
   def cancel

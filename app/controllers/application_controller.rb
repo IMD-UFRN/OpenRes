@@ -55,4 +55,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_after_action(reservation)
+    if reservation.reservation_group
+      redirect_to reservation.reservation_group
+    else
+      redirect_to check_reservations_path(filter_by: "future")
+    end
+  end
+
 end
