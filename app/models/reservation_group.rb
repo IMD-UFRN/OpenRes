@@ -11,6 +11,14 @@ class ReservationGroup < ActiveRecord::Base
     ReservationGroup.where.not(confirmed_at: nil)
   }
 
+  scope :from_class, lambda{
+    where(from_class: true)
+  }
+
+  scope :not_from_class, lambda{
+    where(from_class: nil)
+  }
+
   scope :from_user, lambda{ |user|
     ReservationGroup.where(user_id: user.id)
   }

@@ -31,8 +31,6 @@ OpenRes::Application.routes.draw do
   get "check_reservations/", to: "reservation_approval#index", as: :check_reservations
   get "check_group_reservations/", to: "reservation_group_approval#index", as: :check_group_reservations
 
-
-
   post "reservation_groups/:reservation_group_id/approve", to: "reservation_group_approval#approve", as: :reservation_group_approve
   post "check_group_reservations/:reservation_group_id/reject", to: "reservation_group_approval#reject", as: :reservation_group_reject
   post "check_group_reservations/:reservation_group_id/suspend", to: "reservation_group_approval#suspend", as: :reservation_group_suspend
@@ -72,7 +70,6 @@ OpenRes::Application.routes.draw do
   get '/places/slot_search', to: 'places#slot_search', as: :slot_search
 
   resources :places
-
 
   resources :users, path: 'accounts'
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user

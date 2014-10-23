@@ -1,17 +1,27 @@
-<%if params[:filter_by] == "future" %>
-  <h1>Checando Reservas Múltiplas Futuras</h1>
-<% elsif params[:filter_by] == "finished" %>
-  <h1>Checando Reservas Múltiplas Finalizadas</h1>
-<%else%>
-  <h1>Checando Reservas Múltiplas</h1>
+<% if params[:classes] %>
+  <%if params[:filter_by] == "future" %>
+    <h1>Checando Reservas para Turmas Futuras</h1>
+  <% elsif params[:filter_by] == "finished" %>
+    <h1>Checando Reservas para Turmas Finalizadas</h1>
+  <%else%>
+    <h1>Checando Reservas para Turmas</h1>
+  <%end%>
+<% else %>
+  <%if params[:filter_by] == "future" %>
+    <h1>Checando Reservas Múltiplas Futuras</h1>
+  <% elsif params[:filter_by] == "finished" %>
+    <h1>Checando Reservas Múltiplas Finalizadas</h1>
+  <%else%>
+    <h1>Checando Reservas Múltiplas</h1>
+  <%end%>
 <%end%>
 
 <%= render "shared/reservation_group_search_bar" %>
 
 <ul class="nav nav-tabs" style="margin-bottom: 20px;">
-  <li><%= link_to 'Reservas Futuras', check_group_reservations_path(filter_by: "future") %></li>
-  <li><%= link_to 'Reservas Finalizadas', check_group_reservations_path(filter_by: "finished") %></li>
-  <li><%= link_to 'Todas as Reservas', check_group_reservations_path %></li>
+  <li><%= link_to 'Reservas Futuras', check_group_reservations_path(filter_by: "future", classes: params[:classes]) %></li>
+  <li><%= link_to 'Reservas Finalizadas', check_group_reservations_path(filter_by: "finished", classes: params[:classes]) %></li>
+  <li><%= link_to 'Todas as Reservas', check_group_reservations_path(classes: params[:classes]) %></li>
 </ul>
 
 
@@ -19,7 +29,12 @@
 
 <div class="clear">
 
-<%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
+
+<% if params[:classes] %>
+  <%= link_to "Nova Reserva para Turma", new_reservation_group_path(to_class: "true"), class:"btn btn-success"%>
+<% else %>
+  <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
+<% end %>
 
 <%= render "shared/back"%>
 

@@ -98,4 +98,8 @@ class ReservationAuth
     false
   end
 
+  def self.can_create_class?(user)
+    user.role == "admin"
+  end
+
 end

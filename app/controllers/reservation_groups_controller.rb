@@ -6,7 +6,7 @@ class ReservationGroupProcessor
   def initialize(hash)
     @hash = hash
     @group = ReservationGroup.new(name: hash[:name], user_id: hash[:user_id],
-      notes: hash[:notes])
+      notes: hash[:notes], from_class: hash[:from_class])
   end
 
   def process?
@@ -66,6 +66,10 @@ class ReservationGroupsController < ApplicationController
   before_filter :return_if_confirmed, only: [:new_reservation]
 
   def new
+    if params[:to_class] && !ReservationAuth.can_create_class?(current_user)
+      flash[:error] = "Você não possui acesso a esta página"
+      redirect_to dashboard_path
+    end
   end
 
   def edit
@@ -200,6 +204,9 @@ class ReservationGroupsController < ApplicationController
   def new_reservation
     @reservation = Reservation.new
     @reservation.reservation_group = @reservation_group
+  end
+
+  def classes
   end
 
   def confirm

@@ -1,11 +1,24 @@
 # -*- encoding : utf-8 -*-
 class ReservationGroupApprovalController < ApplicationController
   def index
+
+    reservations = ReservationGroup.confirmed
+
+    if params[:classes]
+      reservations = reservations.from_class
+      unless ReservationAuth.can_create_class?(current_user)
+        flash[:error]= "Você não tem acesso a esta página"
+        return redirect_to dashboard_path
+      end
+    else
+      reservations = reservations.not_from_class
+    end
+
     if params[:filter_by] == "future"
 
       reservation_groups = []
 
-      ReservationGroup.confirmed.can_decide_over(current_user).each do |reservation|
+      reservations.confirmed.can_decide_over(current_user).each do |reservation|
         reservation_groups << reservation if reservation.begin_date >= DateTime.now.to_date
       end
 
@@ -13,12 +26,12 @@ class ReservationGroupApprovalController < ApplicationController
 
       reservation_groups = []
 
-      ReservationGroup.confirmed.can_decide_over(current_user).each do |reservation|
+      reservations.confirmed.can_decide_over(current_user).each do |reservation|
         reservation_groups << reservation if reservation.begin_date < DateTime.now.to_date
       end
 
     else
-      reservation_groups = ReservationGroup.confirmed.can_decide_over(current_user)
+      reservation_groups = reservations.confirmed.can_decide_over(current_user)
 
       if params[:reservation_search]
         reservation_groups = ReservationGroup.filter(reservation_groups, params[:reservation_search])
