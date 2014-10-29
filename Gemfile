@@ -90,6 +90,8 @@ gem 'by_star', :git => "git://github.com/radar/by_star"
 
 gem 'paper_trail', '~> 3.0.5'
 
+gem 'roo'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

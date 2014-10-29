@@ -153,7 +153,62 @@ class ReservationGroupApprovalController < ApplicationController
   end
 
   def process_spreadsheet
-    raise Exception.new(params)
+    s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
+
+    i = 2
+    hash = {}
+
+    while i <= s.last_row
+
+      if s.cell(i, 1)
+        hash[:name] = s.cell(i, 1)
+        hash[:place_id] = Place.find_by(code: s.cell(i, 2)).id
+        hash[:responsible] = s.cell(i, 3)
+        hash[:reason] = s.cell(i, 4)
+        hash[:notes] = s.cell(i, 5)
+
+        hash[:repetitions] = {}
+      end
+
+      hash[:repetitions][i-2] = {begin_date: s.cell(i, 6).strftime("%d/%m/%Y"),
+                                 end_date: s.cell(i, 7).strftime("%d/%m/%Y"),
+                                 weekly_repeat: s.cell(i, 8).to_i.to_s.chars.map{ |x|
+                                   (x.to_i - 1).to_s
+                                 },
+                                 begin_time: Time.at(s.cell(i, 9).to_f).gmtime.strftime('%R').to_s,
+                                 end_time: Time.at(s.cell(i, 10).to_f).gmtime.strftime('%R').to_s,
+                                }
+
+
+
+      i+= 1
+
+    end
+
+
+    hash[:user_id] = current_user.id
+
+    @reservation_group = ReservationGroup.new(name: hash[:name],
+     notes: hash[:notes])
+
+    group_processor = ReservationGroupProcessor.new(hash)
+
+    unless group_processor.process?
+      flash[:error] ="Nenhuma reserva criada. O horário de fim de um dos blocos é menor que o de início."
+      redirect_to new_reservation_group_path
+      return
+    end
+
+    @reservation_group = group_processor.save
+
+    if @reservation_group
+      redirect_to @reservation_group
+    else
+      flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é válido e contém os dias selecionados."
+      redirect_to new_reservation_group_path
+      return
+    end
+
   end
 
   def justification_params
