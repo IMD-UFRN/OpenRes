@@ -1,0 +1,15 @@
+<%= simple_form_for(:import, url: import_spreadsheet_path) do |f| %>
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Importar Planilha de turmas</h3>
+  </div>
+  <div class="modal-body">
+    <%= f.input :spreadsheet, as: :file, label: "Planilha" %>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit "Importar", class: "btn btn-normal" %>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+  </div>
+
+<% end %>

@@ -145,6 +145,17 @@ class ReservationGroupApprovalController < ApplicationController
     end
   end
 
+  def import_spreadsheet
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def process_spreadsheet
+    raise Exception.new(params)
+  end
+
   def justification_params
     params.require(:justification).permit(:reason).
       merge(user_id: current_user.id, reservation_group_id: params[:reservation_group_id])

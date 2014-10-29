@@ -32,6 +32,8 @@
 
 <% if params[:classes] %>
   <%= link_to "Nova Reserva para Turma", new_reservation_group_path(to_class: "true"), class:"btn btn-success"%>
+  <%= link_to "Nova Reserva para Turmas via Planilha", import_spreadsheet_path, remote: true, class:"btn btn-success"%>
+
 <% else %>
   <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
 <% end %>
