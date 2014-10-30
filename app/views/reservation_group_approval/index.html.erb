@@ -40,5 +40,14 @@
 
 <%= render "shared/back"%>
 
+<% if params[:classes] %>
+  <hr>
+
+  <h1>Minhas Reservas de Turmas</h1>
+
+  <%= render @user_class_reservations%>
+
+<% end %>
+
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

@@ -6,7 +6,6 @@ class ReservationGroup < ActiveRecord::Base
 
   has_many :reservations
 
-
   scope :confirmed, lambda{
     ReservationGroup.where.not(confirmed_at: nil)
   }

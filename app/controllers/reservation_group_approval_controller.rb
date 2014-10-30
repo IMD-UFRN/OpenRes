@@ -10,6 +10,7 @@ class ReservationGroupApprovalController < ApplicationController
         flash[:error]= "Você não tem acesso a esta página"
         return redirect_to dashboard_path
       end
+      @user_class_reservations = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_class)
     else
       reservations = reservations.not_from_class
     end
@@ -156,58 +157,60 @@ class ReservationGroupApprovalController < ApplicationController
     s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
 
     i = 2
-    hash = {}
+
+    reservations = []
 
     while i <= s.last_row
 
-      if s.cell(i, 1)
-        hash[:name] = s.cell(i, 1)
-        hash[:place_id] = Place.find_by(code: s.cell(i, 2)).id
-        hash[:responsible] = s.cell(i, 3)
-        hash[:reason] = s.cell(i, 4)
-        hash[:notes] = s.cell(i, 5)
+      hash = {}
+      hash[:name]        = s.cell(i, 1)
+      hash[:place_id]    = Place.find_by(code: s.cell(i, 2)).id
+      hash[:responsible] = s.cell(i, 3)
+      hash[:reason]      = s.cell(i, 4)
+      hash[:notes]       = s.cell(i, 5)
 
-        hash[:repetitions] = {}
-      end
+      hash[:repetitions] = {}
 
-      hash[:repetitions][i-2] = {begin_date: s.cell(i, 6).strftime("%d/%m/%Y"),
-                                 end_date: s.cell(i, 7).strftime("%d/%m/%Y"),
-                                 weekly_repeat: s.cell(i, 8).to_i.to_s.chars.map{ |x|
-                                   (x.to_i - 1).to_s
-                                 },
-                                 begin_time: Time.at(s.cell(i, 9).to_f).gmtime.strftime('%R').to_s,
-                                 end_time: Time.at(s.cell(i, 10).to_f).gmtime.strftime('%R').to_s,
-                                }
+      begin
 
+        hash[:repetitions][i-2] = {begin_date: s.cell(i, 6).strftime("%d/%m/%Y"),
+                                   end_date: s.cell(i, 7).strftime("%d/%m/%Y"),
+                                   weekly_repeat: s.cell(i, 8).to_i.to_s.chars.map{ |x|
+                                     (x.to_i - 1).to_s
+                                   },
+                                   begin_time: Time.at(s.cell(i, 9).to_f).gmtime.strftime('%R').to_s,
+                                   end_time: Time.at(s.cell(i, 10).to_f).gmtime.strftime('%R').to_s,
+                                  }
 
+        i+= 1
 
-      i+= 1
+      end while s.cell(i, 1).nil? && i <= s.last_row
+
+      hash[:user_id] = current_user.id
+
+      hash[:from_class] = true
+
+      reservations << hash
 
     end
 
+    s = 0
+    f = 0
 
-    hash[:user_id] = current_user.id
+    reservations.each do |hash|
 
-    @reservation_group = ReservationGroup.new(name: hash[:name],
-     notes: hash[:notes])
+      group_processor = ReservationGroupProcessor.new(hash)
 
-    group_processor = ReservationGroupProcessor.new(hash)
+      group_processor.process? ? s+= 1 : f+=1
 
-    unless group_processor.process?
-      flash[:error] ="Nenhuma reserva criada. O horário de fim de um dos blocos é menor que o de início."
-      redirect_to new_reservation_group_path
-      return
+      group_processor.save
+
     end
 
-    @reservation_group = group_processor.save
+    flash[:notice] = "#{s} Reservas cadastradas com sucesso" if s > 0
+    flash[:error] = "#{f} Reservas não cadastradas com sucesso" if f > 0
 
-    if @reservation_group
-      redirect_to @reservation_group
-    else
-      flash[:error] ="Nenhuma reserva criada. Verifique se o período especificado é válido e contém os dias selecionados."
-      redirect_to new_reservation_group_path
-      return
-    end
+    redirect_to check_group_reservations_path(classes: true)
 
   end
 
