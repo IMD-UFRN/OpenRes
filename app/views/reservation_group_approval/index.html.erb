@@ -33,7 +33,8 @@
 <% if params[:classes] %>
   <%= link_to "Nova Reserva para Turma", new_reservation_group_path(to_class: "true"), class:"btn btn-success"%>
   <%= link_to "Nova Reserva para Turmas via Planilha", import_spreadsheet_path, remote: true, class:"btn btn-success"%>
-
+  <%= link_to "Modelo de Planilha em Branco", "/spreadsheets/modelo_reserva_em_lote.xlsx", class: "btn btn-default" %>
+  <%= link_to "Exemplo de Planilha Preenchida", "/spreadsheets/exemplo_reserva_em_lote.xlsx", class: "btn btn-default" %>
 <% else %>
   <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
 <% end %>
