@@ -65,7 +65,7 @@ class ReservationAuth
   end
 
   def self.can_cancel_group?(user, reservation_group)
-    reservation_group.status != 'canceled' && reservation_group.status != "rejected" && (reservation_group.user == user || reservation_group.created_by == user)  && !reservation_group.past?
+    !reservation_group.confirmed_at? || (reservation_group.status != 'canceled' && reservation_group.status != "rejected" && (reservation_group.user == user || reservation_group.created_by == user)  && !reservation_group.past?)
   end
 
   def self.can_cancel_list?(user, list)
@@ -87,7 +87,6 @@ class ReservationAuth
 
     result
   end
-
 
   def self.can_delete_list?(user, list)
 
