@@ -33,6 +33,9 @@ class ReservationGroupDecorator < Draper::Decorator
   end
 
   def status
+
+    return "NÃO SALVA" unless object.confirmed_at?
+
     my_status={
       "pending"=>"Pendente",
       "rejected"=>"Rejeitada",
