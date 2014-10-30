@@ -38,6 +38,10 @@ Handlebars.registerHelper("placeLink", function(id) {
   return "/places/" + id;
 });
 
+Handlebars.registerHelper("newPlaceReservationLink", function(id, date, begin_time, end_time) {
+  return "reservations/new?place_id=" + id + "&date=" + $("#date").val() + "&begin_time="+ $("#begin_time").val()  + "&end_time=" + $("#end_time").val() ;
+});
+
 Handlebars.registerHelper("prettyStatus", function(status) {
   if (status == "approved")
     return "Aprovada";

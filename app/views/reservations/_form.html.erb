@@ -13,9 +13,9 @@
   <% end %>
 
   <div class="form-inputs">
-    <%= f.input :date, as: :date_picker  %>
-    <%= f.input :begin_time, as: :time_picker %>
-    <%= f.input :end_time, as: :time_picker %>
+    <%= f.input :date, as: :date_picker, input_html: { value: params[:date] }  %>
+    <%= f.input :begin_time, as: :time_picker, input_html: { value: params[:begin_time] } %>
+    <%= f.input :end_time, as: :time_picker, input_html: { value: params[:end_time] } %>
 
     <% if current_user.role == "admin" %>
       <%= f.association :user, input_html: { class: 'chosen-select', data: { placeholder: "Selecione um usuário" } ,id: 'user_selector'}, required: false %>

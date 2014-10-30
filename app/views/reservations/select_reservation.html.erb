@@ -52,9 +52,16 @@
 
 <script id="slot_search_template" type="text/x-handlebars-template">
 
-  {{#each this.places}}
+  {{#each places}}
   <div class= "panel panel-slots">
-    {{full_name}} <a href={{placeLink id}} class="btn btn-small btn-normal pull-right">Detalhes da Sala</a>
+    {{full_name}}
+
+    <div class="pull-right">
+      <a href={{newPlaceReservationLink id}} class="btn btn-small btn-success">Nova Reserva</a>
+
+      <a href={{placeLink id}} class="btn btn-small btn-normal">Detalhes da Sala</a>
+    </div>
+
   </div>
   {{else}}
     Nenhuma sala encontrada
@@ -73,7 +80,7 @@
       type: "GET",
       url: encodeURI('/places/slot_search?begin_time='+begin_time + '&end_time='+end_time + '&date='+date),
       success: function(data){
-
+        console.log(data);
         var source = $('#slot_search_template').html();
 
         if (!source)
