@@ -56,9 +56,9 @@ class ReservationGroup < ActiveRecord::Base
 
     reservations = []
 
-    ReservationGroup.all.each do |reservation|
+    ReservationGroup.confirmed.each do |reservation|
 
-      if reservation.place.id == place.id
+      if reservation.places.include?(place)
         reservations << reservation
       end
     end
