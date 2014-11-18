@@ -228,6 +228,11 @@ Reservation.create(user_id: tec_user.id, reason: "Reunião."  , date: Date.today
 projetor = ObjectResource.create(name: "Projetor", description: "Datashow fixo.")
 computador= ObjectResource.create(name: "Computador", description: "Computador fixo.")
 
+Vehicle.create(plate: "MYL-6222", car_model: "Doblo", description: "Amplo espaço interno", capacity: 8)
+Vehicle.create(plate: "MNL-6423", car_model: "L200", description: "Caminhonete", capacity: 2)
+Driver.create(name: "João")
+
+
 bes_place.object_resources << projetor
 tec_place.object_resources << projetor
 bti_place.object_resources << projetor

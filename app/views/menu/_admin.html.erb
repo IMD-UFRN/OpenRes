@@ -21,6 +21,9 @@
 <li><%= link_to 'Tipos de Sala', room_types_path %></li>
 <li><%= link_to 'Objetos', object_resources_path %></li>
 <li><%= link_to 'Turmas', check_group_reservations_path(classes: true) %></li>
+<li><%= link_to 'Reservas de Veículos', vehicle_reservations_path(filter_by: "future") %></li>
+<li><%= link_to 'Veículos', vehicles_path %></li>
+<li><%= link_to 'Motoristas', drivers_path %></li>
 <li>
   <%= link_to whats_new_path do  %>
   Novidades <span class="badge pull-right ">NOVO</span>

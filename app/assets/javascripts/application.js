@@ -27,6 +27,8 @@
 //= require handlebars
 //= require jquery_nested_form
 //= require jvectormap
+//= require angular.min
+//= require onload
 //= require_tree .
 
 Handlebars.registerHelper("prettifyDate", function(timestamp) {

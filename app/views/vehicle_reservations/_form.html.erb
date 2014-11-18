@@ -11,8 +11,8 @@
     </div>
   <% end %>
 
-  <div class="row" ng-controller="CarReservationsCtrl">
-    <div class="col-md-4">
+  <div ng-controller="CarReservationsCtrl">
+    <div class="span4">
       <%= f.input :date, as: :date_picker  %>
       <%= f.input :begin_time, as: :time_picker %>
       <%= f.input :end_time, as: :time_picker  %>
@@ -40,11 +40,12 @@
 
       <%= f.input :passengers, label: "Participantes" %>
 
+      <br>
       <%= f.button :submit, "OK", class:"btn btn-success" %>
 
     </div>
 
-    <div class="col-md-8">
+    <div class="span8">
       <div class="panel panel-primary">
         <div class="panel-heading">
           Detalhes do Veículo
@@ -54,11 +55,16 @@
             <strong>Data:</strong> {{date_selected}}
           </p>
           <h3>Usuários responsáveis</h3>
-          <div class="list-group">
+          <!-- <div class="list-group">
             <a href="#" class="list-group-item">Sergio Eduardo Medeiros<span class="pull-right">
 sergio@imd.ufrn.br</span></a>
             <a href="#" class="list-group-item">Aldo Nascimento<span class="pull-right">aldo.nascimento@imd.ufrn.br</span></a>
-          </div>
+          </div> -->
+          <ul>
+            <% @responsibles.each do |responsible| %>
+            <li><strong><%= responsible.name %> </strong> - <%= responsible.email %></li>
+            <% end %>
+          </ul>
 
           <h3>Reservas Marcadas para este dia</h3>
 
@@ -108,5 +114,7 @@ sergio@imd.ufrn.br</span></a>
   </div>
 
 <% end %>
+
+<div style="clear: both"></div>
 
 <hr>

@@ -1,10 +1,5 @@
-<div class="row">
+<h1>Detalhes da Reserva de Veículo</strong></h1>
 
-  <div class="col-md-8 col-xs-12">
-    <h1>Detalhes da Reserva de Veículo</strong></h1>
-  </div>
-
-</div>
 
 <%= @vehicle_reservation.approve_link%>
 <%= @vehicle_reservation.suspend_link%>
@@ -35,9 +30,4 @@
 
 <hr>
 
-<div class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content" id="modal-window">
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

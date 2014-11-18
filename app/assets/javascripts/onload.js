@@ -103,6 +103,12 @@ function toggleSelectAll(el){
 
   var checkboxes = $(el).parent().parent().parent().find("input").prop('checked', selected);
 
-
-
 }
+
+var OpenResVeiculosApp = angular.module('OpenResVeiculosApp', []);
+
+var ready = function() {
+  angular.bootstrap('body', ['OpenResVeiculosApp']);
+};
+
+$(document).on('ready page:load', ready);

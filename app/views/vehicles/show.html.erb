@@ -1,16 +1,7 @@
-<div class="row">
 
-  <div class="col-md-8 col-xs-12">
-    <h1><%= link_to "Veículos", vehicles_path%> > Detalhes do Veículo <%= @vehicle.plate %></strong></h1>
-  </div>
+<h1><%= link_to "Veículos", vehicles_path%> > Detalhes do Veículo <%= @vehicle.plate %></strong></h1>
 
-  <div class="col-md-4 col-xs-12">
-    <%=link_to icon('edit') +  ' Editar dados', edit_vehicle_path(@vehicle) , class: "btn btn-primary pull-right margin-top" %>
-  </div>
-
-
-</div>
-
+<%=link_to icon('edit') +  ' Editar dados', edit_vehicle_path(@vehicle) , class: "btn btn-primary pull-right margin-top" %>
 
 <h3>Dados Gerais</h3>
 <p>

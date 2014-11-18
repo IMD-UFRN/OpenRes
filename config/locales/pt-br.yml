@@ -1,4 +1,7 @@
 pt-BR:
+  pending: "Pendente"
+  approved: "Aprovada"
+  rejected: "Rejeitada"
   date:
     abbr_day_names:
     - Dom
@@ -215,6 +218,8 @@ pt-BR:
       reservation: Reserva
       user: Usuário
       class_monitor: Monitor de Sala
+      vehicle: Veículo
+      vehicle_reservation: Reserva de Veículo
     attributes:
       room_type:
         name: Nome
@@ -260,3 +265,13 @@ pt-BR:
         name: Nome
         email: E-mail
         place: Sala
+      vehicle:
+        plate: Placa
+        car_model: Modelo
+      vehicle_reservation:
+        date: Data
+        begin_time: Início
+        end_time: Fim
+        vehicle: Veículo
+        driver: Motorista
+        reason: Motivo
