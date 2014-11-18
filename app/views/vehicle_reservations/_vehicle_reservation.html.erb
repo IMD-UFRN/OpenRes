@@ -1,0 +1,12 @@
+<td><%= vehicle_reservation.date %></td>
+<td><%= vehicle_reservation.begin_time %></td>
+<td><%= vehicle_reservation.end_time %></td>
+<td><%= vehicle_reservation.vehicle %></td>
+<td><%= vehicle_reservation.has_conflicts? %></td>
+<td><%= vehicle_reservation.responsible %></td>
+<td>
+  <%= vehicle_reservation.details_link%>
+  <%= vehicle_reservation.approve_link%>
+  <%= vehicle_reservation.suspend_link%>
+  <%= vehicle_reservation.reject_link%>
+</td>

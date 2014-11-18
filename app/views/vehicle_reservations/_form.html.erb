@@ -1,0 +1,112 @@
+<%= simple_form_for(@vehicle_reservation) do |f| %>
+  <% if @vehicle_reservation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vehicle_reservation.errors.count, "error") %> prohibited this vehicle_reservation from being saved:</h2>
+
+      <ul>
+      <% @vehicle_reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row" ng-controller="CarReservationsCtrl">
+    <div class="col-md-4">
+      <%= f.input :date, as: :date_picker  %>
+      <%= f.input :begin_time, as: :time_picker %>
+      <%= f.input :end_time, as: :time_picker  %>
+
+      <% if @vehicle %>
+        <div>
+          Veículo: <strong><%= @vehicle.full_name %></strong>
+        </div>
+        <%= f.input :vehicle_id, as: :hidden, :input_html => { :value => @vehicle.id, id: "vehicle_selector", "ng-model"=> "vehicle", "ng-change"=> "updatePreview()"} %>
+        <br>
+      <% else %>
+        <%= f.association :vehicle, label_method: :full_name, input_html: {class: "chosen-select", "ng-change"=> "updatePreview()", "ng-model"=> "vehicle", data: { placeholder: "Selecione um veículo" }} %>
+      <% end %>
+
+      <% if @driver %>
+        <div class="margin-bottom">
+          Motorista: <strong><%= @driver.name %></strong>
+          <%= f.input :driver_id, as: :hidden, :input_html => { :value => @drive.id, id: "driver_selector"} %>
+        </div>
+      <% else %>
+        <%= f.association :driver, label_method: :name, input_html: {class: "chosen-select", data: { placeholder: "Selecione um motorista" }} %>
+      <% end %>
+
+      <%= f.input :reason %>
+
+      <%= f.input :passengers, label: "Participantes" %>
+
+      <%= f.button :submit, "OK", class:"btn btn-success" %>
+
+    </div>
+
+    <div class="col-md-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Detalhes do Veículo
+        </div>
+        <div class="panel-body">
+          <p>
+            <strong>Data:</strong> {{date_selected}}
+          </p>
+          <h3>Usuários responsáveis</h3>
+          <div class="list-group">
+            <a href="#" class="list-group-item">Sergio Eduardo Medeiros<span class="pull-right">
+sergio@imd.ufrn.br</span></a>
+            <a href="#" class="list-group-item">Aldo Nascimento<span class="pull-right">aldo.nascimento@imd.ufrn.br</span></a>
+          </div>
+
+          <h3>Reservas Marcadas para este dia</h3>
+
+
+          <table class="table table-striped table-bordered table-hover ">
+            <thead>
+              <tr>
+                <th>Início</th>
+                <th>Fim</th>
+                <th>Requisitor</th>
+                <th>Motorista</th>
+                <th>Motivo</th>
+                <th>Situação</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="reservation in preview.reservations">
+                <td>
+                  {{reservation.begin_time}}
+                </td>
+                <td>
+                  {{reservation.end_time}}
+                </td>
+                <td>
+                  {{reservation.responsible}}
+                </td>
+                <td>
+                  {{reservation.driver}}
+                </td>
+                <td>
+                  {{reservation.reason}}
+                </td>
+                <td>
+                  {{reservation.status}}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<% end %>
+
+<hr>

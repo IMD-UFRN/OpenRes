@@ -88,6 +88,19 @@ OpenRes::Application.routes.draw do
 
   end
 
+  resources :vehicle_reservations
+  resources :vehicles
+  resources :drivers
+
+  get '/vehicles/:id/reservations', to: 'vehicles#get_reservations', as: :get_vehicle_reservations
+
+  post "vehicle_reservations/:id/approve", to: "vehicle_reservation_approval#approve", as: :vehicle_reservation_approve
+  get "vehicle_reservations/:id/reject" => 'vehicle_reservation_approval#justify_status', as: :justify_reject_for_vehicle_reservation
+  get "vehicle_reservations/:id/suspend" => 'vehicle_reservation_approval#justify_status', as: :justify_suspend_for_vehicle_reservation
+
+  post "vehicle_reservations/:id/reject", to: "vehicle_reservation_approval#reject", as: :vehicle_reservation_reject
+  post "vehicle_reservations/:id/suspend", to: "vehicle_reservation_approval#suspend", as: :vehicle_reservation_suspend
+
   controller :profile do
     get '/profile/edit', to: 'profile#edit', as: :edit_profile
     get '/profile', to: 'profile#profile', as: :profile

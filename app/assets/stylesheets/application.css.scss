@@ -25,6 +25,7 @@ body { padding-top: 60px; }
 
 @import "chosen";
 
-@import "font-awesome";
-
 @import "base";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";

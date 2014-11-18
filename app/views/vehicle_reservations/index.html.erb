@@ -1,0 +1,124 @@
+<div class="row">
+
+  <div class="col-md-8 col-xs-12">
+    <% if params[:filter_by]=="finished" %>
+      <h1>Reservas de Veículos - Passadas</h1>
+    <% elsif params[:filter_by]=="future" %>
+      <h1>Reservas de Veículos - Futuras</h1>
+    <% else %>
+      <h1>Reservas de Veículos - Todas</h1>
+    <% end %>
+  </div>
+
+  <div class="col-md-4 col-xs-12">
+    <%= link_to icon('plus-square-o') + ' Nova reserva de veículo', new_vehicle_reservation_path, class: "btn btn-success pull-right margin-top" %>
+  </div>
+</div>
+
+
+<ul class="nav nav-tabs" style="margin-bottom: 20px;">
+  <li><%= link_to 'Reservas Futuras', vehicle_reservations_path(filter_by: "future") %></li>
+  <li><%= link_to 'Reservas Finalizadas', vehicle_reservations_path(filter_by: "finished") %></li>
+  <li><%= link_to 'Todas as Reservas', vehicle_reservations_path %></li>
+</ul>
+
+
+<% if  @pending_reservations.length > 0 ||  @approved_reservations.length > 0 || @rejected_reservations.length > 0 %>
+
+  <% if @pending_reservations.length > 0 %>
+
+    <div class="accordion">
+      <table class = "table table-striped table-bordered table-hover">
+        <thead class="head">
+          <tr>
+            <th colspan="7">Reservas Pendentes</th>
+          </tr>
+        </thead>
+
+
+          <tbody class= "slide-hidden">
+            <%= render 'vehicle_reservations_header' %>
+            <% @pending_reservations.each do |reservation| %>
+              <tr class="<%= reservation.conflict_class %>" >
+                <%= render reservation%>
+              </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  <%end%>
+
+  <% if @approved_reservations.length > 0 %>
+    <div class="accordion">
+      <table class = "table table-striped table-bordered table-hover">
+        <thead class= "head">
+          <tr>
+            <th colspan="7">Reservas Aprovadas<i class="fa fa-angle-down strong toggleIcon"></i></th>
+          </tr>
+        </thead>
+        <tbody class= "slide-hidden">
+          <%= render 'vehicle_reservations_header' %>
+          <% @approved_reservations.each do |reservation| %>
+            <tr>
+              <%= render reservation%>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <%end%>
+
+  <% if @rejected_reservations.length > 0 %>
+    <div class="accordion">
+      <table class = "table table-striped table-bordered table-hover">
+        <thead class= "head">
+          <tr>
+            <th colspan="7">Reservas Rejeitadas</th>
+          </tr>
+        </thead>
+        <tbody class= "slide-hidden">
+          <tr>
+            <th>Data</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Veículo</th>
+            <th>Conflita?</th>
+            <th>Motivo da Rejeição</th>
+            <th>Ações</th>
+          </tr>
+          <% @rejected_reservations.each do |reservation| %>
+            <tr>
+              <td><%= reservation.date %></td>
+              <td><%= reservation.begin_time %></td>
+              <td><%= reservation.end_time %></td>
+              <td><%= reservation.vehicle %></td>
+              <td><%= reservation.has_conflicts? %></td>
+              <td><%= reservation.vehicle_reservation_justification.reason %></td>
+              <td>
+                <%= reservation.details_link %>
+                <%= reservation.approve_link%>
+                <%= reservation.suspend_link%>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <%end%>
+  <br>
+
+<%else%>
+  <br>
+  <br>
+  <big>Não existe nenhuma reserva deste tipo.</big>
+  <br>
+  <br>
+  <br>
+<%end%>
+
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modal-window">
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -48,8 +48,6 @@ gem "nested_form"
 
 gem 'virtus', git: 'https://github.com/solnic/virtus.git'
 
-gem "font-awesome-rails"
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -91,6 +89,8 @@ gem 'by_star', :git => "git://github.com/radar/by_star"
 gem 'paper_trail', '~> 3.0.5'
 
 gem 'roo'
+
+gem 'font-awesome-sass', '~> 4.2.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

@@ -1,0 +1,16 @@
+<%= simple_form_for(@vehicle) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :plate, label:"Placa" %>
+    <%= f.input :car_model, label:"Modelo" %>
+    <%= f.input :capacity, label:"Capacidade", as: :integer %>
+    <%= f.input :description, label:"Características" %>
+  </div>
+  <br>
+  <div class="form-actions">
+    <%= f.button :submit, "OK", class: "btn btn-success" %>
+  </div>
+<% end %>
+
+<hr>

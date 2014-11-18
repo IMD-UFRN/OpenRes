@@ -1,0 +1,16 @@
+<% url= (request.original_url.include?("reject") ? vehicle_reservation_reject_path : vehicle_reservation_suspend_path) %>
+
+<%= simple_form_for(:justification, url: url) do |f| %>
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Escreva abaixo o motivo</h3>
+  </div>
+  <div class="modal-body">
+    <%= f.input :reason, as: :text, label: "Motivo" %>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit (request.original_url.include?("reject") ? "Rejeitar" : "Suspender"), class: "btn btn-normal" %>
+  </div>
+
+<% end %>
