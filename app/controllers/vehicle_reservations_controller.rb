@@ -48,6 +48,9 @@ class VehicleReservationsController < ApplicationController
 
     respond_to do |format|
       if @vehicle_reservation.save
+
+        NotifyUserMailer.send_vehicle_reservation_made(@vehicle_reservation)
+        
         format.html { redirect_to @vehicle_reservation, notice: 'Reserva cadastrada com sucesso.' }
         format.json { render :show, status: :created, location: @vehicle_reservation }
       else
@@ -89,6 +92,6 @@ class VehicleReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vehicle_reservation_params
-      params[:vehicle_reservation].permit(:date, :begin_time, :end_time, :vehicle_id, :reason, :passengers, :driver_id)
+      params[:vehicle_reservation].permit(:date, :begin_time, :end_time, :vehicle_id, :reason, :passengers, :driver_id).merge(user_id: current_user.id)
     end
 end

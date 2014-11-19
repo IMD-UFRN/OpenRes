@@ -8,6 +8,11 @@ class VehicleReservationPolicy
     if conflicts.empty?
       reservation.status = "approved"
 
+      unless opts[:silent]
+        VehicleReservationApprovalMailer.approved_mail(reservation).deliver
+
+      end
+
       reservation.save
     end
 
@@ -23,6 +28,11 @@ class VehicleReservationPolicy
       reservation.save
     end
 
+    unless opts[:silent]
+      VehicleReservationApprovalMailer.suspended_mail(reservation, justification).deliver
+
+    end
+
   end
 
   def self.reject(reservation, justification, opts={})
@@ -31,6 +41,11 @@ class VehicleReservationPolicy
     ActiveRecord::Base.transaction do
       justification.save
       reservation.save
+    end
+
+    unless opts[:silent]
+      VehicleReservationApprovalMailer.rejected_mail(reservation, justification).deliver
+
     end
 
   end

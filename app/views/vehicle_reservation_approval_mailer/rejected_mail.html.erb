@@ -1,0 +1,21 @@
+<p>
+  Olá <%= @reservation.user.name %>,
+
+  <br>
+  <br>
+
+  A reserva de código <%= @reservation.id %> foi <strong>REJEITADA</strong>.
+
+  <br>
+  <br>
+
+  <strong>Dia</strong>: <%= @reservation.date.strftime("%d/%m/%Y") %> <br>
+  <strong>Hora</strong>: das <%= @reservation.begin_time.strftime("%H:%M") %> às e <%=@reservation.end_time.strftime("%H:%M") %> <br>
+  <strong>Veículo</strong>: <%= @reservation.vehicle.full_name %> <br>
+</p>
+
+<p> Motivo: <%= @justification.reason %> </p>
+
+<p>
+(este é um e-mail automático. Dúvidas, entre em contato com a secretaria do departamento responsável pela sala solicitada.)
+</p>

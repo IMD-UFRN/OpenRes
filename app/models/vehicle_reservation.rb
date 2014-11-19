@@ -3,6 +3,7 @@ class VehicleReservation < ActiveRecord::Base
 
   belongs_to :vehicle
   belongs_to :driver
+  belongs_to :user
   has_one :vehicle_reservation_justification
 
   validates_presence_of :driver, :vehicle, :date, :begin_time, :end_time, :reason
@@ -26,7 +27,6 @@ class VehicleReservation < ActiveRecord::Base
     reservations = VehicleReservation.where("vehicle_id = ? and date = ? and id <> ? and status <> ? and status <> ?", reservation.vehicle_id, reservation.date, reservation.id, "rejected", "canceled")
 
     return reservations
-      .reject { |r| r.reservation_group && !r.reservation_group.confirmed_at}
       .select { |r| r.time_interval.overlaps? reservation.time_interval }
   }
 
@@ -48,4 +48,8 @@ class VehicleReservation < ActiveRecord::Base
     return VehicleReservation.where("date < ? OR ( date = ? AND end_time < ? )",  DateTime.now.to_date, DateTime.now.to_date, now_time)
   }
 
+  def time_interval
+    begin_time..end_time
+  end
+  
 end

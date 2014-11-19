@@ -17,6 +17,15 @@ class NotifyUserMailer < ActionMailer::Base
 
   end
 
+  def send_vehicle_reservation_made(reservation)
+    @reservation = reservation
+
+    User.where(role:"admin").each do |user|
+      reservation_made(@reservation, user).deliver
+    end
+
+  end
+
   def send_reservation_to_class_monitor(reservation)
     @reservation = reservation
 

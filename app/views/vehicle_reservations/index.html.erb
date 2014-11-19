@@ -34,7 +34,6 @@
           </tr>
         </thead>
 
-
           <tbody class= "slide-hidden">
             <%= render 'vehicle_reservations_header' %>
             <% @pending_reservations.each do |reservation| %>
@@ -81,6 +80,7 @@
             <th>Início</th>
             <th>Fim</th>
             <th>Veículo</th>
+            <th>Solicitante</th>
             <th>Conflita?</th>
             <th>Motivo da Rejeição</th>
             <th>Ações</th>
@@ -91,6 +91,7 @@
               <td><%= reservation.begin_time %></td>
               <td><%= reservation.end_time %></td>
               <td><%= reservation.vehicle %></td>
+              <td><%= reservation.user %></td>
               <td><%= reservation.has_conflicts? %></td>
               <td><%= reservation.vehicle_reservation_justification.reason %></td>
               <td>

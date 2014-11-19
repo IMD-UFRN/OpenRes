@@ -4,6 +4,9 @@ class VehicleReservationDecorator < Draper::Decorator
 
   include Draper::LazyHelpers
 
+  def user
+    link_to object.user.name, object.user
+  end
 
   def details_link
     link_to icon("file-text-o") + " Detalhes", object, class: "btn btn-normal btn-sm"
@@ -55,6 +58,10 @@ class VehicleReservationDecorator < Draper::Decorator
 
   def conflict_class
     "conflicted_reservation" if  object.has_conflicts? and not object.status.in? %w(canceled rejected)
+  end
+
+  def driver
+    link_to object.driver.name, object.driver
   end
 
 

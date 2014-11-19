@@ -11,6 +11,7 @@ o usuário <%= @reservation.user.name %> realizou uma reserva em uma sala sob su
     <br><strong>Título:</strong> <%= @reservation.name %>
     <br><strong>Local:</strong> <%= @reservation.place.name %>
     <br><strong>Período:</strong> <%=@reservation.begin_date.strftime("%d/%m/%Y") %> a <%=@reservation.end_date.strftime("%d/%m/%Y") %>
+    <br><strong>Motivo:</strong> <%=@reservation.reason %>
     <br><strong>Solicitada em:</strong> <%=@reservation.created_at.strftime("%d/%m/%Y - %H:%M")%>
 
   <% else %>
@@ -19,6 +20,7 @@ o usuário <%= @reservation.user.name %> realizou uma reserva em uma sala sob su
     <br><strong>Local:</strong> <%= @reservation.place.name %>
     <br><strong>Dia:</strong> <%= @reservation.date.strftime("%d/%m/%Y") %>
     <br><strong>Horário:</strong> <%=@reservation.begin_time.strftime("%H:%M") %> às <%=@reservation.end_time.strftime("%H:%M") %>
+    <br><strong>Motivo:</strong> <%=@reservation.reason %>
     <br><strong>Solicitada em:</strong> <%=@reservation.created_at.strftime("%d/%m/%Y - %H:%M")%>
 
   <% end %>
