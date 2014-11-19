@@ -11,11 +11,11 @@
   Múltiplas  <span class="badge pull-right "><%= @pending_group_counter %></span>
   <% end %>
 </li>
-<li><%= link_to 'Mapa de Salas', map_show_path %></li>
 <li><%= link_to 'Reservas Simples', reservations_path(filter_by: "future")  %></li>
 <li><%= link_to 'Reservas Múltiplas', reservation_groups_path %></li>
 <li><%= link_to 'Usuários', users_path %></li>
 <li><%= link_to 'Salas', places_path %></li>
+<li><%= link_to 'Mapa de Salas', map_show_path %></li>
 <li><%= link_to 'Monitores de Sala', class_monitors_path %></li>
 <li><%= link_to 'Setores', sectors_path %></li>
 <li><%= link_to 'Tipos de Sala', room_types_path %></li>
