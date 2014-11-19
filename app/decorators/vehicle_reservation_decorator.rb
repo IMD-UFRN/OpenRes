@@ -13,18 +13,26 @@ class VehicleReservationDecorator < Draper::Decorator
   end
 
   def approve_link
+    return unless ReservationAuth.can_approve?(current_user, object)
+
     link_to icon("check-square-o") + " Aprovar", vehicle_reservation_approve_path(object.id), class: "btn btn-normal btn-sm", method: "post"
   end
 
   def suspend_link
+    return unless ReservationAuth.can_suspend?(current_user, object)
+
     link_to icon("exclamation-circle") + " Suspender", justify_suspend_for_vehicle_reservation_path(object), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "btn btn-normal btn-sm"}
   end
 
   def reject_link
+    return unless ReservationAuth.can_reject?(current_user, object)
+
     link_to icon("ban") + " Rejeitar", justify_reject_for_vehicle_reservation_path(object), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "btn btn-normal btn-sm"}
   end
 
   def cancel_link
+    return unless ReservationAuth.can_cancel?(current_user, object)
+
     link_to icon("close") + " Cancelar", object, class: "btn btn-normal btn-sm"
   end
 

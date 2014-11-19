@@ -51,5 +51,11 @@ class VehicleReservation < ActiveRecord::Base
   def time_interval
     begin_time..end_time
   end
-  
+
+  def can_be_decided_over?(ap_user)
+    return true if ap_user.role == "admin"
+
+    false
+  end
+
 end
