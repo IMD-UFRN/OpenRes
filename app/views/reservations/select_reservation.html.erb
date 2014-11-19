@@ -3,20 +3,28 @@
 
 
 
-    <div class="well span5">
+    <div class="well span3">
       <p class= "table-title">Reserva Simples</p>
       <hr>
-      <p>São marcadas para apenas um horário de um só dia. Ideal para reuniões ou palestras.</p>
+      <p class="new-reservation-box">São marcadas para apenas um horário de um só dia. Ideal para reuniões ou palestras.</p>
       <hr>
       <%= link_to 'Nova Reserva Simples', new_reservation_path, class:"btn btn-success" %>
     </div>
 
-    <div class="well span5">
+    <div class="well span3">
       <p class= "table-title">Reserva Múltipla</p>
       <hr>
-      <p>São marcadas com repetição em vários dias e horários distintos. Ideal para congressos ou mini-cursos.</p>
+      <p class="new-reservation-box">São marcadas com repetição em vários dias e horários distintos. Ideal para congressos ou mini-cursos.</p>
       <hr>
       <%= link_to 'Nova Reserva Múltipla', new_reservation_group_path, class:"btn btn-success" %>
+    </div>
+
+    <div class="well span3">
+      <p class= "table-title">Reserva de Veículo</p>
+      <hr>
+      <p class="new-reservation-box">São marcadas para um veículo e motorista.</p>
+      <hr>
+      <%= link_to 'Nova Reserva de Veículo', new_vehicle_reservation_path, class:"btn btn-success" %>
     </div>
 
 
