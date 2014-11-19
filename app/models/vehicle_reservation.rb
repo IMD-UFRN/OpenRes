@@ -58,4 +58,20 @@ class VehicleReservation < ActiveRecord::Base
     false
   end
 
+  def past?
+
+    return true if date < Date.today
+
+    h= end_time.hour
+    m= end_time.min
+    s= end_time.sec
+
+    return true if h < Time.now.hour && m < Time.now.min && s < Time.now.sec
+
+  end
+
+  def reservation_group
+    nil
+  end
+
 end

@@ -6,12 +6,16 @@ class VehicleReservationsController < ApplicationController
   # GET /vehicle_reservations.json
   def index
 
-    if params[:filter_by]=="finished"
-      reservations = VehicleReservation.from_past
-    elsif params[:filter_by]=="future"
-      reservations = VehicleReservation.from_future
-    else
+    if current_user.role == "admin"
       reservations = VehicleReservation.all
+    else
+      reservations = VehicleReservation.where(user_id: current_user.id)
+    end
+
+    if params[:filter_by]=="finished"
+      reservations = reservations.from_past
+    elsif params[:filter_by]=="future"
+      reservations = reservations.from_future
     end
 
     pending_reservations = reservations.where(status: "pending")
@@ -50,7 +54,7 @@ class VehicleReservationsController < ApplicationController
       if @vehicle_reservation.save
 
         NotifyUserMailer.send_vehicle_reservation_made(@vehicle_reservation)
-        
+
         format.html { redirect_to @vehicle_reservation, notice: 'Reserva cadastrada com sucesso.' }
         format.json { render :show, status: :created, location: @vehicle_reservation }
       else
