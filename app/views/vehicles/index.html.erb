@@ -5,6 +5,7 @@
     <tr>
       <th>Modelo</th>
       <th>Placa</th>
+      <th>Reservável?</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -15,6 +16,7 @@
         <tr>
           <td><%= link_to vehicle.car_model, vehicle %></td>
           <td><%= vehicle.plate  %></td>
+          <td><%= vehicle.reservable  %></td>
           <td>
             <%= link_to icon('check-square-o') + ' Nova Reserva', new_vehicle_reservation_path(vehicle_id: vehicle.id), class: "btn btn-success btn-sm" %>
             <%= link_to icon('file-text-o') + ' Detalhes', vehicle, class: "btn btn-normal btn-sm" %>

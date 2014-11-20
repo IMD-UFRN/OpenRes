@@ -24,11 +24,11 @@
         <%= f.input :vehicle_id, as: :hidden, :input_html => { :value => @vehicle.id, id: "vehicle_selector", "ng-model"=> "vehicle", "ng-change"=> "updatePreview()"} %>
         <br>
       <% else %>
-        <%= f.association :vehicle, label_method: :full_name, input_html: {class: "chosen-select", "ng-change"=> "updatePreview()", "ng-model"=> "vehicle", data: { placeholder: "Selecione um veículo" }} %>
+        <%= f.association :vehicle, collection: @reservable_vehicles, label_method: :full_name, input_html: {class: "chosen-select", "ng-change"=> "updatePreview()", "ng-model"=> "vehicle", data: { placeholder: "Selecione um veículo" }} %>
       <% end %>
 
       <br>
-      
+
       <% if @driver %>
         <div class="margin-bottom">
           Motorista: <strong><%= @driver.name %></strong>

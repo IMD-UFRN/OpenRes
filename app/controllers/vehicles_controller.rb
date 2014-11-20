@@ -5,12 +5,13 @@ class VehiclesController < ApplicationController
   # GET /vehicles
   # GET /vehicles.json
   def index
-    @vehicles = Vehicle.all
+    @vehicles = VehicleDecorator.decorate_collection Vehicle.all
   end
 
   # GET /vehicles/1
   # GET /vehicles/1.json
   def show
+    @vehicle = VehicleDecorator.decorate(@vehicle)
   end
 
   # GET /vehicles/new
@@ -76,6 +77,6 @@ class VehiclesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vehicle_params
-      params[:vehicle].permit(:plate, :car_model, :capacity, :description)
+      params[:vehicle].permit(:plate, :car_model, :capacity, :description, :reservable)
     end
 end

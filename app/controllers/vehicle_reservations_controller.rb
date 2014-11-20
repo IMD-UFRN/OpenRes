@@ -39,6 +39,7 @@ class VehicleReservationsController < ApplicationController
     @vehicle = Vehicle.find(params[:vehicle_id]) if params[:vehicle_id]
     @driver = Driver.find(params[:driver_id]) if params[:driver_id]
     @responsibles = User.where(role:"admin")
+    @reservable_vehicles = Vehicle.reservable
   end
 
   # GET /vehicle_reservations/1/edit
