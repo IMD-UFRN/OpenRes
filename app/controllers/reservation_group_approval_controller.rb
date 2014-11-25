@@ -218,10 +218,10 @@ class ReservationGroupApprovalController < ApplicationController
 
     end
 
-    flash[:notice] = "#{s} Reservas cadastradas com sucesso" if s > 0
+    flash[:notice] = "#{s} Reservas cadastradas com sucesso. Não se esqueça de salvá-las." if s > 0
     flash[:error] = "#{f} Reservas não cadastradas com sucesso" if f > 0
 
-    redirect_to check_group_reservations_path(classes: true)
+    redirect_to check_group_reservations_path(classes: true, saved: false, anchor: "my_reservations")
 
   end
 

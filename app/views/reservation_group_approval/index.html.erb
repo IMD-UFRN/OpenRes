@@ -44,7 +44,13 @@
 <% if params[:classes] %>
   <hr>
 
-  <h1>Minhas Reservas de Turmas</h1>
+  <h1 id="my_reservations">Minhas Reservas de Turmas</h1>
+
+  <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+    <li><%= link_to 'Reservas Confirmadas', check_group_reservations_path(filter_by: params[:filter_by], classes: params[:classes], saved: "true") %></li>
+    <li><%= link_to 'Reservas Não Confirmadas', check_group_reservations_path(filter_by: params[:filter_by], classes: params[:classes], saved: "false") %></li>
+    <li><%= link_to 'Todas as Reservas', check_group_reservations_path(classes: params[:classes]) %></li>
+  </ul>
 
   <%= render @user_class_reservations%>
 
