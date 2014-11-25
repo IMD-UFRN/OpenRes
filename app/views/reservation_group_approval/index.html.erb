@@ -34,7 +34,7 @@
   <%= link_to "Nova Reserva para Turma", new_reservation_group_path(to_class: "true"), class:"btn btn-success"%>
   <%= link_to "Nova Reserva para Turmas via Planilha", import_spreadsheet_path, remote: true, class:"btn btn-success"%>
   <%= link_to "Modelo de Planilha em Branco", "/spreadsheets/modelo_reserva_em_lote.xlsx", class: "btn btn-default" %>
-  <%= link_to "Manual de Preenchiento da Planilha", "/spreadsheets/exemplo_reserva_em_lote.xlsx", class: "btn btn-default" %>
+  <%= link_to "Manual de Preenchiento da Planilha", "/Manual OpenRes IMD.pdf", class: "btn btn-default" %>
 <% else %>
   <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
 <% end %>
@@ -52,7 +52,66 @@
     <li><%= link_to 'Todas as Reservas', check_group_reservations_path(classes: params[:classes]) %></li>
   </ul>
 
-  <%= render @user_class_reservations%>
+  <div class= "reservations span12" >
+    <% unless @user_class_reservations.length ==0 %>
+
+    <% @user_class_reservations.each do |reservation_group| %>
+      <table class = "table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class ="table-title" colspan="3">
+              Título: <%=link_to reservation_group.name, reservation_group%>
+            </th>
+            <th>
+              Situação: <%=reservation_group.status%>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Local(is):</th>
+            <td colspan="2"><%=reservation_group.places%></td>
+            <th>Código: <%=reservation_group.id%></th>
+          </tr>
+          <tr>
+            <th>Início:</th>
+            <td><%=reservation_group.begin_date%></td>
+            <th>Fim:</th>
+            <td><%=reservation_group.end_date%></td>
+            <tr>
+              <th>Dias da semana:</th>
+              <td colspan="3"><%=reservation_group.days%></td>
+            </tr>
+            <tr>
+              <th>Solicitante</th>
+              <td><%=reservation_group.user%></td>
+              <th>Autorizado a pegar a chave</th>
+              <td><%=reservation_group.responsible %></td>
+            </tr>
+            <tr>
+              <th>Conflita?</th>
+              <td><%=reservation_group.has_conflicts?%></td>
+              <th>Ações</th>
+              <td colspan="2">
+                <%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %>
+                <%=reservation_group.approve_link %>
+                <%=reservation_group.suspend_link %>
+                <%=reservation_group.reject_link %>
+                <%=reservation_group.cancel_link %>
+
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+
+        <%end%>
+      <%else%>
+      <p>Não existem reservas deste tipo</p>
+      <% end %>
+    </div>
+
 
 <% end %>
 
