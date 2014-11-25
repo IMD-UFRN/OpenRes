@@ -9,6 +9,9 @@ class ReservationGroup < ActiveRecord::Base
   scope :confirmed, lambda{
     ReservationGroup.where.not(confirmed_at: nil)
   }
+  scope :not_confirmed, lambda{
+    ReservationGroup.where(confirmed_at: nil)
+  }
 
   scope :from_class, lambda{
     where(from_class: true)

@@ -6,11 +6,22 @@ class ReservationGroupApprovalController < ApplicationController
 
     if params[:classes]
       reservations = reservations.from_class
+
       unless ReservationAuth.can_create_class?(current_user)
         flash[:error]= "Você não tem acesso a esta página"
         return redirect_to dashboard_path
       end
-      @user_class_reservations = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_class)
+
+      user_class_reservations = ReservationGroup.from_user(current_user).from_class
+
+      if params[:saved] == "false"
+        user_class_reservations = user_class_reservations.not_confirmed
+      elsif params[:saved] == "true"
+        user_class_reservations = user_class_reservations.confirmed
+      end
+
+      @user_class_reservations = ReservationGroupDecorator.decorate_collection(user_class_reservations)
+
     else
       reservations = reservations.not_from_class
     end
