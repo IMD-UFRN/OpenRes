@@ -1,58 +1,51 @@
 <div class= "reservations span12" >
-  <% unless @reservation_groups.length ==0 %>
 
+  <table class = "table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class ="table-title" colspan="3">
+          Título: <%=link_to reservation_group.name, reservation_group%>
+        </th>
+        <th>
+          Situação: <%=reservation_group.status%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Local(is):</th>
+        <td colspan="2"><%=reservation_group.places%></td>
+        <th>Código: <%=reservation_group.id%></th>
+      </tr>
+      <tr>
+        <th>Início:</th>
+        <td><%=reservation_group.begin_date%></td>
+        <th>Fim:</th>
+        <td><%=reservation_group.end_date%></td>
+      <tr>
+        <th>Dias da semana:</th>
+        <td colspan="3"><%=reservation_group.days%></td>
+      </tr>
+      <tr>
+        <th>Solicitante</th>
+        <td><%=reservation_group.user%></td>
+        <th>Autorizado a pegar a chave</th>
+        <td><%=reservation_group.responsible %></td>
+      </tr>
+      <tr>
+        <th>Conflita?</th>
+        <td><%=reservation_group.has_conflicts?%></td>
+        <th>Ações</th>
+        <td colspan="2">
+          <%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %>
+          <%=reservation_group.approve_link %>
+          <%=reservation_group.suspend_link %>
+          <%=reservation_group.reject_link %>
+          <%=reservation_group.cancel_link %>
 
-      <table class = "table table-striped table-bordered table-hover">
-        <thead>
-          <tr>
-            <th class ="table-title" colspan="3">
-              Título: <%=link_to reservation_group.name, reservation_group%>
-            </th>
-            <th>
-              Situação: <%=reservation_group.status%>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Local(is):</th>
-            <td colspan="2"><%=reservation_group.places%></td>
-            <th>Código: <%=reservation_group.id%></th>
-          </tr>
-          <tr>
-            <th>Início:</th>
-            <td><%=reservation_group.begin_date%></td>
-            <th>Fim:</th>
-            <td><%=reservation_group.end_date%></td>
-          <tr>
-            <th>Dias da semana:</th>
-            <td colspan="3"><%=reservation_group.days%></td>
-          </tr>
-          <tr>
-            <th>Solicitante</th>
-            <td><%=reservation_group.user%></td>
-            <th>Autorizado a pegar a chave</th>
-            <td><%=reservation_group.responsible %></td>
-          </tr>
-          <tr>
-            <th>Conflita?</th>
-            <td><%=reservation_group.has_conflicts?%></td>
-            <th>Ações</th>
-            <td colspan="2">
-              <%= link_to 'Detalhes', reservation_group,  class: "btn-small btn-normal" %>
-              <%=reservation_group.approve_link %>
-              <%=reservation_group.suspend_link %>
-              <%=reservation_group.reject_link %>
-              <%=reservation_group.cancel_link %>
+        </td>
+      </tr>
 
-            </td>
-          </tr>
-
-        </tbody>
-      </table>
-
-
-  <%else%>
-    <p>Não existem reservas deste tipo</p>
-  <% end %>
+    </tbody>
+  </table>
 </div>

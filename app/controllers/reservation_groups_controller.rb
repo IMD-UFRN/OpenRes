@@ -93,17 +93,17 @@ class ReservationGroupsController < ApplicationController
   def index
 
      if params[:filter_by] == "future"
-       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_future.select{ |r|
+       @reservation_groups = ReservationGroupDecorator.decorate_collection(Kaminari.paginate_array(ReservationGroup.from_user(current_user).from_future.select{ |r|
          r.status != "canceled"
-         })
+         }).page( params[:page]).per(3))
      elsif params[:filter_by] == "finished"
-       @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).from_past.select{ |r|
+       @reservation_groups = ReservationGroupDecorator.decorate_collection(Kaminari.paginate_array(ReservationGroup.from_user(current_user).from_past.select{ |r|
          r.status != "canceled"
-         })
+         }).page( params[:page]).per(3))
      else
-      @reservation_groups = ReservationGroupDecorator.decorate_collection(ReservationGroup.from_user(current_user).select{ |r|
-        r.status != "canceled"
-        })
+      @reservation_groups =    ReservationGroupDecorator.decorate_collection(Kaminari.paginate_array(ReservationGroup.from_user(current_user).select{ |r|
+          r.status != "canceled"
+          }).page( params[:page]).per(3))
      end
   end
 

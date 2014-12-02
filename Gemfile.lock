@@ -161,6 +161,9 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    kaminari (0.16.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     libv8 (3.16.14.3)
     listen (2.7.1)
       celluloid (>= 0.15.2)
@@ -339,6 +342,7 @@ DEPENDENCIES
   handlebars_assets
   jbuilder (~> 1.2)
   jquery-rails
+  kaminari
   magic_encoding
   momentjs-rails
   nested_form

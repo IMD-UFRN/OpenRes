@@ -25,7 +25,15 @@
 </ul>
 
 
-<%= render @reservation_groups %>
+<% unless @reservation_groups.empty?  %>
+  <%= render @reservation_groups %>
+
+
+  <%= paginate @reservation_groups %>
+<%else%>
+
+<p>Não existem reservas deste tipo</p>
+<% end %>
 
 <div class="clear">
 
@@ -114,6 +122,4 @@
 
 
 <% end %>
-
-
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

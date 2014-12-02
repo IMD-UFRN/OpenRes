@@ -25,34 +25,41 @@ class ReservationGroup < ActiveRecord::Base
     ReservationGroup.where(user_id: user.id)
   }
 
-  scope :from_sector, lambda { |sector|
-
-    reservations = []
-
-    ReservationGroup.all.each do |reservation|
-
-      if reservation.sectors_ids.include? sector.id
-
-        reservations << reservation
-      end
-    end
-
-    return reservations
-  }
+  paginates_per 2
+  # scope :from_sector, lambda { |sector|
+  #
+  #   ReservationGroup.where()
+  #
+  #   reservations = []
+  #
+  #   ReservationGroup.all.each do |reservation|
+  #
+  #     if reservation.sectors_ids.include? sector.id
+  #
+  #       reservations << reservation
+  #     end
+  #   end
+  #
+  #   return reservations
+  # }
 
   scope :from_sectors, lambda { |sector_ids|
 
-    reservations = []
+    ReservationGroup.find(Reservation.where(place_id: PlaceSector.where(sector_id: sector_ids).pluck(:place_id)).pluck(:reservation_group_id))
 
-    ReservationGroup.all.each do |reservation|
-
-      if (reservation.sectors_ids - sector_ids).length < reservation.sectors_ids.length
-
-        reservations << reservation
-      end
-    end
-
-    return reservations
+    # Register.where(competition_id: Competition.where("..."))
+    #
+    # reservations = []
+    #
+    # ReservationGroup.all.each do |reservation|
+    #
+    #   if (reservation.sectors_ids - sector_ids).length < reservation.sectors_ids.length
+    #
+    #     reservations << reservation
+    #   end
+    # end
+    #
+    # return reservations
   }
 
   scope :from_place, lambda { |place|

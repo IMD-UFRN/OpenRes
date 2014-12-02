@@ -2,6 +2,8 @@
 class ReservationGroupApprovalController < ApplicationController
   def index
 
+    # @users = User.order(:name).page params[:page]
+
     reservations = ReservationGroup.confirmed
 
     if params[:classes]
@@ -49,7 +51,7 @@ class ReservationGroupApprovalController < ApplicationController
         reservation_groups = ReservationGroup.filter(reservation_groups, params[:reservation_search])
       end
     end
-    @reservation_groups = ReservationGroupDecorator.decorate_collection(reservation_groups)
+    @reservation_groups = ReservationGroupDecorator.decorate_collection(Kaminari.paginate_array(reservation_groups).page( params[:page]).per(3))
 
     @params = ReservationSearchDecorator.decorate(params[:reservation_search])
 

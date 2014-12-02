@@ -12,10 +12,17 @@
   <li><%= link_to 'Todas as Reservas', reservation_groups_path %></li>
 </ul>
 
-<%= render @reservation_groups %>
+<% unless @reservation_groups.empty?  %>
+  <%= render @reservation_groups %>
 
-<div class="clear">
+
+  <%= paginate @reservation_groups %>
+<%else%>
+
+  <p>Não existem reservas deste tipo</p>
+<% end %>
 
 <%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
+
 
 <%= render "shared/back"%>

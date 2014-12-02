@@ -2,6 +2,13 @@ pt-BR:
   pending: "Pendente"
   approved: "Aprovada"
   rejected: "Rejeitada"
+  views:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Próxima &rsaquo;"
+      truncate: "&hellip;"
   date:
     abbr_day_names:
     - Dom
