@@ -1,4 +1,7 @@
-<%= simple_form_for(:import, url: url) do |f| %>
+<h1>Processador de Sugestões de Turmas</h1>
+<hr>
+
+<%= simple_form_for(:import, url: import_suggestion_spreadsheet_path) do |f| %>
 
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -11,7 +14,5 @@
     <%= f.submit "Importar", class: "btn btn-normal" %>
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
   </div>
-
-
 
 <% end %>

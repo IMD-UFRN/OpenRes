@@ -1,0 +1,2 @@
+module ClassesSuggestionProcessorHelper
+end
