@@ -1,7 +1,9 @@
 # -*- encoding : utf-8 -*-
 OpenRes::Application.routes.draw do
   get "map/show"
+
   resources :room_types
+  resources :classes_suggestion_processor
 
   devise_scope :user do
     root to: "devise/sessions#new"
@@ -42,8 +44,10 @@ OpenRes::Application.routes.draw do
   get "reservations_group/:reservation_group_id/reject" => 'reservation_group_approval#justify_status', as: :justify_reject_group
   get "reservations_group/:reservation_group_id/suspend" => 'reservation_group_approval#justify_status', as: :justify_suspend_group
 
-  get "reservations_group/import" => 'reservation_group_approval#import_spreadsheet', as: :import_spreadsheet
-  post "reservations_group/import" => 'reservation_group_approval#process_spreadsheet'
+  get "spreadsheet/import" => 'importer#import_spreadsheet', as: :import_spreadsheet
+  post "class_spreadsheet/import" => 'reservation_group_approval#process_class_spreadsheet', as: :process_class_spreadsheet
+
+  post "classes_suggestion_processor/import" => 'classes_suggestion_processor#process_suggestion_spreadsheet', as: :process_suggestion_spreadsheet
 
 
   post "reservations/:reservation_id/approve", to: "reservation_approval#approve", as: :reservation_approve

@@ -158,15 +158,8 @@ class ReservationGroupApprovalController < ApplicationController
       format.js
     end
   end
-
-  def import_spreadsheet
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  def process_spreadsheet
+  
+  def process_class_spreadsheet
     s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
 
     i = 2
