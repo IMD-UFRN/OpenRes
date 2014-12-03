@@ -94,6 +94,8 @@ gem 'font-awesome-sass', '~> 4.2.0'
 
 gem 'kaminari'
 
+gem 'sidekiq'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

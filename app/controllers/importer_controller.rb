@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ImporterController < ApplicationController
 
   def import_spreadsheet
