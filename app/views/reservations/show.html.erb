@@ -6,7 +6,21 @@
 <%= @reservation.reject_link %>
 <%= @reservation.cancel_link %>
 
-<hr>
+<hr style="clear: both">
+
+<a href= "/" title="Add to Calendar" class="addthisevent pull-right margin-bottom">
+  Adicionar a Calendário
+  <span class="_start"><%= @reservation.add_to_event_begin %></span>
+  <span class="_end"><%= @reservation.add_to_event_end %></span>
+  <span class="_summary"><%= @reservation.reason %></span>
+  <span class="_description"><%= @reservation.reason %></span>
+  <span class="_location">Sala <%= @reservation.place_full_name %> - CIVT</span>
+  <span class="_organizer"><%= @reservation.user_name %></span>
+  <span class="_organizer_email"><%= @reservation.user_email %></span>
+  <span class="_all_day_event">false</span>
+  <span class="_date_format">DD/MM/YYYY</span>
+</a>
+
 
 <dl>
   <dt>Situação:</dt> <dd><%= @reservation.status %></dd>
@@ -93,6 +107,6 @@
   <h4>Não foram feitas alterações na reserva desde sua criação.</h4>
 <% end %>
 
-
-
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
+<script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>

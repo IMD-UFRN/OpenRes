@@ -21,6 +21,14 @@ class ReservationDecorator < Draper::Decorator
     object.begin_time.strftime("%H:%M")
   end
 
+  def add_to_event_begin
+    object.date.strftime("%d-%m-%Y") + " " + object.begin_time.strftime("%H:%M:00")
+  end
+
+  def add_to_event_end
+    object.date.strftime("%d-%m-%Y") + " " + object.end_time.strftime("%H:%M:00")
+  end
+
   def end_time
     object.end_time.strftime("%H:%M")
   end
@@ -42,12 +50,24 @@ class ReservationDecorator < Draper::Decorator
     link_to(object.user.name, object.user)
   end
 
+  def user_email
+    object.user.email
+  end
+
+  def user_name
+    object.user.name
+  end
+
   def created_by
     link_to(object.created_by.name, object.created_by)
   end
 
   def place
     link_to(object.place.full_name, object.place)
+  end
+
+  def place_full_name
+    object.place.full_name
   end
 
   def room_type
