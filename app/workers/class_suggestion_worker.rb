@@ -2,56 +2,79 @@
 class ClassSuggestionWorker
   include Sidekiq::Worker
 
-  test_v = [
-    [ #primeira turma
-      [2], #professores
-      40,  #capacidade
-      [["2456M12",	1]], #horario requerido e tipo da sala
-      [["2456M34",	1]],
-      [["2456M12",	2]],
-      [["2456M34",	2]],
-      [["24M34",	1], ["56M34",	2]]
-    ],
-    [ #segunda turma
-      [1],#professores
-      30, #capacidade
-      [["2456M12",	1]],
-      [["2456M34",	3]],
-      [["2456M12",	2]],
-      [["2456M34",	2]],
-      [["24M34",	1], ["56M34",	2]]
+  def initialize
+    @test_v = [
+      { #primeira turma
+        teacher:  2, #professores
+        capacity: 40,  #capacidade
+        suggestions: [    #lista de horários
+          [{hours: "2456M12", room_type: 0}], #horario requerido e tipo da sala
+          [{hours: "2456M34", room_type: 1}],
+          [{hours: "2456M12", room_type: 2}],
+          [{hours: "2456M34", room_type: 2}],
+          [{hours: "24M34",	  room_type: 0},{hours: "56M34",	room_type: 0}]
+        ]
+      },
+      { #segunda turma
+        teacher:  1, #professores
+        capacity: 30,  #capacidade
+        suggestions: [    #lista de horários
+          [{hours: "2456M12", room_type: 1}],
+          [{hours: "2456M34", room_type: 0}],
+          [{hours: "2456M12", room_type: 2}],
+          [{hours: "2456M34", room_type: 2}],
+          [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
+        ]
+      }
     ]
-  ]
 
-  rooms = [
-    [
-      "A305",      #código
-      1            #tipo
-      40,          #capacidade
-      "2456M1234", #horario disp manha
-      "",          #horario disp tarde
-      "24N12",     #horario disp noite
+    @rooms = [
+      [ #tipo 0
+        { #sala
+          code: "A305",
+          capacity: 40,
+          hours_m: "2456M1234",
+          hours_a: "",
+          hours_n: "24N12"
+        },#fim sala
+        { #sala
+          code: "A101",
+          capacity: 20,
+          hours_m: "2456M1234",
+          hours_a: "",
+          hours_n: "24N1234"
+        } #fim sala
+      ], #fim tipo 0
+
+      [ #tipo 1
+        { #sala
+          code: "A306",
+          capacity: 40,
+          hours_m: "2456M1234",
+          hours_a: "",
+          hours_n: "24N12"
+        } #fim sala
+      ], #fim tipo 1
+
+      [ #tipo 2
+        { #sala
+          code: "A307",
+          capacity: 40,
+          hours_m: "2456M1234",
+          hours_a: "35T12",
+          hours_n: "24N12"
+        } #fim sala
+      ] #fim tipo 2
     ]
-    [
-      "A306",      #código
-      2            #tipo
-      40,          #capacidade
-      "2456M1234", #horario disp manha
-      "",          #horario disp tarde
-      "24N12",     #horario disp noite
-    ]
-    [
-      "A307",      #código
-      3            #tipo
-      40,          #capacidade
-      "2456M1234", #horario disp manha
-      "",          #horario disp tarde
-      "24N12",     #horario disp noite
-    ]
-  ]
+  end
 
   def perform(name, count)
     puts 'Doing hard work'
+  end
+
+
+  def test
+    transform_suggestion_list(@test_v, @rooms)
   end
 
   private
@@ -73,5 +96,48 @@ class ClassSuggestionWorker
 
   def valid?(v)
   end
+
+  def generate_all_suggestions(sugg, preference, rooms)
+
+    aux = []
+
+    sugg.each do |slot|
+      aux << rooms[slot[:room_type]].map do |x|
+        {code: x[:code], hours: slot[:hours]}
+      end
+    end
+
+    aux[0].product(*aux[1..-1]).map do |x|
+
+      {preference: preference, room: x}
+
+    end
+
+  end
+
+  def transform_suggestion_list(s_list, rooms)
+
+    r = []
+
+    s_list.each do |course|
+
+      aux = []
+
+      course[:suggestions].each_with_index do |sugg, ss_index|
+
+        generate_all_suggestions(sugg, ss_index, rooms).each do |x|
+          aux << x
+        end
+
+
+      end
+
+      r << aux
+    end
+
+    r
+
+  end
+
 
 end
