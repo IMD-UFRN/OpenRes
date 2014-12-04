@@ -10,11 +10,12 @@ class ClassSuggestionWorker
         suggestions: [    #lista de horários
           [{hours: "2456M12", room_type: 0}], #horario requerido e tipo da sala
           [{hours: "2456M34", room_type: 1}],
-          [{hours: "2456M12", room_type: 2}],
+          [{hours: "2456M34", room_type: 2}],
           [{hours: "2456M34", room_type: 2}],
           [{hours: "24M34",	  room_type: 0},{hours: "56M34",	room_type: 0}]
         ]
       },
+
       { #segunda turma
         teacher:  1, #professores
         capacity: 30,  #capacidade
@@ -33,16 +34,12 @@ class ClassSuggestionWorker
         { #sala
           code: "A305",
           capacity: 40,
-          hours_m: "2456M1234",
-          hours_a: "",
-          hours_n: "24N12"
+          hours: "2456M1234 T 24N12"
         },#fim sala
         { #sala
           code: "A101",
           capacity: 20,
-          hours_m: "2456M1234",
-          hours_a: "",
-          hours_n: "24N1234"
+          hours: "2456M1234 56T34 2N1234"
         } #fim sala
       ], #fim tipo 0
 
@@ -50,9 +47,7 @@ class ClassSuggestionWorker
         { #sala
           code: "A306",
           capacity: 40,
-          hours_m: "2456M1234",
-          hours_a: "",
-          hours_n: "24N12"
+          hours: "2456M1234 456T12 N"
         } #fim sala
       ], #fim tipo 1
 
@@ -60,9 +55,7 @@ class ClassSuggestionWorker
         { #sala
           code: "A307",
           capacity: 40,
-          hours_m: "2456M1234",
-          hours_a: "35T12",
-          hours_n: "24N12"
+          hours: "2456M1234 56T34 2N1234"
         } #fim sala
       ] #fim tipo 2
     ]
@@ -74,37 +67,46 @@ class ClassSuggestionWorker
 
 
   def test
-    transform_suggestion_list(@test_v, @rooms)
+    expand_suggestion_list(@test_v, @rooms)
+
+    puts "FAZER TESTES PRA VERIFICAR CONFLITOS"
   end
 
   private
-  def generate_next_state(v)
-    return false if v[0] == v.length
 
-    i = 1
+  def valid_room?(room, slot, capacity)
 
-    v[-i] += 1
+    return false if room[:capacity] < capacity
 
-    while i <= v.length && v[-i] == v.length
-      v[-i] = 0
-      i += 1
-    end
+    days, hours = slot[:hours].split(/[MTN]/)
+    shift = slot[:hours].scan(/[MTN]/)[0]
 
-    return false if v[0] == v.length
-    return v
+    r_days, r_hours = room[:hours].scan(/\d+[#{shift}]\d+/)[0].split(shift)
+
+    puts days
+    puts r_days
+    puts "-"
+    puts (r_days.chars - days.chars ).length
+    puts "-"
+    puts hours
+    puts r_hours
+    puts "-H-"
+    puts (r_hours.chars - hours.chars ).length
+    puts "-"
+
+    puts " ------------  "
+    return (r_days.chars - days.chars).length == r_days.length - days.length && (r_hours.chars - hours.chars).length == r_hours.length - hours.length
+
   end
 
-  def valid?(v)
-  end
-
-  def generate_all_suggestions(sugg, preference, rooms)
+  def generate_all_suggestions(sugg, preference, rooms, capacity)
 
     aux = []
 
     sugg.each do |slot|
-      aux << rooms[slot[:room_type]].map do |x|
-        {code: x[:code], hours: slot[:hours]}
-      end
+      aux << rooms[slot[:room_type]].map do |room|
+        {code: room[:code], hours: slot[:hours]} if valid_room?(room, slot, capacity)
+      end.compact
     end
 
     aux[0].product(*aux[1..-1]).map do |x|
@@ -115,7 +117,7 @@ class ClassSuggestionWorker
 
   end
 
-  def transform_suggestion_list(s_list, rooms)
+  def expand_suggestion_list(s_list, rooms)
 
     r = []
 
@@ -125,10 +127,9 @@ class ClassSuggestionWorker
 
       course[:suggestions].each_with_index do |sugg, ss_index|
 
-        generate_all_suggestions(sugg, ss_index, rooms).each do |x|
+        generate_all_suggestions(sugg, ss_index, rooms, course[:capacity]).each do |x|
           aux << x
         end
-
 
       end
 
@@ -138,6 +139,5 @@ class ClassSuggestionWorker
     r
 
   end
-
 
 end
