@@ -18,9 +18,9 @@ class ClassSuggestionWorker
 
       { #segunda turma
         teacher:  1, #professores
-        capacity: 30,  #capacidade
+        capacity: 20,  #capacidade
         suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 1}],
+          [{hours: "2456M12", room_type: 0}],
           [{hours: "2456M34", room_type: 0}],
           [{hours: "2456M12", room_type: 2}],
           [{hours: "2456M34", room_type: 2}],
@@ -67,9 +67,7 @@ class ClassSuggestionWorker
 
 
   def test
-    expand_suggestion_list(@test_v, @rooms)
-
-    puts "FAZER TESTES PRA VERIFICAR CONFLITOS"
+    mass_slot_generator(expand_suggestion_list(@test_v, @rooms))
   end
 
   private
@@ -83,18 +81,6 @@ class ClassSuggestionWorker
 
     r_days, r_hours = room[:hours].scan(/\d+[#{shift}]\d+/)[0].split(shift)
 
-    puts days
-    puts r_days
-    puts "-"
-    puts (r_days.chars - days.chars ).length
-    puts "-"
-    puts hours
-    puts r_hours
-    puts "-H-"
-    puts (r_hours.chars - hours.chars ).length
-    puts "-"
-
-    puts " ------------  "
     return (r_days.chars - days.chars).length == r_days.length - days.length && (r_hours.chars - hours.chars).length == r_hours.length - hours.length
 
   end
@@ -137,6 +123,49 @@ class ClassSuggestionWorker
     end
 
     r
+
+  end
+
+  def conflicting?(solution)
+
+    slots = {}
+
+    solution.each do |hour|
+
+      hour[:room].each do |room|
+
+        days, hours = room[:hours].split(/[MTN]/)
+        shift = room[:hours].scan(/[MTN]/)[0]
+
+        days.chars.each do |d|
+
+          hours.chars.each do |h|
+
+            return true if (slots[room[:code]]["#{shift}"]["#{d}"]["#{h}"] rescue false)
+
+            slots[room[:code]] ||= {}
+            slots[room[:code]]["#{shift}"] ||= {}
+            slots[room[:code]]["#{shift}"]["#{d}"] ||= {}
+            slots[room[:code]]["#{shift}"]["#{d}"]["#{h}"] ||= {}
+
+          end
+
+        end
+
+      end
+
+    end
+
+    false
+  end
+
+  def mass_slot_generator(preferences)
+
+    all = preferences[0].product(*preferences[1..-1])
+
+    all.delete_if do |solution|
+      conflicting?(solution)
+    end
 
   end
 
