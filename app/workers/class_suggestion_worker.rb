@@ -5,26 +5,39 @@ class ClassSuggestionWorker
   def initialize
     @test_v = [
       { #primeira turma
-        teacher:  2, #professores
+        teachers:  ["Marcel"], #professores
         capacity: 40,  #capacidade
         suggestions: [    #lista de horários
           [{hours: "2456M12", room_type: 0}], #horario requerido e tipo da sala
           [{hours: "2456M34", room_type: 1}],
           [{hours: "2456M34", room_type: 2}],
           [{hours: "2456M34", room_type: 2}],
+          [{hours: "24N12"  , room_type: 0}],
           [{hours: "24M34",	  room_type: 0},{hours: "56M34",	room_type: 0}]
         ]
       },
 
       { #segunda turma
-        teacher:  1, #professores
+        teachers:  ["Ivan"], #professores
         capacity: 20,  #capacidade
         suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 0}],
+          [{hours: "2456M12", room_type: 1}],
           [{hours: "2456M34", room_type: 0}],
           [{hours: "2456M12", room_type: 2}],
           [{hours: "2456M34", room_type: 2}],
           [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
+        ]
+      },
+
+      { #terceira turma
+        teachers:  ["Marcel","Ivan"], #professores
+        capacity: 20,  #capacidade
+        suggestions: [    #lista de horários
+          [{hours: "2456M12", room_type: 1}],
+          [{hours: "2456M34", room_type: 0}],
+          [{hours: "2456M12", room_type: 2}],
+          [{hours: "2456M34", room_type: 2}],
+          [{hours: "24N12"  , room_type: 1}]
         ]
       }
     ]
@@ -34,7 +47,7 @@ class ClassSuggestionWorker
         { #sala
           code: "A305",
           capacity: 40,
-          hours: "2456M1234 T 24N12"
+          hours: "2456M1234 24N12"
         },#fim sala
         { #sala
           code: "A101",
@@ -47,7 +60,7 @@ class ClassSuggestionWorker
         { #sala
           code: "A306",
           capacity: 40,
-          hours: "2456M1234 456T12 N"
+          hours: "2456M1234 456T12"
         } #fim sala
       ], #fim tipo 1
 
@@ -79,7 +92,7 @@ class ClassSuggestionWorker
     days, hours = slot[:hours].split(/[MTN]/)
     shift = slot[:hours].scan(/[MTN]/)[0]
 
-    r_days, r_hours = room[:hours].scan(/\d+[#{shift}]\d+/)[0].split(shift)
+    r_days, r_hours = room[:hours].scan(/\d+[#{shift}]\d+/)[0].split(shift) rescue return false
 
     return (r_days.chars - days.chars).length == r_days.length - days.length && (r_hours.chars - hours.chars).length == r_hours.length - hours.length
 
@@ -130,7 +143,7 @@ class ClassSuggestionWorker
 
     slots = {}
 
-    solution.each do |hour|
+    solution.each_with_index do |hour, index|
 
       hour[:room].each do |room|
 
@@ -147,6 +160,15 @@ class ClassSuggestionWorker
             slots[room[:code]]["#{shift}"] ||= {}
             slots[room[:code]]["#{shift}"]["#{d}"] ||= {}
             slots[room[:code]]["#{shift}"]["#{d}"]["#{h}"] ||= {}
+
+            @test_v[index][:teachers].each do |teacher|
+              return true if (slots[teacher]["#{shift}"]["#{d}"]["#{h}"] rescue false)
+
+              slots[teacher] ||= {}
+              slots[teacher]["#{shift}"] ||= {}
+              slots[teacher]["#{shift}"]["#{d}"] ||= {}
+              slots[teacher]["#{shift}"]["#{d}"]["#{h}"] ||= {}
+            end
 
           end
 
