@@ -161,12 +161,42 @@ class ClassSuggestionWorker
 
   def mass_slot_generator(preferences)
 
-    all = preferences[0].product(*preferences[1..-1])
+    all =  Enumerator.new do |y|
 
-    all.delete_if do |solution|
-      conflicting?(solution)
+      v = [].tap { |x| 1.upto(preferences.length) { x << 0 } }
+
+      loop do
+        y.yield(v)
+
+        i = -1
+        v[i] += 1
+
+        while v[i] && v[i] >= preferences[i].length
+
+          v[i] = 0
+          i -= 1
+
+          v[i] += 1 if v[i]
+
+        end
+
+        break if -i > preferences.length
+
+      end
+
+
     end
 
+    # all = preferences[0].product(*preferences[1..-1])
+    result = []
+
+    all.each do |solution|
+      aux = [].tap { |x| solution.each_with_index {|i, s| x << preferences[s][i] } }
+      result << aux unless conflicting?(aux)
+
+    end
+
+    result
   end
 
 end
