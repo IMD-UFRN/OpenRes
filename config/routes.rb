@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
+require 'sidekiq/web'
+
 OpenRes::Application.routes.draw do
   get "map/show"
+
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :room_types
   resources :classes_suggestion_processor

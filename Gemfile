@@ -34,6 +34,8 @@ gem 'puma'
 
 gem 'cancancan'
 
+gem 'sinatra', require: nil
+
 gem 'draper'
 
 gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'https://github.com/zpaulovics/datetimepicker-rails'

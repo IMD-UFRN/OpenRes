@@ -2,47 +2,45 @@
 class ClassSuggestionWorker
   include Sidekiq::Worker
 
-  def initialize
-    @test_v = [
-      { #primeira turma
-        teachers:  ["Marcel"], #professores
-        capacity: 40,  #capacidade
-        suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 0}], #horario requerido e tipo da sala
-          [{hours: "2456M34", room_type: 1}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "24N12"  , room_type: 0}],
-          [{hours: "24M34",	  room_type: 0},{hours: "56M34",	room_type: 0}]
-        ]
-      },
 
-      { #segunda turma
-        teachers:  ["Ivan"], #professores
-        capacity: 20,  #capacidade
-        suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 1}],
-          [{hours: "2456M34", room_type: 0}],
-          [{hours: "2456M12", room_type: 2}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
-        ]
-      },
+  @@test_v = [
+    { #primeira turma
+      teachers:  ["Marcel"], #professores
+      capacity: 40,  #capacidade
+      suggestions: [    #lista de horários
+        [{hours: "2456M12", room_type: 0}], #horario requerido e tipo da sala
+        [{hours: "2456M34", room_type: 1}],
+        [{hours: "2456M34", room_type: 2}],
+        [{hours: "2456M34", room_type: 2}],
+        [{hours: "24N12"  , room_type: 0}],
+        [{hours: "24M34",	  room_type: 0},{hours: "56M34",	room_type: 0}]
+      ]
+    },
+    { #segunda turma
+      teachers:  ["Ivan"], #professores
+      capacity: 20,  #capacidade
+      suggestions: [    #lista de horários
+        [{hours: "2456M12", room_type: 1}],
+        [{hours: "2456M34", room_type: 0}],
+        [{hours: "2456M12", room_type: 2}],
+        [{hours: "2456M34", room_type: 2}],
+        [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
+      ]
+    },
 
-      { #terceira turma
-        teachers:  ["Marcel","Ivan"], #professores
-        capacity: 20,  #capacidade
-        suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 1}],
-          [{hours: "2456M34", room_type: 0}],
-          [{hours: "2456M12", room_type: 2}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "24N12"  , room_type: 1}]
-        ]
-      }
-    ]
-
-    @rooms = [
+    { #terceira turma
+      teachers:  ["Marcel","Ivan"], #professores
+      capacity: 20,  #capacidade
+      suggestions: [    #lista de horários
+        [{hours: "2456M12", room_type: 1}],
+        [{hours: "2456M34", room_type: 0}],
+        [{hours: "2456M12", room_type: 2}],
+        [{hours: "2456M34", room_type: 2}],
+        [{hours: "24N12"  , room_type: 1}]
+      ]
+    }
+  ]
+    @@rooms = [
       [ #tipo 0
         { #sala
           code: "A305",
@@ -72,15 +70,9 @@ class ClassSuggestionWorker
         } #fim sala
       ] #fim tipo 2
     ]
-  end
 
-  def perform(name, count)
-    puts 'Doing hard work'
-  end
-
-
-  def test
-    mass_slot_generator(expand_suggestion_list(@test_v, @rooms))
+  def perform
+    mass_slot_generator(expand_suggestion_list(@@test_v, @@rooms))
   end
 
   private
@@ -139,86 +131,20 @@ class ClassSuggestionWorker
 
   end
 
-  def conflicting?(solution)
-
-    slots = {}
-
-    solution.each_with_index do |hour, index|
-
-      hour[:room].each do |room|
-
-        days, hours = room[:hours].split(/[MTN]/)
-        shift = room[:hours].scan(/[MTN]/)[0]
-
-        days.chars.each do |d|
-
-          hours.chars.each do |h|
-
-            return true if (slots[room[:code]]["#{shift}"]["#{d}"]["#{h}"] rescue false)
-
-            slots[room[:code]] ||= {}
-            slots[room[:code]]["#{shift}"] ||= {}
-            slots[room[:code]]["#{shift}"]["#{d}"] ||= {}
-            slots[room[:code]]["#{shift}"]["#{d}"]["#{h}"] ||= {}
-
-            @test_v[index][:teachers].each do |teacher|
-              return true if (slots[teacher]["#{shift}"]["#{d}"]["#{h}"] rescue false)
-
-              slots[teacher] ||= {}
-              slots[teacher]["#{shift}"] ||= {}
-              slots[teacher]["#{shift}"]["#{d}"] ||= {}
-              slots[teacher]["#{shift}"]["#{d}"]["#{h}"] ||= {}
-            end
-
-          end
-
-        end
-
-      end
-
-    end
-
-    false
-  end
-
   def mass_slot_generator(preferences)
 
-    all =  Enumerator.new do |y|
+      # PartitionSolutionAnaliserWorker.new(6).perform(preferences)
 
-      v = [].tap { |x| 1.upto(preferences.length) { x << 0 } }
+    x = []
 
-      loop do
-        y.yield(v)
+    #lembrar de rodar com alguma amostra que tenha resultados possíveis logo de cara
+    #lembrar de rodar com alguma amostra que tenha resultados possíveis só no fim
 
-        i = -1
-        v[i] += 1
-
-        while v[i] && v[i] >= preferences[i].length
-
-          v[i] = 0
-          i -= 1
-
-          v[i] += 1 if v[i]
-
-        end
-
-        break if -i > preferences.length
-
-      end
-
-
+    0.upto(preferences[0].length-1) do |i|
+      x << PartitionSolutionAnaliserWorker.perform_async(preferences, i)
     end
 
-    # all = preferences[0].product(*preferences[1..-1])
-    result = []
-
-    all.each do |solution|
-      aux = [].tap { |x| solution.each_with_index {|i, s| x << preferences[s][i] } }
-      result << aux unless conflicting?(aux)
-
-    end
-
-    result
+    x
   end
 
 end
