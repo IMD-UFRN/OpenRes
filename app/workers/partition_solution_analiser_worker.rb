@@ -25,17 +25,6 @@ class PartitionSolutionAnaliserWorker
           [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
         ]
       },
-      { #segunda turma
-        teachers:  ["Ivan"],#professores
-        capacity: 20,  #capacidade
-        suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 1}],
-          [{hours: "2456M34", room_type: 0}],
-          [{hours: "2456M12", room_type: 2}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
-        ]
-      },
       { #terceira turma
         teachers:  ["Marcel","Ivan"], #professores
         capacity: 20,  #capacidade
@@ -98,6 +87,7 @@ class PartitionSolutionAnaliserWorker
           hours.chars.each do |h|
 
             return true if (slots[room["code"]]["#{shift}"]["#{d}"]["#{h}"] rescue false)
+
 
             slots[room["code"]] ||= {}
             slots[room["code"]]["#{shift}"] ||= {}
@@ -165,6 +155,8 @@ class PartitionSolutionAnaliserWorker
       puts aux.inspect unless c
 
       result << aux unless c
+
+      $redis.set('processed', $redis.get('processed').to_i + 1)
 
     end
 

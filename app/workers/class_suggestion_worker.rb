@@ -17,7 +17,7 @@ class ClassSuggestionWorker
       ]
     },
     { #segunda turma
-      teachers:  ["Ivan"], #professores
+      teachers:  ["Ivan"],#professores
       capacity: 20,  #capacidade
       suggestions: [    #lista de horários
         [{hours: "2456M12", room_type: 1}],
@@ -27,7 +27,6 @@ class ClassSuggestionWorker
         [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
       ]
     },
-
     { #terceira turma
       teachers:  ["Marcel","Ivan"], #professores
       capacity: 20,  #capacidade
@@ -132,6 +131,19 @@ class ClassSuggestionWorker
   end
 
   def mass_slot_generator(preferences)
+
+    total_to_process = preferences[0].length
+
+    1.upto(preferences.length - 1) do |i|
+
+      total_to_process *= preferences[i].length
+
+    end
+
+    $redis.set('total_to_process', total_to_process)
+
+    $redis.set('processed', 0)
+
 
       # PartitionSolutionAnaliserWorker.new(6).perform(preferences)
 

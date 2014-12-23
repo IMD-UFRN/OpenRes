@@ -100,6 +100,8 @@ gem 'kaminari'
 
 gem 'sidekiq'
 
+gem 'redis'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

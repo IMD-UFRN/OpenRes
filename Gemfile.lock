@@ -368,6 +368,7 @@ DEPENDENCIES
   puma
   rails (= 4.0.1)
   rails-backbone
+  redis
   roo
   rspec-rails (~> 2.0)
   rvm-capistrano
