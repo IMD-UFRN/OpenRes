@@ -39,6 +39,7 @@ class ClassSuggestionWorker
       ]
     }
   ]
+
     @@rooms = [
       [ #tipo 0
         { #sala
