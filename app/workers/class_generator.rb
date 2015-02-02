@@ -47,8 +47,6 @@ class ClassGenerator
 
         classes << [random_class]
 
-        puts classes.last.first.inspect
-
         new_class = comp_class(classes.last.first)
 
         classes.last << new_class if get_percentage?(90)

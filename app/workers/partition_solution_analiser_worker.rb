@@ -1,73 +1,38 @@
 class PartitionSolutionAnaliserWorker
   include Sidekiq::Worker
 
-    @@test_v = [
-      { #primeira turma
-        teachers:  ["Marcel"], #professores
-        capacity: 40,  #capacidade
-        suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 0}], #horario requerido e tipo da sala
-          [{hours: "2456M34", room_type: 1}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "24N12"  , room_type: 0}],
-          [{hours: "24M34",	  room_type: 0},{hours: "56M34",	room_type: 0}]
-        ]
-      },
-      { #segunda turma
-        teachers:  ["Ivan"],#professores
-        capacity: 20,  #capacidade
-        suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 1}],
-          [{hours: "2456M34", room_type: 0}],
-          [{hours: "2456M12", room_type: 2}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "24M34"  , room_type: 1}, {hours: "56M34", room_type:	2}]
-        ]
-      },
-      { #terceira turma
-        teachers:  ["Marcel","Ivan"], #professores
-        capacity: 20,  #capacidade
-        suggestions: [    #lista de horários
-          [{hours: "2456M12", room_type: 1}],
-          [{hours: "2456M34", room_type: 0}],
-          [{hours: "2456M12", room_type: 2}],
-          [{hours: "2456M34", room_type: 2}],
-          [{hours: "24N12"  , room_type: 1}]
-        ]
-      }
-    ]
+  @@test_v = []
 
-    @@rooms = [
-      [ #tipo 0
-        { #sala
-          code: "A305",
-          capacity: 40,
-          hours: "23456M1234 24N12"
-        },#fim sala
-        { #sala
-          code: "A101",
-          capacity: 20,
-          hours: "2456M1234 56T34 2N1234"
-        } #fim sala
-      ], #fim tipo 0
+  @@rooms = [
+    [ #tipo 0
+      { #sala
+        code: "A305",
+        capacity: 40,
+        hours: "23456M1234 24N12"
+      },#fim sala
+      { #sala
+        code: "A101",
+        capacity: 20,
+        hours: "2456M1234 56T34 2N1234"
+      } #fim sala
+    ], #fim tipo 0
 
-      [ #tipo 1
-        { #sala
-          code: "A306",
-          capacity: 40,
-          hours: "2456M1234 456T12"
-        } #fim sala
-      ], #fim tipo 1
+    [ #tipo 1
+      { #sala
+        code: "A306",
+        capacity: 40,
+        hours: "2456M1234 456T12"
+      } #fim sala
+    ], #fim tipo 1
 
-      [ #tipo 2
-        { #sala
-          code: "A307",
-          capacity: 40,
-          hours: "2456M1234 56T34 2N1234"
-        } #fim sala
-      ] #fim tipo 2
-    ]
+    [ #tipo 2
+      { #sala
+        code: "A307",
+        capacity: 40,
+        hours: "2456M1234 56T34 2N1234"
+      } #fim sala
+    ] #fim tipo 2
+  ]
 
 
   def conflicting?(solution)
@@ -114,7 +79,11 @@ class PartitionSolutionAnaliserWorker
     false
   end
 
-  def perform(preferences, partition)
+  def perform(preferences, possible_rooms, partition)
+
+    puts @@test_v
+
+    @@test_v = possible_rooms
 
     all =  Enumerator.new do |y|
 
