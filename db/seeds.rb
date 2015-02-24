@@ -202,6 +202,7 @@ Place.create(code: "B436" , name: "Incubada"                              , capa
 
 
 User.create(role: "admin", email: "admin@example.com", password: "rootadmin", name: "Admin", cpf: "092.092.092-92", sector_ids: 1)
+User.create(role: "receptionist", email: "recep@example.com", password: "rootadmin", name: "Recep", cpf: "192.092.092-92", sector_ids: 1)
 
 bes_user = User.create(role: "basic", email: "marcel@example.com", password: "rootadmin", name: "Marcel BES", cpf: "096.092.092-96", sector_ids: dep_es.id)
 bti_user = User.create(role: "basic", email: "jose@example.com", password: "rootadmin", name: "José BTI", cpf: "097.092.092-97", sector_ids: dep_ti.id)

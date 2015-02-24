@@ -117,6 +117,8 @@ class ClassSuggestionWorker
     #lembrar de rodar com alguma amostra que tenha resultados possíveis logo de cara
     #lembrar de rodar com alguma amostra que tenha resultados possíveis só no fim
 
+    #(0..2).to_a.repeated_combination(3).to_a.sort { |x, y| if ((x.sum <=> y.sum) == 0); x.max <=> y.max; else; x.sum <=> y.sum; end; }
+    
     0.upto(preferences[0].length-1) do |i|
       x << PartitionSolutionAnaliserWorker.perform_async(preferences,   @@test_v, i)
     end
