@@ -1,0 +1,217 @@
+digraph OpenRes {
+rankdir = "LR";
+ranksep = "0.5";
+nodesep = "0.4";
+pad = "0.4,0.4";
+margin = "0,0";
+concentrate = "true";
+labelloc = "t";
+fontsize = "13";
+fontname = "Arial BoldMT";
+node[ shape  =  "Mrecord" , fontsize  =  "10" , fontname  =  "ArialMT" , margin  =  "0.07,0.05" , penwidth  =  "1.0"];
+edge[ fontname  =  "ArialMT" , fontsize  =  "7" , dir  =  "both" , arrowsize  =  "0.9" , penwidth  =  "1.0" , labelangle  =  "32" , labeldistance  =  "1.8"];
+label = "OpenRes domain model\n\n";
+m_Checkin [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Checkin</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="begin_time">begin_time <font face="Arail ItalicMT" color="grey60">time</font></td></tr>
+  <tr><td align="left" width="130" port="date">date <font face="Arail ItalicMT" color="grey60">date</font></td></tr>
+  <tr><td align="left" width="130" port="end_time">end_time <font face="Arail ItalicMT" color="grey60">time</font></td></tr>
+</table>
+>];
+m_ClassMonitor [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ClassMonitor</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="email">email <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+</table>
+>];
+m_Driver [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Driver</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+m_Justification [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Justification</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="reason">reason <font face="Arail ItalicMT" color="grey60">text</font></td></tr>
+</table>
+>];
+m_ObjectResource [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ObjectResource</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="description">description <font face="Arail ItalicMT" color="grey60">text ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+"m_PaperTrail::Version" [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">PaperTrail::Version</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="event">event <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="item_type">item_type <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="object">object <font face="Arail ItalicMT" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="object_changes">object_changes <font face="Arail ItalicMT" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="whodunnit">whodunnit <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+</table>
+>];
+m_Place [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Place</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="capacity">capacity <font face="Arail ItalicMT" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="code">code <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="reservable">reservable <font face="Arail ItalicMT" color="grey60">boolean</font></td></tr>
+</table>
+>];
+m_PlaceObject [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">PlaceObject</font></td></tr>
+</table>
+>];
+m_PlaceSector [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">PlaceSector</font></td></tr>
+</table>
+>];
+m_Reservation [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Reservation</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="begin_time">begin_time <font face="Arail ItalicMT" color="grey60">time ∗</font></td></tr>
+  <tr><td align="left" width="130" port="date">date <font face="Arail ItalicMT" color="grey60">date ∗</font></td></tr>
+  <tr><td align="left" width="130" port="end_time">end_time <font face="Arail ItalicMT" color="grey60">time ∗</font></td></tr>
+  <tr><td align="left" width="130" port="reason">reason <font face="Arail ItalicMT" color="grey60">text ∗</font></td></tr>
+  <tr><td align="left" width="130" port="responsible">responsible <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="status">status <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+</table>
+>];
+m_ReservationGroup [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ReservationGroup</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="confirmed_at">confirmed_at <font face="Arail ItalicMT" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="from_class">from_class <font face="Arail ItalicMT" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="notes">notes <font face="Arail ItalicMT" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="user_id">user_id <font face="Arail ItalicMT" color="grey60">integer</font></td></tr>
+</table>
+>];
+m_RoomType [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">RoomType</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="description">description <font face="Arail ItalicMT" color="grey60">text ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+m_Sector [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Sector</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="description">description <font face="Arail ItalicMT" color="grey60">text ∗</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+>];
+m_User [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">User</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="cpf">cpf <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="current_sign_in_at">current_sign_in_at <font face="Arail ItalicMT" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="current_sign_in_ip">current_sign_in_ip <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="email">email <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="encrypted_password">encrypted_password <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="last_sign_in_at">last_sign_in_at <font face="Arail ItalicMT" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="last_sign_in_ip">last_sign_in_ip <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="name">name <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="remember_created_at">remember_created_at <font face="Arail ItalicMT" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="reset_password_sent_at">reset_password_sent_at <font face="Arail ItalicMT" color="grey60">datetime</font></td></tr>
+  <tr><td align="left" width="130" port="reset_password_token">reset_password_token <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="role">role <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="sign_in_count">sign_in_count <font face="Arail ItalicMT" color="grey60">integer ∗</font></td></tr>
+</table>
+>];
+m_UserSector [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">UserSector</font></td></tr>
+</table>
+>];
+m_Vehicle [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Vehicle</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="capacity">capacity <font face="Arail ItalicMT" color="grey60">integer ∗</font></td></tr>
+  <tr><td align="left" width="130" port="car_model">car_model <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="description">description <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="plate">plate <font face="Arail ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="reservable">reservable <font face="Arail ItalicMT" color="grey60">boolean</font></td></tr>
+</table>
+>];
+m_VehicleReservation [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">VehicleReservation</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="begin_time">begin_time <font face="Arail ItalicMT" color="grey60">time ∗</font></td></tr>
+  <tr><td align="left" width="130" port="date">date <font face="Arail ItalicMT" color="grey60">date ∗</font></td></tr>
+  <tr><td align="left" width="130" port="end_time">end_time <font face="Arail ItalicMT" color="grey60">time ∗</font></td></tr>
+  <tr><td align="left" width="130" port="passengers">passengers <font face="Arail ItalicMT" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="reason">reason <font face="Arail ItalicMT" color="grey60">text ∗</font></td></tr>
+  <tr><td align="left" width="130" port="responsible">responsible <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="status">status <font face="Arail ItalicMT" color="grey60">string</font></td></tr>
+</table>
+>];
+m_VehicleReservationJustification [label = <<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">VehicleReservationJustification</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="reason">reason <font face="Arail ItalicMT" color="grey60">text</font></td></tr>
+</table>
+>];
+  m_Reservation -> "m_PaperTrail::Version" [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_ReservationGroup -> "m_PaperTrail::Version" [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Sector -> m_User [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_Reservation [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_UserSector [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_Sector [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "1", constraint = "false"];
+  m_Reservation -> m_Checkin [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Place -> m_ClassMonitor [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Driver -> m_VehicleReservation [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Place -> m_PlaceSector [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Place -> m_Sector [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
+  m_Place -> m_PlaceObject [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Place -> m_ObjectResource [style = "dotted", arrowhead = "normal", arrowtail = "none", weight = "2", constraint = "false"];
+  m_RoomType -> m_Place [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Place -> m_Reservation [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_ObjectResource -> m_PlaceObject [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_Reservation [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_ReservationGroup -> m_Reservation [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Reservation -> m_Justification [arrowhead = "none", arrowtail = "none", weight = "2"];
+  m_Vehicle -> m_VehicleReservation [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_VehicleReservation [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_VehicleReservation -> m_VehicleReservationJustification [arrowhead = "none", arrowtail = "none", weight = "2"];
+  m_ReservationGroup -> m_Justification [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_User -> m_Justification [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Sector -> m_PlaceSector [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Sector -> m_ObjectResource [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Sector -> m_UserSector [arrowhead = "normal", arrowtail = "none", weight = "1"];
+}
