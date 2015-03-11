@@ -24,7 +24,6 @@ class PlacesController < ApplicationController
   # GET /places/1
   # GET /places/1.json
   def show
-
     reservations = @place.reservations.not_grouped
     reservation_groups = ReservationGroup.from_place(@place)
 
@@ -37,9 +36,8 @@ class PlacesController < ApplicationController
       reservation_groups= reservation_groups && ReservationGroup.from_past
     end
 
-    @reservations= ReservationDecorator.decorate_collection(reservations)
-    @reservation_groups= ReservationGroupDecorator.decorate_collection(reservation_groups)
-
+    @reservations = ReservationDecorator.decorate_collection(reservations.page(params[:page]))
+    @reservation_groups = ReservationGroupDecorator.decorate_collection(reservation_groups.page(params[:page]))
   end
 
   # GET /places/new

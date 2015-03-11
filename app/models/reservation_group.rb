@@ -25,7 +25,6 @@ class ReservationGroup < ActiveRecord::Base
     ReservationGroup.where(user_id: user.id)
   }
 
-  paginates_per 2
   # scope :from_sector, lambda { |sector|
   #
   #   ReservationGroup.where()
