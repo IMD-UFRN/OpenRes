@@ -8,7 +8,6 @@
 // Then bootstrap itself
 @import "bootstrap";
 
-@import "bootstrap-datetimepicker";
 
 @import "jvectormap";
 
@@ -27,5 +26,6 @@ body { padding-top: 60px; }
 
 @import "base";
 
+@import "bootstrap-datetimepicker";
 @import "font-awesome-sprockets";
 @import "font-awesome";

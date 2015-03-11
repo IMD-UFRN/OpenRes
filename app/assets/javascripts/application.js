@@ -17,13 +17,13 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/open_res
+//= require moment
 //= require bootstrap
 //= require bootstrap-modal
 //= require bootstrap-datetimepicker
+//= require moment/pt-br.js
 //= require chosen-jquery
 //= require turbolinks
-//= require moment
-//= require moment/pt-br.js
 //= require handlebars
 //= require jquery_nested_form
 //= require jvectormap

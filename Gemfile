@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
+ruby '2.2.1'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', '4.2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -28,13 +30,11 @@ gem 'devise'
 
 gem 'simple_form'
 
-gem 'puma'
-
 gem 'cancancan'
 
 gem 'draper'
 
-gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'https://github.com/zpaulovics/datetimepicker-rails'
+gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'https://github.com/zpaulovics/datetimepicker-rails', tag: 'v1.0.0'
 
 gem 'chosen-rails'
 
@@ -42,7 +42,7 @@ gem "rails-backbone"
 
 gem 'handlebars_assets'
 
-gem 'momentjs-rails'
+gem 'momentjs-rails', '~> 2.9', :github => 'derekprior/momentjs-rails'
 
 gem "nested_form"
 
@@ -63,7 +63,7 @@ end
 
 gem 'compass-rails'
 gem 'bootstrap-sass', '~> 2.3.2'
-gem 'bootswatch-rails'
+gem 'bootswatch-rails', '~> 0.5.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
@@ -76,13 +76,16 @@ group :development, :test do
   gem 'sqlite3'
   gem 'simplecov', require: false
   gem 'simplecov-html', require: false
-  gem 'capistrano', '~> 2.15.4'
-  gem 'rvm-capistrano'
+  gem 'coveralls', require: false
+  gem 'guard-rspec', require: false
+
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
 end
-
-gem 'coveralls', require: false
-
-gem 'guard-rspec', require: false
 
 gem 'by_star', :git => "git://github.com/radar/by_star"
 
