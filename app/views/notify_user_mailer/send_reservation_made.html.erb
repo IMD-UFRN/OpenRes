@@ -9,7 +9,7 @@ o usuário <%= @reservation.user.name %> realizou uma reserva em uma sala sob su
 
     <br><strong>Tipo da reserva:</strong> Reserva Múltipla
     <br><strong>Título:</strong> <%= @reservation.name %>
-    <br><strong>Local:</strong> <%= @reservation.place.name %>
+    <br><strong>Local:</strong> <%= @reservation.place.full_name %>
     <br><strong>Período:</strong> <%=@reservation.begin_date.strftime("%d/%m/%Y") %> a <%=@reservation.end_date.strftime("%d/%m/%Y") %>
     <br><strong>Motivo:</strong> <%=@reservation.reason %>
     <br><strong>Solicitada em:</strong> <%=@reservation.created_at.strftime("%d/%m/%Y - %H:%M")%>
