@@ -17,7 +17,7 @@ o usuário <%= @reservation.user.name %> realizou uma reserva em uma sala sob su
   <% else %>
 
     <br><strong>Tipo da reserva:</strong> Reserva Simples
-    <br><strong>Local:</strong> <%= @reservation.place.name %>
+    <br><strong>Local:</strong> <%= @reservation.place.full_name %>
     <br><strong>Dia:</strong> <%= @reservation.date.strftime("%d/%m/%Y") %>
     <br><strong>Horário:</strong> <%=@reservation.begin_time.strftime("%H:%M") %> às <%=@reservation.end_time.strftime("%H:%M") %>
     <br><strong>Motivo:</strong> <%=@reservation.reason %>
