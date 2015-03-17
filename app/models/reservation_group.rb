@@ -63,16 +63,8 @@ class ReservationGroup < ActiveRecord::Base
 
   scope :from_place, lambda { |place|
 
-    reservations = []
+    ReservationGroup.confirmed.joins(:reservations).where("reservations.place_id = ?", place.id).uniq
 
-    ReservationGroup.confirmed.each do |reservation|
-
-      if reservation.places.include?(place)
-        reservations << reservation
-      end
-    end
-
-    return reservations
   }
 
 
