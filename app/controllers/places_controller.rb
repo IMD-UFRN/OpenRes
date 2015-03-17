@@ -29,15 +29,17 @@ class PlacesController < ApplicationController
 
     if params[:filter_by] == "future"
       reservations= reservations.from_future
-      reservation_groups= reservation_groups && ReservationGroup.from_future
+      reservation_groups= reservation_groups.from_future
 
     elsif params[:filter_by] == "finished"
       reservations= reservations.from_past
-      reservation_groups= reservation_groups && ReservationGroup.from_past
+      reservation_groups= reservation_groups.from_past
     end
 
+    # byebug
+
     @reservations = ReservationDecorator.decorate_collection(reservations.page(params[:page]))
-    @reservation_groups = ReservationGroupDecorator.decorate_collection(reservation_groups.page(params[:page]))
+    @reservation_groups = ReservationGroupDecorator.decorate_collection(reservation_groups.page(params[:page]).to_a)
   end
 
   # GET /places/new

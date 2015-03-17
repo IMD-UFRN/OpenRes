@@ -63,35 +63,19 @@ class ReservationGroup < ActiveRecord::Base
 
   scope :from_place, lambda { |place|
 
-    ReservationGroup.confirmed.joins(:reservations).where("reservations.place_id = ?", place.id).uniq
+    ReservationGroup.confirmed.joins(:reservations).where("reservations.place_id = ?", place.id).distinct
 
   }
 
 
   scope :from_future, lambda{
-    reservations = []
+    ReservationGroup.joins(:reservations).group("reservation_groups.id").having("max(reservations.date) >= ?", DateTime.now.to_date)
 
-    ReservationGroup.all.each do |reservation|
-
-      if reservation.end_date >= DateTime.now.to_date
-        reservations << reservation
-      end
-    end
-
-    return reservations
   }
 
   scope :from_past, lambda{
-    reservations = []
+    ReservationGroup.joins(:reservations).group("reservation_groups.id").having("max(reservations.date) < ?", DateTime.now.to_date)
 
-    ReservationGroup.all.each do |reservation|
-
-      if reservation.end_date < DateTime.now.to_date
-        reservations << reservation
-      end
-    end
-
-    return reservations
   }
 
   scope :can_decide_over, lambda { |user|
@@ -126,6 +110,8 @@ class ReservationGroup < ActiveRecord::Base
   end
 
   def begin_date
+    byebug if reservations == []
+
     reservations.order(:date).first.date
   end
 
