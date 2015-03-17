@@ -8,15 +8,6 @@ class NotifyUserMailer < ActionMailer::Base
   #   en.notify_user_mailer.reservation_made.subject
   #
 
-  def send_reservation_made(reservation)
-    @reservation = reservation
-
-    User.select { |u| @reservation.can_be_decided_over?(u) }.each do |user|
-      reservation_made(@reservation, user).deliver
-    end
-
-  end
-
   def send_vehicle_reservation_made(reservation)
     @reservation = reservation
 
@@ -53,8 +44,6 @@ class NotifyUserMailer < ActionMailer::Base
 
   end
 
-  private
-
   def reservation_made(reservation, user)
     @reservation = reservation
     @url  = 'http://espacos.imd.ufrn.br'
@@ -68,7 +57,6 @@ class NotifyUserMailer < ActionMailer::Base
 
     mail to: user.email, subject: "[IMD- UFRN] Reserva em Sala de Monitoria"
   end
-
 
   def reservation_canceled(reservation, user)
     @reservation = reservation

@@ -66,8 +66,13 @@ class ReservationsController < ApplicationController
           format.json { render action: 'show', status: :created, location: @reservation }
 
         else
-          NotifyUserMailer.send_reservation_made(@reservation)
-          NotifyUserMailer.send_reservation_to_class_monitor(@reservation)
+          User.select { |u| @reservation.can_be_decided_over?(u) }.each do |user|
+            NotifyUserMailer.reservation_made(@reservation, user).deliver
+          end
+
+          @reservation.place.class_monitors.each do |monitor|
+            NotifyUserMailer.reservation_made_to_class_monitor(@reservation, monitor).deliver
+          end
 
           format.html { redirect_to @reservation, notice: 'Reserva criada com sucesso.' }
           format.json { render action: 'show', status: :created, location: @reservation }
@@ -85,7 +90,11 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       if @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reserva atualizada com sucesso.' }
-        NotifyUserMailer.send_reservation_to_class_monitor(@reservation)
+
+        @reservation.place.class_monitors.each do |monitor|
+          NotifyUserMailer.reservation_made_to_class_monitor(@reservation, monitor).deliver
+        end
+
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
