@@ -38,8 +38,8 @@ class PlacesController < ApplicationController
 
     # byebug
 
-    @reservations = ReservationDecorator.decorate_collection(reservations.page(params[:page]))
-    @reservation_groups = ReservationGroupDecorator.decorate_collection(reservation_groups.page(params[:page]).to_a)
+    @reservations = ReservationDecorator.decorate_collection(reservations.page(params[:reservation_page]).per(5))
+    @reservation_groups = ReservationGroupDecorator.decorate_collection(reservation_groups.page(params[:reservation_group_page]).per(3))
   end
 
   # GET /places/new

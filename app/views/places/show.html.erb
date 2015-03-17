@@ -138,7 +138,7 @@
     </tbody>
   </table>
 
-  <%= paginate @reservations %>
+  <%= paginate @reservations, param_name: :reservation_page %>
 
   <% if params[:filter_by] == "future" %>
     <h2 id="placeGroupReservations">Reservas Múltiplas Futuras desta Sala</h2>
@@ -156,6 +156,7 @@
 
   <% unless @reservation_groups.length ==0 %>
     <%= render @reservation_groups %>
+    <%= paginate @reservation_groups, param_name: :reservation_group_page %>
   <%else%>
     <p>Não existem reservas deste tipo</p>
   <% end %>
