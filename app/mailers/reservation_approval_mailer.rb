@@ -8,7 +8,6 @@ class ReservationApprovalMailer < ActionMailer::Base
   #   en.reservation_approval_mailer.approved_mail.subject
   #
   def approved_mail(reservation)
-    @greeting = "Hi"
     @reservation = reservation
 
     mail to: @reservation.user.email, subject: "[IMD- UFRN] Situação de reserva para sala #{@reservation.place.full_name}"
@@ -20,7 +19,6 @@ class ReservationApprovalMailer < ActionMailer::Base
   #   en.reservation_approval_mailer.rejected_mail.subject
   #
   def rejected_mail(reservation, justification)
-    @greeting = "Hi"
     @justification = justification
     @reservation = reservation
 
@@ -33,7 +31,6 @@ class ReservationApprovalMailer < ActionMailer::Base
   #   en.reservation_approval_mailer.suspended_mail.subject
   #
   def suspended_mail(reservation, justification)
-    @greeting = "Hi"
     @reservation = reservation
     @justification = justification
 
