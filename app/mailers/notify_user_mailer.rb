@@ -8,15 +8,6 @@ class NotifyUserMailer < ActionMailer::Base
   #   en.notify_user_mailer.reservation_made.subject
   #
 
-  def send_vehicle_reservation_made(reservation)
-    @reservation = reservation
-
-    User.where(role:"admin").each do |user|
-      reservation_made(@reservation, user).deliver
-    end
-
-  end
-
   def send_reservation_to_class_monitor(reservation)
     @reservation = reservation
 
@@ -45,6 +36,13 @@ class NotifyUserMailer < ActionMailer::Base
   end
 
   def reservation_made(reservation, user)
+    @reservation = reservation
+    @url  = 'http://espacos.imd.ufrn.br'
+
+    mail to: user.email, subject: "[IMD- UFRN] Nova reserva"
+  end
+
+  def vehicle_reservation_made(reservation, user)
     @reservation = reservation
     @url  = 'http://espacos.imd.ufrn.br'
 

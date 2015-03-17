@@ -54,7 +54,9 @@ class VehicleReservationsController < ApplicationController
     respond_to do |format|
       if @vehicle_reservation.save
 
-        NotifyUserMailer.send_vehicle_reservation_made(@vehicle_reservation)
+        User.where(role:"admin").each do |user|
+          NotifyUserMailer.vehicle_reservation_made(@vehicle_reservation, user).deliver
+        end
 
         format.html { redirect_to @vehicle_reservation, notice: 'Reserva cadastrada com sucesso.' }
         format.json { render :show, status: :created, location: @vehicle_reservation }
