@@ -64,7 +64,9 @@ class ReservationPolicy
     reservation.save
 
     unless opts[:silent]
-      NotifyUserMailer.send_canceled_mail(reservation).deliver
+      User.select { |u| reservation.can_be_decided_over?(u) }.each do |user|
+        NotifyUserMailer.reservation_canceled(reservation, user).deliver
+      end
 
       reservation.place.class_monitors.each do |monitor|
         NotifyUserMailer.reservation_made_to_class_monitor(reservation, monitor).deliver
