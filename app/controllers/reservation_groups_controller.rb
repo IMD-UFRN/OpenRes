@@ -159,7 +159,7 @@ class ReservationGroupsController < ApplicationController
     end
 
     @reservation_group.place.class_monitors.each do |monitor|
-      NotifyUserMailer.reservation_made_to_class_monitor(reservation, monitor).deliver
+      NotifyUserMailer.reservation_made_to_class_monitor(@reservation_group, monitor).deliver
     end
 
     redirect_to @reservation_group, notice: "Reserva salva com sucesso"

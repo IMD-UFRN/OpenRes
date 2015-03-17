@@ -232,6 +232,7 @@ Vehicle.create(plate: "MYL-6222", car_model: "Doblo", description: "Amplo espaç
 Vehicle.create(plate: "MNL-6423", car_model: "L200", description: "Caminhonete", capacity: 2)
 Driver.create(name: "João")
 
+ClassMonitor.create(name: "Monitor", email: "monitor@example.com", place_id: 1)
 
 bes_place.object_resources << projetor
 tec_place.object_resources << projetor

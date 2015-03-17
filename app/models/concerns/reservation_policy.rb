@@ -132,7 +132,10 @@ class ReservationPolicy
     end
 
     reservation_group.save
-    NotifyUserMailer.send_canceled_group_mail(reservation_group)
+
+    User.select { |u| reservation_group.can_be_decided_over?(u) }.each do |user|
+      NotifyUserMailer.reservation_group_canceled(reservation_group, user).deliver
+    end
 
     reservation_group.place.class_monitors.each do |monitor|
       NotifyUserMailer.reservation_made_to_class_monitor(reservation_group, monitor).deliver
