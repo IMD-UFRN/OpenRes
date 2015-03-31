@@ -49,6 +49,7 @@ OpenRes::Application.routes.draw do
 
   post "classes_suggestion_processor/import" => 'classes_suggestion_processor#process_suggestion_spreadsheet', as: :process_suggestion_spreadsheet
 
+  get "classes_suggestions" => 'classes_suggestions#index', as: :classes_suggestions
 
   post "reservations/:reservation_id/approve", to: "reservation_approval#approve", as: :reservation_approve
   post "check_reservations/:reservation_id/reject", to: "reservation_approval#reject", as: :reservation_reject
