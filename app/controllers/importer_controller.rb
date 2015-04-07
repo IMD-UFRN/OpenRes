@@ -79,7 +79,18 @@ class ImporterController < ApplicationController
   end
 
   def process_suggestions_spreadsheet
+    s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
+
+    i = 2
+
+    while i <= s.last_row
+      i+=1
+    end
+
+    flash[:notice] = "#{i} Linhas"
+
     redirect_to classes_suggestions_path
+
   end
 
 end
