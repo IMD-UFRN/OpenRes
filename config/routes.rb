@@ -43,7 +43,7 @@ OpenRes::Application.routes.draw do
   get "reservations_group/:reservation_group_id/reject" => 'reservation_group_approval#justify_status', as: :justify_reject_group
   get "reservations_group/:reservation_group_id/suspend" => 'reservation_group_approval#justify_status', as: :justify_suspend_group
 
-  get "spreadsheet/import" => 'importer#import_suggestions_spreadsheet', as: :import_suggestions_spreadsheet
+  get "suggestions_spreadsheet/import" => 'importer#import_suggestions_spreadsheet', as: :import_suggestions_spreadsheet
 
   get "spreadsheet/import" => 'importer#import_spreadsheet', as: :import_spreadsheet
   post "class_spreadsheet/import" => 'reservation_group_approval#process_class_spreadsheet', as: :process_class_spreadsheet
