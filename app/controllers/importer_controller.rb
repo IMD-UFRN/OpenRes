@@ -9,4 +9,12 @@ class ImporterController < ApplicationController
     end
   end
 
+  def import_suggestions_spreadsheet
+    @url = params[:url]
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 end
