@@ -1,6 +1,16 @@
 <h1>Processador de Sugestões de Turmas</h1>
 
-<%= link_to "Nova Reserva Múltipla", new_reservation_group_path, class:"btn btn-success"%>
+<div class="well">
+  Utilize esta funcionalidade para importar sugestões de turmas informadas por professores. <br>
+  Etapas:
+  <ol>
+    <li>Baixar planilha preenchível</li>
+    <li>Preencher planilha de acordo com as orientações nela contidas</li>
+    <li>Submeter planilha</li>
+  </ol>
+</div>
+<%= link_to "Importar Planilha", new_reservation_group_path, class:"btn btn-success"%>
+<%= link_to "Baixar planilha preenchível", new_reservation_group_path, class:"btn"%>
 
 
 <%= render "shared/back"%>
