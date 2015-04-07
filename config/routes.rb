@@ -3,7 +3,6 @@ OpenRes::Application.routes.draw do
   get "map/show"
 
   resources :room_types
-  resources :classes_suggestion_processor
 
   devise_scope :user do
     root to: "devise/sessions#new"
