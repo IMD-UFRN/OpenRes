@@ -1,33 +1,46 @@
 # -*- encoding : utf-8 -*-
 OpenRes::Application.routes.draw do
-  get "map/show"
 
+  resources :class_monitors
+  resources :drivers
+  resources :object_resources
+  resources :places
   resources :room_types
+  resources :reservations
+  resources :reservation_groups, except: :destroy
+  resources :sectors
+  resources :user_places
+  resources :vehicle_reservations
+  resources :vehicles
+
+  devise_for :users
 
   devise_scope :user do
     root to: "devise/sessions#new"
   end
 
+  controller :profile do
+    get '/profile/edit', to: 'profile#edit', as: :edit_profile
+    get '/profile', to: 'profile#profile', as: :profile
+    get '/profile/edit/password', to: 'profile#edit_password', as: :edit_password
+    patch '/profile/edit', to: 'profile#update'
+  end
+
+  controller :checkin do
+    get '/checkin', to: :index, as: :checkin_list
+    get "checkin/:place_id", to: :checkin_details, as: :checkin_details
+    post "checkin/:reservation_id", to: :checkin, as: :checkin
+    post "checkout/:checkin_id", to: :checkout, as: :checkout
+  end
+
+  controller :reservation_groups do
+    get '/reservation_groups/:id/new_reservation', to: :new_reservation, as: :add_reservation
+  end
+
+  get "map/show"
   get '/sobre', to: 'home#about', as: :about
   get '/novidades', to: 'home#whats_new', as: :whats_new
-
   get '/new_reservation', to: 'reservations#select_reservation', as: :new_select_reservation
-
-  get "reservations/all", to: "reservations#all", as: :all
-  get "reservations/finished", to: "reservations#finished", as: :finished
-  get "reservations/future", to: "reservations#future", as: :future
-
-  get "reservations/basic_reservations", to: "reservations#user_all_reservations",as: :user_all_reservations
-  get "reservations/basic_finished_reservations", to: "reservations#user_finished_reservations",as: :user_finished_reservations
-  get "reservations/basic_future_reservations", to: "reservations#user_future_reservations",as: :user_future_reservations
-
-  devise_for :users
-
-  resources :sectors
-  resources :reservations
-  resources :user_places
-  resources :object_resources
-  resources :class_monitors
 
   get "check_reservations/", to: "reservation_approval#index", as: :check_reservations
   get "check_group_reservations/", to: "reservation_group_approval#index", as: :check_group_reservations
@@ -38,7 +51,6 @@ OpenRes::Application.routes.draw do
   post "reservation_groups/:reservation_group_id/cancel", to: "reservation_group_approval#cancel", as: :reservation_group_cancel
 
   post "reservation_groups/:reservation_group_id/confirm", to: "reservation_groups#confirm", as: :reservation_group_confirm
-
 
   get "reservations_group/:reservation_group_id/reject" => 'reservation_group_approval#justify_status', as: :justify_reject_group
   get "reservations_group/:reservation_group_id/suspend" => 'reservation_group_approval#justify_status', as: :justify_suspend_group
@@ -63,7 +75,6 @@ OpenRes::Application.routes.draw do
   post "mass_action/cancel/", to: "mass_reservation_actions#cancel", as: :mass_cancel
   post "mass_action/delete/", to: "mass_reservation_actions#delete", as: :mass_delete
 
-
   get "reservations/:reservation_id/reject" => 'reservation_approval#justify_status', as: :justify_reject
   get "reservations/:reservation_id/suspend" => 'reservation_approval#justify_status', as: :justify_suspend
 
@@ -78,25 +89,11 @@ OpenRes::Application.routes.draw do
 
   get '/places/slot_search', to: 'places#slot_search', as: :slot_search
 
-  resources :places
-
   resources :users, path: 'accounts'
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
 
-
-  resources :reservation_groups, except: :destroy
   get 'reservation_groups/:id/edit_period', to: 'reservation_groups#edit_period', as: :edit_period_reservation_group
   patch 'reservation_groups/:id/update_period', to: 'reservation_groups#update_period', as: :update_period_reservation_group
-
-  controller :reservation_groups do
-
-    get '/reservation_groups/:id/new_reservation', to: :new_reservation, as: :add_reservation
-
-  end
-
-  resources :vehicle_reservations
-  resources :vehicles
-  resources :drivers
 
   get '/vehicles/:id/reservations', to: 'vehicles#get_reservations', as: :get_vehicle_reservations
 
@@ -107,17 +104,4 @@ OpenRes::Application.routes.draw do
   post "vehicle_reservations/:id/reject", to: "vehicle_reservation_approval#reject", as: :vehicle_reservation_reject
   post "vehicle_reservations/:id/suspend", to: "vehicle_reservation_approval#suspend", as: :vehicle_reservation_suspend
 
-  controller :profile do
-    get '/profile/edit', to: 'profile#edit', as: :edit_profile
-    get '/profile', to: 'profile#profile', as: :profile
-    get '/profile/edit/password', to: 'profile#edit_password', as: :edit_password
-    patch '/profile/edit', to: 'profile#update'
-  end
-
-  controller :checkin do
-    get '/checkin', to: :index, as: :checkin_list
-    get "checkin/:place_id", to: :checkin_details, as: :checkin_details
-    post "checkin/:reservation_id", to: :checkin, as: :checkin
-    post "checkout/:checkin_id", to: :checkout, as: :checkout
-  end
 end
