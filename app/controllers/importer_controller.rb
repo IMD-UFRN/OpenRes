@@ -87,22 +87,60 @@ class ImporterController < ApplicationController
 
     while s.cell(i, 1) != "DISCIPLINA"
 
-      rooms << {  code:           s.cell(i, 1),
-                  name:           s.cell(i, 2),
-                  type:           s.cell(i, 3),
-                  capacity:       s.cell(i, 4),
-                  disp_morning:   s.cell(i, 5),
-                  disp_afternoon: s.cell(i,6),
-                  disp_night:     s.cell(i, 7) } unless s.cell(i, 1).blank?
+      rooms << {
+        code:           s.cell(i, 1),
+        name:           s.cell(i, 2),
+        type:           s.cell(i, 3),
+        capacity:       s.cell(i, 4),
+        disp_morning:   s.cell(i, 5),
+        disp_afternoon: s.cell(i,6),
+        disp_night:     s.cell(i, 7)
+      } unless s.cell(i, 1).blank?
+
       i+=1
     end
 
-    puts rooms
+    i+=2
 
-    flash[:notice] = "#{rooms}"
+    classes = []
+
+    while i <= s.last_row && s.cell(i, 1) != "FIM"
+
+      classes << {
+        code:         s.cell(i, 1),
+        name:         s.cell(i, 2),
+        acronym:      s.cell(i, 3),
+        group:        s.cell(i, 4),
+        capacity:     s.cell(i, 5),
+        class_number: s.cell(i, 6),
+        teachers:     s.cell(i, 7),
+        suggestions: []
+      } unless s.cell(i, 1).blank?
+
+      classes.last[:suggestions] << [{
+        hour:     s.cell(i, 8),
+        type:     s.cell(i, 9),
+      }]
+
+      j = 10
+
+      unless s.cell(i, j).nil?
+        classes.last[:suggestions].last  << {
+          hour:     s.cell(i, j),
+          type:     s.cell(i, j+1)
+        }
+        j += 1
+      end
+
+      i+=1
+
+    end
+
+    flash[:notice] = "#{classes}"
 
     redirect_to classes_suggestions_path
 
   end
+
 
 end
