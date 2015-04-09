@@ -81,13 +81,25 @@ class ImporterController < ApplicationController
   def process_suggestions_spreadsheet
     s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
 
-    i = 2
+    i = 4
 
-    while i <= s.last_row
+    rooms = []
+
+    while s.cell(i, 1) != "DISCIPLINA"
+
+      rooms << {  code:           s.cell(i, 1),
+                  name:           s.cell(i, 2),
+                  type:           s.cell(i, 3),
+                  capacity:       s.cell(i, 4),
+                  disp_morning:   s.cell(i, 5),
+                  disp_afternoon: s.cell(i,6),
+                  disp_night:     s.cell(i, 7) } unless s.cell(i, 1).blank?
       i+=1
     end
 
-    flash[:notice] = "#{i} Linhas"
+    puts rooms
+
+    flash[:notice] = "#{rooms}"
 
     redirect_to classes_suggestions_path
 
