@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'sidekiq/web'
+
 OpenRes::Application.routes.draw do
 
   resources :class_monitors
@@ -104,5 +106,7 @@ OpenRes::Application.routes.draw do
 
   post "vehicle_reservations/:id/reject", to: "vehicle_reservation_approval#reject", as: :vehicle_reservation_reject
   post "vehicle_reservations/:id/suspend", to: "vehicle_reservation_approval#suspend", as: :vehicle_reservation_suspend
+
+  mount Sidekiq::Web => '/sidekiq'
 
 end

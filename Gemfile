@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.2.1'
 
+ruby '2.1.2'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2'
 
@@ -30,6 +32,8 @@ gem 'devise'
 gem 'simple_form'
 
 gem 'cancancan'
+
+gem 'sinatra', require: nil
 
 gem 'draper'
 
@@ -96,9 +100,9 @@ gem 'roo'
 
 gem 'font-awesome-sass', '~> 4.2.0'
 
-gem 'kaminari'
-
 gem 'sidekiq'
+
+gem 'redis'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
