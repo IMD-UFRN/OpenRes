@@ -132,7 +132,7 @@ class ImporterController < ApplicationController
         j += 1
       end
 
-      i+=1
+      i += 1
 
     end
 
