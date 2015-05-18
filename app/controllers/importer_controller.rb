@@ -124,7 +124,7 @@ class ImporterController < ApplicationController
       } unless s.cell(i, 1).blank?
 
       classes.last[:suggestions] << [{
-        hour:      s.cell(i, 8),
+        hours:      s.cell(i, 8),
         room_type: types.find_index(s.cell(i, 9)),
       }]
 
@@ -132,7 +132,7 @@ class ImporterController < ApplicationController
 
       unless s.cell(i, j).nil?
         classes.last[:suggestions].last  << {
-          hour:      s.cell(i, j),
+          hours:      s.cell(i, j),
           room_type: types.find_index(s.cell(i, j+1))
         }
         j += 1
@@ -142,7 +142,9 @@ class ImporterController < ApplicationController
 
     end
 
-    flash[:notice] = "#{rooms}"
+    flash[:notice] = "#{classes}"
+
+    #byebug
 
     ClassSuggestionWorker.perform_async(classes, rooms)
 

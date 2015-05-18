@@ -42,13 +42,13 @@ class ClassSuggestionWorker
   private
 
   def valid_room?(room, slot, capacity)
+    room.symbolize_keys!
 
     return false if room[:capacity] < capacity
 
     days, hours = slot[:hours].split(/[MTN]/)
     shift = slot[:hours].scan(/[MTN]/)[0]
 
-    #NAO ACHA O SPLIT AQUI
     r_days, r_hours = room[:hours].scan(/\d+[#{shift}]\d+/)[0].split(shift) rescue return false
 
     return (r_days.chars - days.chars).length == r_days.length - days.length && (r_hours.chars - hours.chars).length == r_hours.length - hours.length
@@ -60,6 +60,8 @@ class ClassSuggestionWorker
     aux = []
 
     sugg.each do |slot|
+      slot.symbolize_keys!
+      debug(slot)
       aux << rooms[slot[:room_type]].map do |room|
         {code: room[:code], hours: slot[:hours]} if valid_room?(room, slot, capacity)
       end.compact
@@ -71,6 +73,12 @@ class ClassSuggestionWorker
 
     end
 
+  end
+
+  def debug(str)
+    puts "\n\n\n"
+    puts str
+    puts "\n\n\n"
   end
 
   def expand_suggestion_list(s_list, rooms)
