@@ -35,14 +35,22 @@ class PartitionSolutionAnaliserWorker
   ]
 
 
+  def debug(str)
+    puts "\n\n\n"
+    puts str
+    puts "\n\n\n"
+  end
+
+
   def conflicting?(solution)
 
     slots = {}
 
+    debug(solution)
+
     solution.each_with_index do |hour, index|
 
       hour["room"].each do |room|
-
 
         days, hours = room["hours"].split(/[MTN]/)
         shift = room["hours"].scan(/[MTN]/)[0]
@@ -53,13 +61,12 @@ class PartitionSolutionAnaliserWorker
 
             return true if (slots[room["code"]]["#{shift}"]["#{d}"]["#{h}"] rescue false)
 
-
             slots[room["code"]] ||= {}
             slots[room["code"]]["#{shift}"] ||= {}
             slots[room["code"]]["#{shift}"]["#{d}"] ||= {}
             slots[room["code"]]["#{shift}"]["#{d}"]["#{h}"] ||= {}
 
-            @@test_v[index][:teachers].each do |teacher|
+            @@test_v[index]["teachers"].each do |teacher|
               return true if (slots[teacher]["#{shift}"]["#{d}"]["#{h}"] rescue false)
 
               slots[teacher] ||= {}
@@ -80,9 +87,6 @@ class PartitionSolutionAnaliserWorker
   end
 
   def perform(preferences, possible_rooms, partition)
-
-    puts @@test_v
-
     @@test_v = possible_rooms
 
     all =  Enumerator.new do |y|
@@ -112,7 +116,6 @@ class PartitionSolutionAnaliserWorker
 
     end
 
-    # all = preferences[0].product(*preferences[1..-1])
     result = []
 
     all.each do |solution|

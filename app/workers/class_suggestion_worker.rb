@@ -61,7 +61,6 @@ class ClassSuggestionWorker
 
     sugg.each do |slot|
       slot.symbolize_keys!
-      debug(slot)
       aux << rooms[slot[:room_type]].map do |room|
         {code: room[:code], hours: slot[:hours]} if valid_room?(room, slot, capacity)
       end.compact
@@ -73,12 +72,6 @@ class ClassSuggestionWorker
 
     end
 
-  end
-
-  def debug(str)
-    puts "\n\n\n"
-    puts str
-    puts "\n\n\n"
   end
 
   def expand_suggestion_list(s_list, rooms)
