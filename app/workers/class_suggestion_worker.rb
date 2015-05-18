@@ -35,8 +35,8 @@ class ClassSuggestionWorker
     ] #fim tipo 2
   ]
 
-  def perform
-    mass_slot_generator(expand_suggestion_list(@@test_v, @@rooms))
+  def perform(classes, rooms)
+    mass_slot_generator(expand_suggestion_list(classes, rooms))
   end
 
   private
@@ -48,6 +48,7 @@ class ClassSuggestionWorker
     days, hours = slot[:hours].split(/[MTN]/)
     shift = slot[:hours].scan(/[MTN]/)[0]
 
+    #NAO ACHA O SPLIT AQUI
     r_days, r_hours = room[:hours].scan(/\d+[#{shift}]\d+/)[0].split(shift) rescue return false
 
     return (r_days.chars - days.chars).length == r_days.length - days.length && (r_hours.chars - hours.chars).length == r_hours.length - hours.length
@@ -76,9 +77,14 @@ class ClassSuggestionWorker
 
     r = []
 
+    s_list = s_list[0].map(&:symbolize_keys)
+    rooms = rooms.map(&:symbolize_keys)
+
     s_list.each do |course|
 
       aux = []
+
+      # raise Exception.new course
 
       course[:suggestions].each_with_index do |sugg, ss_index|
 
@@ -118,7 +124,7 @@ class ClassSuggestionWorker
     #lembrar de rodar com alguma amostra que tenha resultados possíveis só no fim
 
     #(0..2).to_a.repeated_combination(3).to_a.sort { |x, y| if ((x.sum <=> y.sum) == 0); x.max <=> y.max; else; x.sum <=> y.sum; end; }
-    
+
     0.upto(preferences[0].length-1) do |i|
       x << PartitionSolutionAnaliserWorker.perform_async(preferences,   @@test_v, i)
     end
