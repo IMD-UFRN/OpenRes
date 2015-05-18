@@ -77,8 +77,8 @@ class ClassSuggestionWorker
 
     r = []
 
-    s_list = s_list[0].map(&:symbolize_keys)
-    rooms = rooms.map(&:symbolize_keys)
+    s_list = s_list.map(&:symbolize_keys)
+    rooms = rooms.each{|vectors| vectors.map(&:symbolize_keys) }
 
     s_list.each do |course|
 
