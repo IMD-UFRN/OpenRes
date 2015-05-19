@@ -36,6 +36,7 @@ class ClassSuggestionWorker
   ]
 
   def perform(classes, rooms)
+    @classes = classes
     mass_slot_generator(expand_suggestion_list(classes, rooms))
   end
 
@@ -103,13 +104,10 @@ class ClassSuggestionWorker
   end
 
   def mass_slot_generator(preferences)
-
     total_to_process = preferences[0].length
 
     1.upto(preferences.length - 1) do |i|
-
       total_to_process *= preferences[i].length
-
     end
 
     $redis.set('total_to_process', total_to_process)
@@ -126,8 +124,8 @@ class ClassSuggestionWorker
 
     #(0..2).to_a.repeated_combination(3).to_a.sort { |x, y| if ((x.sum <=> y.sum) == 0); x.max <=> y.max; else; x.sum <=> y.sum; end; }
 
-    0.upto(preferences[0].length-1) do |i|
-      x << PartitionSolutionAnaliserWorker.perform_async(preferences,  @@test_v, i)
+    0.upto(preferences[0].length - 1) do |i|
+      x << PartitionSolutionAnaliserWorker.perform_async(preferences, @classes, i)
     end
 
     x

@@ -34,19 +34,15 @@ class PartitionSolutionAnaliserWorker
     ] #fim tipo 2
   ]
 
-
-  def debug(str)
-    puts "\n\n\n"
+  def debug str
+    puts "\n\n\nDEBUG\n\n\n"
     puts str
-    puts "\n\n\n"
+    puts "\n\n\n/DEBUG\n\n\n"
   end
 
 
   def conflicting?(solution)
-
     slots = {}
-
-    debug(solution)
 
     solution.each_with_index do |hour, index|
 
@@ -88,6 +84,7 @@ class PartitionSolutionAnaliserWorker
 
   def perform(preferences, possible_rooms, partition)
     @@test_v = possible_rooms
+    debug(possible_rooms)
 
     all =  Enumerator.new do |y|
 
@@ -123,8 +120,6 @@ class PartitionSolutionAnaliserWorker
       aux = [].tap { |x| solution.each_with_index {|i, s| x << preferences[s][i] } }
 
       c = conflicting?(aux)
-
-      puts aux.inspect unless c
 
       result << aux unless c
 
