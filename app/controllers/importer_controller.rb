@@ -79,6 +79,10 @@ class ImporterController < ApplicationController
   end
 
   def process_suggestions_spreadsheet
+    $redis.set('status', 'input_conversion')
+    $redis.set('total_to_process', 0)
+    $redis.keys('processed*').each { |x| $redis.set(x, 0) }
+
     s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
 
     i = 3
@@ -141,19 +145,28 @@ class ImporterController < ApplicationController
 
     end
 
-    flash[:notice] = "#{classes}"
-
-    #byebug
-
     ClassSuggestionWorker.perform_async(classes, rooms)
-
     redirect_to classes_suggestions_path
-
   end
 
   def status
-    possible = %w(hue br gibe mony pl0x)
-    render json: { value: possible.sample }
+    total_to_process = $redis.get('total_to_process').to_i
+    processed = $redis.keys('processed*').map { |x| $redis.get(x).to_i }.sum
+
+    $redis.set('status', 'done') if (total_to_process == processed && total_to_process != 0)
+
+    render json: { 
+      status: $redis.get('status'),
+      total_to_process: total_to_process,
+      processed: processed,
+      percentage: get_percentage(processed, total_to_process)
+    }
+  end
+
+  def get_percentage(processed, total_to_process)
+    (processed/total_to_process * 100.0).to_s + "%"
+  rescue
+    "0%"
   end
 
 end

@@ -20,4 +20,5 @@ OpenResVeiculosApp.factory('ClassSuggestionStatus', function($http, $timeout) {
 
 OpenResVeiculosApp.controller('ClassSuggestionController', function($scope, ClassSuggestionStatus) {
   $scope.status = ClassSuggestionStatus.update();
+  $scope.Math = window.Math;
 });

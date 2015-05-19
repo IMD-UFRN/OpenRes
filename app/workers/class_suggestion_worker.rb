@@ -37,6 +37,7 @@ class ClassSuggestionWorker
 
   def perform(classes, rooms)
     @classes = classes
+    $redis.set('status', 'generate_possibilities')
     mass_slot_generator(expand_suggestion_list(classes, rooms))
   end
 
@@ -110,10 +111,10 @@ class ClassSuggestionWorker
       total_to_process *= preferences[i].length
     end
 
+    $redis.set('status', 'removing_conflicts')
+
     $redis.set('total_to_process', total_to_process)
-
     $redis.set('processed', 0)
-
 
     # PartitionSolutionAnaliserWorker.new(6).perform(preferences)
 
