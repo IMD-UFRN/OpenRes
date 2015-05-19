@@ -116,19 +116,18 @@ class ImporterController < ApplicationController
         code:         s.cell(i, 1),
         name:         s.cell(i, 2),
         acronym:      s.cell(i, 3),
-        group:        s.cell(i, 4),
-        capacity:     s.cell(i, 5),
-        class_number: s.cell(i, 6).to_i,
-        teachers:     s.cell(i, 7).split("/"),
+        capacity:     s.cell(i, 4),
+        class_number: s.cell(i, 5).to_i,
+        teachers:     s.cell(i, 6).split("/"),
         suggestions: []
       } unless s.cell(i, 1).blank?
 
       classes.last[:suggestions] << [{
-        hours:      s.cell(i, 8),
-        room_type: types.find_index(s.cell(i, 9)),
+        hours:      s.cell(i, 7),
+        room_type: types.find_index(s.cell(i, 8)),
       }]
 
-      j = 10
+      j = 9
 
       unless s.cell(i, j).nil?
         classes.last[:suggestions].last  << {

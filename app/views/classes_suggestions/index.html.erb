@@ -12,6 +12,21 @@
 <%= link_to "Importar Planilha de Sugestões", import_suggestions_spreadsheet_path(url: process_suggestions_spreadsheet_path), remote: true, class:"btn btn-success"%>
 <%= link_to "Baixar planilha preenchível", "/spreadsheets/modelo_reserva_em_lote.xlsx", :target => '_blank', class:"btn"%>
 
+<br>
+
+<hr>
+
+<h2>Progresso</h2>
+<ol>
+  <li>Convertendo entrada...</li>
+  <li>Gerando possibilidades de alocação...</li>
+  <li>Removendo Conflitos...</li>
+  <li>Gerando planilha final...</li>
+  <li>Feito</li>
+</ol>
+<div class="progress">
+  <div class="bar" style="width: 60%;"></div>
+</div>
 
 <%= render "shared/back"%>
 
