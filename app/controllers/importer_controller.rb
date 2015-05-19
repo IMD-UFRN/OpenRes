@@ -151,5 +151,9 @@ class ImporterController < ApplicationController
 
   end
 
+  def status
+    possible = %w(hue br gibe mony pl0x)
+    render json: { value: possible.sample }
+  end
 
 end

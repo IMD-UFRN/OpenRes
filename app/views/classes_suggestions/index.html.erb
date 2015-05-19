@@ -16,17 +16,20 @@
 
 <hr>
 
-<h2>Progresso</h2>
-<ol>
-  <li>Convertendo entrada...</li>
-  <li>Gerando possibilidades de alocação...</li>
-  <li>Removendo Conflitos...</li>
-  <li>Gerando planilha final...</li>
-  <li>Feito</li>
-</ol>
-<div class="progress">
-  <div class="bar" style="width: 60%;"></div>
-</div>
+  <div ng-controller="ClassSuggestionController">
+    <h2>Progresso</h2>
+    <h1>{{status}}</h1>
+    <ol>
+      <li>Convertendo entrada...</li>
+      <li>Gerando possibilidades de alocação...</li>
+      <li>Removendo Conflitos...</li>
+      <li>Gerando planilha final...</li>
+      <li>Feito</li>
+    </ol>
+    <div class="progress">
+      <div class="bar" style="width: 60%;"></div>
+    </div>
+  </div>
 
 <%= render "shared/back"%>
 

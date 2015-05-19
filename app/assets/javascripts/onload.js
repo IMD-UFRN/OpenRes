@@ -50,7 +50,6 @@ var ready = function() {
       });
     }
     else{
-      console.log(list.join());
       $.ajax({
         type: "GET",
         url: el.attr("href"),
