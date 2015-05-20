@@ -4,14 +4,14 @@ OpenResVeiculosApp.factory('ClassSuggestionStatus', function($http, $timeout) {
     update: function() {
       var status = {};
 
-      (function poll () {
+      (function poll (time) {
         $timeout(function () {
           $http.get('/class_suggestions/status').then(function(response){
             angular.extend(status, response.data);
           })
-          poll();
-        }, 3000);
-      })();
+          poll(3000);
+        }, time);
+      })(1);
 
       return status; 
     }
