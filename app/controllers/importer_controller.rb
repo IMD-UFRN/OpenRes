@@ -80,6 +80,7 @@ class ImporterController < ApplicationController
 
   def process_suggestions_spreadsheet
     $redis.set('status', 'input_conversion')
+
     $redis.set('total_to_process', 0)
     $redis.keys('processed*').each { |x| $redis.set(x, 0) }
 

@@ -18,13 +18,12 @@
 
 <div ng-controller="ClassSuggestionController">
   <h2>Progresso</h2>
-  <h1>{{status}}</h1>
-  <ol>
-    <li>Convertendo entrada...</li>
-    <li>Gerando possibilidades de alocação...</li>
-    <li>Removendo Conflitos...</li>
-    <li>Gerando planilha final...</li>
-    <li>Feito</li>
+  <ol class="status-list">
+    <li ng-class="{'active': status.status == 'input_conversion'}">Convertendo entrada...</li>
+    <li ng-class="{'active': status.status == 'generate_possibilities'}">Gerando possibilidades de alocação...</li>
+    <li ng-class="{'active': status.status == 'removing_conflicts'}">Removendo Conflitos...</li>
+    <li ng-class="{'active': status.status == 'generating_results'}">Gerando planilha final...</li>
+    <li ng-class="{'active': status.status == 'done'}">Feito</li>
   </ol>
   <div class="progress">
     <div class="bar" style="width: {{status.processed/status.total_to_process * 100}}%"></div>
