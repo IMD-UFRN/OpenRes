@@ -17,16 +17,19 @@
 <hr>
 
 <div ng-controller="ClassSuggestionController">
-  <h2>Progresso</h2>
-  <ol class="status-list">
-    <li ng-class="{'active': status.status == 'input_conversion'}">Convertendo entrada...</li>
-    <li ng-class="{'active': status.status == 'generate_possibilities'}">Gerando possibilidades de alocação...</li>
-    <li ng-class="{'active': status.status == 'removing_conflicts'}">Removendo Conflitos...</li>
-    <li ng-class="{'active': status.status == 'generating_results'}">Gerando planilha final...</li>
-    <li ng-class="{'active': status.status == 'done'}">Feito</li>
-  </ol>
-  <div class="progress">
-    <div class="bar" style="width: {{status.processed/status.total_to_process * 100}}%"></div>
+  <div ng-class="{'hidden':  status.status == null}" >
+    <h2>Progresso</h2>
+    <ol class="status-list">
+      <li ng-class="{'active': status.status == 'input_conversion'}">Convertendo entrada...</span>
+      </li>
+      <li ng-class="{'active': status.status == 'generate_possibilities'}">Gerando possibilidades de alocação...</li>
+      <li ng-class="{'active': status.status == 'removing_conflicts'}">Removendo Conflitos...</li>
+      <li ng-class="{'active': status.status == 'generating_results'}">Gerando planilha final...</li>
+      <li ng-class="{'active': status.status == 'done'}">Feito</li>
+    </ol>
+    <div class="progress">
+      <div class="bar" style="width: {{status.processed/status.total_to_process * 100}}%"></div>
+    </div>
   </div>
 </div>
 
