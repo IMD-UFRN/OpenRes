@@ -164,6 +164,8 @@ class ImporterController < ApplicationController
     }
   end
 
+  private 
+
   def get_percentage(processed, total_to_process)
     (processed/total_to_process * 100.0).to_s + "%"
   rescue

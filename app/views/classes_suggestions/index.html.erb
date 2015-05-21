@@ -18,7 +18,7 @@
 
 <div ng-controller="ClassSuggestionController">
   <div ng-class="{'hidden':  status.status == null}" >
-    <h2>Progresso</h2>
+    <h2>Progresso </h2>
     <ol class="status-list">
       <li ng-class="{'active': status.status == 'input_conversion'}">Convertendo entrada...</span>
       </li>
@@ -30,6 +30,7 @@
     <div class="progress">
       <div class="bar" style="width: {{status.processed/status.total_to_process * 100}}%"></div>
     </div>
+    <sub style="margin: 0; float:right">{{status.processed}}/{{status.total_to_process}}</sub>
   </div>
 </div>
 

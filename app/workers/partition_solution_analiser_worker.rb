@@ -34,13 +34,6 @@ class PartitionSolutionAnaliserWorker
     ] #fim tipo 2
   ]
 
-  def debug str
-    puts "\n\n\nDEBUG\n\n\n"
-    puts str
-    puts "\n\n\n/DEBUG\n\n\n"
-  end
-
-
   def conflicting?(solution)
     slots = {}
 
@@ -108,12 +101,15 @@ class PartitionSolutionAnaliserWorker
 
     all.each do |solution|
       aux = [].tap { |x| solution.each_with_index { |i, s| x << preferences[s][i] } }
-      c = conflicting?(aux)
-      result << aux unless c
+
+      unless conflicting?(aux)
+        s = aux.to_json
+        $redis.set("result-#{Digest::MD5.hexdigest(s)}", s)
+      end
+
       $redis.set('processed' + partition.to_s, $redis.get('processed' + partition.to_s).to_i + 1)
     end
 
-    result
   end
 
 end
