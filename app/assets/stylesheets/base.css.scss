@@ -373,3 +373,9 @@ h3{
 .center{
   text-align: center;
 }
+
+ol.status-list {
+  li.active {
+    font-weight: bold;
+  }
+}

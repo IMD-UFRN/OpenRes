@@ -34,19 +34,15 @@ class PartitionSolutionAnaliserWorker
     ] #fim tipo 2
   ]
 
-
-  def debug(str)
-    puts "\n\n\n"
+  def debug str
+    puts "\n\n\nDEBUG\n\n\n"
     puts str
-    puts "\n\n\n"
+    puts "\n\n\n/DEBUG\n\n\n"
   end
 
 
   def conflicting?(solution)
-
     slots = {}
-
-    debug(solution)
 
     solution.each_with_index do |hour, index|
 
@@ -90,9 +86,7 @@ class PartitionSolutionAnaliserWorker
     @@test_v = possible_rooms
 
     all =  Enumerator.new do |y|
-
       v = [partition].tap { |x| 1.upto(preferences.length-1) { x << 0 } }
-
 
       loop do
         y.yield(v)
@@ -101,35 +95,22 @@ class PartitionSolutionAnaliserWorker
         v[i] += 1
 
         while v[i] && v[i] >= preferences[i].length
-
           v[i] = 0
           i -= 1
-
           v[i] += 1 if v[i]
-
         end
 
         break if -i >= preferences.length
-
       end
-
-
     end
 
     result = []
 
     all.each do |solution|
-
-      aux = [].tap { |x| solution.each_with_index {|i, s| x << preferences[s][i] } }
-
+      aux = [].tap { |x| solution.each_with_index { |i, s| x << preferences[s][i] } }
       c = conflicting?(aux)
-
-      puts aux.inspect unless c
-
       result << aux unless c
-
-      $redis.set('processed', $redis.get('processed').to_i + 1)
-
+      $redis.set('processed' + partition.to_s, $redis.get('processed' + partition.to_s).to_i + 1)
     end
 
     result
