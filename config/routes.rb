@@ -108,6 +108,7 @@ OpenRes::Application.routes.draw do
   post "vehicle_reservations/:id/suspend", to: "vehicle_reservation_approval#suspend", as: :vehicle_reservation_suspend
 
   get 'class_suggestions/status', to: 'importer#status'
+  get 'class_suggestions/results', to: 'classes_suggestions#results'
 
   mount Sidekiq::Web => '/sidekiq'
 

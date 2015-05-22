@@ -1,0 +1,20 @@
+<h1>Processador de Sugestões de Turmas > Resultado</h1>
+
+<div class="well">
+  Analise as possibilidades de reservas realizadas.
+</div>
+
+<hr>
+    <!-- <%= @classes.inspect %> -->
+
+<% @possibilities.each do |ps| %>
+
+  <% ps.each_with_index do |suggestions, i| %>
+    <!-- <%= suggestions %> -->
+    <%= @classes[i] %>
+  <% end %>
+
+  <br>
+<% end %>
+
+<%= render "shared/back" %>

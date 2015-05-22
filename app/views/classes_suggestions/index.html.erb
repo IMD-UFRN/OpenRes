@@ -30,10 +30,20 @@
     <div class="progress">
       <div class="bar" style="width: {{status.processed/status.total_to_process * 100}}%"></div>
     </div>
-    <sub style="margin: 0; float:right">{{status.processed}}/{{status.total_to_process}}</sub>
+    <div class="progress-sub">
+      <sub>{{status.processed}}/{{status.total_to_process}}</sub>
+    </div>
   </div>
-</div>
 
-<%= render "shared/back"%>
+<ul class="pager">
+  <li class="previous">
+    <a href="javascript:history.back()">← Voltar</a>
+  </li>
+  <li ng-class="{'hidden':  status.status != 'done'}">
+    <%= link_to "Verificar Resultados →", class_suggestions_results_path, id: "advance-button"%>
+  </li>
+</ul>
+
+</div>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

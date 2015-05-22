@@ -383,3 +383,18 @@ ol.status-list {
 .icon-active{
   color: green;
 }
+
+.visible{
+  display: block !important;
+}
+
+#advance-button{
+ @extend .pull-right;
+ @extend .btn;
+ @extend .btn-success;
+}
+
+.progress-sub{
+  text-align: center;
+  width: 100%
+}
