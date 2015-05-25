@@ -38,6 +38,7 @@ class ClassSuggestionWorker
   def perform(classes, rooms)
     @classes = classes
     $redis.set('classes', classes.to_json)
+    $redis.set('rooms', rooms.to_json)
 
     $redis.set('status', 'generate_possibilities')
     mass_slot_generator(expand_suggestion_list(classes, rooms))

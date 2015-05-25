@@ -5,16 +5,62 @@
 </div>
 
 <hr>
-    <!-- <%= @classes.inspect %> -->
 
-<% @possibilities.each do |ps| %>
+<%= @rooms[:room_allocations].inspect %>
 
-  <% ps.each_with_index do |suggestions, i| %>
-    <!-- <%= suggestions %> -->
-    <%= @classes[i] %>
-  <% end %>
+<% @possibilities.each_with_index do |ps, i| %>
+  <div class="row-fluid">
+    <div class="span8">
 
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Possibilidade <%= i + 1 %>
+          - FATOR DE OPÇÕES ESCOLHIDAS:
+          <%= ('%.2f' %  (ps[:preference_coefficient])).gsub('.', ',') %>
+        </div>
+        <div class="panel-body">
+          <% ps[:result].each_with_index do |suggestions, j| %>
+            <p>
+              <strong>Disciplina</strong>
+              <%= @classes[j]["acronym"] %>
+              <%= @classes[j]["code"] %>
+              <%= @classes[j]["name"]  %>
+              <strong>Turma:</strong> <%= @classes[j]["class_number"] %>
+              -
+              <strong>Professor(es):</strong> <%= @classes[j]["teachers"].join(", ") %>
+            </p>
+            <p>
+              <strong>Prioridade:</strong> <%= suggestions["preference"] + 1%>
+              <% suggestions["room"].each do |room| %>
+                <ul>
+                  <li>
+                    <strong>Sala:</strong> <%= room["code"] %>
+                    <strong>Horário:</strong> <%= room["hours"] %>
+                  </li>
+                </ul>
+                <% end %>
+            </p>
+            <% unless j == ps.length-1 %>
+              <hr>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Situação das Salas
+        </div>
+        <div class="panel-body">
+          <%= ps[:room_allocation_coefficient] %>
+        </div>
+      </div>
+    </div>
+  </div>
   <br>
 <% end %>
+
 
 <%= render "shared/back" %>
