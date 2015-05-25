@@ -39,6 +39,7 @@ class ClassSuggestionWorker
     @classes = classes
     $redis.set('classes', classes.to_json)
     $redis.set('rooms', rooms.to_json)
+    $redis.keys('result-*').each { |k| $redis.del(k) }
 
     $redis.set('status', 'generate_possibilities')
     mass_slot_generator(expand_suggestion_list(classes, rooms))
@@ -61,7 +62,6 @@ class ClassSuggestionWorker
   end
 
   def generate_all_suggestions(sugg, preference, rooms, capacity)
-
     aux = []
 
     sugg.each do |slot|

@@ -6,8 +6,6 @@
 
 <hr>
 
-<%= @rooms[:room_allocations].inspect %>
-
 <% @possibilities.each_with_index do |ps, i| %>
   <div class="row-fluid">
     <div class="span8">
@@ -40,7 +38,7 @@
                 </ul>
                 <% end %>
             </p>
-            <% unless j == ps.length-1 %>
+            <% unless j == ps[:result].length - 1 %>
               <hr>
             <% end %>
           <% end %>
@@ -51,10 +49,14 @@
     <div class="span4">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Situação das Salas
+          Ocupação das Salas - <%= ('%.2f' % ps[:occupation_coefficient][:percentage]).gsub('.', ',') %>%
         </div>
         <div class="panel-body">
-          <%= ps[:room_allocation_coefficient] %>
+          <ul>
+            <% ps[:room_allocation_coefficient].each do |code, stats| %>
+              <li><strong><%= code %>:</strong> <%=  ('%.2f' %  stats["percentage"]).gsub('.', ',') %>%</li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>

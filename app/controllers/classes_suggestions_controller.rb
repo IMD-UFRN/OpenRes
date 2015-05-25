@@ -5,13 +5,15 @@ class ClassesSuggestionsController < ApplicationController
 
   def results
     @classes = JSON.parse($redis.get("classes"))
-    @rooms = {JSON.parse($redis.get("rooms"))}
-    @rooms[:room_allocations] = {}.tap do |room_allocations|
-      @rooms.each do |room|
-        room = room.first
-        room_allocations[room["code"]] = room["hours"].split(/[MTN]/).inject(1) { |sum, current| sum * current.length }
+
+    total_occupation = 0
+    used_occupation = 0
+
+    room_allocations = Hash[
+      JSON.parse($redis.get("rooms")).flatten.map do |current|
+        [current["code"], current["hours"].split(/[MTN ]/).each_slice(2).inject(0) { |sum, c| sum + c[0].length * c[1].length }]
       end
-    end
+    ]
 
     @possibilities = $redis.keys("result-*").map do |x|
       db_result = JSON.parse($redis.get(x))
@@ -23,11 +25,27 @@ class ClassesSuggestionsController < ApplicationController
 
       db_result.each do |suggestion|
         suggestion["room"].each do |room|
+          used_hours = room["hours"].split(/[MTN]/).inject(1) { |sum, current| sum * current.length }
+
           result[:room_allocation_coefficient][room["code"]] ||= {}
-          result[:room_allocation_coefficient][room["code"]]["total_hours"] ||= 0
-          result[:room_allocation_coefficient][room["code"]]["total_hours"] += room["hours"].split(/[MTN]/).inject(1) { |sum, current| sum * current.length }
+          result[:room_allocation_coefficient][room["code"]]["used_hours"] ||= 0
+          result[:room_allocation_coefficient][room["code"]]["used_hours"] += used_hours
         end
       end
+
+      result[:room_allocation_coefficient].each do |room, stats|
+        total_occupation += room_allocations[room]
+        used_occupation += stats["used_hours"]
+
+        stats["total_hours"] = room_allocations[room]
+        stats["percentage"] = (stats["used_hours"] / room_allocations[room].to_f) * 100
+      end
+      
+      result[:occupation_coefficient] = {}
+      result[:occupation_coefficient][:total_occupation] = total_occupation
+      result[:occupation_coefficient][:used_occupation] = used_occupation
+      result[:occupation_coefficient][:percentage] = (used_occupation / total_occupation.to_f) * 100
+
       result
     end.sort_by do |x|
       x[:preference_coefficient]
