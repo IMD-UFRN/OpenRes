@@ -79,12 +79,18 @@ class ImporterController < ApplicationController
   end
 
   def process_suggestions_spreadsheet
+
+    if params.try(:[], :import).try(:[], :spreadsheet).nil? || params.try(:[], :import).try(:[], :resource_spread_sheet).nil?
+      flash[:error] = "Por favor insira as duas planilhas necessárias para o processamento"
+      return redirect_to classes_suggestions_path
+    end
+
+    s = Roo::Excelx.new(params[:import][:resource_spread_sheet].path)
+
     $redis.set('status', 'input_conversion')
 
     $redis.set('total_to_process', 0)
     $redis.keys('processed*').each { |x| $redis.set(x, 0) }
-
-    s = Roo::Excelx.new(params[:import][:resource_spread_sheet].path, file_warning: :ignore)
 
     i = 3
 

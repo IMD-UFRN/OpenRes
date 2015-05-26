@@ -8,8 +8,8 @@
     Lembre-se de importar somente planilhas fornecidas pelo sistema.
   </div>
   <div class="modal-body">
-    <%= f.input :resource_spread_sheet, as: :file, label: "Recursos" %>
-    <%= f.input :spreadsheet, as: :file, label: "Turmas" %>
+    <%= f.input :resource_spread_sheet, as: :file, label: "Recursos", required: true %>
+    <%= f.input :spreadsheet, as: :file, label: "Turmas", required: true %>
   </div>
   <div class="modal-footer">
     <%= f.submit "Importar", class: "btn btn-normal" %>
