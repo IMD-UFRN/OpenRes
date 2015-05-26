@@ -84,7 +84,7 @@ class ImporterController < ApplicationController
     $redis.set('total_to_process', 0)
     $redis.keys('processed*').each { |x| $redis.set(x, 0) }
 
-    s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
+    s = Roo::Excelx.new(params[:import][:resource_spread_sheet].path, file_warning: :ignore)
 
     i = 3
 
@@ -93,7 +93,7 @@ class ImporterController < ApplicationController
 
     active_index = -1
 
-    while s.cell(i, 1) != "DISCIPLINA"
+    while i <= s.last_row
 
       unless s.empty?(i, 1)
         active_index += 1
@@ -111,9 +111,11 @@ class ImporterController < ApplicationController
       i+=1
     end
 
-    i+=2
+    i = 3
 
     classes = []
+
+    s = Roo::Excelx.new(params[:import][:spreadsheet].path, file_warning: :ignore)
 
     while i <= s.last_row && s.cell(i, 1) != "FIM"
 
@@ -156,7 +158,7 @@ class ImporterController < ApplicationController
 
     $redis.set('status', 'done') if (total_to_process == processed && total_to_process != 0)
 
-    render json: { 
+    render json: {
       status: $redis.get('status'),
       total_to_process: total_to_process,
       processed: processed,
@@ -164,7 +166,7 @@ class ImporterController < ApplicationController
     }
   end
 
-  private 
+  private
 
   def get_percentage(processed, total_to_process)
     (processed/total_to_process * 100.0).to_s + "%"

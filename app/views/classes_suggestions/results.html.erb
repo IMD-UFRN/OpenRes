@@ -49,12 +49,16 @@
     <div class="span4">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Ocupação das Salas - <%= ('%.2f' % ps[:occupation_coefficient][:percentage]).gsub('.', ',') %>%
+          Ocupação das Salas -
+          <div class="pull-right">
+            <%= ('%.2f' % ps[:occupation_coefficient][:percentage]).gsub('.', ',') %>%
+          </div>
         </div>
         <div class="panel-body">
           <ul>
             <% ps[:room_allocation_coefficient].each do |code, stats| %>
-              <li><strong><%= code %>:</strong> <%=  ('%.2f' %  stats["percentage"]).gsub('.', ',') %>%</li>
+              <li><strong><%= code %>:</strong> <div class="pull-right"><%=  ('%.2f' %  stats["percentage"]).gsub('.', ',') %>% </div></li>
+              <p><%= stats["used_hours"] %> de <%= stats["total_hours"] %> horários disponíveis</p>
             <% end %>
           </ul>
         </div>
