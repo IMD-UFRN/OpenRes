@@ -12,7 +12,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          Possibilidade <%= i + 1 %>
+          Possibilidade <%= @page*5 + i + 1 %>
           - FATOR DE OPÇÕES ESCOLHIDAS:
           <%= ('%.2f' %  (ps[:preference_coefficient])).gsub('.', ',') %>
         </div>

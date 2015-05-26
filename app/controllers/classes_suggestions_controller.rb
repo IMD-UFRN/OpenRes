@@ -17,7 +17,7 @@ class ClassesSuggestionsController < ApplicationController
       used_occupation = 0
 
       db_result = JSON.parse($redis.get(x))
-      
+
       result = {
         preference_coefficient: 1 + db_result.inject(0) { |sum, current| sum + current["preference"].to_i } / db_result.length.to_f ,
         result: db_result,
@@ -51,6 +51,13 @@ class ClassesSuggestionsController < ApplicationController
     end.sort_by do |x|
       x[:preference_coefficient]
     end
+
+    @page = (params[:page].to_i - 1) * 5
+    @page = params[:page].to_i - 1
+
+    @page = 0 if @page < 0
+
+    @possibilities = @possibilities [@page * 5..@page * 5 + 4]
 
   end
 
