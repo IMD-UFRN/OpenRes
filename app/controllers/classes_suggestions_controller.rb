@@ -55,10 +55,10 @@ class ClassesSuggestionsController < ApplicationController
     @page = (params[:page].to_i - 1) * 5
     @page = params[:page].to_i - 1
 
-    @page = 0 if @page < 0
+    @page      = 0 if @page < 0
+    @next_page = @page + 2
 
     @possibilities = @possibilities [@page * 5..@page * 5 + 4]
-
   end
 
 end
