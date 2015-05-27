@@ -25,10 +25,10 @@
         <div class="panel-heading">
           Possibilidade <%= @page*5 + i + 1 %>
           - FATOR DE OPÇÕES ESCOLHIDAS:
-          <%= ('%.2f' %  (ps[:preference_coefficient])).gsub('.', ',') %>
+          <%= ('%.2f' %  (ps["preference_coefficient"])).gsub('.', ',') %>
         </div>
         <div class="panel-body">
-          <% ps[:result].each_with_index do |suggestions, j| %>
+          <% ps["result"].each_with_index do |suggestions, j| %>
             <p>
               <strong>Disciplina</strong>
               <%= @classes[j]["acronym"] %>
@@ -49,7 +49,7 @@
                 </ul>
                 <% end %>
             </p>
-            <% unless j == ps[:result].length - 1 %>
+            <% unless j == ps["result"].length - 1 %>
               <hr>
             <% end %>
           <% end %>
@@ -62,12 +62,12 @@
         <div class="panel-heading">
           Ocupação das Salas -
           <div class="pull-right">
-            <%= ('%.2f' % ps[:occupation_coefficient][:percentage]).gsub('.', ',') %>%
+            <%= ('%.2f' % ps["occupation_coefficient"]["percentage"]).gsub('.', ',') %>%
           </div>
         </div>
         <div class="panel-body">
           <ul>
-            <% ps[:room_allocation_coefficient].each do |code, stats| %>
+            <% ps["room_allocation_coefficient"].each do |code, stats| %>
               <li><strong><%= code %>:</strong> <div class="pull-right"><%=  ('%.2f' %  stats["percentage"]).gsub('.', ',') %>% </div></li>
               <p><%= stats["used_hours"] %> de <%= stats["total_hours"] %> horários disponíveis</p>
             <% end %>
