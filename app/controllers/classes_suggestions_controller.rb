@@ -58,7 +58,6 @@ class ClassesSuggestionsController < ApplicationController
       $redis.set('ordered_possibilities', @possibilities.to_json)
     end
 
-    @page = (params[:page].to_i - 1) * 5
     @page = params[:page].to_i - 1
 
     @page      = 0 if @page < 0
@@ -68,6 +67,11 @@ class ClassesSuggestionsController < ApplicationController
     @pages = @length / 5
 
     @possibilities = @possibilities [@page * 5..@page * 5 + 4]
+
+    # @possibilities.each do |ps|
+    #   rg = ReservationGroup.new ps
+    #   ps[:has_conflicts] = ps.rg.has_conflicts?
+    # end
   end
 
 end
