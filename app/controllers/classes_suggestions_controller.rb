@@ -55,7 +55,7 @@ class ClassesSuggestionsController < ApplicationController
         [x[:preference_coefficient], -x[:occupation_coefficient][:percentage]]
       end
 
-      $redis.set('ordered_possibilities', @possibilities.to_json) 
+      $redis.set('ordered_possibilities', @possibilities.to_json)
     end
 
     @page = (params[:page].to_i - 1) * 5
@@ -63,6 +63,9 @@ class ClassesSuggestionsController < ApplicationController
 
     @page      = 0 if @page < 0
     @next_page = @page + 2
+
+    @length = @possibilities.length
+    @pages = @length / 5
 
     @possibilities = @possibilities [@page * 5..@page * 5 + 4]
   end

@@ -6,13 +6,15 @@
 
 <hr>
 
+
 <ul class= pager>
-  <% unless @page == 0 %>
-    <li class= "previous">
-      <%= link_to "← Página " + @page.to_s, class_suggestions_results_path(page: @page - 1)  %>
-    </li>
-  <% end %>
-  <li class= "next">
+  <li class= "previous <%= "visible-hidden" if @page == 0%>">
+    <%= link_to "← Página " + @page.to_s, class_suggestions_results_path(page: @page - 1)  %>
+  </li>
+  <li>
+    Página <%= @page %>  de <%= @pages %>
+  </li>
+  <li class= "next <%= "visible-hidden" if @page == @pages%>">
     <%= link_to "Página " + @next_page.to_s + " →", class_suggestions_results_path(page: @next_page) %>
   </li>
 </ul>
