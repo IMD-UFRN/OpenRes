@@ -26,10 +26,17 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           Possibilidade <%= @page*5 + i + 1 %>
-          - FATOR DE OPÇÕES ESCOLHIDAS:
-          <%= ('%.2f' %  (ps["preference_coefficient"])).gsub('.', ',') %>
-          <div class="pull-right badge  <%= ps[:has_conflicts] ? "badge-danger" : "Não badge-success"%>">
-            <%= ps[:has_conflicts] ? icon("exclamation-circle") + " Conflita" : icon("check") + " Não conflita"%>
+          -
+          <div class="muted inline">
+            fator de opções escolhidas:
+            <%= ('%.2f' %  (ps["preference_coefficient"])).gsub('.', ',') %>
+          </div>
+          <div class="pull-right">
+            <% if ps[:has_conflicts] %>
+              <%= link_to icon("exclamation-circle") + " Ver conflitos", "#", class: "btn btn-mini btn-danger" %>
+            <% else %>
+              <%= link_to icon("check") + " Verificar Reserva", "#", class: "btn btn-mini btn-success" %>
+            <% end %>
           </div>
         </div>
         <div class="panel-body">
