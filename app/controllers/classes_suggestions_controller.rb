@@ -68,10 +68,13 @@ class ClassesSuggestionsController < ApplicationController
 
     @possibilities = @possibilities [@page * 5..@page * 5 + 4]
 
-    # @possibilities.each do |ps|
-    #   rg = ReservationGroup.new ps
-    #   ps[:has_conflicts] = ps.rg.has_conflicts?
-    # end
+    @possibilities.each do |ps|
+      # rg = ReservationGroup.new ps
+      # ps[:has_conflicts] = ps.rg.has_conflicts?
+      ps[:has_conflicts] = true
+    end
+
+    @possibilities.first[:has_conflicts] = false
   end
 
 end

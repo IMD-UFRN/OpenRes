@@ -12,7 +12,7 @@
     <%= link_to "← Página " + @page.to_s, class_suggestions_results_path(page: @page - 1)  %>
   </li>
   <li>
-    Página <%= @page %>  de <%= @pages %>. <strong><%= @length %></strong> possibilidades encontradas. 
+    Página <%= @page %>  de <%= @pages %>. <strong><%= @length %></strong> possibilidades encontradas.
   </li>
   <li class= "next <%= "visible-hidden" if @page == @pages%>">
     <%= link_to "Página " + @next_page.to_s + " →", class_suggestions_results_path(page: @next_page) %>
@@ -28,6 +28,9 @@
           Possibilidade <%= @page*5 + i + 1 %>
           - FATOR DE OPÇÕES ESCOLHIDAS:
           <%= ('%.2f' %  (ps["preference_coefficient"])).gsub('.', ',') %>
+          <div class="pull-right badge  <%= ps[:has_conflicts] ? "badge-danger" : "Não badge-success"%>">
+            <%= ps[:has_conflicts] ? icon("exclamation-circle") + " Conflita" : icon("check") + " Não conflita"%>
+          </div>
         </div>
         <div class="panel-body">
           <% ps["result"].each_with_index do |suggestions, j| %>
